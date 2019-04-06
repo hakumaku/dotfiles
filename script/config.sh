@@ -26,12 +26,27 @@ git_config () {
 	git config --global user.name "hakumaku"
 }
 
+clear_unwanted_extension () {
+	local dir="/usr/share/gnome-shell/extensions"
+	sudo rm -rf "$dir/screenshot-window-sizer*"
+	sudo rm -rf "$dir/apps-menu*"
+	sudo rm -rf "$dir/auto-move-window*"
+	sudo rm -rf "$dir/ubuntu-dock*"
+	sudo rm -rf "$dir/launch_new_instance*"
+	sudo rm -rf "$dir/window-list*"
+	sudo rm -rf "$dir/native-window-placement*"
+	sudo rm -rf "$dir/windowsNavigator*"
+	sudo rm -rf "$dir/places-menu*"
+	sudo rm -rf "$dir/workspace-indicator*"
+}
+
 while getopts "is" opt; do
 	case "$opt" in
 		"i")
 			smplayer
 			thumbnailer
 			git_config
+			clear_unwanted_extension
 			break;;
 		"s")
 			# import sync_dotfile ()

@@ -100,7 +100,6 @@ class GnomeInstaller():
 EXTENSION_ID = (
     ('Extensions', 1036),
     ('User Themes', 19),
-    ('Hide Dash X', 805),
     ('Hide Activites Button', 744),
     ('No Title Bar', 1267),
     ('Dash to Dock', 307),
@@ -109,6 +108,7 @@ EXTENSION_ID = (
     ('Transparent Notification', 1080),
     ('Caffeine', 517),
     ('Draw on You screen', 1683),
+    ('WinTile', 1723),
 )
 
 if __name__ == '__main__':
