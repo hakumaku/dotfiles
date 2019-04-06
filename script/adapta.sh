@@ -12,6 +12,8 @@ DEPS=(
 	"parallel" 
 	"libcanberra-gtk-module"
 	"libcanberra-gtk3-module"
+	"fonts-roboto"
+	"fonts-noto"
 )
 DIR="$HOME/workspace"
 OPTIONS=(
