@@ -60,7 +60,7 @@ EXTERNAL_PACKAGE=(
 for ppa in "${PPA[@]}"; do
 	sudo add-apt-repository -n -y "$ppa"
 done && {
-	sudo apt -qq update &&
+	sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
 	sudo apt -qq -y install ${PACKAGE[*]}
 } && {
 	temp="tmp.deb"
