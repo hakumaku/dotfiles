@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 LOCAL_IMAGE_SXIV="$HOME/.config/sxiv/exec/image-info"
-REMOTE_IMAGE_SXIV="$HOME/workspace/lastchicken/install/dotfiles/sxiv/image-info"
+REMOTE_IMAGE_SXIV="$HOME/workspace/ubuntu-fresh/dotfiles/sxiv/image-info"
 LOCAL_RIFLE_SXIV="/usr/local/bin/sxiv-rifle"
-REMOTE_RIFLE_SXIV="$HOME/workspace/lastchicken/install/dotfiles/sxiv/sxiv-rifle"
+REMOTE_RIFLE_SXIV="$HOME/workspace/ubuntu-fresh/dotfiles/sxiv/sxiv-rifle"
 
 sxiv () {
 	if [ ! -f "$REMOTE_IMAGE_SXIV" ] || [ ! -f "$REMOTE_RIFLE_SXIV" ]; then

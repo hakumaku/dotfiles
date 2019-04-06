@@ -4,11 +4,11 @@
 
 LOCAL_TOTEM="/usr/share/thumbnailers/totem.thumbnailer"
 REMOTE_TOTEM="$HOME"`
-	`"/workspace/lastchicken/install/dotfiles/gif/totem.thumbnailer"
+	`"/workspace/ubuntu-fresh/dotfiles/gif/totem.thumbnailer"
 
 LOCAL_SMPLAYER="$HOME/.config/smplayer/smplayer.ini"
 REMOTE_SMPLAYER="$HOME"`
-	`"/workspace/lastchicken/install/dotfiles/smplayer/smplayer.ini"
+	`"/workspace/ubuntu-fresh/dotfiles/smplayer/smplayer.ini"
 
 # bashrc
 

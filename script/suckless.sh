@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 LOCAL_ST_CONFIG="$HOME/workspace/st/config.h"
-REMOTE_ST_CONFIG="$HOME/workspace/lastchicken/install/dotfiles/st/config.h"
-ST_DESKTOP="$HOME/workspace/lastchicken/install/dotfiles/st/st.desktop"
+REMOTE_ST_CONFIG="$HOME/workspace/ubuntu-fresh/dotfiles/st/config.h"
+ST_DESKTOP="$HOME/workspace/ubuntu-fresh/dotfiles/st/st.desktop"
 
 LOCAL_DMENU_CONFIG="$HOME/workspace/dmenu/config.h"
-REMOTE_DMENU_CONFIG="$HOME/workspace/lastchicken/install/dotfiles/dmenu/config.h"
+REMOTE_DMENU_CONFIG="$HOME/workspace/ubuntu-fresh/dotfiles/dmenu/config.h"
 
 install () {
 	# $1: install directory

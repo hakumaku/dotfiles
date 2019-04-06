@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 LOCAL_RC_CONF="$HOME/.config/ranger/rc.conf"
-REMOTE_RC_CONF="$HOME/workspace/lastchicken/install/dotfiles/ranger/rc.conf"
+REMOTE_RC_CONF="$HOME/workspace/ubuntu-fresh/dotfiles/ranger/rc.conf"
 DIR="$HOME/workspace"
 
 ranger () {

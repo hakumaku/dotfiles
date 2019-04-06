@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REMOTE_VIMRC="$HOME/workspace/lastchicken/install/dotfiles/vim/.vimrc"
+REMOTE_VIMRC="$HOME/workspace/ubuntu-fresh/dotfiles/vim/.vimrc"
 LOCAL_VIMRC="$HOME/.vimrc"
 
 vim_plugin () {

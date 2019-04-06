@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 REMOTE_POWERLINE_CONFIG="$HOME"`
-	`"/workspace/lastchicken/install/dotfiles/powerline/config.json"
+	`"/workspace/ubuntu-fresh/dotfiles/powerline/config.json"
 LOCAL_POWERLINE_CONFIG="$HOME/.config/powerline/config.json"
 
 PACKAGE=(

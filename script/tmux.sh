@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 LOCAL_TMUX_CONF="$HOME/.tmux.conf"
-REMOTE_TMUX_CONF="$HOME/workspace/lastchicken/install/dotfiles/tmux/.tmux.conf"
+REMOTE_TMUX_CONF="$HOME/workspace/ubuntu-fresh/dotfiles/tmux/.tmux.conf"
 
 tmux () {
 	if [ ! -f "$REMOTE_TMUX_CONF" ]; then
