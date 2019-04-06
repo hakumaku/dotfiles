@@ -34,7 +34,7 @@ while getopts "isb" opt; do
 			bash "$dir""/vim.sh" -s
 			break;;
 		"b")
-			printf "source $HOME/workspace/lastchicken/install/dotfiles/bashrc" >>\
+			printf "source $HOME/workspace/ubuntu-fresh/dotfiles/bashrc" >>\
 				"$HOME/.bashrc"
 			break;;
 		*)

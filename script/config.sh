@@ -10,8 +10,6 @@ LOCAL_SMPLAYER="$HOME/.config/smplayer/smplayer.ini"
 REMOTE_SMPLAYER="$HOME"`
 	`"/workspace/ubuntu-fresh/dotfiles/smplayer/smplayer.ini"
 
-# bashrc
-
 smplayer () {
 	[ -f $REMOTE_SMPLAYER ] && mkdir -p $HOME/.config/smplayer &&
 	cp "$REMOTE_SMPLAYER" "$LOCAL_SMPLAYER"
@@ -28,16 +26,16 @@ git_config () {
 
 clear_unwanted_extension () {
 	local dir="/usr/share/gnome-shell/extensions"
-	sudo rm -rf "$dir/screenshot-window-sizer*"
-	sudo rm -rf "$dir/apps-menu*"
-	sudo rm -rf "$dir/auto-move-window*"
-	sudo rm -rf "$dir/ubuntu-dock*"
-	sudo rm -rf "$dir/launch_new_instance*"
-	sudo rm -rf "$dir/window-list*"
-	sudo rm -rf "$dir/native-window-placement*"
-	sudo rm -rf "$dir/windowsNavigator*"
-	sudo rm -rf "$dir/places-menu*"
-	sudo rm -rf "$dir/workspace-indicator*"
+	sudo rm -rf "$dir/screenshot-window-sizer"*
+	sudo rm -rf "$dir/apps-menu"*
+	sudo rm -rf "$dir/auto-move-window"*
+	sudo rm -rf "$dir/ubuntu-dock"*
+	sudo rm -rf "$dir/launch_new_instance"*
+	sudo rm -rf "$dir/window-list"*
+	sudo rm -rf "$dir/native-window-placement"*
+	sudo rm -rf "$dir/windowsNavigator"*
+	sudo rm -rf "$dir/places-menu"*
+	sudo rm -rf "$dir/workspace-indicator"*
 }
 
 while getopts "is" opt; do

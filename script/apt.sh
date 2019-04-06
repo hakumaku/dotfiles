@@ -21,7 +21,7 @@ PACKAGE=(
 	# blueman
 	"smplayer" "smtube" "smplayer-themes" "smplayer-skins"
 	"rhythmbox" "shotwell" "sxiv"
-	"youtube-dl" "w3m-img" "indicator-stickynotes"
+	"w3m-img" "indicator-stickynotes"
 
 	# adapta gtk theme
 	# "adapta-gtk-theme"
