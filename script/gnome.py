@@ -109,6 +109,9 @@ EXTENSION_ID = (
     ('Caffeine', 517),
     ('Draw on You screen', 1683),
     ('WinTile', 1723),
+    ('CPU Power Manager', 945),
+    ('Refresh Wifi Connections', 905),
+    ('Status Area Horizontal Spacing', 355),
 )
 
 if __name__ == '__main__':

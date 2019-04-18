@@ -1,3 +1,5 @@
+# script path
+DIR="$HOME/workspace/ubuntu-fresh"
 FAVORITE=(
 	"google-chrome.desktop"
 	"steam.desktop"
@@ -110,7 +112,7 @@ done
 
 #
 # Theme
-# 
+#
 gsettings set org.gnome.desktop.interface gtk-theme "Adapta-Eta"
 gsettings set org.gnome.desktop.interface icon-theme "Suru++"
 gsettings set org.gnome.desktop.interface cursor-theme "DMZ-Black"
@@ -118,7 +120,7 @@ gsettings set org.gnome.shell.extensions.user-theme name "Adapta-Eta"
 
 #
 # Keyboard shortcuts
-# 
+#
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Super>e'
 
@@ -223,7 +225,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/', \
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/', \
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/' ]"
+	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/', \
+	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/' ]"
 
 # custom0: Shutdown
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutdown"
@@ -280,4 +283,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ name "Nvidia dmenu"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ command "$DIR/nvidia.sh"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ binding "<Super>semicolon"
+
+# custom11: nightlight
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ name "Nightlight"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ command "$DIR/nightlight.sh"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ binding "<Super>backslash"
 
