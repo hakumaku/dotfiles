@@ -30,12 +30,13 @@ clear_unwanted_extension () {
 	sudo rm -rf "$dir/apps-menu"*
 	sudo rm -rf "$dir/auto-move-window"*
 	sudo rm -rf "$dir/ubuntu-dock"*
-	sudo rm -rf "$dir/launch_new_instance"*
+	sudo rm -rf "$dir/launch-new-instance"*
 	sudo rm -rf "$dir/window-list"*
 	sudo rm -rf "$dir/native-window-placement"*
 	sudo rm -rf "$dir/windowsNavigator"*
 	sudo rm -rf "$dir/places-menu"*
 	sudo rm -rf "$dir/workspace-indicator"*
+	sudo rm -rf "$dir/drive-menu"*
 }
 
 while getopts "is" opt; do

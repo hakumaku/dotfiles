@@ -110,6 +110,13 @@ for dir in $SCHEMADIR/openweather*; do
 	break
 done
 
+for dir in $SCHEMADIR/status-area-horizontal-spacing*; do
+	if [ -d "$dir" ]; then
+		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.status-area-horizontal-spacing hpadding 2
+	fi
+	break
+done
+
 #
 # Theme
 #
