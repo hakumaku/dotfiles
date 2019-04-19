@@ -1,30 +1,21 @@
 #!/usr/bin/env bash
 
 PPA=(
-	# "ppa:tista/adapta" 					# Adapta gtk theme
-	"ppa:rvm/smplayer"					# smplayer
+	# "ppa:rvm/smplayer"					# smplayer
 	"ppa:nilarimogard/webupd8"			# gnome-twitch
 	"ppa:umang/indicator-stickynotes"	# indicator-stickynotes
 	"ppa:graphics-drivers"				# nvidia graphics drivers
-	# "NNN (ppa:twodopeshaggy/jarun)"
 )
 
 PACKAGE=(
-	"git" "vim" "vim-gnome"
-	"g++" "curl" "ctags"
-	"gdebi" "valgrind" "htop"
-	"tmux" "screenfetch" "autogen"
-	"automake" "cmake" "snap"
-	"fcitx-hangul" "chrome-gnome-shell" "gufw"
-	"gnome-tweak-tool" "gnome-shell-extensions"
-	"python3-dev" "python3-pip" "python-apt"
+	"git" "vim" "vim-gnome" "g++" "curl" "ctags"
+	"gdebi" "valgrind" "htop" "tmux" "screenfetch" "autogen"
+	"automake" "cmake" "snap" "fcitx-hangul" "gufw" "cheese"
+	"rhythmbox" "sxiv" "vlc" "indicator-stickynotes"
+	"chrome-gnome-shell" "gnome-tweak-tool" "gnome-shell-extensions"
+	"python3-dev" "python3-pip" "python-apt" "w3m-img"
+	# "smplayer" "smtube" "smplayer-themes" "smplayer-skins"
 	# blueman
-	"smplayer" "smtube" "smplayer-themes" "smplayer-skins"
-	"rhythmbox" "shotwell" "sxiv"
-	"w3m-img" "indicator-stickynotes"
-
-	# adapta gtk theme
-	# "adapta-gtk-theme"
 
 	# Suckless Terminal & Dmenu
 	# Comment the line in "config.mk" when install Dwm:
