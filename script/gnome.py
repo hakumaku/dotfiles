@@ -101,7 +101,7 @@ EXTENSION_ID = (
     ('Extensions', 1036),
     ('User Themes', 19),
     ('Hide Activites Button', 744),
-    ('No Title Bar', 1267),
+    ('GTK Title Bar', 1732),
     ('Dash to Dock', 307),
     ('AlternateTab', 15),
     ('OpenWeather', 750),
