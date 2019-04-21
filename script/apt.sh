@@ -3,7 +3,7 @@
 PPA=(
 	# "ppa:rvm/smplayer"					# smplayer
 	"ppa:nilarimogard/webupd8"			# gnome-twitch
-	"ppa:umang/indicator-stickynotes"	# indicator-stickynotes
+	# "ppa:umang/indicator-stickynotes"	# indicator-stickynotes
 	"ppa:graphics-drivers"				# nvidia graphics drivers
 )
 
@@ -11,10 +11,11 @@ PACKAGE=(
 	"git" "vim" "vim-gnome" "g++" "curl" "ctags"
 	"gdebi" "valgrind" "htop" "tmux" "screenfetch" "autogen"
 	"automake" "cmake" "snap" "fcitx-hangul" "gufw" "cheese"
-	"rhythmbox" "sxiv" "vlc" "indicator-stickynotes"
+	"rhythmbox" "sxiv" "vlc" "cmatrix"
 	"chrome-gnome-shell" "gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt" "w3m-img"
 	# "smplayer" "smtube" "smplayer-themes" "smplayer-skins"
+	# "indicator-stickynotes"
 	# blueman
 
 	# Suckless Terminal & Dmenu
