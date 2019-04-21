@@ -26,7 +26,7 @@ vlc_player () {
 	[ -f $REMOTE_VLC ] && mkdir -p $HOME/.config/vlc &&
 	cp "$REMOTE_VLC" "$LOCAL_VLC"
 
-	[ -f $REMOTE_VLC_SKINS ] && mkdir -p $HOME/.local/share/vlc &&
+	[ -n "$(ls -A $REMOTE_VLC_SKINS)" ] && mkdir -p $HOME/.local/share/vlc &&
 	cp -r "$REMOTE_VLC_SKINS" "$LOCAL_VLC_SKINS"
 }
 
