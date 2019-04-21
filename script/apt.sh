@@ -50,10 +50,9 @@ EXTERNAL_PACKAGE=(
 # Add repository
 for ppa in "${PPA[@]}"; do
 	sudo add-apt-repository -n -y "$ppa"
-done && {
-	sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
-	sudo apt -qq -y --ignore-missing install ${PACKAGE[*]}
-} && {
+done
+sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
+sudo apt -qq -y --ignore-missing install ${PACKAGE[*]} && {
 	temp="tmp.deb"
 	for site in ${EXTERNAL_PACKAGE[*]}; do
 		wget -q -O $temp $site
