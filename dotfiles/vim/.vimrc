@@ -83,6 +83,7 @@ set tabstop=4			" Tab size = 4
 set shiftwidth=4		" Size of the indent
 set softtabstop=0		" Insert a combination of spaces when set to non-zero
 set noexpandtab			" No spaces when tab
+set mouse=a
 set autoindent
 set listchars=tab:»\ ,eol:↲,trail:·
 
