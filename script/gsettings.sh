@@ -30,6 +30,10 @@ gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
 
+# GNOME Shell version 3.32.0
+gsettings set org.gnome.shell.extensions.desktop-icons show-trash 'false'
+gsettings set org.gnome.shell.extensions.desktop-icons show-home 'false'
+
 #
 # Extensions
 #
