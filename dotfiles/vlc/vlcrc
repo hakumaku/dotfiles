@@ -3474,7 +3474,7 @@ qt-privacy-ask=0
 skins2-last=/home/haku/.local/share/vlc/skins2/Slim_Beam_Black-krypton.vlt
 
 # Config of last used skin (string)
-skins2-config=["Hidden" "Panel_0" 0 0 650 360 0]["MainWindow" "MainFrame" 142 100 992 655 1]["PlaylistIcon" "playlisticon_on" 0 0 650 360 0]["VolumeWindow" "VolumeFrame" 0 0 50 160 0]["color" "color1" 0 0 650 360 0]["customplaylist" "customplaylist_off" 0 0 650 360 0]["fileinfo" "fileinfo_off" 0 0 650 360 0]["fullscreenController" "fswindow" 0 0 650 61 0]["menu" "menu_off" 0 0 1 1 0]["playlist" "playlistframe" 100 100 568 382 0]["playlisticons" "playlisticons_1" 0 0 1 1 0]["popup1" "popup1_off" 0 0 1 1 0]["posbar" "posbar_big" 0 0 1 1 0]["pref" "pr" 0 0 650 360 0]["start" "firststart_yes" 0 0 1 1 0]
+skins2-config=["Hidden" "Panel_0" 0 0 650 360 0]["MainWindow" "MainFrame" 352 61 992 655 1]["PlaylistIcon" "playlisticon_on" 0 0 650 360 0]["VolumeWindow" "VolumeFrame" 0 0 50 160 0]["color" "color1" 0 0 650 360 0]["customplaylist" "customplaylist_off" 0 0 650 360 0]["fileinfo" "fileinfo_off" 0 0 650 360 0]["fullscreenController" "fswindow" 650 1037 650 61 0]["menu" "menu_off" 0 0 1 1 0]["playlist" "playlistframe" 100 100 568 382 0]["playlisticons" "playlisticons_1" 0 0 1 1 0]["popup1" "popup1_off" 0 0 1 1 0]["posbar" "posbar_big" 0 0 1 1 0]["pref" "pr" 0 0 650 360 0]["start" "firststart_yes" 0 0 1 1 0]
 
 # Enable transparency effects (boolean)
 #skins2-transparency=0

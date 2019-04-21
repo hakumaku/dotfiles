@@ -52,7 +52,7 @@ for ppa in "${PPA[@]}"; do
 	sudo add-apt-repository -n -y "$ppa"
 done && {
 	sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
-	sudo apt -qq -y install ${PACKAGE[*]}
+	sudo apt -qq -y --ignore-missing install ${PACKAGE[*]}
 } && {
 	temp="tmp.deb"
 	for site in ${EXTERNAL_PACKAGE[*]}; do
