@@ -28,7 +28,10 @@ gsettings set org.gnome.desktop.background picture-options 'scaled'
 gsettings set org.gnome.desktop.screensaver picture-options 'scaled'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
+gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
+
+gsettings set org.gnome.software download-updates 'false'
 
 # GNOME Shell version 3.32.0
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash 'false'
@@ -81,6 +84,14 @@ for dir in $SCHEMADIR/no-title-bar*; do
 	break
 done
 
+for dir in $SCHEMADIR/dynamic-panel-transparency*; do
+	if [ -d "$dir" ]; then
+		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.dynamic-panel-transparency unmaximized-opacity 154
+		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.dynamic-panel-transparency transition-speed 500
+	fi
+	break
+done
+
 for dir in $SCHEMADIR/openweather*; do
 	if [ -d "$dir" ]; then
 		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather weather-provider 'openweathermap'
@@ -120,6 +131,14 @@ for dir in $SCHEMADIR/status-area-horizontal-spacing*; do
 	break
 done
 
+for dir in $SCHEMADIR/drawOnYourScreen*; do
+	if [ -d "$dir" ]; then
+		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.draw-on-your-screen erase-drawing "['<Alt>space']"
+		gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.draw-on-your-screen toggle-drawing "['<Super>space']"
+	fi
+	break
+done
+
 #
 # Theme
 #
@@ -151,6 +170,12 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys video-out "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
 # <Super>S: toggle-overview
 gsettings set org.gnome.shell.keybindings toggle-overview "[]"
+# <Super>Escape: Restore the keyboard shortcuts
+gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
+# <Super>space: switch-input-source
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
+# <Alt>space: window menu
+gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[]"
 
 # Window tiling keybindings
 gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super>H']"
@@ -241,7 +266,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 # custom0: Shutdown
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutdown"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-session-quit --power-off"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>grave"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>Escape"
 
 # custom1: gnome-tweaks
 # ubuntu 18.04 has bug that it cannot bind "<Super>O".
@@ -292,10 +317,10 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 # custom10: nvidia
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ name "Nvidia dmenu"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ command "$DIR/nvidia.sh"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ binding "<Super>semicolon"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ binding "<Super>Semicolon"
 
 # custom11: nightlight
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ name "Nightlight"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ command "$DIR/nightlight.sh"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ binding "<Super>backslash"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ binding "<Super>Backslash"
 

@@ -23,6 +23,7 @@ while getopts "isb" opt; do
 			bash "$dir""/config.sh" -i
 			bash "$dir""/gsettings.sh"
 			bash "$dir""/korean.sh"
+			bash "$dir""/autostart.sh"
 			break;;
 		"s")
 			bash "$dir""/config.sh" -s

@@ -204,7 +204,7 @@ endfunc
 " Insert a newline in normal mode.
 nnoremap <C-l> o<ESC>k
 " Removes any search highlighting.
-nnoremap <C-n> :nohl<CR>
+nnoremap <C-@> :nohl<CR>
 " Move the current line one down.
 nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
 " Move the current line one up.
@@ -231,7 +231,8 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-nnoremap <tab> :bn<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
 nnoremap <BS> :bd<CR>
 
 " Set command line arguments

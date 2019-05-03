@@ -101,17 +101,19 @@ EXTENSION_ID = (
     ('Extensions', 1036),
     ('User Themes', 19),
     ('Hide Activites Button', 744),
-    ('GTK Title Bar', 1732),
+    ('Dynamic Panel Transparency', 1011),
     ('Dash to Dock', 307),
     ('AlternateTab', 15),
     ('OpenWeather', 750),
-    ('Transparent Notification', 1080),
-    ('Caffeine', 517),
+    # ('Transparent Notification', 1080),
+    # ('Caffeine', 517),
     ('Draw on You screen', 1683),
-    ('WinTile', 1723),
+    # ('WinTile', 1723),
     ('CPU Power Manager', 945),
     ('Refresh Wifi Connections', 905),
     ('Status Area Horizontal Spacing', 355),
+    # ('GTK Title Bar', 1732),
+    # ('No Title Bar', 1267),
 )
 
 if __name__ == '__main__':

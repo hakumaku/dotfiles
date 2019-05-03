@@ -6,6 +6,8 @@ bind -x '"\C-o": "ranger"'
 bind '"\C-j": history-search-forward'
 bind '"\C-k": history-search-backward'
 alias ls='ls --color -h --group-directories-first'
+alias gm='cd $HOME/Music'
+alias gd='cd $HOME/Downloads'
 # alias lst='lsd --group-dirs --tree --color never'
 # alias ll='lsd --group-dirs -l --color never'
 # alias ranger="python3 $HOME/workspace/ranger/ranger.py"
@@ -16,8 +18,8 @@ alias vimrc="vim $HOME/.vimrc"
 alias dmenuconfig="vim $HOME/workspace/dmenu/config.h"
 alias stconfig="vim $HOME/workspace/st/config.h"
 alias loginwallpaper="sudo vim +/#lockDialogGroup /usr/share/gnome-shell/theme/ubuntu.css"
-# nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 alias sxiv='sxiv -a -f'
+alias screen='bash $HOME/workspace/ubuntu-fresh/screen.sh'
 
 # Tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

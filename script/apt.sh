@@ -34,6 +34,12 @@ PACKAGE=(
 	# The following two are associated with NNN. (https://github.com/jarun/nnn)
 	# "libncursesw5-dev" "moreutils" "nnn"
 
+	# Steam
+	"steam"
+
+	# Google Chrome
+	"google-chrome-stable"
+
 	# Twitch
 	"gnome-twitch"
 	"gnome-twitch-player-backend-gstreamer-cairo"
@@ -52,13 +58,9 @@ EXTERNAL_PACKAGE=(
 for ppa in "${PPA[@]}"; do
 	sudo add-apt-repository -n -y "$ppa"
 done
+# Google Chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
-sudo apt -qq -y --ignore-missing install ${PACKAGE[*]} && {
-	temp="tmp.deb"
-	for site in ${EXTERNAL_PACKAGE[*]}; do
-		wget -q -O $temp $site
-		sudo dpkg -i $temp
-		rm $temp
-	done
-}
+sudo apt -qq -y --ignore-missing install ${PACKAGE[*]}
 
