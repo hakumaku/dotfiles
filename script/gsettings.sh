@@ -151,6 +151,7 @@ gsettings set org.gnome.shell.extensions.user-theme name "Adapta-Eta"
 # Keyboard shortcuts
 #
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
+# gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Super>e'
 
 # Disable default bindings.

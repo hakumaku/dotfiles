@@ -7,7 +7,7 @@
  */
 
 /*
- * Glyphs with "Nerd Font Mono" font displays in a really small size. 
+ * Glyphs with "Nerd Font Mono" font displays in a really small size.
  * e.g) UbuntuMono works, but UbuntoMono Mono does not.
  */
 // static char *font = "UbuntuMono Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
@@ -105,14 +105,14 @@ float alpha = 0.85;
 // static const char *colorname[] = {
 //   "#1d2021", "#fb4934", "#b8bb26", "#fabd2f", "#83a598",
 //   "#d3869b", "#8ec07c", "#d5c4a1", "#665c54", "#fe8019",
-//   "#3c3836", "#504945", "#bdae93", "#ebdbb2", "#d65d0e", "#fbf1c7", 
+//   "#3c3836", "#504945", "#bdae93", "#ebdbb2", "#d65d0e", "#fbf1c7",
 // };
 
 /* Gruvbox Dark Soft */
 // static const char *colorname[] = {
 //   "#32302f", "#fb4934", "#b8bb26", "#fabd2f", "#83a598",
 //   "#d3869b", "#8ec07c", "#d5c4a1", "#665c54", "#fe8019",
-//   "#3c3836", "#504945", "#bdae93", "#ebdbb2", "#d65d0e", "#fbf1c7", 
+//   "#3c3836", "#504945", "#bdae93", "#ebdbb2", "#d65d0e", "#fbf1c7",
 // };
 
 /* Gruvbox Dark Medium */

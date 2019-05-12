@@ -15,37 +15,37 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 	Plugin 'VundleVim/Vundle.vim'
 
+	" Essential
+	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'scrooloose/syntastic'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'tpope/vim-surround'
+	Plugin 'raimondi/delimitmate'
+	Plugin 'ryanoasis/vim-devicons'
+
 	" Colorschemes
 	" Plugin 'altercation/vim-colors-solarized'
 	Plugin 'lifepillar/vim-solarized8'
 	Plugin 'morhetz/gruvbox'
-	Plugin 'octol/vim-cpp-enhanced-highlight'
 	Plugin 'junegunn/seoul256.vim'
 	Plugin 'crusoexia/vim-monokai'
 	Plugin 'kaicataldo/material.vim'
 
-	Plugin 'scrooloose/syntastic'
-	Plugin 'tpope/vim-surround'
-	Plugin 'raimondi/delimitmate'
-	Plugin 'scrooloose/nerdtree'
-	Plugin 'ryanoasis/vim-devicons'
-	" Fuzzy Finder (https://github.com/junegunn/fzf)
-	Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	" Plugin 'terryma/vim-multiple-cursors'
-
-	Plugin 'tpope/vim-fugitive'
-
+	" Status line
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
 
-	Plugin 'mattn/emmet-vim'
+	" Fuzzy Finder (https://github.com/junegunn/fzf)
+	Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plugin 'junegunn/fzf.vim'
 
-	Plugin 'Valloric/YouCompleteMe'
-	Plugin 'pangloss/vim-javascript'
-	Plugin 'artur-shaik/vim-javacomplete2'
-
-	" arm syntax highlighting
-	Plugin 'arm9/arm-syntax-vim'
+	" syntax highlighting
+	" Plugin 'mattn/emmet-vim'
+	" Plugin 'arm9/arm-syntax-vim'
+	" Plugin 'pangloss/vim-javascript'
+	" Plugin 'artur-shaik/vim-javacomplete2'
+	" Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -79,13 +79,17 @@ endif
 
 set hidden				" Hide buffers when abandoned
 set number				" Show line number
+set relativenumber		" Relative numbers instead of absolute
 set tabstop=4			" Tab size = 4
 set shiftwidth=4		" Size of the indent
 set softtabstop=0		" Insert a combination of spaces when set to non-zero
 set noexpandtab			" No spaces when tab
-set mouse=a
+set mouse=a				" Enable mouse scrolling
 set autoindent
 set listchars=tab:»\ ,eol:↲,trail:·
+
+" Soft wrapping text
+set wrap linebreak nolist
 
 set scrolloff=3			" Show 3 lines above or below cursor when scrolling
 set showmode			" Show insert, replace, or visual mode in last line
@@ -109,9 +113,128 @@ set signcolumn="yes"
 
 
 " =====================
+" Customized Shortcut
+" =====================
+" {{{
+" Move cursor by virtual lines.
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+" <ESC> key mapping
+inoremap jj <ESC>
+" Insert a newline in normal mode.
+nnoremap <CR> o<ESC>k
+" Move the current line one down.
+nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
+" Move the current line one up.
+nnoremap <C-k> :m-2<CR>:echo 'Move line up'<CR>
+" Open.
+nnoremap <C-o> :NERDTreeToggle<CR>:echo @%<CR>
+
+" Toggle displaying whitespaces. Mapped to 'ctrl + /'
+nnoremap <C-_> :set nolist!<CR>
+" Commentate
+vnoremap <C-_> :call Commentate()<CR>
+
+" Removes any search highlighting.
+" nnoremap <C-@> :nohl<CR>
+" Insert space in normal mode
+nnoremap <space> i<space><esc>
+" Toggle .vimrc file.
+nnoremap <expr> <Home> bufname('%') == $MYVIMRC ? ':bd<CR>' : ':e $MYVIMRC<CR>'
+" Replace
+vnoremap <C-h> y:call Replace()<CR>
+" Exact replace
+vnoremap <C-g> y:call ExactReplace()<CR>
+" Copy & Paste
+" If it does not work, please check if vim is compiled with clipboard
+" features: vim --version | grep 'clipboard'.
+" ( '+' means it supports, '-' not.)
+" If you are using ubuntu or gnome environment,
+" run 'sudo apt install vim-gnome'
+vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
+inoremap <C-v> <ESC>"+pa
+
+" Cycle through buffers
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+nnoremap <BS> :bd<CR>
+
+" Set command line arguments
+nnoremap <F4> :call SetCLA()<CR>
+
+" Execute python file
+au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
+
+" Compile and Run C file
+au FileType c noremap <F2> :call CompileAssem()<CR>
+au FileType c noremap <C-e> :call CompileRun()<CR>
+au FileType c noremap <F3> :call CompileDebug()<CR>
+
+" Execute bash file
+au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
+" }}}
+" =====================
+
+
+" =====================
 " Vim Functions
 " =====================
 " {{{
+func! Commentate() range
+	let l:line = getline("'<")
+	let l:indent = matchstr(l:line, '^\s*')
+	let l:bool = matchstr(l:line, '\S')
+	
+	if &ft == 'vim'
+		let l:char = '" '
+		if l:bool == '"'
+			call CommentStrip(l:char, line("'<"), line("'>"))
+		else
+			call CommentWrite('" ', l:indent)
+		endif
+
+	elseif &ft == 'python' || &ft == 'bash'
+		let l:char = '# '
+		if l:bool == '#'
+			call CommentStrip(l:char, line("'<"), line("'>"))
+		else
+			call CommentWrite(l:char, l:indent)
+		endif
+
+	elseif &ft == 'c' || &ft == 'cpp'
+		let l:char = " \\* "
+		if l:bool == '*' || l:bool == '/'
+			let l:s = search("\\/\\*", 'ncb', line('^'))
+			let l:e = search("\\*\\/", 'nc', line('$'))
+			call CommentStrip(l:char, l:s+1, l:e-1)
+			exe l:s."delete"
+			exe l:e-1."delete"
+		else
+			let l:s = line("'<")
+			let l:e = line("'>")
+			call CommentWrite(l:char, l:indent)
+			call append(l:s-1, l:indent.'/*')
+			call append(l:e+1, l:indent.' */')
+		endif
+	endif
+endfunc
+
+func CommentWrite(char, indent)
+	if empty(a:indent)
+		silent! exe "'<,'>s/^/&".a:char."/"
+	else
+		" If the selection contains blank lines,
+		" insert tabs into them.
+		silent! exe "'<,'>s/^$/".a:indent."/"
+		silent! exe "'<,'>s/\\s\\{,".len(a:indent)."}/&".a:char."/"
+	endif
+endfunc
+
+func CommentStrip(char, start, end)
+	silent! exe a:start.",".a:end."s/^\\s*".a:char."$//"
+	silent! exe a:start.",".a:end."s/".a:char."//"
+endfunc
+
 func EatChar(pat)
 	let c = nr2char(getchar(0))
 	return (c =~ a:pat) ? '' : c
@@ -143,7 +266,7 @@ func! MapNoContext(key, seq)
 		return a:key
 	else
 		exe 'return "'.
-		    \substitute(a:seq, '\\<\(.\{-}\)\\>', '"."\\<\1>"."', 'g').
+					\substitute(a:seq, '\\<\(.\{-}\)\\>', '"."\\<\1>"."', 'g').
 			\'"'
 	endif
 endfunc
@@ -193,61 +316,6 @@ func! CompileAssem()
 	silent exe "!gcc" "%" l:flags "-o ".l:output
 	exe "edit" l:output
 endfunc
-" }}}
-" =====================
-
-
-" =====================
-" Customized Shortcut
-" =====================
-" {{{
-" Insert a newline in normal mode.
-nnoremap <C-l> o<ESC>k
-" Removes any search highlighting.
-nnoremap <C-@> :nohl<CR>
-" Move the current line one down.
-nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
-" Move the current line one up.
-nnoremap <C-k> :m-2<CR>:echo 'Move line up'<CR>
-" Open.
-nnoremap <C-o> :NERDTreeToggle<CR>:echo @%<CR>
-" Toggle displaying whitespaces. Mapped to 'ctrl + /'
-nnoremap <C-_> :set nolist!<CR>
-" Insert space in normal mode
-nnoremap <space> i<space><esc>
-" Toggle .vimrc file.
-nnoremap <expr> <Home> bufname('%') == $MYVIMRC ? ':bd<CR>' : ':e $MYVIMRC<CR>'
-" Replace
-vnoremap <C-h> y:call Replace()<CR>
-" Exact replace
-vnoremap <C-g> y:call ExactReplace()<CR>
-" Copy & Paste
-" If it does not work, please check if vim is compiled with clipboard
-" features: vim --version | grep 'clipboard'.
-" ( '+' means it supports, '-' not.)
-" If you are using ubuntu or gnome environment,
-" run 'sudo apt install vim-gnome'
-vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
-inoremap <C-v> <ESC>"+pa
-
-" Cycle through buffers
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
-nnoremap <BS> :bd<CR>
-
-" Set command line arguments
-nnoremap <F4> :call SetCLA()<CR>
-
-" Execute python file
-au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
-
-" Compile and Run C file
-au FileType c noremap <F2> :call CompileAssem()<CR>
-au FileType c noremap <C-e> :call CompileRun()<CR>
-au FileType c noremap <F3> :call CompileDebug()<CR>
-
-" Execute bash file
-au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
 " }}}
 " =====================
 
