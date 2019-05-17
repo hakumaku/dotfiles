@@ -261,8 +261,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/', \
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/', \
 	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/' ]"
+	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/',\
+	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/',\
+	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom12/' ]"
 
 # custom0: Shutdown
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutdown"
@@ -324,4 +325,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ name "Nightlight"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ command "$DIR/nightlight.sh"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ binding "<Super>Backslash"
+
+# custom12: gnome system monitor
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ name "System Monitor"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ command "gnome-system-monitor"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom11/ binding "<Primary><Shift>Tab"
 
