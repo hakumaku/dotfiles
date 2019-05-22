@@ -1,6 +1,5 @@
 " =====================
-" Vundle
-" https://github.com/VundleVim/Vundle.vim.git
+" Vundle (https://github.com/VundleVim/Vundle.vim.git)
 " =====================
 " {{{
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -25,20 +24,11 @@ call vundle#begin()
 	Plugin 'ryanoasis/vim-devicons'
 
 	" Colorschemes
-	" Plugin 'altercation/vim-colors-solarized'
 	Plugin 'lifepillar/vim-solarized8'
-	Plugin 'morhetz/gruvbox'
-	Plugin 'junegunn/seoul256.vim'
-	Plugin 'crusoexia/vim-monokai'
-	Plugin 'kaicataldo/material.vim'
 
 	" Status line
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
-
-	" Fuzzy Finder (https://github.com/junegunn/fzf)
-	Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plugin 'junegunn/fzf.vim'
 
 	" syntax highlighting
 	" Plugin 'mattn/emmet-vim'
@@ -66,7 +56,6 @@ filetype plugin indent on    " required
 " }}}
 " =====================
 
-
 " =====================
 " Vim Basic Settings
 " =====================
@@ -90,13 +79,19 @@ set listchars=tab:»\ ,eol:↲,trail:·
 
 " Soft wrapping text
 set wrap linebreak nolist
+set ttyfast				" More characters will be sent to the screen
+set ttimeout			" Time waited for key press to complete
+set ttimeoutlen=50
 
 set scrolloff=3			" Show 3 lines above or below cursor when scrolling
+set colorcolumn=81
 set showmode			" Show insert, replace, or visual mode in last line
 set showcmd				" Show command in last line
+set wildmenu			" On pressing 'wildchar' to invoke completion
 set encoding=utf-8		" Encoding
 set nobackup			" No backup files
-set nowritebackup		" No backup files
+set nowritebackup
+set noswapfile
 
 set splitbelow			" When opening h splits, place cursor in the new split
 set splitright			" When opening v splits, place cursor in the new split
@@ -104,13 +99,13 @@ set splitright			" When opening v splits, place cursor in the new split
 set cursorline			" Show cursor line
 set incsearch			" Dynamic search
 set hlsearch			" Highlight search
+set ignorecase			" Case insensitive search
+set smartcase			" Case sensitive if contains at least one capital letter
 set laststatus=2
-" Replace - with ' '
-set fillchars=fold:\ 
+set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
 " }}}
 " =====================
-
 
 " =====================
 " Customized Shortcut
@@ -121,6 +116,7 @@ nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " <ESC> key mapping
 inoremap jj <ESC>
+
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
 " Move the current line one down.
@@ -174,7 +170,6 @@ au FileType c noremap <F3> :call CompileDebug()<CR>
 au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
 " }}}
 " =====================
-
 
 " =====================
 " Vim Functions
@@ -319,7 +314,6 @@ endfunc
 " }}}
 " =====================
 
-
 " =====================
 " Autocommand
 " =====================
@@ -405,7 +399,6 @@ augroup END
 " }}}
 " =====================
 
-
 " =====================
 " tmux
 " =====================
@@ -416,72 +409,17 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " =====================
 
-
 " =====================
-" vim-solarized8
-" https://github.com/lifepillar/vim-solarized8
-" =====================
-" {{{
-" set background=dark
-" silent! colorscheme solarized8
-" silent! colorscheme solarized8_low
-" silent! colorscheme solarized8_high
-" silent! colorscheme solarized8_flat
-" }}}
-" =====================
-
-
-" =====================
-" gruvbox
-" https://github.com/morhetz/gruvbox
-" =====================
-" {{{
-" set background=dark
-" silent! colorscheme gruvbox
-" let g:gruvbox_invert_indent_guides=1
-" let g:gruvbox_contrast='hard'
-" }}}
-" =====================
-
-
-" =====================
-" material
-" https://github.com/kaicataldo/material.vim
+" vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 " =====================
 " {{{
 set background=dark
-" 'default' | 'palenight' | 'dark'
-let g:material_theme_style = 'dark'
-let g:airline_theme = 'material'
-" Settings must be set before this line.
-silent! colorscheme material 
+silent! colorscheme solarized8
+silent! colorscheme solarized8_low
+silent! colorscheme solarized8_high
+silent! colorscheme solarized8_flat
 " }}}
 " =====================
-
-
-" =====================
-" vim-monokai
-" https://github.com/crusoexia/vim-monokai
-" =====================
-" {{{
-" silent! colorscheme monokai
-" }}}
-" =====================
-
-
-" =====================
-" seoul256
-" https://github.com/junegunn/seoul256.vim
-" =====================
-" {{{
-" set background=dark
-" Range:   233 (darkest) ~ 239 (lightest)
-" Default: 237
-" let g:seoul256_background = 233
-" silent! colorscheme seoul256
-" }}}
-" =====================
-
 
 " =====================
 " vim-syntastic
@@ -503,7 +441,6 @@ let g:syntastic_python_python_exec = 'python3'
 " }}}
 " =====================
 
-
 " =====================
 " vim-airline & vim-airline-themes
 " =====================
@@ -518,16 +455,7 @@ let g:airline_section_b = '%{strftime("%H:%M:%S")}'
 let g:airline_section_y = '%{&fenc} %{WebDevIconsGetFileFormatSymbol()}'
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='light'
-" let g:airline_solarized_bg='dark'
-" }}}
-" =====================
-
-
-" =====================
-" vim-emmet
-" =====================
-" {{{
-" let g:user_emmet_leader_key='<Tab>'
+let g:airline_solarized_bg='dark'
 " }}}
 " =====================
 
@@ -542,7 +470,6 @@ let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " }}}
 " =====================
 
-
 " =====================
 " YouCompleteMe
 " =====================
@@ -554,23 +481,6 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
-" }}}
-" =====================
-
-
-" =====================
-" fzf
-" =====================
-" {{{
-" }}}
-" =====================
-
-
-" =====================
-" arm-syntax-vim
-" =====================
-" {{{
-au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
 " }}}
 " =====================
 

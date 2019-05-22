@@ -2,6 +2,7 @@
 set -o vi
 export EDITOR=/usr/bin/vim
 bind -m vi-insert "\C-l":clear-screen
+bind -m vi-insert "\C-[":vi-movement-mode
 bind -x '"\C-o": "ranger"'
 bind '"\C-j": history-search-forward'
 bind '"\C-k": history-search-backward'

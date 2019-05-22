@@ -1,9 +1,8 @@
 # script path
 DIR="$HOME/workspace/ubuntu-fresh"
 FAVORITE=(
-	"google-chrome.desktop"
+	"firefox.desktop"
 	"steam.desktop"
-	"com.vinszent.GnomeTwitch.desktop"
 	"rhythmbox.desktop"
 	"vlc.desktop"
 	"st.desktop"
