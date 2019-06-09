@@ -7,6 +7,10 @@ bind -x '"\C-o": "ranger"'
 bind '"\C-j": history-search-forward'
 bind '"\C-k": history-search-backward'
 alias ls='ls --color -h --group-directories-first'
+alias l.='ls -d .* --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
 # alias lst='lsd --group-dirs --tree --color never'
@@ -21,6 +25,20 @@ alias stconfig="vim $HOME/workspace/st/config.h"
 alias loginwallpaper="sudo vim +/#lockDialogGroup /usr/share/gnome-shell/theme/ubuntu.css"
 alias sxiv='sxiv -a -f'
 alias screen='bash $HOME/workspace/ubuntu-fresh/screen.sh'
+get_wm () {
+	xprop | awk '
+		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
+		/^WM_NAME/{sub(/.* =/, "title:"); print}'
+}
+alias wm='get_wm'
+
+laptop=eDP-1-1
+external=HDMI-1-1
+alias turnoff_laptop="xrandr --output $laptop --off"
+alias turnoff_external="xrandr --output $monitor --off"
+alias left_laptop="xrandr --output $laptop --auto --output $external --right-of $laptop"
+alias right_laptop="xrandr --output $laptop --auto --output $external --left-of $laptop"
+alias mirror_laptop="xrandr --output $external --same-as $laptop"
 
 # Tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

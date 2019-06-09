@@ -93,6 +93,10 @@ set nobackup			" No backup files
 set nowritebackup
 set noswapfile
 
+" Enable folding
+set foldmethod=marker
+set foldmarker={{{,}}}
+
 set splitbelow			" When opening h splits, place cursor in the new split
 set splitright			" When opening v splits, place cursor in the new split
 
@@ -483,4 +487,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " =====================
+
+" Transparent
+hi Normal guibg=NONE ctermbg=NONE
 

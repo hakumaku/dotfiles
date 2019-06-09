@@ -17,6 +17,14 @@ LOCAL_VLC_SKINS="$HOME/.local/share/vlc"
 REMOTE_VLC_SKINS="$HOME"`
 	`"/workspace/ubuntu-fresh/dotfiles/vlc/skins2"
 
+LOCAL_I3="$HOME/.config/i3/"
+REMOTE_I3="$HOME"`
+	`"/workspace/ubuntu-fresh/dotfiles/i3/"
+
+LOCAL_POLYBAR="$HOME/.config/polybar/"
+REMOTE_POLYBAR="$HOME"`
+	`"/workspace/ubuntu-fresh/dotfiles/polybar/"
+
 smplayer () {
 	[ -f $REMOTE_SMPLAYER ] && mkdir -p $HOME/.config/smplayer &&
 	cp "$REMOTE_SMPLAYER" "$LOCAL_SMPLAYER"
@@ -69,6 +77,8 @@ while getopts "is" opt; do
 			sync_dotfile "$LOCAL_TOTEM" "$REMOTE_TOTEM"
 			# sync_dotfile "$LOCAL_SMPLAYER" "$REMOTE_SMPLAYER"
 			sync_dotfile "$LOCAL_VLC" "$REMOTE_VLC"
+			sync_dotfile "$LOCAL_I3" "$REMOTE_I3"
+			sync_dotfile "$LOCAL_POLYBAR" "$REMOTE_POLYBAR"
 			break;;
 		*)
 			break;;
