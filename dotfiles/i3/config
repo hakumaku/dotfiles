@@ -38,6 +38,7 @@ client.background       #ffffff
 # Floating windows
 # {{{
 for_window [class="firefox"] floating enable
+for_window [class="Firefox"] floating enable
 for_window [class="stacer"] floating enable
 for_window [class="Nautilus"] floating enable
 for_window [class="Steam"] floating enable

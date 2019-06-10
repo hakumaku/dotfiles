@@ -26,7 +26,7 @@ sync_dotfile () {
 				cp "$new/$f" "$old/"
 			done
 			for f in ${modified[@]}; do
-				echo -e "\t$f*"
+				echo -e "\t*$f"
 				cp "$new/$f" "$old/"
 			done
 			for f in ${minus[@]}; do
