@@ -7,7 +7,7 @@ disable_autostart () {
 	if [ ! -f $src ]; then
 		return
 	fi
-	mkdir -r "$HOME/.config/autostart" && cp "$src" "$dest" &&
+	mkdir -p "$HOME/.config/autostart" && cp "$src" "$dest" &&
 	echo "X-GNOME-Autostart-enabled=false" >> $dest
 }
 

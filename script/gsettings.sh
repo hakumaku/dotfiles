@@ -142,10 +142,10 @@ done
 #
 # Theme
 #
-gsettings set org.gnome.desktop.interface gtk-theme "Adapta-Eta"
+gsettings set org.gnome.desktop.interface gtk-theme "Yaru"
 gsettings set org.gnome.desktop.interface icon-theme "Suru++"
-gsettings set org.gnome.desktop.interface cursor-theme "DMZ-Black"
-gsettings set org.gnome.shell.extensions.user-theme name "Adapta-Eta"
+gsettings set org.gnome.desktop.interface cursor-theme "Yaru"
+gsettings set org.gnome.shell.extensions.user-theme name "Yaru"
 
 #
 # Keyboard shortcuts
