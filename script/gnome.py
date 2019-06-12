@@ -113,6 +113,7 @@ EXTENSION_ID = (
     ('Refresh Wifi Connections', 905),
     # ('TopIcons Plus', 1031),
     ('Status Area Horizontal Spacing', 355),
+    ('Extend Panel Menu', '1201'),
     # ('GTK Title Bar', 1732),
     # ('No Title Bar', 1267),
 )

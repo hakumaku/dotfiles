@@ -16,7 +16,7 @@ while getopts "isb" opt; do
 
 			echo "Vim" && bash "$dir""/vim.sh" -i
 			echo "Tmux" && bash "$dir""/tmux.sh" -i
-			echo "Adapta" && bash "$dir""/adapta.sh"
+			# echo "Adapta" && bash "$dir""/adapta.sh"
 			echo "Suru" && bash "$dir""/suru.sh"
 			echo "gnome-shell-extension" && python3 "$dir""/gnome.py"
 			echo "Gnome desktop environment configuration"

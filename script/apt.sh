@@ -61,10 +61,10 @@ done
 # wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 # sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
+sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
+sudo apt -qq -y --ignore-missing install ${PACKAGE[*]}
+
 # UniMatrix
 sudo curl -L https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py -o /usr/local/bin/unimatrix
 sudo chmod a+rx /usr/local/bin/unimatrix
-
-sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
-sudo apt -qq -y --ignore-missing install ${PACKAGE[*]}
 
