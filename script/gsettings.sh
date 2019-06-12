@@ -9,6 +9,7 @@ FAVORITE=(
 	"org.gnome.Nautilus.desktop"
 	"org.gnome.tweaks.desktop"
 	"gnome-control-center.desktop"
+	"stacer.desktop"
 	"nvidia-settings.desktop"
 )
 #
