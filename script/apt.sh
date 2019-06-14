@@ -15,9 +15,11 @@ PACKAGE=(
 	"cmus" "sxiv" "vlc" "cheese" "transmission" "stacer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt"
-	"w3m-img" "compton" "feh"
+	"w3m-img" "compton" "feh" "moreutils"
 	"ffmpeg" "ffmpegthumbnailer"
 	"$(check-language-support)"
+	# wine League of Legends
+	"winbind"
 	# "smplayer" "smtube" "smplayer-themes" "smplayer-skins"
 	# "indicator-stickynotes"
 	# blueman

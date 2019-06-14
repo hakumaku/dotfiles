@@ -1,3 +1,33 @@
+get_wm () {
+	xprop | awk '
+		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
+		/^WM_NAME/{sub(/.* =/, "title:"); print}'
+}
+alias wm='get_wm'
+
+snapicons () {
+	local app=$1
+	local path="/var/lib/snapd/desktop/applications"
+	local icon=""
+	if [ "$app" == "lol" ] || [ "$app" == "leagueoflegends" ]; then
+		icon="leagueoflegends"
+		app="leagueoflegends_leagueoflegends.desktop"
+
+	elif [ "$app" == "discord" ]; then
+		icon="discord"
+		app="discord_discord.desktop"
+
+	elif [ "$app" == "system" ]; then
+		icon="system"
+		app="gnome-system-monitor_gnome-system-monitor.desktop"
+
+	else
+		return 1
+	fi
+
+	sed -r 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
+}
+
 # Bash settings
 set -o vi
 export EDITOR=/usr/bin/vim
@@ -25,12 +55,6 @@ alias stconfig="vim $HOME/workspace/st/config.h"
 alias loginwallpaper="sudo vim +/#lockDialogGroup /usr/share/gnome-shell/theme/ubuntu.css"
 alias sxiv='sxiv -a -f'
 alias screen='bash $HOME/workspace/ubuntu-fresh/screen.sh'
-get_wm () {
-	xprop | awk '
-		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
-		/^WM_NAME/{sub(/.* =/, "title:"); print}'
-}
-alias wm='get_wm'
 
 laptop=eDP-1-1
 external=HDMI-1-1

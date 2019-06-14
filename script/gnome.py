@@ -98,24 +98,28 @@ class GnomeInstaller():
 
 # Gnome Shell Extension
 EXTENSION_ID = (
-    ('Extensions', 1036),
-    ('User Themes', 19),
-    ('Hide Activites Button', 744),
-    ('Dynamic Panel Transparency', 1011),
-    ('Dash to Dock', 307),
+    # ('Extensions', 1036),
+    # ('User Themes', 19),
+    # ('Hide Activites Button', 744),
+    ('Hide Activities Button', 1128),
+    # ('Dynamic Panel Transparency', 1011),
+    # ('Dash to Dock', 307),
     ('AlternateTab', 15),
     ('OpenWeather', 750),
     # ('Transparent Notification', 1080),
     # ('Caffeine', 517),
     ('Draw on You screen', 1683),
     # ('WinTile', 1723),
-    ('CPU Power Manager', 945),
+    # ('CPU Power Manager', 945),
     ('Refresh Wifi Connections', 905),
-    # ('TopIcons Plus', 1031),
     ('Status Area Horizontal Spacing', 355),
-    ('Extend Panel Menu', '1201'),
+    ('Hide Dash X', 805),
+    # ('TopIcons Plus', 1031),
+    # ('Extend Panel Menu', '1201'),
     # ('GTK Title Bar', 1732),
     # ('No Title Bar', 1267),
+    # ('Gno-Menu', 608),
+    # ('Applications Menu', 6),
 )
 
 if __name__ == '__main__':
