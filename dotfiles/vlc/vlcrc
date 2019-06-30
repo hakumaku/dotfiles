@@ -749,7 +749,7 @@ audiobargraph_v-position=0
 skins2-last=/home/haku/.local/share/vlc/skins2/Slim_Beam_Black-krypton.vlt
 
 # Config of last used skin (string)
-skins2-config=["Hidden" "Panel_0" 0 0 650 360 0]["MainWindow" "MainFrame" 100 94 1259 817 1]["PlaylistIcon" "playlisticon_on" 0 0 650 360 0]["VolumeWindow" "VolumeFrame" 744 265 50 160 0]["color" "color1" 0 0 650 360 0]["customplaylist" "customplaylist_off" 0 0 650 360 0]["fileinfo" "fileinfo_off" 0 0 650 360 0]["fullscreenController" "fswindow" 635 987 650 61 0]["menu" "menu_off" 0 0 1 1 0]["playlist" "playlistframe" 1352 417 568 382 0]["playlisticons" "playlisticons_1" 0 0 1 1 0]["popup1" "popup1_off" 0 0 1 1 0]["posbar" "posbar_big" 0 0 1 1 0]["pref" "pr" 744 265 650 360 0]["start" "firststart_yes" 0 0 1 1 0]
+skins2-config=["Hidden" "Panel_0" 0 0 650 360 0]["MainWindow" "MainFrame" 526 137 1259 817 1]["PlaylistIcon" "playlisticon_on" 0 0 650 360 0]["VolumeWindow" "VolumeFrame" 744 265 50 160 0]["color" "color1" 0 0 650 360 0]["customplaylist" "customplaylist_off" 0 0 650 360 0]["fileinfo" "fileinfo_off" 0 0 650 360 0]["fullscreenController" "fswindow" 635 987 650 61 0]["menu" "menu_off" 0 0 1 1 0]["playlist" "playlistframe" 1352 417 568 382 0]["playlisticons" "playlisticons_1" 0 0 1 1 0]["popup1" "popup1_off" 0 0 1 1 0]["posbar" "posbar_big" 0 0 1 1 0]["pref" "pr" 744 265 650 360 0]["start" "firststart_yes" 0 0 1 1 0]
 
 # Enable transparency effects (boolean)
 #skins2-transparency=0
@@ -4113,7 +4113,7 @@ text-renderer=any
 #input-timeshift-granularity=-1
 
 # Change title according to current media (string)
-input-title-format=$F
+input-title-format=$u
 
 # Disable all lua plugins (boolean)
 #lua=1
@@ -4230,10 +4230,10 @@ repeat=1
 #playlist-cork=1
 
 # Allow only one running instance (boolean)
-one-instance=1
+#one-instance=0
 
 # Use only one instance when started from file manager (boolean)
-#one-instance-when-started-from-file=1
+one-instance-when-started-from-file=0
 
 # Enqueue items into playlist in one instance mode (boolean)
 playlist-enqueue=1
@@ -4287,7 +4287,7 @@ playlist-enqueue=1
 stats=0
 
 # Interface module (string)
-intf=skins2,any
+#intf=
 
 # Extra interface modules (string)
 #extraintf=

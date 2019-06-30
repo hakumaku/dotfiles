@@ -1,7 +1,4 @@
-" =====================
-" Vundle (https://github.com/VundleVim/Vundle.vim.git)
-" =====================
-" {{{
+" {{{ Vundle (https://github.com/VundleVim/Vundle.vim.git)
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -54,12 +51,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this lineset nocompatible
 " }}}
-" =====================
 
-" =====================
-" Vim Basic Settings
-" =====================
-" {{{
+" {{{ Vim Basic Settings
 syntax on
 set t_Co=256			" True colors
 if (has("termguicolors"))
@@ -109,12 +102,8 @@ set laststatus=2
 set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
 " }}}
-" =====================
 
-" =====================
-" Customized Shortcut
-" =====================
-" {{{
+" {{{ Customized Shortcut
 " Move cursor by virtual lines.
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -173,12 +162,8 @@ au FileType c noremap <F3> :call CompileDebug()<CR>
 " Execute bash file
 au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
 " }}}
-" =====================
 
-" =====================
-" Vim Functions
-" =====================
-" {{{
+" {{{ Vim Functions
 func! Commentate() range
 	let l:line = getline("'<")
 	let l:indent = matchstr(l:line, '^\s*')
@@ -316,12 +301,8 @@ func! CompileAssem()
 	exe "edit" l:output
 endfunc
 " }}}
-" =====================
 
-" =====================
-" Autocommand
-" =====================
-" {{{
+" {{{ Autocommand
 augroup project
 	au!
 	au BufRead,BufNewFile *.h,*.c set filetype=c
@@ -401,34 +382,20 @@ augroup file_vim
 	au FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
-" =====================
-
-" =====================
-" tmux
-" =====================
-" {{{
+"
+" {{{ Tmux
 " Tmux true color settings.
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
-" =====================
-
-" =====================
-" vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
-" =====================
-" {{{
+" {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 set background=dark
 silent! colorscheme solarized8
 silent! colorscheme solarized8_low
 silent! colorscheme solarized8_high
 silent! colorscheme solarized8_flat
 " }}}
-" =====================
-
-" =====================
-" vim-syntastic
-" =====================
-" {{{
+" {{{ vim-syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -443,12 +410,7 @@ let g:syntastic_loc_list_height=1
 let g:ycm_show_diagnostics_ui = 0
 let g:syntastic_python_python_exec = 'python3'
 " }}}
-" =====================
-
-" =====================
-" vim-airline & vim-airline-themes
-" =====================
-" {{{
+" {{{ vim-airline & vim-airline-themes
 let g:airline#extensions#tabline#enabled = 1			" turn on buffer list
 let g:airline#extensions#tabline#show_tab_nr = 1		" Show tab number
 let g:airline#extensions#tabline#tab_nr_type = 1		" Show tab number
@@ -461,23 +423,13 @@ let g:airline_powerline_fonts = 1
 " let g:airline_theme='light'
 let g:airline_solarized_bg='dark'
 " }}}
-" =====================
-
-" =====================
-" vim-devicons
-" =====================
-" {{{
+" {{{ vim-devicons
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " }}}
-" =====================
-
-" =====================
-" YouCompleteMe
-" =====================
-" {{{
+" {{{ YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 " Disable scratch window.
 set completeopt-=preview
@@ -486,8 +438,4 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
-" =====================
-
-" Transparent
-hi Normal guibg=NONE ctermbg=NONE
 
