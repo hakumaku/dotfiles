@@ -526,7 +526,7 @@ audiobargraph_v-position=0
 [rotate] # Rotate video filter
 
 # Angle in degrees (float)
-#rotate-angle=30.000000
+rotate-angle=140.000000
 
 # Use motion sensors (boolean)
 #rotate-use-motion=0
@@ -763,7 +763,7 @@ skins2-config=["Hidden" "Panel_0" 0 0 650 360 0]["MainWindow" "MainFrame" 526 13
 [qt] # Qt interface
 
 # Start in minimal view (without menus) (boolean)
-qt-minimal-view=1
+#qt-minimal-view=0
 
 # Systray icon (boolean)
 #qt-system-tray=1
@@ -4209,7 +4209,7 @@ vod-server=any
 #loop=0
 
 # Repeat current item (boolean)
-repeat=1
+#repeat=0
 
 # Play and exit (boolean)
 #play-and-exit=0

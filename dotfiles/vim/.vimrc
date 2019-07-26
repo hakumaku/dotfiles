@@ -117,7 +117,7 @@ nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
 " Move the current line one up.
 nnoremap <C-k> :m-2<CR>:echo 'Move line up'<CR>
 " Open.
-nnoremap <C-o> :NERDTreeToggle<CR>:echo @%<CR>
+" nnoremap <C-o> :NERDTreeToggle<CR>:echo @%<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <C-_> :set nolist!<CR>
@@ -144,8 +144,8 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
+" nnoremap <C-n> :bn<CR>
+" nnoremap <C-p> :bp<CR>
 nnoremap <BS> :bd<CR>
 
 " Set command line arguments
@@ -438,4 +438,3 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
-

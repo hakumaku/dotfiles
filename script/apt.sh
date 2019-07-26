@@ -15,7 +15,7 @@ PACKAGE=(
 	"cmus" "sxiv" "vlc" "cheese" "transmission" "stacer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt"
-	"w3m-img" "compton" "feh" "moreutils"
+	"w3m-img" "compton" "feh" "moreutils" "plank"
 	"ffmpeg" "ffmpegthumbnailer"
 	"$(check-language-support)"
 	# wine League of Legends

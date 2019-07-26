@@ -212,15 +212,25 @@ gsettings set org.gnome.desktop.interface enable-animations true
 # gsettings set org.gnome.nautilus.icon-view text-ellipsis-limit "['1']"
 
 # Switching to specific workspace
+gsettings set org.gnome.desktop.wm.preferences num-workspace 4
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
+# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
+gsettings set org.gnome.shell.keybindings switch-to-application-1 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-2 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-3 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-4 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-5 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-6 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-7 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-8 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "['']"
 
 # Move window to specific workspace
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Ctrl>1']"
@@ -248,84 +258,4 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Super><Ct
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "<Super>equal"
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "<Super>minus"
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "<Super>0"
-
-# Customized shortcuts
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[\
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/', \
-	'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/' ]"
-
-# custom0: Shutdown
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Shutdown"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-session-quit --power-off"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>Escape"
-
-# custom1: gnome-tweaks
-# ubuntu 18.04 has bug that it cannot bind "<Super>O".
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Gnome Tweaks"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-tweaks"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Super>U"
-
-# custom2: Calculator
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Calculator"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "gnome-calculator"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "<Super>C"
-
-# custom3: Simple Terminal
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name "Simple Terminal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command "st"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding "<Super>Return"
-
-# custom4: Ranger
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name "Ranger"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command "st -e 'ranger'"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding "<Super>R"
-
-# custom5: Dmenu
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/ name "Dmenu"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/ command "dmenu_run"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/ binding "<Super>S"
-
-# custom6: Web browser
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/ name "Web browser"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/ command "firefox"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/ binding "<Super>W"
-
-# custom7: Music Player
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ name "Music Player"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ command "rhythmbox"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ binding "<Super>Y"
-
-# custom8: Twitch TV
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ name "Twitch"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ command "gnome-twitch"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ binding "<Super>T"
-
-# custom9: Steam
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ name "Steam"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ command "steam"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/ binding "<Super>G"
-
-# custom10: nvidia
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ name "Nvidia dmenu"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ command "$DIR/nvidia.sh"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/ binding "<Super>Semicolon"
-
-# custom11: nightlight
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/ name "Nightlight"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/ command "$DIR/nightlight.sh"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/ binding "<Super>Backslash"
-
-# custom12: gnome system monitor
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ name "System Monitor"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ command "gnome-system-monitor"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom10/ binding "<Primary><Shift>Tab"
 
