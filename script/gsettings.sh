@@ -24,8 +24,8 @@ gsettings set org.gnome.shell favorite-apps "[${gset[*]}]"
 # Desktop
 #
 gsettings set org.gnome.desktop.background show-desktop-icons 'false'
-gsettings set org.gnome.desktop.background picture-options 'scaled'
-gsettings set org.gnome.desktop.screensaver picture-options 'scaled'
+gsettings set org.gnome.desktop.background picture-options 'wallpaper'
+gsettings set org.gnome.desktop.screensaver picture-options 'wallpaper'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
@@ -161,6 +161,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Super>e'
 # Disable default bindings.
 # <Super>: overlay key
 gsettings set org.gnome.mutter overlay-key ""
+# <Super>A: application view
+gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
 # <Super>N: focus-active-notification
 gsettings set org.gnome.shell.keybindings focus-active-notification "[]"
 # <Super>H: Hide window
