@@ -16,7 +16,6 @@ UBUNTU_PACKAGE=(
 	"python3-dev" "python3-pip" "python-apt"
 	"w3m-img" "compton" "feh" "moreutils"
 	"plank" "steam" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
-	"$(check-language-support)"
 	"winbind"						# wine League of Legends
 
 	# Suckless Terminal & Dmenu
@@ -91,9 +90,6 @@ install_unimatrix () {
 	sudo chmod a+rx /usr/local/bin/unimatrix
 }
 
-pip_install "${PIP_PACKAGE[*]}"
-exit 0
-
 while [[ $# -gt 0 ]]; do
 	arg="$1"
 
@@ -106,6 +102,7 @@ while [[ $# -gt 0 ]]; do
 			for ppa in ${PPA[@]}; do
 				sudo add-apt-repository -n -y "$ppa"
 			done
+			UBUNTU_PACKAGE+=("$(check-language-support)")
 			sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
 			sudo apt -qq -y --ignore-missing install ${UBUNTU_PACKAGE[*]}
 		;;
