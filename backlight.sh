@@ -22,9 +22,9 @@ division=20
 stride=$( printf "%.2f" $( echo "$max_brightness / $division" | bc -l ) )
 
 while [[ $# -gt 0 ]]; do
-	key="$1"
+	arg="$1"
 
-	case $key in
+	case "$arg" in
 		-i|--increase)
 			sum=$( printf "%.0f" $( echo "$brightness + $stride" | bc -l ) )
 			shift

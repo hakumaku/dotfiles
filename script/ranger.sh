@@ -16,10 +16,11 @@ ranger () {
 		return
 	fi
 
-	git clone -q https://github.com/ranger/ranger "$dir/ranger" &&
-	mkdir -p "$HOME/.config/ranger" && cp "$remote_rc_conf" "$local_rc_conf" &&
-	(cd "$dir/ranger" && python3 ranger.py --copy-config=all &&
-		sudo make install) &&
+	# git clone -q https://github.com/ranger/ranger "$dir/ranger" &&
+	# mkdir -p "$HOME/.config/ranger" && cp "$remote_rc_conf" "$local_rc_conf" &&
+	# (cd "$dir/ranger" && python3 ranger.py --copy-config=all &&
+	# 	sudo make install) &&
+	pip install --user ranger-fm
 	# Uncomment video preview script
 	sed -i '/# Video$/{
 		n
