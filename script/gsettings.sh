@@ -218,6 +218,7 @@ gsettings set org.gnome.desktop.interface enable-animations true
 # gsettings set org.gnome.nautilus.icon-view text-ellipsis-limit "['1']"
 
 # Switching to specific workspace
+gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.desktop.wm.preferences num-workspace 4
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
