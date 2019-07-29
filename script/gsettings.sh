@@ -157,6 +157,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Super>e'
 # Disable default bindings.
 # <Super>: overlay key
 gsettings set org.gnome.mutter overlay-key ""
+# <Super>A: application view
+gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
 # <Super>N: focus-active-notification
 gsettings set org.gnome.shell.keybindings focus-active-notification "[]"
 # <Super>H: Hide window
