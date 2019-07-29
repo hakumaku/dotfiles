@@ -43,6 +43,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
+alias grep='grep --color=auto'
 # alias lst='lsd --group-dirs --tree --color never'
 # alias ll='lsd --group-dirs -l --color never'
 # alias ranger="python3 $HOME/workspace/ranger/ranger.py"
