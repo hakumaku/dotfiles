@@ -24,8 +24,8 @@ gsettings set org.gnome.shell favorite-apps "[${gset[*]}]"
 # Desktop
 #
 gsettings set org.gnome.desktop.background show-desktop-icons 'false'
-gsettings set org.gnome.desktop.background picture-options 'scaled'
-gsettings set org.gnome.desktop.screensaver picture-options 'scaled'
+gsettings set org.gnome.desktop.background picture-options 'wallpaper'
+gsettings set org.gnome.desktop.screensaver picture-options 'wallpaper'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
