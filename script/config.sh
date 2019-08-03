@@ -35,6 +35,7 @@ declare -A DOTFILES=(
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
 	"stacer" "yaru" "snapd"
+	# humanity-icon-theme?
 )
 ARCH_PACKAGE=(
 	"base-devel" "gdm" "gnome" "plank"

@@ -12,7 +12,7 @@
 # If you are not in, run the command
 # $ sudo usermod -a -G video yourname
 
-video="acpi_video0"
+video="intel_backlight"
 path="/sys/class/backlight/$video/brightness"
 max_brightness=$( cat "/sys/class/backlight/$video/max_brightness" )
 brightness=$( cat $path )
@@ -38,12 +38,12 @@ while [[ $# -gt 0 ]]; do
 			exit 0
 		;;
 		-r|--rule)
-			sudo cat <<- END >> "/etc/udev/rules.d/90-backlight.rules"
+			sudo bash -c "cat << EOF > /etc/udev/rules.d/90-backlight.rules"
 			ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
 			ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
 			ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chgrp video /sys/class/leds/%k/brightness"
 			ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chmod g+w /sys/class/leds/%k/brightness"
-			END
+			EOF
 			exit 0;
 		;;
 		*)
