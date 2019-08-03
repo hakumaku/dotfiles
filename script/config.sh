@@ -18,9 +18,9 @@ declare -A DOTFILES=(
 	# (remote, local) pair
 	["vlc"]="${DIR[config]}/vlc/vlcrc,${DIR[dot]}/vlc/vlcrc"
 	["vim"]="$HOME/.vimrc,${DIR[dot]}/vim/.vimrc"
-	["st"]="${DIR[home]}/st/config.h,${DIR[dot]}/st/config.h"
-	["stdesktop"]="${DIR[home]}/st/st.desktop"
-	["dmenu"]="${DIR[home]}/dmenu/config.h,${DIR[dot]}/dmenu/config.h"
+	["st"]="${DIR[parent]}/st/config.h,${DIR[dot]}/st/config.h"
+	["stdesktop"]="${DIR[dot]}/st/st.desktop"
+	["dmenu"]="${DIR[parent]}/dmenu/config.h,${DIR[dot]}/dmenu/config.h"
 	["powerline"]="${DIR[config]}/powerline/config.json,`
 		`${DIR[dot]}/powerline/config.json"
 	["tmux"]="$HOME/.tmux.conf,${DIR[dot]}/tmux/.tmux.conf"
@@ -212,7 +212,9 @@ install_suckless () {
 }
 
 install_st_terminal () {
-	local arg="${DOTFILES[st]}"
+	IFS=','
+	local arg=(${DOTFILES[st]})
+	unset IFS
 	local dir="${arg[0]/config.h}"
 	local config="${arg[1]}"
 	local url="https://dl.suckless.org/st/"
@@ -228,7 +230,9 @@ install_st_terminal () {
 }
 
 install_dmenu () {
-	local arg="${DOTFILES[dmenu]}"
+	IFS=','
+	local arg=(${DOTFILES[dmenu]})
+	unset IFS
 	local dir="${arg[0]/config.h}"
 	local config="${arg[1]}"
 	local url="https://dl.suckless.org/tools/"
@@ -316,7 +320,6 @@ main_install () {
 main () {
 	while [[ $# -gt 0 ]]; do
 		arg="$1"
-		echo $arg
 		case "$arg" in
 			install)
 				shift
