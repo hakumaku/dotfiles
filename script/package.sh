@@ -37,7 +37,7 @@ UBUNTU_PACKAGE=(
 
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
-	"stacer" "yaru" "snapd" "st"
+	"stacer" "yaru" "snapd"
 )
 ARCH_PACKAGE=(
 	"base-devel" "gdm" "gnome" "plank"
