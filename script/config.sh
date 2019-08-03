@@ -322,9 +322,11 @@ main_install () {
 main () {
 	while [[ $# -gt 0 ]]; do
 		arg="$1"
+		echo $arg
 		case "$arg" in
 			install)
-				main_install
+				shift
+				main_install "$@"
 				exit 0
 			;;
 			vlc)
@@ -387,4 +389,6 @@ main () {
 		shift
 	done
 }
+
+main "$@"
 
