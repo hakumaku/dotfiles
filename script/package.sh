@@ -42,7 +42,7 @@ AUR=(
 ARCH_PACKAGE=(
 	"base-devel" "gdm" "gnome" "plank"
 	"networkmanager" "bluez" "bluez-utils"
-	"fcitx-im" "tar" "unzip"
+	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moretutils" "snap" "python-pip"
@@ -83,11 +83,6 @@ pacman_aur () {
 ubuntu_install_chrome () {
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 	sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-}
-
-install_unimatrix () {
-	sudo curl -L https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py -o /usr/local/bin/unimatrix
-	sudo chmod a+rx /usr/local/bin/unimatrix
 }
 
 while [[ $# -gt 0 ]]; do

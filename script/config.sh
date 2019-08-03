@@ -12,6 +12,7 @@ declare -A DIR=(
 	["config"]="$HOME/.config"
 )
 
+# {{{ dotfiles
 declare -A DOTFILES=(
 	# ["local_totem"]="/usr/share/thumbnailers/totem.thumbnailer"
 	# ["remote_totem"]="${DIR[dot]}/gif/totem.thumbnailer"
@@ -28,6 +29,67 @@ declare -A DOTFILES=(
 	["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
 	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 )
+# }}}
+
+# {{{ Arch Packages
+AUR=(
+	"ttf-d2coding" "ttf-unfonts-core-ibx"
+	"stacer" "yaru" "snapd"
+)
+ARCH_PACKAGE=(
+	"base-devel" "gdm" "gnome" "plank"
+	"networkmanager" "bluez" "bluez-utils"
+	"fcitx-im" "fcitx-hangul" "tar" "unzip"
+	"adobe-source-han-sans-kr-fonts"
+	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
+	"autogen" "ctags" "automake" "cmake" "gufw" "moretutils" "snap" "python-pip"
+	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
+)
+install_arch_package () {
+	local dir=""
+	sudo pacman -Syu && sudo pacman -Sq --noconfirm ${ARCH_PACKAGE[*]} && {
+	for aur in "${AUR[@]}"; do
+		dir="${DIR[parent]}/$aur"
+		git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
+			( cd "$dir" && makepkg -sri )
+	done }
+}
+# }}}
+# {{{ Ubuntu Packages
+PPA=(
+	"ppa:nilarimogard/webupd8"			# gnome-twitch
+	"ppa:graphics-drivers"				# nvidia graphics drivers
+	"ppa:oguzhaninan/stacer"			# Stacer
+)
+UBUNTU_PACKAGE=(
+	"git" "vim" "vim-gnome" "g++" "curl" "ctags"
+	"valgrind" "htop" "tmux" "screenfetch" "autogen"
+	"automake" "cmake" "snap" "fcitx-hangul" "gufw"
+	"cmus" "sxiv" "ffmpeg" "ffmpegthumbnailer"
+	"gnome-tweak-tool" "gnome-shell-extensions"
+	"python3-dev" "python3-pip" "python-apt"
+	"w3m-img" "compton" "feh" "moreutils"
+	"plank" "steam" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
+	"winbind"						# wine League of Legends
+
+	# Suckless Terminal & Dmenu
+	# "libx11-dev" "libxext-dev" "libxft-dev"
+	# "libxinerama-dev" "libfreetype6-dev"
+	# "libxft2" "libfontconfig1-dev" "libpam0g-dev"
+	# "libxrandr2" "libxss1"
+
+	# Google Chrome
+	# "google-chrome-stable" "chrome-gnome-shell"
+
+	# Twitch
+	# "gnome-twitch"
+	# "gnome-twitch-player-backend-gstreamer-cairo"
+	# "gnome-twitch-player-backend-gstreamer-clutter"
+	# "gnome-twitch-player-backend-gstreamer-opengl"
+	# "gnome-twitch-player-backend-mpv-opengl"
+)
+
+# }}}
 
 sync_dotfile () {
 	IFS=','
@@ -271,16 +333,28 @@ install_unimatrix () {
 
 # {{{ Pip
 install_pip () {
-	echo ""
+	local packages=(
+		"virtualenv"
+		"powerline-status"
+		"ranger-fm"
+	)
 	for pack in ${package[*]}; do
 		pip3 install --user -q "$pack"
 	done
 }
 # }}}
 
+# {{{ fcitx config
 fcitx_config () {
-	echo ""
+	local profile="$HOME/.config/fcitx/profile"
+	local config="$HOME/.config/fcitx/config"
+	sed -Ei "s/#(IMName=)/\1Hangul/" "$profile"
+	sed -Ei "s/(hangul:)False/\1True/" "$profile"
+	sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
+	sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
+	sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
 }
+# }}}
 
 disable_gnome_software () {
 	if [[ $OS != *"ubuntu"* ]]; then
