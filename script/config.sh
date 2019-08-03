@@ -42,7 +42,7 @@ ARCH_PACKAGE=(
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
-	"autogen" "ctags" "automake" "cmake" "gufw" "moretutils" "snap" "python-pip"
+	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
 )
 install_arch_package () {
