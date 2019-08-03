@@ -45,6 +45,7 @@ ARCH_PACKAGE=(
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
+	"firefox"
 )
 install_arch_package () {
 	local dir=""
