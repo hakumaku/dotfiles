@@ -1,1 +1,7 @@
-sed -nE "/TriggerKey=(.*)/ { s/\1/asdf/p }" "$HOME/.config/fcitx/config"
+profile="$HOME/.config/fcitx/profile.copy"
+config="$HOME/.config/fcitx/config.copy"
+sed -Ei "s/#(IMName=)/\1hangul/" "$profile"
+sed -Ei "s/(hangul:)False/\1True/" "$profile"
+sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
+sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
+sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
