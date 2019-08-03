@@ -212,10 +212,7 @@ install_suckless () {
 }
 
 install_st_terminal () {
-	# Invoke as: suckles_terminal "${DOTFILES[st]"
-	IFS=','
-	local arg=($1)
-	unset IFS
+	local arg="${DOTFILES[st]}"
 	local dir="${arg[0]/config.h}"
 	local config="${arg[1]}"
 	local url="https://dl.suckless.org/st/"
@@ -231,10 +228,7 @@ install_st_terminal () {
 }
 
 install_dmenu () {
-	# Invoke as: suckles_terminal "${DOTFILES[st]"
-	IFS=','
-	local arg=($1)
-	unset IFS
+	local arg="${DOTFILES[dmenu]}"
 	local dir="${arg[0]/config.h}"
 	local config="${arg[1]}"
 	local url="https://dl.suckless.org/tools/"
