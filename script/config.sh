@@ -88,7 +88,15 @@ UBUNTU_PACKAGE=(
 	# "gnome-twitch-player-backend-gstreamer-opengl"
 	# "gnome-twitch-player-backend-mpv-opengl"
 )
+install_ubuntu_package () {
+	for ppa in ${PPA[@]}; do
+		sudo add-apt-repository -n -y "$ppa"
+	done
+	UBUNTU_PACKAGE+=("$(check-language-support)")
+	sudo apt -qq update && sudo ubuntu-drivers autoinstall &&
+		sudo apt -qq -y --ignore-missing install ${UBUNTU_PACKAGE[*]}
 
+}
 # }}}
 
 sync_dotfile () {
@@ -373,6 +381,8 @@ main_install () {
 	while [[ $# -gt 0 ]]; do
 		arg="$1"
 		case "$arg" in
+			arch) install_arch_package ;;
+			ubuntu) install_ubuntu_package ;;
 			vundle) install_vundle ;;
 			tmux_theme) install_tmux_theme ;;
 			youtubedl) install_youtubedl ;;
