@@ -52,7 +52,6 @@ sxiv () {
 		image/x-portable-graymap=sxiv.desktop
 		image/x-tga=sxiv.desktop
 		image/x-xpixmap=sxiv.desktop
-
 		END
 		)
 		printf "$string" >> $mime

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Install script for font-awesome
 
 FONTS=(
 	https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/SourceCodePro.zip

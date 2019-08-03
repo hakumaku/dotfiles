@@ -1,3 +1,10 @@
+#!/usr/bind/env python3
+# Install script for gnome-shell extensions
+# You can search extensions in https://extensions.gnome.org/.
+# The code number is in the url.
+# e.g) https://extensions.gnome.org/extension/19/user-themes/
+#                                            ^^^
+
 import subprocess
 import pathlib
 import urllib
