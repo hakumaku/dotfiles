@@ -56,8 +56,9 @@ install_arch_package () {
 install_steam () {
 	# Enable multilib
 	local conf="/etc/pacman.conf"
-	sed -E 's/#([multilib]\n#Include)/\1/'
+	sed -iE "/^#\[multilib\]/,/^#Include/ s/#(.*)/\1/" "$conf"
 	# sudo pacman -Sq --noconfirm nvidia
+	# sudo pacman -Syy
 }
 # }}}
 # {{{ Ubuntu Packages
