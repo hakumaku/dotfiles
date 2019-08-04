@@ -35,7 +35,7 @@ AUR=(
 	# humanity-icon-theme?
 )
 ARCH_PACKAGE=(
-	"base-devel" "gdm" "gnome" "plank"
+	"xorg" "base-devel" "gdm" "gnome" "plank"
 	"networkmanager" "bluez" "bluez-utils" "lxapperance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts"
@@ -57,6 +57,7 @@ install_arch_package () {
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
 	sudo systemctl enable bluetooth
 	sudo systemctl enable Networkmanager
+	sudo systemctl enable gdm
 }
 install_steam () {
 	# Enable multilib
