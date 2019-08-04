@@ -38,7 +38,7 @@ ARCH_PACKAGE=(
 	"xorg" "base-devel" "gdm" "gnome" "plank"
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
-	"adobe-source-han-sans-kr-fonts"
+	"adobe-source-han-sans-kr-fonts" "awesome"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
