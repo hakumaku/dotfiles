@@ -59,6 +59,7 @@ install_arch_package () {
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
 	sudo systemctl enable bluetooth
 	sudo systemctl enable Networkmanager
+	sudo systemctl enable snap
 	sudo systemctl enable gdm
 }
 install_steam () {
