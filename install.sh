@@ -366,7 +366,7 @@ install_pip () {
 		"powerline-status"
 		"ranger-fm"
 	)
-	for pack in ${package[*]}; do
+	for pack in ${package[@]}; do
 		pip3 install --user -q "$pack"
 	done
 }
