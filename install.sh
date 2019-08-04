@@ -313,6 +313,9 @@ install_st_terminal () {
 	fi
 
 	install_suckless "$dir" "$config" "$url" "$package" &&
+	if [[ ! -d "$HOME/.local/share/applications" ]]; then
+		mkdir -p "$HOME/.local/share/applications"
+	fi
 	cp "${DOTFILES[stdesktop]}" "$HOME/.local/share/applications"
 }
 
