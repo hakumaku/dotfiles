@@ -33,8 +33,8 @@ declare -A DOTFILES=(
 # {{{ Arch Packages
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
-	"stacer" "yaru" "snapd"
-	# humanity-icon-theme?
+	"stacer" "snapd" "humanity-icon-theme"
+	"yaru"
 )
 ARCH_PACKAGE=(
 	"xorg" "base-devel" "gdm" "gnome" "plank"
