@@ -427,7 +427,7 @@ package_install () {
 			dmenu) install_dmenu ;;
 			fcitx)
 				if [[ ! -d "$HOME/.config/fcitx" ]]; then
-					exec fcitx -d
+					( exec fcitx -d & )
 				fi
 				fcitx_config
 			;;
