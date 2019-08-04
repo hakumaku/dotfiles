@@ -90,7 +90,7 @@ UBUNTU_PACKAGE=(
 	"winbind"						# wine League of Legends
 
 	# Suckless Terminal & Dmenu
-	# "libx11-dev" "libxext-dev" "libxft-dev"
+	"libx11-dev" "libxext-dev" "libxft-dev"
 	# "libxinerama-dev" "libfreetype6-dev"
 	# "libxft2" "libfontconfig1-dev" "libpam0g-dev"
 	# "libxrandr2" "libxss1"
