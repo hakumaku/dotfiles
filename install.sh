@@ -36,7 +36,7 @@ AUR=(
 )
 ARCH_PACKAGE=(
 	"base-devel" "gdm" "gnome" "plank"
-	"networkmanager" "bluez" "bluez-utils"
+	"networkmanager" "bluez" "bluez-utils" "lxapperance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
@@ -55,6 +55,8 @@ install_arch_package () {
 	local conf="/etc/locale.gen"
 	sudo sed -Ei "s/^#(en_US.UTF-8)/\1/" "$conf" &&
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
+	sudo systemctl enable bluetooth
+	sudo systemctl enable Networkmanager
 }
 install_steam () {
 	# Enable multilib
