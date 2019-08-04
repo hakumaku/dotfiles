@@ -35,18 +35,11 @@ passwd haku
 
 pacman -S sudo gvim grub efibootmgr
 usermod -aG wheel,audio,video,optical,storage haku
-
-# pacman -S vim
 visudo
 # uncomment the line
 # %wheel ALL=(ALL) ALL
-
-pacman -S grub efibootmgr
 mkdir /boot/efi
 mount /dev/sda1 /boot/efi
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
-
-sudo pacman -S xorg
-systemctl enable gdm
