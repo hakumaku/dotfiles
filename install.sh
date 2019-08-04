@@ -24,6 +24,8 @@ declare -A DOTFILES=(
 		`${DIR[dot]}/powerline/config.json"
 	["tmux"]="$HOME/.tmux.conf,${DIR[dot]}/tmux/.tmux.conf"
 	["ranger"]="${DIR[config]}/ranger/rc.conf,${DIR[dot]}/ranger/rc.conf"
+	["awesome"]="${DIR[config]}/awesome,${DIR[dot]}/awesome"
+	["rofi"]="${DIR[config]}/rofi,${DIR[dot]}/rofi"
 	# ["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
 	# ["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 )
