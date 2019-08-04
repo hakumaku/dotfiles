@@ -395,7 +395,13 @@ package_install () {
 	while [[ $# -gt 0 ]]; do
 		arg="${1,,}"
 		case "$arg" in
-			*"arch"*) install_arch_package ;;
+			*"arch"*)
+				install_arch_package
+				local nvidia=$( lspci | grep "NVIDIA" )
+				if [[ $nvidia ]]; then
+					install_steam
+				fi
+			;;
 			*"ubuntu"*) install_ubuntu_package ;;
 			# The rest must be called after
 			pip)
