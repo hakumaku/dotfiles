@@ -52,6 +52,9 @@ install_arch_package () {
 		git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
 			( cd "$dir" && makepkg -sri --noconfirm )
 	done }
+	local conf="/etc/locale.gen"
+	sudo sed -Ei "s/^#(en_US.UTF-8)/\1/" "$conf" &&
+		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
 }
 install_steam () {
 	# Enable multilib
