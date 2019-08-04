@@ -1,7 +1,0 @@
-#[multilib]
-asdfasdf
-#Include = /etc/pacman/mirrorlist
-
-#Include = /etc/pacman/mirrorlist
-#Include = /etc/pacman/mirrorlist
-#Include = /etc/pacman/mirrorlist

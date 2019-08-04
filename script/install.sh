@@ -56,9 +56,11 @@ install_arch_package () {
 install_steam () {
 	# Enable multilib
 	local conf="/etc/pacman.conf"
-	sed -iE "/^#\[multilib\]/,/^#Include/ s/#(.*)/\1/" "$conf"
-	# sudo pacman -Sq --noconfirm nvidia
-	# sudo pacman -Syy
+	local pack=(
+		"nvidia" "ttf-liberation" "steam"
+	)
+	sudo sed -Ei "/^#\[multilib\]/,/^#Include/ s/#(.*)/\1/" "$conf" &&
+		sudo pacman -Syy && sudo pacman -Sq --noconfirm "${pack[@]}"
 }
 # }}}
 # {{{ Ubuntu Packages
