@@ -275,8 +275,8 @@ install_nerdfont () {
 # {{{ Ranger Devicons
 install_ranger_devicons () {
 	local url="https://github.com/alexanderjeurissen/ranger_devicons"
-	git clone -q "$url" "${DIR[home]}/ranger_devicons" &&
-		(cd "${DIR[home]}/ranger_devicons" && make install)
+	git clone -q "$url" "${DIR[parent]}/ranger_devicons" &&
+		(cd "${DIR[parent]}/ranger_devicons" && make install)
 }
 # }}}
 
