@@ -32,10 +32,10 @@ gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
 gsettings set org.gnome.software download-updates 'false'
 
-gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
-gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
-gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu Bold 11'
+# gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
+# gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
+# gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
+# gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu Bold 11'
 
 # GNOME Shell version 3.32.0
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash 'false'

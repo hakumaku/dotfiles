@@ -85,7 +85,7 @@ UBUNTU_PACKAGE=(
 	"cmus" "sxiv" "ffmpeg" "ffmpegthumbnailer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt"
-	"w3m-img" "compton" "feh" "moreutils"
+	"w3m-img" "compton" "feh" "moreutils" "rofi" "awesome"
 	"plank" "steam" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
 	"winbind"						# wine League of Legends
 
