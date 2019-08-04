@@ -3,7 +3,6 @@
 
 OS=$( cat /etc/os-release | sed -n 's/^NAME=//p' )
 OS=${OS,,}
-
 declare -A DIR=(
 	["source"]="$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
 	["home"]="$( git rev-parse --show-toplevel )"
@@ -11,7 +10,6 @@ declare -A DIR=(
 	["dot"]="${DIR[home]}/dotfiles"
 	["config"]="$HOME/.config"
 )
-
 # {{{ dotfiles
 declare -A DOTFILES=(
 	# ["local_totem"]="/usr/share/thumbnailers/totem.thumbnailer"
@@ -21,16 +19,15 @@ declare -A DOTFILES=(
 	["vim"]="$HOME/.vimrc,${DIR[dot]}/vim/.vimrc"
 	["st"]="${DIR[parent]}/st/config.h,${DIR[dot]}/st/config.h"
 	["stdesktop"]="${DIR[dot]}/st/st.desktop"
-	["dmenu"]="${DIR[parent]}/dmenu/config.h,${DIR[dot]}/dmenu/config.h"
+	# ["dmenu"]="${DIR[parent]}/dmenu/config.h,${DIR[dot]}/dmenu/config.h"
 	["powerline"]="${DIR[config]}/powerline/config.json,`
 		`${DIR[dot]}/powerline/config.json"
 	["tmux"]="$HOME/.tmux.conf,${DIR[dot]}/tmux/.tmux.conf"
 	["ranger"]="${DIR[config]}/ranger/rc.conf,${DIR[dot]}/ranger/rc.conf"
-	["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
-	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
+	# ["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
+	# ["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 )
 # }}}
-
 # {{{ Arch Packages
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
@@ -45,7 +42,7 @@ ARCH_PACKAGE=(
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
-	"firefox"
+	"nautilus" "firefox"
 )
 install_arch_package () {
 	local dir=""
@@ -53,8 +50,14 @@ install_arch_package () {
 	for aur in "${AUR[@]}"; do
 		dir="${DIR[parent]}/$aur"
 		git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
-			( cd "$dir" && makepkg -sri )
+			( cd "$dir" && makepkg -sri --noconfirm )
 	done }
+}
+install_steam () {
+	# Enable multilib
+	local conf="/etc/pacman.conf"
+	sed -E 's/#([multilib]\n#Include)/\1/'
+	# sudo pacman -Sq --noconfirm nvidia
 }
 # }}}
 # {{{ Ubuntu Packages
@@ -379,66 +382,50 @@ disable_gnome_software () {
 	echo "X-GNOME-Autostart-enabled=false" >> $dest
 }
 
-main_install () {
+package_install () {
 	while [[ $# -gt 0 ]]; do
-		arg="$1"
+		arg="${1,,}"
 		case "$arg" in
 			arch) install_arch_package ;;
 			ubuntu) install_ubuntu_package ;;
-			vundle) install_vundle ;;
-			tmux_theme) install_tmux_theme ;;
-			youtubedl) install_youtubedl ;;
-			suru) install_suru ;;
-			polybar) install_polybar ;;
-			nerdfont) install_nerdfont ;;
+			# The rest must be called after
+			pip)
+				install_pip
+				# Enable video option in ranger-fm
+				if [[ -f "$HOME/.config/ranger/scope.sh" ]]; then
+					sed -i '/# Video$/{
+						n
+						s/# //
+						n
+						s/# //
+						n
+						s/# //
+						n
+						s/# //
+					}' "$HOME/.config/ranger/scope.sh"
+				fi
+			;;
+			st|st_terminal) install_st_terminal ;;
+			nerdfont|nerd|font) install_nerdfont ;;
+			vundle|vim) install_vundle ;;
+			tmux_theme|tmux) install_tmux_theme ;;
 			ranger_devicons) install_ranger_devicons ;;
-			st) install_st_terminal ;;
-			dmenu) install_dmenu ;;
+			suru) install_suru ;;
+			youtubedl|youtube) install_youtubedl ;;
+			polybar) install_polybar ;;
 			i3-gaps) install_i3gaps ;;
 			unimatrix) install_unimatrix ;;
-			pip) install_pip ;;
-			*) ;;
-		esac
-		shift
-	done
-}
-
-main () {
-	while [[ $# -gt 0 ]]; do
-		arg="$1"
-		case "$arg" in
-			install)
-				shift
-				main_install "$@"
-				exit 0
-			;;
-			vlc)
-				sync_dotfile "${DOTFILES[$arg]}"
-				;;
-			i3)
-				sync_dotfile "${DOTFILES[$arg]}"
-				;;
-			polybar)
-				sync_dotfile "${DOTFILES[$arg]}"
-				;;
-			vim)
-				;;
-			ranger)
-				sed -i '/# Video$/{
-				n
-				s/# //
-				n
-				s/# //
-				n
-				s/# //
-				n
-				s/# //
-			}' "$HOME/.config/ranger/scope.sh"
+			dmenu) install_dmenu ;;
+			fcitx)
+				if [[ ! -d "$HOME/.config/fcitx" ]]; then
+					exec fcitx -d
+				fi
+				fcitx_config
 			;;
 			git)
 				git config --global user.email "gentlebuuny@gmail.com"
 				git config --global user.name "hakumaku"
-				;;
+			;;
 			thumbnailer)
 				"${DIR[dot]}/gif/totem.thumbnailer"
 				if [ -f "${DIR[dot]}/gif/totem.thumbnailer" ]; then
@@ -465,13 +452,19 @@ main () {
 					sync_dotfile "${DOTFILES[$i]}"
 				done
 			;;
-			*)
-				exit 1
-			;;
+			*) ;;
 		esac
 		shift
 	done
 }
 
-main "$@"
+main () {
+	local arg=(
+		"$OS" "pip" "st" "nerdfont" "vundle" "tmux_theme" "ranger_devicons"
+		"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
+	)
+	package_install "${arg[@]}"
+}
+
+main
 
