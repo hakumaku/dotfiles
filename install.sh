@@ -36,7 +36,7 @@ AUR=(
 )
 ARCH_PACKAGE=(
 	"xorg" "base-devel" "gdm" "gnome" "plank"
-	"networkmanager" "bluez" "bluez-utils" "lxapperance"
+	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
@@ -395,8 +395,8 @@ package_install () {
 	while [[ $# -gt 0 ]]; do
 		arg="${1,,}"
 		case "$arg" in
-			arch) install_arch_package ;;
-			ubuntu) install_ubuntu_package ;;
+			*"arch"*) install_arch_package ;;
+			*"ubuntu"*) install_ubuntu_package ;;
 			# The rest must be called after
 			pip)
 				install_pip
