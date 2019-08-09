@@ -18,7 +18,6 @@ declare -A DOTFILES=(
 	["vlc"]="${DIR[config]}/vlc/vlcrc,${DIR[dot]}/vlc/vlcrc"
 	["vim"]="$HOME/.vimrc,${DIR[dot]}/vim/.vimrc"
 	["st"]="${DIR[parent]}/st/config.h,${DIR[dot]}/st/config.h"
-	["stdesktop"]="${DIR[dot]}/st/st.desktop"
 	# ["dmenu"]="${DIR[parent]}/dmenu/config.h,${DIR[dot]}/dmenu/config.h"
 	["powerline"]="${DIR[config]}/powerline/config.json,`
 		`${DIR[dot]}/powerline/config.json"
@@ -85,8 +84,9 @@ UBUNTU_PACKAGE=(
 	"cmus" "sxiv" "ffmpeg" "ffmpegthumbnailer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt"
-	"w3m-img" "compton" "feh" "moreutils" "rofi" "awesome"
-	"plank" "steam" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
+	"w3m-img" "compton" "feh" "moreutils" "rofi" "awesome" "lxappearance"
+	"plank" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
+	"steam" "steam-devies"
 	"winbind"						# wine League of Legends
 
 	# Suckless Terminal & Dmenu
@@ -316,7 +316,7 @@ install_st_terminal () {
 	if [[ ! -d "$HOME/.local/share/applications" ]]; then
 		mkdir -p "$HOME/.local/share/applications"
 	fi
-	cp "${DOTFILES[stdesktop]}" "$HOME/.local/share/applications"
+	cp "${DIR[dot]}/st/st.desktop" "$HOME/.local/share/applications"
 }
 
 install_dmenu () {
@@ -480,6 +480,11 @@ package_install () {
 }
 
 main () {
+	if [ $1 == sync ]; then
+		package_install "sync"
+		return 0;
+	fi
+
 	local arg=(
 		"$OS" "pip" "st" "nerdfont" "vundle" "tmux_theme" "ranger_devicons"
 		"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
@@ -487,5 +492,5 @@ main () {
 	package_install "${arg[@]}"
 }
 
-main
+main "$@"
 

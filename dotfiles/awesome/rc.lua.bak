@@ -2,7 +2,6 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- {{{ Library
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -22,7 +21,7 @@ require("awful.hotkeys_popup.keys")
 -- Load Debian menu entries
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
---- }}}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -47,6 +46,7 @@ do
     end)
 end
 -- }}}
+
 -- {{{ Variable definitions
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.font = "Ubuntu Bold 11"
@@ -55,18 +55,31 @@ terminal = "st"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
+
+-- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
 }
 layouts = awful.layout.layouts
 tags = {
     names  = { "1", "2", "3", "4" },
-    layouts = { layouts[2], layouts[1], layouts[1], layouts[1] },
+    layout = { layouts[1], layouts[2], layouts[2], layouts[2] },
 }
-for s = 1, screen.count() do
-    tags[s] = awful.tag(tags.names, s, tags.layouts)
-end
 -- }}}
 
 -- {{{ Menu
@@ -103,6 +116,24 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibar
+mytextclock = wibox.widget.textclock("%a %b %d %H:%M:%S", 1)
+local taglist_buttons = gears.table.join(
+                    awful.button({ }, 1, function(t) t:view_only() end),
+                    awful.button({ modkey }, 1, function(t)
+                                              if client.focus then
+                                                  client.focus:move_to_tag(t)
+                                              end
+                                          end),
+                    awful.button({ }, 3, awful.tag.viewtoggle),
+                    awful.button({ modkey }, 3, function(t)
+                                              if client.focus then
+                                                  client.focus:toggle_tag(t)
+                                              end
+                                          end),
+                    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
+                    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+                )
+
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -116,9 +147,13 @@ local function set_wallpaper(s)
 end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
+
 awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
-    s.mytextclock = wibox.widget.textclock("%a %b %d %H:%M:%S", 1)
+	-- layout box not showing..
+	-- I want to remove dot thingy on taglist.
+    tags[s] = awful.tag(tags.names, s, tags.layout)
+
     s.mypromptbox = awful.widget.prompt()
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
@@ -126,46 +161,26 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    s.mytaglist = awful.widget.taglist({
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = gears.table.join(
-            awful.button({ }, 1, function(t) t:view_only() end),
-            awful.button({ modkey }, 1, function(t)
-                if client.focus then
-                    client.focus:move_to_tag(t)
-                end
-            end),
-            awful.button({ }, 3, awful.tag.viewtoggle),
-            awful.button({ modkey }, 3, function(t)
-                if client.focus then
-                    client.focus:toggle_tag(t)
-                end
-            end),
-            awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-            awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)),
-        layout  = {
-            layout  = wibox.layout.fixed.horizontal,
-            spacing = 12,
+        style   = {
+            shape = gears.shape.powerline
+        },
+        layout   = {
+            spacing = -12,
             spacing_widget = {
                 color  = '#dddddd',
                 shape  = gears.shape.powerline,
                 widget = wibox.widget.separator,
             },
+            layout  = wibox.layout.fixed.horizontal
         },
         widget_template = {
-            id     = 'background_role',
-            widget = wibox.container.background,
             {
-                left = 18,
-                right = 18,
-                widget = wibox.container.margin,
                 {
-                    layout = wibox.layout.fixed.horizontal,
                     {
-                        bg     = '#dddddd',
-                        shape  = gears.shape.circle,
-                        widget = wibox.container.background,
                         {
                             {
                                 id     = 'index_role',
@@ -174,14 +189,31 @@ awful.screen.connect_for_each_screen(function(s)
                             margins = 4,
                             widget  = wibox.container.margin,
                         },
+                        bg     = '#dddddd',
+                        shape  = gears.shape.circle,
+                        widget = wibox.container.background,
                     },
-                    nil,
+                    {
+                        {
+                            id     = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 2,
+                        widget  = wibox.container.margin,
+                    },
                     {
                         id     = 'text_role',
                         widget = wibox.widget.textbox,
                     },
-                }
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left  = 18,
+                right = 18,
+                widget = wibox.container.margin
             },
+            id     = 'background_role',
+            widget = wibox.container.background,
+            -- Add support for hover colors and an index label
             create_callback = function(self, c3, index, objects) --luacheck: no unused args
                 self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
                 self:connect_signal('mouse::enter', function()
@@ -199,13 +231,10 @@ awful.screen.connect_for_each_screen(function(s)
                 self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
             end,
         },
-        style   = {
-            shape = gears.shape.powerline,
-            squares_sel = ""
-        },
-    })
+        buttons = taglist_buttons
+    }
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, })
+    s.mywibox = awful.wibar({ position = "top", screen = s })
     s.mywibox:setup {
         -- It will center the clock.
         expand = "outside",
@@ -217,17 +246,14 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Middle widgets
             layout = wibox.layout.fixed.horizontal,
-            s.mytextclock,
+            mytextclock,
         },
         { -- Right widgets
             layout = wibox.layout.align.horizontal,
             -- The follwing line is to push systray to the rightmost.
             nil, nil,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                wibox.widget.systray(),
-                s.mylayoutbox,
-            }
+            wibox.widget.systray(),
+            s.mylayoutbox,
         },
     }
 end)
@@ -496,11 +522,6 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
-          "Places",
-          "kakaotalk.exe",
-        },
-        title = {
-          "KakaoTalk"
         },
         class = {
           "Arandr",
@@ -513,8 +534,7 @@ awful.rules.rules = {
           "Wpa_gui",
           "veromix",
           "xtightvncviewer",
-          "Stacer",
-          "Nautilus"},
+          "Stacer"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
@@ -538,10 +558,11 @@ awful.rules.rules = {
       properties = { border_width = 0,
                      floating = true,
                      sticky = true,
+                     -- ontop = true,
                      above = true,
+                     focusable = false,
                      below = false,
-                     height = 5,
-      },
+      }
     },
     { rule_any = {
         instance = {
@@ -627,4 +648,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
