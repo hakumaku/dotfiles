@@ -160,7 +160,7 @@ sync_dotfile () {
 		# the file contains white spaces.
 		local type=""
 		local file=""
-		echo "$machine"
+		echo "$(basename $machine)/"
 		while read line; do
 			type="${line: -1}"
 			case "$type" in
@@ -173,7 +173,7 @@ sync_dotfile () {
 				"r")
 					file=$( sed -nE "s/Files (.*) and .*/\1/p" <<< "$line" )
 					file="${file##*/}"
-					printf "\t* \"$file\"\n"
+					printf "\t* \e[4m\"$file\"\e[24m\n"
 					cp "$machine/$file" "$remote"
 				;;
 				# Only in ...: ...
@@ -182,10 +182,10 @@ sync_dotfile () {
 				*)
 					file=$( sed -E "s/^(.*): //" <<< "$line" )
 					if [ -f "$machine/$file" ]; then
-						printf "\t+ \"$file\"\n"
+						printf "\t\e[32m+ \"$file\"\e[39m\n"
 						cp "$machine/$file" "$remote"
 					elif [ -f "$remote/$file" ]; then
-						printf "\t- \"$file\"\n"
+						printf "\t\e[31m- \"$file\"\e[39m\n"
 						rm "$remote/$file"
 					else
 						exit 1
