@@ -87,7 +87,7 @@ UBUNTU_PACKAGE=(
 	"python3-dev" "python3-pip" "python-apt"
 	"w3m-img" "compton" "feh" "moreutils" "rofi" "awesome" "lxappearance"
 	"plank" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
-	"steam" "steam-devies"
+	"steam" "steam-devices"
 	"winbind"						# wine League of Legends
 
 	# Suckless Terminal & Dmenu
