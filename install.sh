@@ -43,7 +43,8 @@ ARCH_PACKAGE=(
 	"adobe-source-han-sans-kr-fonts" "awesome" "rofi"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
-	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese" "transmission-gtk" "transmission-cli"
+	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
+	"transmission" "transmission-gtk" "transmission-cli"
 	"nautilus" "firefox"
 )
 install_arch_package () {
@@ -386,7 +387,7 @@ install_pip () {
 		"powerline-status"
 		"ranger-fm"
 	)
-	for pack in ${package[@]}; do
+	for pack in ${packages[@]}; do
 		pip3 install --user -q "$pack"
 	done
 }
@@ -500,7 +501,7 @@ package_install () {
 }
 
 main () {
-	if [ $1 == sync ]; then
+	if [ "$1" = sync ]; then
 		package_install "sync"
 		return 0;
 	fi
@@ -509,7 +510,8 @@ main () {
 		"$OS" "pip" "st" "nerdfont" "vundle" "tmux_theme" "ranger_devicons"
 		"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
 	)
-	package_install "${arg[@]}"
+	# package_install "${arg[@]}"
+	package_install "pip"
 }
 
 main "$@"
