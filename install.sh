@@ -27,6 +27,7 @@ declare -A DOTFILES=(
 	["rofi"]="${DIR[config]}/rofi,${DIR[dot]}/rofi"
 	["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
 	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
+	["compton"]="${DIR[config]}/compton.conf,${DIR[dot]}/compton/compton.conf"
 )
 # }}}
 # {{{ Arch Packages
