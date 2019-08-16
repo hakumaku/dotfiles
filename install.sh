@@ -402,6 +402,7 @@ fcitx_config () {
 	sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
 	sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
 	sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
+	im-config -n fcitx
 }
 # }}}
 
