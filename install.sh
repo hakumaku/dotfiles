@@ -510,8 +510,7 @@ main () {
 		"$OS" "pip" "st" "nerdfont" "vundle" "tmux_theme" "ranger_devicons"
 		"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
 	)
-	# package_install "${arg[@]}"
-	package_install "pip"
+	package_install "${arg[@]}"
 }
 
 main "$@"
