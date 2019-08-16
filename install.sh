@@ -140,12 +140,12 @@ sync_dotfile () {
 			return 0
 		fi
 		# Synch
-		printf "$filename"
 		if ! cmp -s "$machine" "$remote"; then
-			printf "*"
 			cp "$machine" "$remote"
+			printf "\e[4m* $filename\e[24m\n"
+		else
+			printf "  $filename\e[24m\n"
 		fi
-		echo ""
 
 	# Copy multiple files in the directory.
 	elif [ -d "$remote" ]; then
@@ -160,7 +160,7 @@ sync_dotfile () {
 		# the file contains white spaces.
 		local type=""
 		local file=""
-		echo "$(basename $machine)/"
+		echo "  $(basename $machine)/"
 		while read line; do
 			type="${line: -1}"
 			case "$type" in

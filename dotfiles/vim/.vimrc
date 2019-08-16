@@ -1,5 +1,4 @@
 " {{{ Vundle (https://github.com/VundleVim/Vundle.vim.git)
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -167,7 +166,7 @@ func! Commentate() range
 	let l:line = getline("'<")
 	let l:indent = matchstr(l:line, '^\s*')
 	let l:bool = matchstr(l:line, '\S')
-	
+
 	if &ft == 'vim'
 		let l:char = '" '
 		if l:bool == '"'
