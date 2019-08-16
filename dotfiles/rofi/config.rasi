@@ -80,7 +80,7 @@ configuration {
 	kb-remove-char-back: "BackSpace,Control+h";
 	kb-remove-to-eol: "";
 	kb-remove-to-sol: "Control+u";
-	kb-accept-entry: "KP_Enter";
+	kb-accept-entry: "Return,KP_Enter";
 	kb-accept-custom: "Control+Return";
 	kb-accept-alt: "Shift+Return";
 	kb-delete-entry: "Shift+Delete";

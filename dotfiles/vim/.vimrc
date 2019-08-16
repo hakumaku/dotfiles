@@ -116,8 +116,7 @@ nnoremap <CR> o<ESC>k
 nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
 " Move the current line one up.
 nnoremap <C-k> :m-2<CR>:echo 'Move line up'<CR>
-" Open.
-" nnoremap <C-o> :NERDTreeToggle<CR>:echo @%<CR>
+nnoremap <C-s> :NERDTreeToggle<CR>:echo @%<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <C-_> :set nolist!<CR>

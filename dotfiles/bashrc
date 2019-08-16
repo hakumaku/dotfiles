@@ -31,6 +31,8 @@ snapicons () {
 # Bash settings
 set -o vi
 export EDITOR=/usr/bin/vim
+# Disable pressing <C-s> to freeze.
+stty -ixon
 bind -m vi-insert "\C-l":clear-screen
 bind -m vi-insert "\C-[":vi-movement-mode
 bind -x '"\C-o": "ranger"'

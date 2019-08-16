@@ -1,11 +1,38 @@
-# Disable title bar
-# {{{
+# {{{ Disable title bar
 for_window [class="^.*"] border pixel 0
 font pango:UbuntuMono Nerd Font 0
 # }}}
+# {{{ Plasma
+## Try to kill the wallpaper set by Plasma (it takes up the entire workspace
+# and hides everythiing)
+# exec --no-startup-id wmctrl -c Plasma
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
 
-# i3-gaps
-# {{{
+# Avoid tiling popups, dropdown windows from plasma
+for_window [class="plasmashell"] floating enable
+for_window [class="Plasma"] floating enable
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable
+for_window [class="Kmix"] floating enable
+for_window [class="Klipper"] floating enable
+for_window [class="Plasmoidviewer"] floating enable
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px, no_focus
+
+# >>> Window Rules <<<
+
+# >>> Avoid tiling for non-Plasma stuff <<<
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+no_focus [class="plasmashell"]
+# }}}
+# {{{ i3-gaps
 set $base03    #002b36
 set $base02    #073642
 set $base01    #586e75
@@ -23,8 +50,10 @@ set $blue      #268bd2
 set $cyan      #2aa198
 set $green     #859900
 
-gaps inner 10
+# The order matters, and the 'gaps top' must match the height of polybar.
+gaps inner 12
 gaps outer 0
+gaps top 36
 smart_borders on
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 $base3 #ffffff #2e9ef4   #285577
@@ -35,9 +64,8 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 # }}}
 
-# Floating windows
-# {{{
-for_window [class="firefox"] floating enable
+# {{{ Floating windows
+for_window [class="Wine"] floating enable
 for_window [class="Firefox"] floating enable
 for_window [class="stacer"] floating enable
 for_window [class="Nautilus"] floating enable
@@ -55,27 +83,22 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Applications
-# {{{
-# Start a terminal
+# {{{ Applications
 bindsym $mod+Return exec st
-# Web browser
 bindsym $mod+w exec firefox
-# Steam
 bindsym $mod+g exec steam
-# Natutilus
 bindsym $mod+e exec nautilus
-# Ranger
-# bindsym $mod+r exec st -e 'ranger'
-bindsym $mod+a exec dmenu_run
-bindsym $mod+0 exec pactl set-sink-mute 0 toggle
-bindsym $mod+minus exec pactl set-sink-volume 0 -5%
-bindsym $mod+equal exec pactl set-sink-volume 0 +5%
+bindsym $mod+o exec stacer
+bindsym $mod+a exec rofi -show drun
+bindsym $mod+r exec st -e 'ranger'
+bindsym $mod+8 exec /home/haku/workspace/ubuntu-fresh/backlight.sh -d
+bindsym $mod+9 exec /home/haku/workspace/ubuntu-fresh/backlight.sh -i
+bindsym $mod+0 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+minus exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 # }}}
 
-# Window Control
-# {{{
-# kill focused window
+# {{{ Window Control
 bindsym $mod+q kill
 bindsym $mod+f resize set 1920 1050, move position 0 30
 
@@ -101,13 +124,11 @@ bindsym $mod+space floating toggle
 bindsym $mod+z layout tabbed
 bindsym $mod+Tab focus mode_toggle
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
-# set $ws5 "5"
+set $ws5 "5"
 # set $ws6 "6"
 # set $ws7 "7"
 # set $ws8 "8"
@@ -175,11 +196,10 @@ mode "resize" {
 	bindsym Escape mode "default"
 	bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 # }}}
 
-# i3blocks
-# {{{
+# {{{ i3blocks
 # bar {
 # 	status_command i3blocks
 # 	# status_command i3status
@@ -189,22 +209,7 @@ bindsym $mod+r mode "resize"
 # }
 # }}}
 
-# Startup settings
-# {{{
-# Keyboard configure
-exec --no-startup-id export XMODIFIERS="@im=fcitx"
-exec --no-startup-id export GTK_IM_MODULE=fcitx
-exec --no-startup-id export QT_IM_MODULE=fcitx
-exec --no-startup-id fcitx
-exec --no-startup-id "setxkbmap -layout us -option ctrl:nocaps"
-exec --no-startup-id "setxkbmap -layout us -option korean:ralt_rctrl"
-exec --no-startup-id xset +fp /home/haku/.fonts
-exec --no-startup-id xset fp rehash
-# Monitor
-exec --no-startup-id compton
-exec --no-startup-id xrandr --output eDP-1-1 --off
-exec --no-startup-id feh --bg-fill /home/haku/Pictures/solarized-wallpaper-ubuntu.png
-exec --no-startup-id rfkill unblock bluetooth
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# {{{ Startup settings
+exec --no-startup-id /home/haku/.config/i3/start.sh
 # }}}
 

@@ -25,8 +25,8 @@ declare -A DOTFILES=(
 	["ranger"]="${DIR[config]}/ranger/rc.conf,${DIR[dot]}/ranger/rc.conf"
 	["awesome"]="${DIR[config]}/awesome,${DIR[dot]}/awesome"
 	["rofi"]="${DIR[config]}/rofi,${DIR[dot]}/rofi"
-	# ["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
-	# ["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
+	["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
+	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 )
 # }}}
 # {{{ Arch Packages
@@ -42,7 +42,7 @@ ARCH_PACKAGE=(
 	"adobe-source-han-sans-kr-fonts" "awesome" "rofi"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
-	"cmus" "sxiv" "vlc" "cheese" "transmission-gtk" "transmission-cli"
+	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese" "transmission-gtk" "transmission-cli"
 	"nautilus" "firefox"
 )
 install_arch_package () {
@@ -91,9 +91,11 @@ UBUNTU_PACKAGE=(
 
 	# Suckless Terminal & Dmenu
 	"libx11-dev" "libxext-dev" "libxft-dev"
-	# "libxinerama-dev" "libfreetype6-dev"
+	# "libfreetype6-dev"
 	# "libxft2" "libfontconfig1-dev" "libpam0g-dev"
 	# "libxrandr2" "libxss1"
+	# Dwm
+	"libxinerama-dev"
 
 	# Google Chrome
 	# "google-chrome-stable" "chrome-gnome-shell"
@@ -235,15 +237,20 @@ install_polybar () {
 		sudo pacman -Syu polybar
 	elif [[ $OS == *"ubuntu"* ]]; then
 		local url="https://github.com/jaagr/polybar.git"
-		local dep="cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev \
-			libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev \
-			libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen \
-			xcb-proto libxcb-xrm-dev i3-wm libasound2-dev libmpdclient-dev \
-			libiw-dev libcurl4-openssl-dev \
-			libpulse-dev libxcb-composite0-dev xcb libxcb-ewmh2"
-		sudo apt -qq -y install ${dep[*]}
-		git clone -q "$url" "${DIR[home]}/polybar" &&
-			( cd "${DIR[home]}/polybar" && ./build.sh )
+		local dep=(
+			"cmake" "cmake-data" "libcairo2-dev" "libxcb1-dev" "libxcb-ewmh-dev"
+			"libxcb-icccm4-dev" "libxcb-image0-dev" "libxcb-randr0-dev"
+			"libxcb-util0-dev" "libxcb-xkb-dev" "pkg-config" "python-xcbgen"
+			"xcb-proto" "libxcb-xrm-dev" "libasound2-dev" "libmpdclient-dev"
+			"libiw-dev" "libcurl4-openssl-dev" "libpulse-dev"
+			"libxcb-composite0-dev" "xcb" "libxcb-ewmh2" "libanyevent-i3-perl"
+			"libanyevent-perl" "libasync-interrupt-perl" "libcommon-sense-perl"
+			"libev-perl" "libguard-perl" "libjson-xs-perl"
+			"libtypes-serialiser-perl" "libjson-glib-dev"
+		)
+		sudo apt -qq -y install ${dep[*]} &&
+			git clone -q "$url" "${DIR[parent]}/polybar" &&
+			( cd "${DIR[parent]}/polybar" && ./build.sh )
 	else
 		exit 1
 	fi
@@ -340,8 +347,20 @@ install_dmenu () {
 # {{{ i3-gaps
 install_i3gaps () {
 	if [[ $OS == *"ubuntu"* ]]; then
-		sudo add-apt-repository ppa:simon-monette/i3-gaps &&
-			sudo apt -qq update && sudo apt -qq -y install i3-gaps
+		local dep=(
+			"libxcb1-dev" "libxcb-keysyms1-dev" "libpango1.0-dev"
+			"libxcb-util0-dev" "libxcb-icccm4-dev" "libyajl-dev"
+			"libstartup-notification0-dev" "libxcb-randr0-dev" "libev-dev"
+			"libxcb-cursor-dev" "libxcb-xinerama0-dev" "libxcb-xkb-dev"
+			"libxkbcommon-dev" "libxkbcommon-x11-dev" "autoconf"
+			"libxcb-xrm0" "libxcb-xrm-dev" "automake" "libxcb-shape0-dev"
+		)
+
+	cd /tmp && git clone https://www.github.com/Airblader/i3 i3-gaps &&
+		cd i3-gaps && autoreconf --force --install && rm -rf build/ &&
+		mkdir -p build && cd build/ &&
+		../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers &&
+		make && sudo make install
 	elif [[ $OS == *"arch"* ]]; then
 		sudo pacman -Sy i3-gaps
 	else

@@ -21,21 +21,19 @@ current_value=$( printf "%.2f" $( echo "$brightness / $max_brightness" | bc -l )
 division=20
 stride=$( printf "%.2f" $( echo "$max_brightness / $division" | bc -l ) )
 
-while [[ $# -gt 0 ]]; do
+if [[ $# -gt 0 ]]; then
 	arg="$1"
 
 	case "$arg" in
 		-i|--increase)
 			sum=$( printf "%.0f" $( echo "$brightness + $stride" | bc -l ) )
-			shift
 		;;
 		-d|--decrease)
 			sum=$( printf "%.0f" $( echo "$brightness - $stride" | bc -l ) )
-			shift
 		;;
 		-g|--get)
-			echo "Current brightness: $brightness / $max_brightness"
-			exit 0
+			printf "%.0f%%" $( echo "$current_value * 100" | bc -l )
+			exit 0;
 		;;
 		-r|--rule)
 			sudo tee "/etc/udev/rules.d/90-backlight.rules" <<- END
@@ -47,12 +45,12 @@ while [[ $# -gt 0 ]]; do
 			exit 0;
 		;;
 		*)
-		shift
+			exit 0;
 		;;
 	esac
 
 	sum=$(( sum<0 ? 0 : sum ))
 	sum=$(( sum>max_brightness ? max_brightness : sum ))
 	echo $sum > $path
-done
+fi
 
