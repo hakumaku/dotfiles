@@ -41,7 +41,7 @@ AUR=(
 ARCH_PACKAGE=(
 	"xorg" "base-devel" "gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
-	"fcitx-im" "fcitx-hangul" "tar" "unzip"
+	"fcitx-im" "fcitx-hangul" "fcitx-configtool" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts" "rofi"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
