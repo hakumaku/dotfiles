@@ -39,10 +39,10 @@ AUR=(
 	"yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "base-devel" "gdm" "gnome" "plank"
+	"xorg" "base-devel" "gdm" "gnome" "gnome-tweak-tool"
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
-	"adobe-source-han-sans-kr-fonts" "awesome" "rofi"
+	"adobe-source-han-sans-kr-fonts" "rofi"
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
@@ -77,7 +77,7 @@ install_steam () {
 # }}}
 # {{{ Ubuntu Packages
 PPA=(
-	"ppa:nilarimogard/webupd8"			# gnome-twitch
+	# "ppa:nilarimogard/webupd8"			# gnome-twitch
 	"ppa:graphics-drivers"				# nvidia graphics drivers
 	"ppa:oguzhaninan/stacer"			# Stacer
 )
@@ -85,11 +85,11 @@ UBUNTU_PACKAGE=(
 	"git" "vim" "vim-gnome" "g++" "curl" "ctags"
 	"valgrind" "htop" "tmux" "screenfetch" "autogen"
 	"automake" "cmake" "snap" "fcitx-hangul" "gufw"
-	"cmus" "sxiv" "ffmpeg" "ffmpegthumbnailer"
+	"cmus" "sxiv" "exiv2" "imagemagick" "ffmpeg" "ffmpegthumbnailer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
 	"python3-dev" "python3-pip" "python-apt"
-	"w3m-img" "compton" "feh" "moreutils" "rofi" "awesome" "lxappearance"
-	"plank" "vlc" "cheese" "transmission" "transmission-cli" "stacer"
+	"w3m-img" "compton" "feh" "moreutils" "rofi" "lxappearance"
+	"vlc" "cheese" "transmission" "transmission-cli" "stacer"
 	"steam" "steam-devices"
 	"winbind"						# wine League of Legends
 
