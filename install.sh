@@ -46,7 +46,7 @@ ARCH_PACKAGE=(
 	"git" "gvim" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
-	"transmission" "transmission-gtk" "transmission-cli"
+	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
 	"nautilus" "firefox"
 )
 install_arch_package () {
