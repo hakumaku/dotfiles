@@ -39,7 +39,7 @@ AUR=(
 	"yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "base-devel" "gdm" "gnome" "gnome-tweak-tool"
+	"xorg" "base-devel" "gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts" "rofi"
@@ -51,12 +51,17 @@ ARCH_PACKAGE=(
 )
 install_arch_package () {
 	local dir=""
-	sudo pacman -Syu && sudo pacman -Sq --noconfirm ${ARCH_PACKAGE[*]} && {
-	for aur in "${AUR[@]}"; do
-		dir="${DIR[parent]}/$aur"
-		git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
-			( cd "$dir" && makepkg -sri --noconfirm )
-	done }
+	if sudo pacman -Syu && sudo pacman -Sq --noconfirm ${ARCH_PACKAGE[*]}; then
+		for aur in "${AUR[@]}"; do
+			dir="${DIR[parent]}/$aur"
+			git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
+				( cd "$dir" && makepkg -sri --noconfirm )
+		done
+	else
+		echo "Cannot execute 'pacman'."
+		echo "Check the names of arch packages."
+		exit 1
+	fi
 	local conf="/etc/locale.gen"
 	sudo sed -Ei "s/^#(en_US.UTF-8)/\1/" "$conf" &&
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
