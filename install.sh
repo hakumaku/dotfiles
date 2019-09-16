@@ -440,7 +440,17 @@ fcitx_config () {
 	sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
 	sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
 	sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
-	im-config -n fcitx
+	if [ $OS == *"arch"* ]; then
+		cat >> $HOME/.pam_environment <<- END
+			GTK_IM_MODULE=fcitx
+			QT_IM_MODULE=fcitx
+			XMODIFIERS=@im=fcitx
+		END
+	elif [ $OS == *"ubuntu"* ]; then
+		im-config -n fcitx
+	else
+		return 0
+	fi
 }
 # }}}
 
