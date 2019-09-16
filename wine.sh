@@ -8,10 +8,11 @@ sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ disco mai
 # libfaudio0
 sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport
 sudo apt install --install-recommends winehq-devel
+sudo apt install winetricks
+sudo dpkg --add-architecture i386
 
 sudo snap install leagueoflegends --edge --devmode
 sudo snap refresh --candidate wine-platform-runtime
 sudo snap refresh --candidate wine-platform-4-staging
 
-wget $url -O /tmp/$output
-WINEPREFIX=~/snap/leagueoflegends/common/.wine wine "/tmp/$output"
+wget $url -O $HOME/Downloads

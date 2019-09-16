@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+bspc monitor HDMI-1-1 -d "1" "2" "3" "4" "5" "6" "7"
+bspc monitor eDP-1-1 -d "1" "2" "3" "4" "5" "6" "7"
+
+bspc config border_width         2
+bspc config top_padding          18
+bspc config window_gap           12
+bspc config split_ratio          0.52
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+
+bspc rule -a "stacer" desktop='^1' state=floating follow=on focus=on
+bspc rule -a "Transmission-gtk" desktop='^1' state=floating follow=on focus=on
+bspc rule -a "st-256color" desktop='^2' follow=on focus=on
+bspc rule -a "Firefox" state=monocle follow=on focus=on
+bspc rule -a "Firefox:Places" state=floating follow=on focus=on
+bspc rule -a "Firefox:Dialog" state=floating follow=on focus=on
+bspc rule -a "Firefox:Alert" state=floating follow=on focus=on
+bspc rule -a "Steam" desktop='^5' state=floating follow=on focus=on
+bspc rule -a "vlc" desktop='^6' follow=on focus=on
+bspc rule -a "Wine" desktop='^7' follow=on focus=on state=floating
+bspc rule -a "Wine:leagueclient" desktop='^7' follow=on focus=on state=floating
+bspc rule -a "Wine:leagueclientux.exe" desktop='^7' follown=on focus=on state=floating
+bspc rule -a "polybar" state=sticky
+
+bspc desktop '^1' -l floating
+bspc desktop '^3' -l monocle
+bspc desktop '^4' -l monocle
+bspc desktop '^7' -l floating
+
+export BACKLIGHT_SCRIPT="$HOME/workspace/ubuntu-fresh/backlight.sh"
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl &
+
+mlist=$( xrandr --listmonitors )
+if [ $(echo "$mlist" | sed -n "1p" | awk '{ print $2 }') -gt 1 ]; then
+	primary=$( echo "$mlist" | sed -n "2p" | awk '{ print $4 }' )
+	xrandr --output "$primary" --off &
+fi
+
+sxhkd &
+redshift -l 37.50:126.85 -t 6500K:3200K &
+fcitx -d &
+transmission-gtk -m &
+feh --bg-fill $HOME/Pictures/UAqp0kE.jpg &
+compton &
+~/.config/polybar/main.sh &
+

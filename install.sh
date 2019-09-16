@@ -26,6 +26,8 @@ declare -A DOTFILES=(
 	["awesome"]="${DIR[config]}/awesome,${DIR[dot]}/awesome"
 	["rofi"]="${DIR[config]}/rofi,${DIR[dot]}/rofi"
 	["i3"]="${DIR[config]}/i3,${DIR[dot]}/i3"
+	["bspwm"]="${DIR[config]}/bspwm,${DIR[dot]}/bspwm"
+	["sxhkd"]="${DIR[config]}/sxhkd,${DIR[dot]}/sxhkd"
 	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 	["compton"]="${DIR[config]}/compton.conf,${DIR[dot]}/compton/compton.conf"
 )
@@ -371,6 +373,37 @@ install_i3gaps () {
 }
 # }}}
 
+# {{{ bspwm
+install_bspwm () {
+	local dep=()
+	if [[ $OS == *"ubuntu"* ]]; then
+		dep=(
+			"libxcb-xinerama0-dev" "libxcb-icccm4-dev" "libxcb-randr0-dev"
+			"libxcb-util0-dev" "libxcb-ewmh-dev" "libxcb-keysyms1-dev"
+			"libxcb-shape0-dev"
+		)
+		sudo apt install -qq -y ${dep[@]}
+	elif [[ $OS == *"arch"* ]]; then
+		dep=(
+			"libxcb" "xcb-util" "xcb-util-wm" "xcb-util-keysyms"
+		)
+		sudo pacman -S ${dep[@]}
+	else
+		return 1
+	fi
+
+	( cd ${DIR[parent]} &&
+		git clone https://github.com/baskerville/bspwm.git &&
+		git clone https://github.com/baskerville/sxhkd.git &&
+		cd bspwm && make && sudo make install &&
+		cd ../sxhkd && make && sudo make install &&
+		mkdir -p ~/.config/{bspwm,sxhkd} &&
+		cp /usr/local/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/ &&
+		cp /usr/local/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/ &&
+		chmod u+x ~/.config/bspwm/bspwmrc )
+}
+# }}}
+
 # {{{ Unimatrix
 install_unimatrix () {
 	local url="https://raw.githubusercontent.com/will8211/`
@@ -457,6 +490,7 @@ package_install () {
 			youtubedl|youtube) install_youtubedl ;;
 			polybar) install_polybar ;;
 			i3-gaps) install_i3gaps ;;
+			bspwm) install_bspwm ;;
 			unimatrix) install_unimatrix ;;
 			dmenu) install_dmenu ;;
 			fcitx)

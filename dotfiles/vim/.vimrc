@@ -123,7 +123,7 @@ nnoremap <C-_> :set nolist!<CR>
 vnoremap <C-_> :call Commentate()<CR>
 
 " Removes any search highlighting.
-" nnoremap <C-@> :nohl<CR>
+nnoremap <C-q> :nohl<CR>
 " Insert space in normal mode
 nnoremap <space> i<space><esc>
 " Toggle .vimrc file.
