@@ -380,7 +380,7 @@ augroup file_vim
 	au FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
-"
+
 " {{{ Tmux
 " Tmux true color settings.
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -388,9 +388,9 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 set background=dark
-silent! colorscheme solarized8
-silent! colorscheme solarized8_low
-silent! colorscheme solarized8_high
+" silent! colorscheme solarized8
+" silent! colorscheme solarized8_low
+" silent! colorscheme solarized8_high
 silent! colorscheme solarized8_flat
 " }}}
 " {{{ vim-syntastic
