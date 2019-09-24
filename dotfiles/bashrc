@@ -80,6 +80,6 @@ if [ -f ~/.local/lib/python3*/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
 # Colorls (https://github.com/athityakumar/colorls)
-source $(dirname $(gem which colorls))/tab_complete.sh
-alias lc='colorls -lA --sd'
+# source $(dirname $(gem which colorls))/tab_complete.sh
+# alias lc='colorls -lA --sd'
 
