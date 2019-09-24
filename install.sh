@@ -43,7 +43,7 @@ ARCH_PACKAGE=(
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "fcitx-configtool" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts" "rofi"
-	"git" "gvim" "tmux" wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
+	"git" "gvim" "tmux" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
@@ -74,7 +74,7 @@ install_steam () {
 	# Enable multilib
 	local conf="/etc/pacman.conf"
 	local pack=(
-		"nvidia" "ttf-liberation" "steam"
+		"nvidia" "nvidia-utils" "lib32-nvidia-utils" "ttf-liberation" "steam"
 	)
 	sudo sed -Ei "/^#\[multilib\]/,/^#Include/ s/#(.*)/\1/" "$conf" &&
 		sudo pacman -Syy && sudo pacman -Sq --noconfirm "${pack[@]}"
