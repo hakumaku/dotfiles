@@ -69,6 +69,7 @@ install_arch_package () {
 	sudo systemctl enable Networkmanager
 	sudo systemctl enable snap
 	sudo systemctl enable gdm
+	sudo systemctl enable --now snapd.socket
 }
 install_steam () {
 	# Enable multilib
