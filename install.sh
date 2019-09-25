@@ -43,7 +43,8 @@ ARCH_PACKAGE=(
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "fcitx-configtool" "tar" "unzip"
 	"adobe-source-han-sans-kr-fonts" "rofi"
-	"git" "gvim" "tmux" "wget" "curl" "valgrind" "htop" "screenfetch" "feh" "compton"
+	"git" "gvim" "tmux" "wget" "curl" "valgrind" "htop" "neofetch"
+	"feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
@@ -292,8 +293,14 @@ install_nerdfont () {
 # {{{ Ranger Devicons
 install_ranger_devicons () {
 	local url="https://github.com/alexanderjeurissen/ranger_devicons"
+	IFS=','
+	local config=(${DOTFILES[ranger]})
+	unset IFS
+	local to="${config[0]}"
+	local from="${config[1]}"
 	git clone -q "$url" "${DIR[parent]}/ranger_devicons" &&
-		(cd "${DIR[parent]}/ranger_devicons" && make install)
+		(cd "${DIR[parent]}/ranger_devicons" && make install) &&
+		cp "$from" "$to" && ranger --copy-config=scope
 }
 # }}}
 
@@ -441,13 +448,13 @@ fcitx_config () {
 	sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
 	sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
 	sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
-	if [ $OS == *"arch"* ]; then
+	if [[ $OS = *"arch"* ]]; then
 		cat >> $HOME/.pam_environment <<- END
 			GTK_IM_MODULE=fcitx
 			QT_IM_MODULE=fcitx
 			XMODIFIERS=@im=fcitx
 		END
-	elif [ $OS == *"ubuntu"* ]; then
+	elif [[ $OS = *"ubuntu"* ]]; then
 		im-config -n fcitx
 	else
 		return 0
@@ -564,5 +571,6 @@ main () {
 	package_install "${arg[@]}"
 }
 
-main "$@"
+# main "$@"
+fcitx_config
 
