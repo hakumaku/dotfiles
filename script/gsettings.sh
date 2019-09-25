@@ -156,7 +156,7 @@ gsettings set org.gnome.shell.extensions.user-theme name "Yaru"
 #
 # gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys home '<Super>e'
+gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>e']"
 
 # Disable default bindings.
 # <Super>: overlay key
@@ -262,7 +262,7 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Super><Ct
 # 'amixer -q -D pulse sset Master 10%+'
 # 'amixer -M get Master'
 # 'pactl set-sink-volume 0 +15%'
-gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "<Super>equal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "<Super>minus"
-gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "<Super>0"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['<Super>equal']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "['<Super>minus']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['<Super>0']"
 
