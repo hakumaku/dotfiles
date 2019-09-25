@@ -13,7 +13,7 @@
 // static char *font =
 // "UbuntuMono Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
 static char *font =
-"SauceCodePro Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
+"SauceCodePro Nerd Font Mono:style=Bold:pixelsize=19:antialias=true:autohint=true";
 // static char *font =
 // "Inconsolata Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
 // static char *font =

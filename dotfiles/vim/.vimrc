@@ -142,8 +142,8 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-" nnoremap <C-n> :bn<CR>
-" nnoremap <C-p> :bp<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
 nnoremap <BS> :bd<CR>
 
 " Set command line arguments

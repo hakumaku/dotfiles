@@ -571,6 +571,5 @@ main () {
 	package_install "${arg[@]}"
 }
 
-# main "$@"
-fcitx_config
+main "$@"
 
