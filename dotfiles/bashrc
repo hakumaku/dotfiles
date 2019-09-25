@@ -25,14 +25,18 @@ snapicons () {
 		return 1
 	fi
 
-	sed -r 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
+	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
 # Bash settings
 set -o vi
+bind 'set show-mode-in-prompt on'
+bind 'set vi-cmd-mode-string "\1\e[1;48;2;220;50;47;38;2;255;255;255m\2  \1\e[0m\2"'
+bind 'set vi-ins-mode-string "\1\e[1;48;2;0;135;175;38;2;255;255;255m\2  \1\e[0m\2"'
 export EDITOR=/usr/bin/vim
 # Disable pressing <C-s> to freeze.
 stty -ixon
+complete -cf sudo
 bind -m vi-insert "\C-l":clear-screen
 bind -m vi-insert "\C-[":vi-movement-mode
 bind -x '"\C-o": "ranger"'
@@ -53,9 +57,6 @@ alias grep='grep --color=auto'
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias bashrc="vim ${BASH_SOURCE[0]} -c 'normal zt'"
 alias vimrc="vim $HOME/.vimrc"
-alias dmenuconfig="vim $HOME/workspace/dmenu/config.h"
-alias stconfig="vim $HOME/workspace/st/config.h"
-alias loginwallpaper="sudo vim +/#lockDialogGroup /usr/share/gnome-shell/theme/ubuntu.css"
 alias sxiv='sxiv -a -f'
 alias screen='bash $HOME/workspace/ubuntu-fresh/screen.sh'
 
