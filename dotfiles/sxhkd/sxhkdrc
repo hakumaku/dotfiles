@@ -14,8 +14,8 @@ super + e
 	st -e ranger
 super + r
 	rofi -show drun
-super + t
-	bspc desktop -f '^4' && firefox -new-window "twitch.tv/directory/following"
+# super + t
+# 	bspc desktop -f '^4' && firefox -new-window "twitch.tv/directory/following"
 super + 8
 	bash "$BACKLIGHT_SCRIPT" -d
 super + 9
@@ -53,7 +53,10 @@ super + {grave,Tab}
 	bspc {node,desktop} -f last
 # focus or send to the given desktop
 super + {_,ctrl + }{1-7}
-	bspc {desktop -f,node -d} '^{1-7}'
+	bspc {desktop -f,node -d} '^{1-7}' && bspc node -f north
+# Toggle floating/fullscreen
+super + {z,x,c}
+	bspc node -t '~{fullscreen,floating,tiled}'
 
 # move/resize
 # expand a window by moving one of its side outward

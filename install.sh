@@ -39,16 +39,16 @@ AUR=(
 	"yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "base-devel" "gdm" "gnome" "gnome-tweaks"
+	"xorg" "xorg-xinit" "base-devel" "gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "lxappearance"
 	"fcitx-im" "fcitx-hangul" "fcitx-configtool" "tar" "unzip"
-	"adobe-source-han-sans-kr-fonts" "rofi"
+	"adobe-source-han-sans-kr-fonts" "ttf-dejavu" "rofi" "most"
 	"git" "gvim" "tmux" "wget" "curl" "valgrind" "htop" "neofetch"
-	"feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
+	"gdb" "feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
 	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
 	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
-	"nautilus" "firefox"
+	"nautilus" "firefox" "dnsutils"
 )
 install_arch_package () {
 	local dir=""
@@ -90,7 +90,7 @@ PPA=(
 )
 UBUNTU_PACKAGE=(
 	"git" "vim" "vim-gnome" "g++" "curl" "ctags"
-	"valgrind" "htop" "tmux" "screenfetch" "autogen"
+	"valgrind" "htop" "tmux" "screenfetch" "autogen" "most"
 	"automake" "cmake" "snap" "fcitx-hangul" "gufw"
 	"cmus" "sxiv" "exiv2" "imagemagick" "ffmpeg" "ffmpegthumbnailer"
 	"gnome-tweak-tool" "gnome-shell-extensions"
@@ -245,7 +245,11 @@ install_suru () {
 # {{{ Polybar
 install_polybar () {
 	if [[ $OS == *"arch"* ]]; then
-		sudo pacman -Syu polybar
+		local polybargit="https://aur.archlinux.org/polybar.git"
+		local dir="${DIR[parent]}/polybar"
+		git clone "$polybargit" "$dir" &&
+			( cd "$dir" && makepkg -sri --noconfirm )
+
 	elif [[ $OS == *"ubuntu"* ]]; then
 		local url="https://github.com/jaagr/polybar.git"
 		local dep=(
@@ -265,6 +269,15 @@ install_polybar () {
 	else
 		exit 1
 	fi
+}
+# }}}
+
+# {{{ Lemonbar
+install_lemonbar () {
+	local dir="${DIR[parent]}""/lemonbar"
+	local url="https://github.com/LemonBoy/bar.git"
+	git clone "$url" "$dir" &&
+		( cd "$dir" && make && sudo make install )
 }
 # }}}
 
@@ -411,9 +424,8 @@ install_bspwm () {
 		cd bspwm && make && sudo make install &&
 		cd ../sxhkd && make && sudo make install &&
 		mkdir -p ~/.config/{bspwm,sxhkd} &&
-		cp /usr/local/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/ &&
-		cp /usr/local/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/ &&
-		chmod u+x ~/.config/bspwm/bspwmrc )
+		cp "${DOTFILES[bspwm]}"  ~/.config/bspwm/ &&
+		cp "${DOTFILES[sxhkd]}" ~/.config/sxhkd/ )
 }
 # }}}
 
@@ -479,6 +491,14 @@ package_install () {
 	while [[ $# -gt 0 ]]; do
 		arg="${1,,}"
 		case "$arg" in
+			default)
+				local default_packages=(
+					"$OS" "pip" "st" "nerdfont" "vundle"
+					"tmux_theme" "ranger_devicons"
+					"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
+				)
+				set ${default_packages[@]}
+			;;
 			*"arch"*)
 				install_arch_package
 				local nvidia=$( lspci | grep "NVIDIA" )
@@ -512,6 +532,7 @@ package_install () {
 			suru) install_suru ;;
 			youtubedl|youtube) install_youtubedl ;;
 			polybar) install_polybar ;;
+			lemonbar) install_lemonbar ;;
 			i3-gaps) install_i3gaps ;;
 			bspwm) install_bspwm ;;
 			unimatrix) install_unimatrix ;;
@@ -552,24 +573,31 @@ package_install () {
 					sync_dotfile "${DOTFILES[$i]}"
 				done
 			;;
-			*) ;;
+			*)
+				echo "Unknown arguments: $arg"
+			;;
 		esac
 		shift
 	done
 }
 
-main () {
-	if [ "$1" = sync ]; then
-		package_install "sync"
-		return 0;
-	fi
+grub_config () {
+	# sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono20.pf2 --size=20 /usr/share/fonts/TTF/dejavu/DejaVuSansMono.ttf
+	local GRUB_FONT=/boot/grub/fonts/DejaVuSansMono18.pf2
+	local custom="/etc/grub.d/40_custom"
 
-	local arg=(
-		"$OS" "pip" "st" "nerdfont" "vundle" "tmux_theme" "ranger_devicons"
-		"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
-	)
-	package_install "${arg[@]}"
+	cat >> $custom <<- END
+	menuentry "System shutdown" {
+		echo "System shutting down..."
+		halt
+	}
+	if [ ${grub_platform} == "efi" ]; then
+		menuentry "Firmware setup" {
+			fwsetup
+		}
+	fi
+	END
 }
 
-main "$@"
+package_install "$@"
 

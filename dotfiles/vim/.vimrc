@@ -107,7 +107,7 @@ set signcolumn="yes"
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " <ESC> key mapping
-inoremap jj <ESC>
+inoremap jk <ESC>
 
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
