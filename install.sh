@@ -35,23 +35,34 @@ declare -A DOTFILES=(
 # {{{ Arch Packages
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
-	"stacer" "snapd" "humanity-icon-theme"
-	"yaru"
+	"stacer" "snapd" "gotop"
+	"humanity-icon-theme" "yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "xorg-xinit" "base-devel" "gdm" "gnome" "gnome-tweaks"
-	"networkmanager" "bluez" "bluez-utils" "lxappearance"
-	"fcitx-im" "fcitx-hangul" "fcitx-configtool" "tar" "unzip"
-	"adobe-source-han-sans-kr-fonts" "ttf-dejavu" "rofi" "most"
-	"git" "gvim" "tmux" "wget" "curl" "valgrind" "htop" "neofetch"
-	"gdb" "feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
-	"autogen" "ctags" "automake" "cmake" "gufw" "moreutils" "python-pip"
-	"cmus" "sxiv" "exiv2" "imagemagick" "vlc" "cheese"
+	"xorg" "base-devel" "libva-vdpau-driver" "libva-utils"
+	"gdm" "gnome" "gnome-tweaks"
+	"networkmanager" "bluez" "bluez-utils" "vainfo" "mesa-demos"
+	"fcitx-im" "fcitx-hangul" "fcitx-configtool"
+	"adobe-source-han-sans-kr-fonts" "ttf-dejavu"
+	"bash-completion" "tmux" "rofi" "most" "htop" "neofetch" "wget" "curl"
+	"gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
+	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
+	"cmus" "sxiv" "exiv2" "imagemagick"
+	"feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
+	"nm-applet" "blueman" "redshift" "cbatticon"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
-	"nautilus" "firefox" "dnsutils"
+	"vlc" "cheese" "nautilus" "firefox" "gufw" "lxappearance"
 )
 install_arch_package () {
 	local dir=""
+	# is it Intel cpu?
+	local cpu=$( lscpu | grep "Model name" | awk '{print $3}' )
+	if [[ "$cpu" = "Intel"* ]]; then
+		# ARCH_PACKAGE+=("libva-intel-driver")
+		ARCH_PACKAGE+=("intel-media-driver")
+	else
+		echo "AMD cpu"
+	fi
 	if sudo pacman -Syu && sudo pacman -Sq --noconfirm ${ARCH_PACKAGE[*]}; then
 		for aur in "${AUR[@]}"; do
 			dir="${DIR[parent]}/$aur"
@@ -71,6 +82,17 @@ install_arch_package () {
 	sudo systemctl enable snap
 	sudo systemctl enable gdm
 	sudo systemctl enable --now snapd.socket
+}
+install_optimus () {
+	local optimus=(
+		"optimus-manager" "optimus-manager-qt"
+	)
+	for aur in "${optimus[@]}"; do
+		local dir="${DIR[parent]}/$aur"
+		git clone "https://aur.archlinux.org/""$aur"".git" "$dir" &&
+			( cd "$dir" && makepkg -sri --noconfirm )
+	done
+	sudo pacman -Sq --noconfirm "bbswitch"
 }
 install_steam () {
 	# Enable multilib
@@ -503,6 +525,7 @@ package_install () {
 				install_arch_package
 				local nvidia=$( lspci | grep "NVIDIA" )
 				if [[ $nvidia ]]; then
+					install_optimus
 					install_steam
 				fi
 			;;
