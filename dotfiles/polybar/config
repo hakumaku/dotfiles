@@ -5,11 +5,11 @@ black  = #2b2929
 white  = #f7f7f7
 arch_blue  = #1793d1
 arch_black = #333333
-
+# =============================================================================
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-
+# =============================================================================
 [bar/top]
 width = 100%
 height = 24
@@ -27,18 +27,18 @@ wm-restack = bspwm
 font-0 = "UbuntuMono Nerd Font:style=Bold:pixelsize=13:antialias=true;3"
 modules-left = bspwm
 modules-center = date
-modules-right =
+modules-right = mic pulseaudio battery
 fixed-center = true
 tray-position = right
 tray-padding = 4
 override-redirect = true
 scroll-up = bspwm-wsnext
 scroll-down = bspwm-wsprev
-cursor-click = pointer
-cursor-scroll = ns-resize
+cursor-click = default
+cursor-scroll =
 dpi-x = 96
 dpi-y = 96
-
+# =============================================================================
 [module/bspwm]
 type = internal/bspwm
 format = <label-state>
@@ -68,26 +68,26 @@ label-empty = %icon%
 label-separator = |
 label-separator-padding-right = 1
 label-separator-foreground = ${root.background}
-
+# =============================================================================
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.white}
 label = %percentage:2%%
-
+# =============================================================================
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.white}
 label = %percentage_used%%
-
+# =============================================================================
 [module/bluetooth]
 type = custom/script
 exec = /home/haku/.config/polybar/bluetooth.sh
 interval = 3.0
-
+# =============================================================================
 [module/wlan]
 type = internal/network
 interface = wlp3s0
@@ -105,18 +105,16 @@ ramp-signal-5 = "▁▂▃▄▅▆  "
 ramp-signal-6 = "▁▂▃▄▅▆▇ "
 ramp-signal-7 = "▁▂▃▄▅▆▇█"
 ramp-signal-foreground = ${colors.white}
-
+# =============================================================================
 [module/eth]
 type = internal/network
 interface = enp4s0
 interval = 3.0
-
 format-connected = ""
 format-connected-foreground = ${colors.white}
-
 format-disconnected = ""
 label-disconnected-foreground = ${colors.white}
-
+# =============================================================================
 [module/date]
 type = internal/date
 interval = 1
@@ -127,7 +125,7 @@ time-alt = %H:%M:%S
 format-prefix =
 format-prefix-foreground = ${colors.white}
 label = %date% %time%
-
+# =============================================================================
 [module/backlight]
 type = custom/script
 ; Command to be executed (using "/usr/bin/env sh -c [command]")
@@ -137,28 +135,67 @@ format-prefix = "盛 "
 label = %output%
 ; Will the script output continous content?
 tail = false
-
+# =============================================================================
 [module/pulseaudio]
 type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%%
+label-volume = %percentage:3%%
 label-volume-foreground = ${root.foreground}
+label-muted = "婢   0%"
+ramp-volume-0 = 
+ramp-volume-1 = 墳
+ramp-volume-2 = 
+# =============================================================================
+[module/mic]
+type = custom/script
+exec = $HOME/.config/polybar/mic.sh
+format = <label>
+label = %output%
+; Will the script output continous content?
+tail = true
+interval = 5
+# =============================================================================
+[module/alsa]
+type = internal/alsa
+format-volume = <ramp-volume> <label-volume>
+; Use volume mapping (similar to amixer -M and alsamixer),
+; where the increase in volume is linear to the ear
+mapped = true
+interval = 5
+label-volume = %percentage:3%%
 label-muted = 婢
-label-muted-foreground = #666
 ramp-volume-0 = 
 ramp-volume-1 = 墳
 ramp-volume-2 = 
 
+; Soundcard to be used
+; Usually in the format hw:# where # is the card number
+; You can find the different card numbers in `/proc/asound/cards`
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+master-mixer = Master
+speaker-mixer = none
+headphone-mixer = none
+headphone-id = none
+; If defined, it will replace <ramp-volume> when
+; headphones are plugged in to `headphone_control_numid`
+; If undefined, <ramp-volume> will be used for both
+; Only applies if <ramp-volume> is used
+ramp-headphones-0 = 
+ramp-headphones-1 = 
+# =============================================================================
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = ADP0
-full-at = 97
+full-at = 96
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.white}
 format-charging = <animation-charging> <label-charging>
+label-charging = %percentage:3%%
 format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage:3%%
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -181,7 +218,7 @@ animation-charging-5 = 
 animation-charging-6 = 
 animation-charging-foreground = ${colors.white}
 animation-charging-framerate = 750
-
+# =============================================================================
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -193,13 +230,13 @@ format-warn = <label-warn>
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.white}
-
+# =============================================================================
 [module/gpu]
 type = custom/script
 exec = nvidia-smi -q -d temperature | grep -m1 "Current Temp" | awk '{print $5}'
 label = %output%糖
 interval = 5
-
+# =============================================================================
 [module/powermenu]
 type = custom/menu
 format = <label-toggle> <menu>
@@ -226,7 +263,11 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
-
+# =============================================================================
 [settings]
 screenchange-reload = true
+format-foreground = ${colors.white}
+format-background = ${colors.arch_black}
+# format-underline = ${colors.arch_blue}
+# format-overline = ${colors.arch_blue}
 ; vim:ft=dosini

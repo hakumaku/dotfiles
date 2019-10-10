@@ -9,23 +9,34 @@ super + s
 super + v
 	vlc
 super + w
-	bspc desktop -f '^3' && firefox
+	firefox
 super + e
-	st -e ranger
+	st -e "$HOME/.local/bin/ranger"
+super + m
+	st -e cmus
+super + x
+	st -e gotop -c solarized
 super + r
 	rofi -show drun
-# super + t
-# 	bspc desktop -f '^4' && firefox -new-window "twitch.tv/directory/following"
 super + 8
 	bash "$BACKLIGHT_SCRIPT" -d
 super + 9
 	bash "$BACKLIGHT_SCRIPT" -i
 super + 0
-	pactl set-sink-mute "@DEFAULT_SINK@" toggle
+	amixer -q sset Master toggle
+	# pactl set-sink-mute "@DEFAULT_SINK@" toggle
 super + minus
-	pactl set-sink-volume "@DEFAULT_SINK@" -5%
+	amixer -q sset Master 5%-
+	# pactl set-sink-volume "@DEFAULT_SINK@" -5%
 super + equal
-	pactl set-sink-volume "@DEFAULT_SINK@" +5%
+	amixer -q sset Master 5%+
+	# pactl set-sink-volume "@DEFAULT_SINK@" +5%
+super + ctrl + 0
+	amixer -q sset Capture toggle
+super + ctrl + minus
+	amixer -q sset Capture 5%-,5%-
+super + ctrl + equal
+	amixer -q sset Capture 5%+,5%+
 
 # bspwm hotkeys
 # quit/restart bspwm
@@ -48,15 +59,17 @@ super + {p,b,comma,period}
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+super + + ctrl + bracket{left,right}
+	bspc node -d {prev,next}.local
 # focus the last node/desktop
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 # focus or send to the given desktop
 super + {_,ctrl + }{1-7}
-	bspc {desktop -f,node -d} '^{1-7}' && bspc node -f north
-# Toggle floating/fullscreen
-super + {z,x,c}
-	bspc node -t '~{fullscreen,floating,tiled}'
+	bspc {desktop -f,node -d} '^{1-7}'
+# set the window state
+super + {z,t,f}
+	bspc node -t {fullscreen,tiled,floating}
 
 # move/resize
 # expand a window by moving one of its side outward

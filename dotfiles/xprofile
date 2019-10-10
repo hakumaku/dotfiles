@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+if [[ $XDG_CURRENT_DESKTOP = "Yaru:ubuntu:GNOME" ]]; then
+	return 0
+fi
+
+# https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Configuring_VDPAU
+# export VDPAU_DRIVER=nvidia
+# export LIBVA_DRIVER_NAME=i965
+
+export BACKLIGHT_SCRIPT="$HOME/workspace/ubuntu-fresh/backlight.sh"
+setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
+
+mlist=$( xrandr --listmonitors )
+if [ $(echo "$mlist" | sed -n "1p" | awk '{ print $2 }') -gt 1 ]; then
+	primary=$( echo "$mlist" | sed -n "2p" | awk '{ print $4 }' )
+	xrandr --output "$primary" --off &
+fi
+
+# Mouse cursor
+xsetroot -cursor_name left_ptr
+
+# Daemons
+# blueman-applet &
+# nm-applet &
+# cbatticon &
+# redshift -l 37.50:126.85 -t 6500K:3200K &
+fcitx -d &
+# xpad &
+# transmission-gtk -m &
+
+# Wallpaper
+~/.fehbg &
+
+compton &
+xset s on
+xset s 300
+xss-lock $HOME/workspace/ubuntu-fresh/unimatrix.sh &
+~/.config/polybar/main.sh &
+plank &
+sxhkd &
+exec bspwm
+

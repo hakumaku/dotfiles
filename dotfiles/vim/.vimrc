@@ -58,6 +58,7 @@ if (has("termguicolors"))
 	set termguicolors
 endif
 
+" set spell
 set hidden				" Hide buffers when abandoned
 set number				" Show line number
 set relativenumber		" Relative numbers instead of absolute

@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Script for miscellaneous configurations
-
 OS=$( cat /etc/os-release | sed -n 's/^NAME=//p' )
 OS=${OS,,}
 declare -A DIR=(
@@ -30,8 +28,10 @@ declare -A DOTFILES=(
 	["sxhkd"]="${DIR[config]}/sxhkd,${DIR[dot]}/sxhkd"
 	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 	["compton"]="${DIR[config]}/compton.conf,${DIR[dot]}/compton/compton.conf"
+	["xinit"]="$HOME/.xprofile,${DIR[dot]}/xprofile"
 )
 # }}}
+
 # {{{ Arch Packages
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
@@ -39,30 +39,32 @@ AUR=(
 	"humanity-icon-theme" "yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "base-devel" "libva-vdpau-driver" "libva-utils"
+	"xorg" "base-devel"
+	"libva" "libva-vdpau-driver" "libva-utils"
 	"gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "vainfo" "mesa-demos"
-	"fcitx-im" "fcitx-hangul" "fcitx-configtool"
-	"adobe-source-han-sans-kr-fonts" "ttf-dejavu"
-	"bash-completion" "tmux" "rofi" "most" "htop" "neofetch" "wget" "curl"
+	"alsa-utils" "pavucontrol" "udisks2"
+	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
-	"cmus" "sxiv" "exiv2" "imagemagick"
-	"feh" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
+	"xss-lock" "cmus" "sxiv" "exiv2" "imagemagick"
+	"feh" "xautolock" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
 	"nm-applet" "blueman" "redshift" "cbatticon"
+	"fcitx-im" "fcitx-hangul" "fcitx-configtool"
+	"adobe-source-han-sans-kr-fonts" "ttf-dejavu"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
-	"vlc" "cheese" "nautilus" "firefox" "gufw" "lxappearance"
+	"xpad" "vlc" "cheese" "nautilus" "firefox" "gufw" "lxappearance"
 )
 install_arch_package () {
 	local dir=""
 	# is it Intel cpu?
 	local cpu=$( lscpu | grep "Model name" | awk '{print $3}' )
 	if [[ "$cpu" = "Intel"* ]]; then
-		# ARCH_PACKAGE+=("libva-intel-driver")
-		ARCH_PACKAGE+=("intel-media-driver")
+		ARCH_PACKAGE+=("libva-intel-driver" "intel-media-driver")
 	else
 		echo "AMD cpu"
 	fi
+
 	if sudo pacman -Syu && sudo pacman -Sq --noconfirm ${ARCH_PACKAGE[*]}; then
 		for aur in "${AUR[@]}"; do
 			dir="${DIR[parent]}/$aur"
@@ -74,6 +76,7 @@ install_arch_package () {
 		echo "Check the names of arch packages."
 		exit 1
 	fi
+
 	local conf="/etc/locale.gen"
 	sudo sed -Ei "s/^#(en_US.UTF-8)/\1/" "$conf" &&
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
@@ -94,6 +97,18 @@ install_optimus () {
 	done
 	sudo pacman -Sq --noconfirm "bbswitch"
 }
+install_wine () {
+	local optional_deps=(
+		"wine-mono" "wine_gecko" "winetricks"
+		"lib32-opencl-icd-loader" "opencl-icd-loader"
+		"lib32-libxslt" "lib32-libva" "lib32-sdl2"
+		"lib32-giflib" "lib32-mpg123" "lib32-openal"
+		"lib32-v4l-utils" "lib32-libpulse"
+		"lib32-gtk3" "lib32-gst-plugins-base-libs" "lib32-vulkan-icd-loader"
+		"vkd3d" "lib32-vkd3d" "vulkan-intel" "lib32-vulkan-intel"
+	)
+	sudo pacman -Sq --noconfirm wine-staging "${optional_deps[@]}"
+}
 install_steam () {
 	# Enable multilib
 	local conf="/etc/pacman.conf"
@@ -104,6 +119,69 @@ install_steam () {
 		sudo pacman -Syy && sudo pacman -Sq --noconfirm "${pack[@]}"
 }
 # }}}
+# {{{ Arch linux config
+config_mntpt () {
+	# By default, udisks2 mounts removable drives under
+	# the ACL controlled directory /run/media/$USER/.
+	# If you wish to mount to /media instead, use this rule:
+	local rule="/etc/udev/rules.d/99-udisks2.rules"
+	local conf="/etc/tmpfiles.d/media.conf"
+	if [[ ! -d $( dirname "$rule" ) ]]; then
+		return 1
+	fi
+
+	cat >> "$rule" <<- END
+	# UDISKS_FILESYSTEM_SHARED
+	# ==1: mount filesystem to a shared directory (/media/VolumeName)
+	# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
+	# See udisks(8)
+	ENV{ID_FS_USAGE}=="filesystem|other|crypto", ENV{UDISKS_FILESYSTEM_SHARED}="1"
+	END
+
+	if [[ ! -d $( dirname "$conf" ) ]]; then
+		return 1
+	fi
+
+	cat >> "$conf" <<- END
+	D /media 0755 root root 0 -
+	END
+}
+
+config_bluetooth () {
+	rfkill block bluetooth
+	local profiles="/var/lib/bluetooth/"
+	if [[ ! -z $( sudo ls $profiles ) ]]; then
+		sudo rm -rf "$profiles"/*
+	fi
+	echo 0 > /sys/kernel/debug/bluetooth/hci0/conn_latency
+	echo 6 > /sys/kernel/debug/bluetooth/hci0/conn_min_interval
+	echo 7 > /sys/kernel/debug/bluetooth/hci0/conn_max_interval
+	rfkill unblock bluetooth
+}
+
+config_grub () {
+	local fontpath="/usr/share/fonts/TTF/dejavu/DejaVuSansMono.ttf"
+	local font=${fontpath##*/}
+	local size=20
+	local grub_font="/boot/grub/fonts/${font%.*}$size.pf2"
+	local custom="/etc/grub.d/40_custom"
+
+	cat >> $custom <<- END
+	menuentry "System shutdown" {
+		echo "System shutting down..."
+		halt
+	}
+	if [ ${grub_platform} == "efi" ]; then
+		menuentry "Firmware setup" {
+			fwsetup
+		}
+	fi
+	END
+
+	sudo grub-mkfont --output="$grub_font" --size="$size" "$fontpath"
+}
+# }}}
+
 # {{{ Ubuntu Packages
 PPA=(
 	# "ppa:nilarimogard/webupd8"			# gnome-twitch
@@ -232,6 +310,80 @@ sync_dotfile () {
 	fi
 }
 
+# {{{ Install Suckless Software
+install_suckless () {
+	# $1: install directory
+	# $2: remote config.h
+	# $3: url
+	# $4: package
+	local dir="$1"
+	local config="$2"
+	local url="$3"
+	local package="$4"
+
+	mkdir -p "$dir" &&
+	wget -q "$url$package" -P "$dir" &&
+	tar xf "$dir/$package" -C "$dir" --strip-components=1 &&
+	cp $config $dir &&
+	(cd "$dir" && make && sudo make install && make clean)
+}
+
+install_st_terminal () {
+	IFS=','
+	local arg=(${DOTFILES[st]})
+	unset IFS
+	local dir="${arg[0]/config.h}"
+	local config="${arg[1]}"
+	local url="https://dl.suckless.org/st/"
+	local package="$(wget -q "$url" -O - | grep -o "st-\([0-9].\)*tar.gz" |
+		sort -V | tail -1)"
+	if [ -z "$package" ]; then
+		echo "Cannot parse the link."
+		return
+	fi
+
+	install_suckless "$dir" "$config" "$url" "$package" &&
+	if [[ ! -d "$HOME/.local/share/applications" ]]; then
+		mkdir -p "$HOME/.local/share/applications"
+	fi
+	cp "${DIR[dot]}/st/st.desktop" "$HOME/.local/share/applications"
+}
+
+install_dmenu () {
+	IFS=','
+	local arg=(${DOTFILES[dmenu]})
+	unset IFS
+	local dir="${arg[0]/config.h}"
+	local config="${arg[1]}"
+	local url="https://dl.suckless.org/tools/"
+	local package="$(wget -q "$url" -O - | grep -o "dmenu-\([0-9].\)*tar.gz" |
+		sort -V | tail -1)"
+	if [ -z "$package" ]; then
+		echo "Cannot parse the link."
+		return
+	fi
+
+	install_suckless "$dir" "$config" "$url" "$package"
+}
+# }}}
+
+# {{{ Youtubedl
+install_youtubedl () {
+	local url="https://yt-dl.org/downloads/latest/youtube-dl"
+	sudo wget "$url" -O /usr/local/bin/youtube-dl
+	sudo chmod a+rx /usr/local/bin/youtube-dl
+}
+# }}}
+
+# {{{ Unimatrix
+install_unimatrix () {
+	local url="https://raw.githubusercontent.com/will8211/`
+		`unimatrix/master/unimatrix.py"
+	sudo curl -L "$url" -o /usr/local/bin/unimatrix
+	sudo chmod a+rx /usr/local/bin/unimatrix
+}
+# }}}
+
 # {{{ Vim Vundle
 install_vundle () {
 	local url="https://github.com/VundleVim/Vundle.vim.git"
@@ -248,19 +400,66 @@ install_tmux_theme () {
 }
 # }}}
 
-# {{{ Youtubedl
-install_youtubedl () {
-	local url="https://yt-dl.org/downloads/latest/youtube-dl"
-	sudo wget "$url" -O /usr/local/bin/youtube-dl
-	sudo chmod a+rx /usr/local/bin/youtube-dl
-}
-# }}}
-
 # {{{ Suru++
 install_suru () {
 	local url="https://raw.githubusercontent.com/gusbemacbe/suru-plus/master/install.sh"
 	{ wget -qO- $url | sh; } && { wget -qO- https://git.io/fhQdI | sh; } &&
 		suru-plus-folders -C orange --theme Suru++
+}
+# }}}
+
+# {{{ i3-gaps
+install_i3gaps () {
+	if [[ $OS == *"ubuntu"* ]]; then
+		local dep=(
+			"libxcb1-dev" "libxcb-keysyms1-dev" "libpango1.0-dev"
+			"libxcb-util0-dev" "libxcb-icccm4-dev" "libyajl-dev"
+			"libstartup-notification0-dev" "libxcb-randr0-dev" "libev-dev"
+			"libxcb-cursor-dev" "libxcb-xinerama0-dev" "libxcb-xkb-dev"
+			"libxkbcommon-dev" "libxkbcommon-x11-dev" "autoconf"
+			"libxcb-xrm0" "libxcb-xrm-dev" "automake" "libxcb-shape0-dev"
+		)
+
+	cd /tmp && git clone https://www.github.com/Airblader/i3 i3-gaps &&
+		cd i3-gaps && autoreconf --force --install && rm -rf build/ &&
+		mkdir -p build && cd build/ &&
+		../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers &&
+		make && sudo make install
+	elif [[ $OS == *"arch"* ]]; then
+		sudo pacman -Sy i3-gaps
+	else
+		return 1
+	fi
+}
+# }}}
+
+# {{{ bspwm
+install_bspwm () {
+	local dep=()
+	if [[ $OS == *"ubuntu"* ]]; then
+		dep=(
+			"libxcb-xinerama0-dev" "libxcb-icccm4-dev" "libxcb-randr0-dev"
+			"libxcb-util0-dev" "libxcb-ewmh-dev" "libxcb-keysyms1-dev"
+			"libxcb-shape0-dev"
+		)
+		sudo apt install -qq -y ${dep[@]}
+	elif [[ $OS == *"arch"* ]]; then
+		dep=(
+			"libxcb" "xcb-util" "xcb-util-wm" "xcb-util-keysyms"
+		)
+		sudo pacman -S ${dep[@]}
+	else
+		return 1
+	fi
+
+	( cd ${DIR[parent]} &&
+		git clone https://github.com/baskerville/bspwm.git &&
+		git clone https://github.com/baskerville/sxhkd.git &&
+		cd bspwm && make && sudo make install &&
+		cd ../sxhkd && make && sudo make install &&
+		mkdir -p ~/.config/{bspwm,sxhkd} &&
+		cp "${DOTFILES[bspwm]}"  ~/.config/bspwm/ &&
+		cp "${DOTFILES[sxhkd]}" ~/.config/sxhkd/ )
 }
 # }}}
 
@@ -328,135 +527,8 @@ install_nerdfont () {
 # {{{ Ranger Devicons
 install_ranger_devicons () {
 	local url="https://github.com/alexanderjeurissen/ranger_devicons"
-	IFS=','
-	local config=(${DOTFILES[ranger]})
-	unset IFS
-	local to="${config[0]}"
-	local from="${config[1]}"
 	git clone -q "$url" "${DIR[parent]}/ranger_devicons" &&
-		(cd "${DIR[parent]}/ranger_devicons" && make install) &&
-		cp "$from" "$to" && ranger --copy-config=scope
-}
-# }}}
-
-# {{{ Install Suckless Software
-install_suckless () {
-	# $1: install directory
-	# $2: remote config.h
-	# $3: url
-	# $4: package
-	local dir="$1"
-	local config="$2"
-	local url="$3"
-	local package="$4"
-
-	mkdir -p "$dir" &&
-	wget -q "$url$package" -P "$dir" &&
-	tar xf "$dir/$package" -C "$dir" --strip-components=1 &&
-	cp $config $dir &&
-	(cd "$dir" && make && sudo make install && make clean)
-}
-
-install_st_terminal () {
-	IFS=','
-	local arg=(${DOTFILES[st]})
-	unset IFS
-	local dir="${arg[0]/config.h}"
-	local config="${arg[1]}"
-	local url="https://dl.suckless.org/st/"
-	local package="$(wget -q "$url" -O - | grep -o "st-\([0-9].\)*tar.gz" |
-		sort -V | tail -1)"
-	if [ -z "$package" ]; then
-		echo "Cannot parse the link."
-		return
-	fi
-
-	install_suckless "$dir" "$config" "$url" "$package" &&
-	if [[ ! -d "$HOME/.local/share/applications" ]]; then
-		mkdir -p "$HOME/.local/share/applications"
-	fi
-	cp "${DIR[dot]}/st/st.desktop" "$HOME/.local/share/applications"
-}
-
-install_dmenu () {
-	IFS=','
-	local arg=(${DOTFILES[dmenu]})
-	unset IFS
-	local dir="${arg[0]/config.h}"
-	local config="${arg[1]}"
-	local url="https://dl.suckless.org/tools/"
-	local package="$(wget -q "$url" -O - | grep -o "dmenu-\([0-9].\)*tar.gz" |
-		sort -V | tail -1)"
-	if [ -z "$package" ]; then
-		echo "Cannot parse the link."
-		return
-	fi
-
-	install_suckless "$dir" "$config" "$url" "$package"
-}
-# }}}
-
-# {{{ i3-gaps
-install_i3gaps () {
-	if [[ $OS == *"ubuntu"* ]]; then
-		local dep=(
-			"libxcb1-dev" "libxcb-keysyms1-dev" "libpango1.0-dev"
-			"libxcb-util0-dev" "libxcb-icccm4-dev" "libyajl-dev"
-			"libstartup-notification0-dev" "libxcb-randr0-dev" "libev-dev"
-			"libxcb-cursor-dev" "libxcb-xinerama0-dev" "libxcb-xkb-dev"
-			"libxkbcommon-dev" "libxkbcommon-x11-dev" "autoconf"
-			"libxcb-xrm0" "libxcb-xrm-dev" "automake" "libxcb-shape0-dev"
-		)
-
-	cd /tmp && git clone https://www.github.com/Airblader/i3 i3-gaps &&
-		cd i3-gaps && autoreconf --force --install && rm -rf build/ &&
-		mkdir -p build && cd build/ &&
-		../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers &&
-		make && sudo make install
-	elif [[ $OS == *"arch"* ]]; then
-		sudo pacman -Sy i3-gaps
-	else
-		return 1
-	fi
-}
-# }}}
-
-# {{{ bspwm
-install_bspwm () {
-	local dep=()
-	if [[ $OS == *"ubuntu"* ]]; then
-		dep=(
-			"libxcb-xinerama0-dev" "libxcb-icccm4-dev" "libxcb-randr0-dev"
-			"libxcb-util0-dev" "libxcb-ewmh-dev" "libxcb-keysyms1-dev"
-			"libxcb-shape0-dev"
-		)
-		sudo apt install -qq -y ${dep[@]}
-	elif [[ $OS == *"arch"* ]]; then
-		dep=(
-			"libxcb" "xcb-util" "xcb-util-wm" "xcb-util-keysyms"
-		)
-		sudo pacman -S ${dep[@]}
-	else
-		return 1
-	fi
-
-	( cd ${DIR[parent]} &&
-		git clone https://github.com/baskerville/bspwm.git &&
-		git clone https://github.com/baskerville/sxhkd.git &&
-		cd bspwm && make && sudo make install &&
-		cd ../sxhkd && make && sudo make install &&
-		mkdir -p ~/.config/{bspwm,sxhkd} &&
-		cp "${DOTFILES[bspwm]}"  ~/.config/bspwm/ &&
-		cp "${DOTFILES[sxhkd]}" ~/.config/sxhkd/ )
-}
-# }}}
-
-# {{{ Unimatrix
-install_unimatrix () {
-	local url="https://raw.githubusercontent.com/will8211/`
-		`unimatrix/master/unimatrix.py"
-	sudo curl -L "$url" -o /usr/local/bin/unimatrix
-	sudo chmod a+rx /usr/local/bin/unimatrix
+		(cd "${DIR[parent]}/ranger_devicons" && make install)
 }
 # }}}
 
@@ -466,15 +538,58 @@ install_pip () {
 		"virtualenv"
 		"powerline-status"
 		"ranger-fm"
+		"gdbgui"
 	)
 	for pack in ${packages[@]}; do
-		pip3 install --user -q "$pack"
+		pip3 install -q "$pack"
 	done
+}
+# }}}
+
+# {{{ ranger config
+config_ranger () {
+	if [[ ! $(command -v ranger) ]]; then
+		return 1
+	fi
+	ranger --copy-config=all
+
+	# Enable video preview option.
+	local config="$HOME/.config/ranger/scope.sh"
+	if [[ -f "$config" ]]; then
+		sed -in '/video\/\*)/,/exit 1;;/s/# //' $config
+	fi
+
+	# Enable sxiv -a option.
+	config="$HOME/.config/ranger/rifle.conf"
+	if [[ -f "$config" ]]; then
+		sed -n 's/flag f = sxiv/& -a/p' $config
+	fi
+
+	# Copy rc.conf to the local directory.
+	IFS=','
+	local config=(${DOTFILES[ranger]})
+	unset IFS
+	cp "${config[1]}" "${config[0]}"
+}
+# }}}
+
+# {{{ sxiv config
+config_sxiv () {
+	# Use sxiv as a default application.
+	local rifle="/usr/local/bin"
+	local desktop="/usr/share/applications"
+	sudo cp "${DIR[dot]}/sxiv/sxiv-rifle" "$rifle"
+	sudo sed -i 's/\(Exec=sxiv\).*$/\1-rifle/' "$desktop"
+	xdg-mime default sxiv.desktop image/jpeg
 }
 # }}}
 
 # {{{ fcitx config
 fcitx_config () {
+	if [[ ! -d "$HOME/.config/fcitx" ]]; then
+		( exec fcitx -d & )
+	fi
+
 	local profile="$HOME/.config/fcitx/profile"
 	local config="$HOME/.config/fcitx/config"
 	sed -Ei "s/#(IMName=)/\1Hangul/" "$profile"
@@ -515,38 +630,30 @@ package_install () {
 		case "$arg" in
 			default)
 				local default_packages=(
-					"$OS" "pip" "st" "nerdfont" "vundle"
-					"tmux_theme" "ranger_devicons"
-					"suru" "youtubedl" "unimatrix" "fcitx" "git" "sync"
+					"$OS" "pip" "nerdfont" "st" "vundle"
+					"tmux_theme" "ranger_devicons" "suru"
+					"youtubedl" "unimatrix" "sxiv" "git" "sync"
 				)
 				set ${default_packages[@]}
 			;;
 			*"arch"*)
 				install_arch_package
-				local nvidia=$( lspci | grep "NVIDIA" )
-				if [[ $nvidia ]]; then
+				if [[ $( lspci | grep "NVIDIA" ) ]]; then
 					install_optimus
 					install_steam
+					install_wine
 				fi
+				config_mntpt
+				config_bluetooth
+				config_grub
+				config_ranger
 			;;
-			*"ubuntu"*) install_ubuntu_package ;;
+			*"ubuntu"*)
+				install_ubuntu_package
+				config_ranger
+			;;
 			# The rest must be called after
-			pip)
-				install_pip
-				# Enable video option in ranger-fm
-				if [[ -f "$HOME/.config/ranger/scope.sh" ]]; then
-					sed -i '/# Video$/{
-						n
-						s/# //
-						n
-						s/# //
-						n
-						s/# //
-						n
-						s/# //
-					}' "$HOME/.config/ranger/scope.sh"
-				fi
-			;;
+			pip) install_pip ;;
 			st|st_terminal) install_st_terminal ;;
 			nerdfont|nerd|font) install_nerdfont ;;
 			vundle|vim) install_vundle ;;
@@ -560,37 +667,12 @@ package_install () {
 			bspwm) install_bspwm ;;
 			unimatrix) install_unimatrix ;;
 			dmenu) install_dmenu ;;
-			fcitx)
-				if [[ ! -d "$HOME/.config/fcitx" ]]; then
-					( exec fcitx -d & )
-				fi
-				fcitx_config
-			;;
+			fcitx) fcitx_config ;;
 			git)
 				git config --global user.email "gentlebuuny@gmail.com"
 				git config --global user.name "hakumaku"
 			;;
-			thumbnailer)
-				"${DIR[dot]}/gif/totem.thumbnailer"
-				if [ -f "${DIR[dot]}/gif/totem.thumbnailer" ]; then
-					sudo cp "${DIR[dot]}/gif/totem.thumbnailer" \
-						"/usr/share/thumbnailers/totem.thumbnailer"
-				fi
-			;;
-			gnome-extension)
-				dir="/usr/share/gnome-shell/extensions"
-				sudo rm -rf "$dir/screenshot-window-sizer"*
-				sudo rm -rf "$dir/apps-menu"*
-				sudo rm -rf "$dir/auto-move-window"*
-				sudo rm -rf "$dir/ubuntu-dock"*
-				sudo rm -rf "$dir/launch-new-instance"*
-				sudo rm -rf "$dir/window-list"*
-				sudo rm -rf "$dir/native-window-placement"*
-				sudo rm -rf "$dir/windowsNavigator"*
-				sudo rm -rf "$dir/places-menu"*
-				sudo rm -rf "$dir/workspace-indicator"*
-				shift
-			;;
+			sxiv) config_sxiv ;;
 			sync)
 				for i in "${!DOTFILES[@]}"; do
 					sync_dotfile "${DOTFILES[$i]}"
@@ -602,24 +684,6 @@ package_install () {
 		esac
 		shift
 	done
-}
-
-grub_config () {
-	# sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono20.pf2 --size=20 /usr/share/fonts/TTF/dejavu/DejaVuSansMono.ttf
-	local GRUB_FONT=/boot/grub/fonts/DejaVuSansMono18.pf2
-	local custom="/etc/grub.d/40_custom"
-
-	cat >> $custom <<- END
-	menuentry "System shutdown" {
-		echo "System shutting down..."
-		halt
-	}
-	if [ ${grub_platform} == "efi" ]; then
-		menuentry "Firmware setup" {
-			fwsetup
-		}
-	fi
-	END
 }
 
 package_install "$@"

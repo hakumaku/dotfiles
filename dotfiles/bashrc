@@ -1,13 +1,12 @@
-get_wm () {
+wm () {
 	xprop | awk '
 		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
 		/^WM_NAME/{sub(/.* =/, "title:"); print}'
 }
-alias wm='get_wm'
 twitch () {
 	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | cvlc -f - &
+	# https://www.twitch.tv/popout/$1/chat?popout=
 }
-
 snapicons () {
 	local app=$1
 	local path="/var/lib/snapd/desktop/applications"
@@ -31,7 +30,7 @@ snapicons () {
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
-export PAGER="most"
+export PAGER="less"
 export EDITOR=/usr/bin/vim
 
 # Bash settings
@@ -44,9 +43,14 @@ stty -ixon
 complete -cf sudo
 bind -m vi-insert "\C-l":clear-screen
 bind -m vi-insert "\C-[":vi-movement-mode
+# bind -x '"\C-m": "tmux new-window cmus"'
 bind -x '"\C-o": "ranger"'
 bind '"\C-j": history-search-forward'
 bind '"\C-k": history-search-backward'
+alias grep='grep --color=auto'
+alias mnt='udisksctl mount -b'
+alias umnt='udisksctl unmount -b'
+alias rm='rm -i'
 alias ls='ls --color -h --group-directories-first'
 alias l.='ls -d .* --color=auto'
 alias ..='cd ..'
@@ -54,25 +58,13 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
-alias grep='grep --color=auto'
-# alias lst='lsd --group-dirs --tree --color never'
-# alias ll='lsd --group-dirs -l --color never'
-# alias ranger="python3 $HOME/workspace/ranger/ranger.py"
+alias gv='cd $HOME/Videos'
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias bashrc="vim ${BASH_SOURCE[0]} -c 'normal zt'"
 alias vimrc="vim $HOME/.vimrc"
 alias sxiv='sxiv -a -f'
-alias screen='bash $HOME/workspace/ubuntu-fresh/screen.sh'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-
-laptop=eDP-1-1
-external=HDMI-1-1
-alias turnoff_laptop="xrandr --output $laptop --off"
-alias turnoff_external="xrandr --output $monitor --off"
-alias left_laptop="xrandr --output $laptop --auto --output $external --right-of $laptop"
-alias right_laptop="xrandr --output $laptop --auto --output $external --left-of $laptop"
-alias mirror_laptop="xrandr --output $external --same-as $laptop"
 
 # Tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
