@@ -18,9 +18,9 @@ super + x
 	st -e gotop -c solarized
 super + r
 	rofi -show drun
-super + 8
+super + bracketleft
 	bash "$BACKLIGHT_SCRIPT" -d
-super + 9
+super + bracketright
 	bash "$BACKLIGHT_SCRIPT" -i
 super + 0
 	amixer -q sset Master toggle
@@ -51,19 +51,19 @@ super + {_,ctrl + }q
 super + {_,ctrl + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
+super + {_,shift + }Tab
 	bspc node -f {next,prev}.local
+# focus the last node/desktop
+super + space
+	bspc node -f last
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
+super + {p,n}
 	bspc desktop -f {prev,next}.local
 super + + ctrl + bracket{left,right}
 	bspc node -d {prev,next}.local
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
 # focus or send to the given desktop
 super + {_,ctrl + }{1-7}
 	bspc {desktop -f,node -d} '^{1-7}'

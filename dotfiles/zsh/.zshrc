@@ -1,3 +1,30 @@
+# zsh basic settings
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+zstyle :compinstall filename '/home/haku/.zshrc'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' rehash true
+autoload -Uz compinit promptinit
+zmodload zsh/complist
+compinit
+promptinit
+
+# Key bindings
+bindkey -v
+bindkey "^j" history-beginning-search-forward
+bindkey "^k" history-beginning-search-backward
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# powerline10k settings
+source $HOME/workspace/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# Customize
 wm () {
 	xprop | awk '
 		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
@@ -30,6 +57,8 @@ snapicons () {
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
+
+# Environment variables & aliases
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
 export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
@@ -40,21 +69,8 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 export EDITOR=/usr/bin/vim
-
-# Bash settings
-set -o vi
-bind 'set show-mode-in-prompt on'
-bind 'set vi-cmd-mode-string "\1\e[1;48;2;220;50;47;38;2;255;255;255m\2  \1\e[0m\2"'
-bind 'set vi-ins-mode-string "\1\e[1;48;2;0;135;175;38;2;255;255;255m\2  \1\e[0m\2"'
 # Disable pressing <C-s> to freeze.
 stty -ixon
-complete -cf sudo
-bind -m vi-insert "\C-l":clear-screen
-bind -m vi-insert "\C-[":vi-movement-mode
-# bind -x '"\C-m": "tmux new-window cmus"'
-bind -x '"\C-o": "ranger"'
-bind '"\C-j": history-search-forward'
-bind '"\C-k": history-search-backward'
 alias grep='grep --color=auto'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
@@ -79,14 +95,5 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
 	exec tmux
 fi
 
-# Powerline-status
-PATH="$HOME/.local/bin:$PATH"
-export POWERLINE_COMMAND=powerline
-if [ -f ~/.local/lib/python3*/site-packages/powerline/bindings/bash/powerline.sh ]; then
-	source ~/.local/lib/python3*/site-packages/powerline/bindings/bash/powerline.sh
-fi
-
-# Colorls (https://github.com/athityakumar/colorls)
-# source $(dirname $(gem which colorls))/tab_complete.sh
-# alias lc='colorls -lA --sd'
-
+# zsh-syntax-highlighting
+source /home/haku/workspace/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

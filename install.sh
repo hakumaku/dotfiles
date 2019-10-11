@@ -10,8 +10,6 @@ declare -A DIR=(
 )
 # {{{ dotfiles
 declare -A DOTFILES=(
-	# ["local_totem"]="/usr/share/thumbnailers/totem.thumbnailer"
-	# ["remote_totem"]="${DIR[dot]}/gif/totem.thumbnailer"
 	# (remote, local) pair
 	["vlc"]="${DIR[config]}/vlc/vlcrc,${DIR[dot]}/vlc/vlcrc"
 	["vim"]="$HOME/.vimrc,${DIR[dot]}/vim/.vimrc"
@@ -29,6 +27,8 @@ declare -A DOTFILES=(
 	["polybar"]="${DIR[config]}/polybar,${DIR[dot]}/polybar"
 	["compton"]="${DIR[config]}/compton.conf,${DIR[dot]}/compton/compton.conf"
 	["xinit"]="$HOME/.xprofile,${DIR[dot]}/xprofile"
+	["zsh"]="$HOME/.zshrc,${DIR[dot]}/zsh/.zshrc"
+	["p10k"]="$HOME/.p10k.zsh,${DIR[dot]}/zsh/.p10k.zsh"
 )
 # }}}
 
@@ -43,7 +43,7 @@ ARCH_PACKAGE=(
 	"libva" "libva-vdpau-driver" "libva-utils"
 	"gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "vainfo" "mesa-demos"
-	"alsa-utils" "pavucontrol" "udisks2"
+	"alsa-utils" "pavucontrol" "udisks2" "zsh"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
@@ -77,12 +77,17 @@ install_arch_package () {
 		exit 1
 	fi
 
+
+	# Genereate locale
 	local conf="/etc/locale.gen"
 	sudo sed -Ei "s/^#(en_US.UTF-8)/\1/" "$conf" &&
 		sudo sed -Ei "s/^#(ko_KR.UTF-8)/\1/" "$conf" && sudo locale-gen
+	# Enable color in pacman
+	conf="/etc/pacman.conf"
+	sudo sed -i 's/^#Color$/Color/' "$conf"
+
 	sudo systemctl enable bluetooth
 	sudo systemctl enable Networkmanager
-	sudo systemctl enable snap
 	sudo systemctl enable gdm
 	sudo systemctl enable --now snapd.socket
 }
@@ -581,6 +586,10 @@ config_sxiv () {
 	sudo cp "${DIR[dot]}/sxiv/sxiv-rifle" "$rifle"
 	sudo sed -i 's/\(Exec=sxiv\).*$/\1-rifle/' "$desktop"
 	xdg-mime default sxiv.desktop image/jpeg
+
+	# image-info
+	mkdir -p ~/.config/sxiv/exec
+	cp "${DIR[dot]}/sxiv/exec/image-info" "$HOME/.config/sxiv/exec/"
 }
 # }}}
 
@@ -608,6 +617,18 @@ fcitx_config () {
 	else
 		return 0
 	fi
+}
+# }}}
+
+# {{{ zsh config
+config_zsh () {
+	# powerlevel10k
+	local url="https://github.com/romkatv/powerlevel10k.git"
+	git clone --depth=1 "$url" "${DIR[parent]}/powerlevel10k"
+
+	# zsh-syntax-highlighting
+	url="https://github.com/zsh-users/zsh-syntax-highlighting.git"
+	git clone "$url" "${DIR[parent]}/zsh-syntax-highlighting"
 }
 # }}}
 
@@ -643,6 +664,7 @@ package_install () {
 					install_steam
 					install_wine
 				fi
+				config_zsh
 				config_mntpt
 				config_bluetooth
 				config_grub
