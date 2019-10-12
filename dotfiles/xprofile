@@ -5,6 +5,7 @@ export QT_IM_MODULE=fcitx
 if [[ $XDG_CURRENT_DESKTOP = "Yaru:ubuntu:GNOME" ]]; then
 	return 0
 fi
+echo "$XDG_CURRENT_DESKTOP" >> ~/.desktop.log
 
 # https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Configuring_VDPAU
 # export VDPAU_DRIVER=nvidia
@@ -40,6 +41,9 @@ xset s 300
 xss-lock $HOME/workspace/ubuntu-fresh/unimatrix.sh &
 ~/.config/polybar/main.sh &
 plank &
+if [[ $XDG_CURRENT_DESKTOP = "i3" ]]; then
+	exec i3
+	return 0
+fi
 sxhkd &
 exec bspwm
-

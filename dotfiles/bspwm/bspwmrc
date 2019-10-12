@@ -36,6 +36,7 @@ bspc rule -a "Nm-connection-editor" desktop='^1' state=floating center=on follow
 bspc rule -a "Org.gnome.Nautilus" desktop='^1' state=floating center=on follow=on focus=on
 bspc rule -a "obs" desktop='^1' state=floating center=on follow=on focus=on
 bspc rule -a "xpad" desktop='^1' sticky=on state=floating
+bspc rule -a "Pamac-manager" desktop='^1' center=on state=floating
 bspc rule -a "Sxiv" center=on state=floating
 
 # Fixed desktop applications
