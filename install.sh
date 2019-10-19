@@ -154,15 +154,15 @@ config_mntpt () {
 }
 
 config_bluetooth () {
-	rfkill block bluetooth
+	sudo rfkill block bluetooth
 	local profiles="/var/lib/bluetooth/"
 	if [[ ! -z $( sudo ls $profiles ) ]]; then
 		sudo rm -rf "$profiles"/*
 	fi
-	echo 0 > /sys/kernel/debug/bluetooth/hci0/conn_latency
-	echo 6 > /sys/kernel/debug/bluetooth/hci0/conn_min_interval
-	echo 7 > /sys/kernel/debug/bluetooth/hci0/conn_max_interval
-	rfkill unblock bluetooth
+	sudo echo 0 > /sys/kernel/debug/bluetooth/hci0/conn_latency
+	sudo echo 6 > /sys/kernel/debug/bluetooth/hci0/conn_min_interval
+	sudo echo 7 > /sys/kernel/debug/bluetooth/hci0/conn_max_interval
+	sudo rfkill unblock bluetooth
 }
 
 config_grub () {
@@ -654,7 +654,7 @@ package_install () {
 				local default_packages=(
 					"${OS}" "pip" "nerdfont" "st" "vundle"
 					"tmux_theme" "ranger_devicons" "suru"
-					"youtubedl" "unimatrix" "sxiv" "git" "sync"
+					"youtubedl" "unimatrix" "sxiv" "git" "sync" "config"
 				)
 				set "${default_packages[@]}"
 				continue
@@ -666,11 +666,6 @@ package_install () {
 					install_steam
 					install_wine
 				fi
-				config_zsh
-				config_mntpt
-				config_bluetooth
-				config_grub
-				config_ranger
 			;;
 			*"ubuntu"*)
 				install_ubuntu_package
@@ -701,6 +696,13 @@ package_install () {
 				for i in "${!DOTFILES[@]}"; do
 					sync_dotfile "${DOTFILES[$i]}"
 				done
+			;;
+			config)
+				config_zsh
+				config_mntpt
+				config_bluetooth
+				config_grub
+				config_ranger
 			;;
 			*)
 				echo "Unknown arguments: $arg"
