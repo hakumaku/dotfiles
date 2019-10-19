@@ -550,6 +550,7 @@ install_pip () {
 	for pack in ${packages[@]}; do
 		pip3 install --user "$pack"
 	done
+	PATH=$PATH:"$HOME/.local/bin"
 }
 # }}}
 

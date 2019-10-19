@@ -2,6 +2,7 @@
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
+PATH=$PATH:"$HOME/.local/bin"
 if [[ $XDG_CURRENT_DESKTOP = "Yaru:ubuntu:GNOME" ]]; then
 	return 0
 fi
