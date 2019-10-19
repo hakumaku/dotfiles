@@ -35,21 +35,22 @@ declare -A DOTFILES=(
 # {{{ Arch Packages
 AUR=(
 	"ttf-d2coding" "ttf-unfonts-core-ibx"
-	"stacer" "snapd" "gotop"
+	# "stacer"
+	"snapd" "gotop"
 	"humanity-icon-theme" "yaru"
 )
 ARCH_PACKAGE=(
 	"xorg" "base-devel"
 	"libva" "libva-vdpau-driver" "libva-utils"
 	"gdm" "gnome" "gnome-tweaks"
-	"networkmanager" "bluez" "bluez-utils" "vainfo" "mesa-demos"
+	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
 	"alsa-utils" "pavucontrol" "udisks2" "zsh"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
 	"xss-lock" "cmus" "sxiv" "exiv2" "imagemagick"
 	"feh" "xautolock" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
-	"nm-applet" "blueman" "redshift" "cbatticon"
+	"network-manager-applet" "blueman" "redshift" "cbatticon"
 	"fcitx-im" "fcitx-hangul" "fcitx-configtool"
 	"adobe-source-han-sans-kr-fonts" "ttf-dejavu"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
@@ -546,7 +547,7 @@ install_pip () {
 		"gdbgui"
 	)
 	for pack in ${packages[@]}; do
-		pip3 install -q "$pack"
+		sudo pip3 install -q "$pack"
 	done
 }
 # }}}
@@ -651,11 +652,12 @@ package_install () {
 		case "$arg" in
 			default)
 				local default_packages=(
-					"$OS" "pip" "nerdfont" "st" "vundle"
+					"${OS}" "pip" "nerdfont" "st" "vundle"
 					"tmux_theme" "ranger_devicons" "suru"
 					"youtubedl" "unimatrix" "sxiv" "git" "sync"
 				)
-				set ${default_packages[@]}
+				set "${default_packages[@]}"
+				continue
 			;;
 			*"arch"*)
 				install_arch_package
@@ -702,6 +704,8 @@ package_install () {
 			;;
 			*)
 				echo "Unknown arguments: $arg"
+				echo "$@"
+				exit 1
 			;;
 		esac
 		shift
