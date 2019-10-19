@@ -89,7 +89,7 @@ install_arch_package () {
 	sudo sed -i 's/^#Color$/Color/' "$conf"
 
 	sudo systemctl enable bluetooth
-	sudo systemctl enable Networkmanager
+	sudo systemctl enable NetworkManager
 	sudo systemctl enable gdm
 	sudo systemctl enable --now snapd.socket
 }
@@ -167,10 +167,11 @@ config_bluetooth () {
 }
 
 config_grub () {
-	local fontpath="/usr/share/fonts/TTF/dejavu/DejaVuSansMono.ttf"
+	local fontpath="/usr/share/fonts/TTF/DejaVuSansMono.ttf"
 	local font=${fontpath##*/}
 	local size=20
 	local grub_font="/boot/grub/fonts/${font%.*}$size.pf2"
+	local file="/etc/default/grub"
 	local custom="/etc/grub.d/40_custom"
 
 	sudo bash -c "cat >> $custom" <<- END
@@ -186,6 +187,8 @@ config_grub () {
 	END
 
 	sudo grub-mkfont --output="$grub_font" --size="$size" "$fontpath"
+	sudo sed -i '/#GRUB_THEME/a '"GRUB_FONT=\"$text\"" $file
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # }}}
 
