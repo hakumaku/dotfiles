@@ -569,7 +569,7 @@ config_ranger () {
 	# Enable sxiv -a option.
 	config="$HOME/.config/ranger/rifle.conf"
 	if [[ -f "$config" ]]; then
-		sed -n 's/flag f = sxiv/& -a/p' $config
+		sed -in 's/flag f = sxiv/& -a/' $config
 	fi
 
 	# Copy rc.conf to the local directory.
@@ -584,7 +584,7 @@ config_ranger () {
 config_sxiv () {
 	# Use sxiv as a default application.
 	local rifle="/usr/local/bin"
-	local desktop="/usr/share/applications"
+	local desktop="/usr/share/applications/sxiv.desktop"
 	sudo cp "${DIR[dot]}/sxiv/sxiv-rifle" "$rifle"
 	sudo sed -i 's/\(Exec=sxiv\).*$/\1-rifle/' "$desktop"
 	xdg-mime default sxiv.desktop image/jpeg
