@@ -55,6 +55,7 @@ ARCH_PACKAGE=(
 	"adobe-source-han-sans-kr-fonts" "ttf-dejavu"
 	"transmission-gtk" "transmission-cli" "transmission-remote-gtk"
 	"xpad" "vlc" "cheese" "nautilus" "firefox" "gufw" "lxappearance"
+	"inetutils" # suru++ requires 'hostname' command.
 )
 install_arch_package () {
 	local dir=""
@@ -136,7 +137,7 @@ config_mntpt () {
 		return 1
 	fi
 
-	cat >> "$rule" <<- END
+	sudo bash -c "cat > $rule" <<-END
 	# UDISKS_FILESYSTEM_SHARED
 	# ==1: mount filesystem to a shared directory (/media/VolumeName)
 	# ==0: mount filesystem to a private directory (/run/media/$USER/VolumeName)
@@ -148,7 +149,7 @@ config_mntpt () {
 		return 1
 	fi
 
-	cat >> "$conf" <<- END
+	sudo bash -c "cat > $conf" <<- END
 	D /media 0755 root root 0 -
 	END
 }
@@ -172,7 +173,7 @@ config_grub () {
 	local grub_font="/boot/grub/fonts/${font%.*}$size.pf2"
 	local custom="/etc/grub.d/40_custom"
 
-	cat >> $custom <<- END
+	sudo bash -c "cat >> $custom" <<- END
 	menuentry "System shutdown" {
 		echo "System shutting down..."
 		halt
@@ -660,6 +661,9 @@ package_install () {
 				continue
 			;;
 			*"arch"*)
+				echo "########################"
+				echo "Installing Arch pacakges"
+				echo "########################"
 				install_arch_package
 				if [[ $( lspci | grep "NVIDIA" ) ]]; then
 					install_optimus
@@ -672,13 +676,49 @@ package_install () {
 				config_ranger
 			;;
 			# The rest must be called after
-			pip) install_pip ;;
-			st|st_terminal) install_st_terminal ;;
-			nerdfont|nerd|font) install_nerdfont ;;
-			vundle|vim) install_vundle ;;
-			tmux_theme|tmux) install_tmux_theme ;;
-			ranger_devicons) install_ranger_devicons ;;
-			suru) install_suru ;;
+			pip)
+				echo "########################"
+				echo "Installing Pip packages"
+				echo "########################"
+				install_pip
+			;;
+			st|st_terminal)
+				echo "##########################"
+				echo "Installing Simple Termianl"
+				echo "##########################"
+				install_st_terminal
+			;;
+			nerdfont|nerd|font)
+				echo "#############################"
+				echo "Installing Nerdfonts"
+				echo "It will take a bit long time."
+				echo "#############################"
+				install_nerdfont
+			;;
+			vundle|vim)
+				echo "###############################"
+				echo "Installing Vundle & Vim Plugins"
+				echo "###############################"
+				install_vundle
+			;;
+			tmux_theme|tmux)
+				echo "#####################"
+				echo "Installing Tmux theme"
+				echo "#####################"
+				install_tmux_theme
+			;;
+			ranger_devicons)
+				echo "##########################"
+				echo "Installing Ranger Devicons"
+				echo "##########################"
+				install_ranger_devicons
+			;;
+			suru)
+				echo "#######################"
+				echo "Installing Suru++ icons"
+				echo "#######################"
+				install_suru
+			;;
 			youtubedl|youtube) install_youtubedl ;;
 			polybar) install_polybar ;;
 			lemonbar) install_lemonbar ;;
@@ -700,7 +740,7 @@ package_install () {
 			config)
 				config_zsh
 				config_mntpt
-				config_bluetooth
+				# config_bluetooth
 				config_grub
 				config_ranger
 			;;
