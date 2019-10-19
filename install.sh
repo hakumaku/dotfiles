@@ -548,7 +548,7 @@ install_pip () {
 		"gdbgui"
 	)
 	for pack in ${packages[@]}; do
-		sudo pip3 install -q "$pack"
+		pip3 install --user "$pack"
 	done
 }
 # }}}
