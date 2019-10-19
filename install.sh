@@ -654,7 +654,7 @@ package_install () {
 				local default_packages=(
 					"${OS}" "pip" "nerdfont" "st" "vundle"
 					"tmux_theme" "ranger_devicons" "suru"
-					"youtubedl" "unimatrix" "sxiv" "git" "sync" "config"
+					"youtubedl" "unimatrix" "sxiv" "git" "config" "sync"
 				)
 				set "${default_packages[@]}"
 				continue
