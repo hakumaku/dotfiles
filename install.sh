@@ -461,6 +461,10 @@ install_bspwm () {
 	else
 		return 1
 	fi
+	IFS=','
+	local bspwm_config=(${DOTFILES[bspwm]})
+	local sxhkd_config=(${DOTFILES[sxhkd]})
+	unset IFS
 
 	( cd ${DIR[parent]} &&
 		git clone https://github.com/baskerville/bspwm.git &&
@@ -468,8 +472,8 @@ install_bspwm () {
 		cd bspwm && make && sudo make install &&
 		cd ../sxhkd && make && sudo make install &&
 		mkdir -p ~/.config/{bspwm,sxhkd} &&
-		cp "${DOTFILES[bspwm]}"  ~/.config/bspwm/ &&
-		cp "${DOTFILES[sxhkd]}" ~/.config/sxhkd/ )
+		cp "${bspwm_config[1]}"  "${bspwm_config[0]}" &&
+		cp "${sxhkd_config[1]}" "${sxhkd_config[0]}" )
 }
 # }}}
 
