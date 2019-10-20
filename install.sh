@@ -187,7 +187,7 @@ config_grub () {
 	END
 
 	sudo grub-mkfont --output="$grub_font" --size="$size" "$fontpath"
-	sudo sed -i '/#GRUB_THEME/a '"GRUB_FONT=\"$text\"" $file
+	sudo sed -i '/#GRUB_THEME/a '"GRUB_FONT=\"$grub_font\"" $file
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 # }}}
