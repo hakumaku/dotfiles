@@ -46,7 +46,7 @@ ARCH_PACKAGE=(
 	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
 	"alsa-utils" "pavucontrol" "udisks2" "zsh"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
-	"gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
+	"clang" "gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
 	"xss-lock" "cmus" "sxiv" "exiv2" "imagemagick"
 	"feh" "xautolock" "compton" "ffmpeg" "ffmpegthumbnailer" "w3m"
@@ -396,10 +396,12 @@ install_unimatrix () {
 
 # {{{ Vim Vundle
 install_vundle () {
+	local ycmpy = "$HOME/.vim/bundle/YouCompleteMe/install.py"
 	local url="https://github.com/VundleVim/Vundle.vim.git"
 	git clone -q "$url" ~/.vim/bundle/Vundle.vim &&
 		sync_dotfile "${DOTFILES[vim]}" && vim +PluginInstall +qall &&
-		python3 ~/.vim/bundle/YouCompleteMe/install.py --all &> /dev/null
+		python3 "$ycmpy" --all &&
+		python3 "$ycmpy" --clang-completer --system-libclang
 }
 # }}}
 
