@@ -40,7 +40,7 @@ AUR=(
 	"humanity-icon-theme" "yaru"
 )
 ARCH_PACKAGE=(
-	"xorg" "base-devel"
+	"xorg" "base-devel" "linux-firmware"
 	"libva" "libva-vdpau-driver" "libva-utils"
 	"gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
