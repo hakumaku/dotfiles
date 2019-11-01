@@ -302,7 +302,7 @@ augroup file_c
 	au FileType c call Iab('elif', 'else if ()<CR>{<CR>}<esc>2ba')
 	au FileType c call Iab('else', 'else<CR>{<CR>}<esc>O')
 	au FileType c call Iab('while', 'while ()<CR>{<CR>}<esc>2ba')
-	au FileType c call Iab('for', 'for (;;)<CR>{<CR>}<esc>2ba')
+	au FileType c call Iab('for', 'for (int i = 0; i < ; i++)<CR>{<CR>}<esc>3Bi')
 	au FileType c call Iab('switch', 'switch ()<CR>{<CR>default:<CR>break;<CR>}<esc>6ba')
 augroup END
 
@@ -321,7 +321,7 @@ augroup file_cc
 	au FileType cpp call Iab('elif', 'else if ()<CR>{<CR>}<esc>2ba')
 	au FileType cpp call Iab('else', 'else<CR>{<CR>}<esc>O')
 	au FileType cpp call Iab('while', 'while ()<CR>{<CR>}<esc>2ba')
-	au FileType cpp call Iab('for', 'for (;;)<CR>{<CR>}<esc>2ba')
+	au FileType cpp call Iab('for', 'for (int i = 0; i < ; i++)<CR>{<CR>}<esc>3Bi')
 	au FileType cpp call Iab('switch', 'switch ()<CR>{<CR>default:<CR>break;<CR>}<esc>6ba')
 augroup END
 
