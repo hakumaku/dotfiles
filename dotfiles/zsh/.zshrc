@@ -38,15 +38,15 @@ snapicons () {
 	local app=$1
 	local path="/var/lib/snapd/desktop/applications"
 	local icon=""
-	if [ "$app" == "lol" ] || [ "$app" == "leagueoflegends" ]; then
+	if [ "$app" = "lol" ] || [ "$app" = "leagueoflegends" ]; then
 		icon="leagueoflegends"
 		app="leagueoflegends_leagueoflegends.desktop"
 
-	elif [ "$app" == "discord" ]; then
+	elif [ "$app" = "discord" ]; then
 		icon="discord"
 		app="discord_discord.desktop"
 
-	elif [ "$app" == "system" ]; then
+	elif [ "$app" = "system" ]; then
 		icon="system"
 		app="gnome-system-monitor_gnome-system-monitor.desktop"
 

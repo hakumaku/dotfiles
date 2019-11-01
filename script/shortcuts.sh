@@ -6,15 +6,16 @@ keys=(
 	"Gnome Tweaks, gnome-tweaks, <Super>U"
 	"Calculator, gnome-calculator, <Super>C"
 	"Simple Terminal, st, <Super>Return"
-	"Ranger, st -e \'ranger\', <Super>R"
+	"Ranger, st -e ranger, <Super>E"
+	"Ranger, st -e gotop -c solarized, <Super>X"
+	"Rofi, rofi -show drun, <Super>R"
 	"Web Browser, firefox, <Super>W"
 	"Steam, steam, <Super>G"
 	"Nvidia Dmenu, $DIR/nvidia.sh, <Super>Semicolon"
 	"Nightlight, $DIR/nightlight.sh, <Super>Backslash"
 	"System Monitor, gnome-system-monitor, <Primary><Shift>Tab"
-	"Rofi, rofi -show drun, <Super>A"
-	"Brightness up, $DIR/backlight.sh -i, <Super>9"
-	"Brightness down, $DIR/backlight.sh -d, <Super>8"
+	"Brightness up, $DIR/backlight.sh -i, <Super>braceright"
+	"Brightness down, $DIR/backlight.sh -d, <Super>braceleft"
 )
 
 gsettings_init () {

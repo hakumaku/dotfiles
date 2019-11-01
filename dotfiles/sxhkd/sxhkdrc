@@ -11,7 +11,7 @@ super + v
 super + w
 	firefox
 super + e
-	st -e "$HOME/.local/bin/ranger"
+	st -e ranger
 super + m
 	st -e cmus
 super + x

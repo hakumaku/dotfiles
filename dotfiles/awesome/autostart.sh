@@ -2,17 +2,22 @@
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
-fcitx -d
-setxkbmap -layout us -option ctrl:nocaps
-setxkbmap -layout us -option korean:ralt_rctrl
-pactl set-sink-volume @DEFAULT_SINK@ 100%
-xset +fp /home/haku/.fonts
-xset fp rehash
+PATH=$PATH:"$HOME/.local/bin"
 
-# Monitor
-# compton &
-plank &
-feh --bg-fill ~/Pictures/house.png
-# exec --no-startup-id feh --bg-fill /home/haku/Pictures/house.png
-# exec --no-startup-id xrandr --output eDP-1-1 --off
+function run {
+	if ! pgrep -f $1; then
+		$@&
+	fi
+}
+
+run xrandr --setprovideroutputsource modesetting NVIDIA-0
+run xrandr --auto
+run fcitx -d
+run setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
+run xset s on
+run xset s 300
+run xss-lock $HOME/workspace/ubuntu-fresh/unimatrix.sh
+run compton
+run plank
+run $HOME/.fehbg
 

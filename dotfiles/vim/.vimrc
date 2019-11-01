@@ -1,15 +1,9 @@
 " {{{ Vundle (https://github.com/VundleVim/Vundle.vim.git)
 set nocompatible              " be iMproved, required
 filetype off                  " required
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 	Plugin 'VundleVim/Vundle.vim'
-
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'scrooloose/syntastic'
@@ -32,23 +26,8 @@ call vundle#begin()
 	" Plugin 'pangloss/vim-javascript'
 	" Plugin 'artur-shaik/vim-javacomplete2'
 	" Plugin 'octol/vim-cpp-enhanced-highlight'
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this lineset nocompatible
 " }}}
 
 " {{{ Vim Basic Settings
@@ -87,8 +66,10 @@ set nowritebackup
 set noswapfile
 
 " Enable folding
-set foldmethod=marker
-set foldmarker={{{,}}}
+set foldmethod=syntax
+set nofoldenable
+set foldnestmax=5
+set foldlevel=5
 
 set splitbelow			" When opening h splits, place cursor in the new split
 set splitright			" When opening v splits, place cursor in the new split
@@ -107,8 +88,6 @@ set signcolumn="yes"
 " Move cursor by virtual lines.
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-" <ESC> key mapping
-inoremap jk <ESC>
 
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
@@ -379,6 +358,7 @@ augroup END
 augroup file_vim
 	au!
 	au FileType vim setlocal foldmethod=marker
+	au FileType vim setlocal foldmarker={{{,}}}
 augroup END
 " }}}
 

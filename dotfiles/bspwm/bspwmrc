@@ -15,7 +15,6 @@ bspc config window_gap				  12
 bspc config split_ratio				  0.52
 bspc config borderless_monocle		  false
 bspc config gapless_monocle			  false
-bspc config click_to_focus			  true
 bspc config remove_disabled_monitors  true
 bspc config remove_unplugged_monitors true
 bspc config pointer_follows_focus     false
@@ -38,12 +37,15 @@ bspc rule -a "obs" desktop='^1' state=floating center=on follow=on focus=on
 bspc rule -a "xpad" desktop='^1' sticky=on state=floating
 bspc rule -a "Pamac-manager" desktop='^1' center=on state=floating
 bspc rule -a "Sxiv" center=on state=floating
+bspc rule -a "Java" center=on state=floating
+bspc rule -a "Eclipse" center=on state=floating
 
 # Fixed desktop applications
 bspc rule -a "unimatrix" desktop='^1' state=fullscreen follow=on focus=on layer=above
 bspc rule -a "st-256color" desktop='^2' follow=on focus=on
 bspc rule -a "firefox" desktop='^3' state=monocle follow=on focus=on
 bspc rule -a "firefox:Places" desktop='^3' state=floating follow=on focus=on
+bspc rule -a "firefox:Popup" desktop='^3' state=floating border=off
 bspc rule -a "Vlc" desktop='^4' follow=on
 bspc rule -a "Steam" desktop='^5' state=floating follow=on border=off
 bspc rule -a "vlc" desktop='^6' center=on follow=on state=floating

@@ -2,24 +2,30 @@
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
+setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
 PATH=$PATH:"$HOME/.local/bin"
-if [[ $XDG_CURRENT_DESKTOP = "Yaru:ubuntu:GNOME" ]]; then
+
+yaru="Yaru:ubuntu:GNOME"
+if [ "$XDG_CURRENT_DESKTOP" == "$yaru" ]; then
 	return 0
 fi
-echo "$XDG_CURRENT_DESKTOP" >> ~/.desktop.log
-
-# https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Configuring_VDPAU
-# export VDPAU_DRIVER=nvidia
-# export LIBVA_DRIVER_NAME=i965
 
 export BACKLIGHT_SCRIPT="$HOME/workspace/ubuntu-fresh/backlight.sh"
-setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
-
+# If you have nvidia graphics, you'll get error message:
+# Couldn't retrieve monitors via randr.
+# if [ ! -z $( lspci | grep NVIDIA ) ]; then
+# fi
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
 mlist=$( xrandr --listmonitors )
 if [ $(echo "$mlist" | sed -n "1p" | awk '{ print $2 }') -gt 1 ]; then
 	primary=$( echo "$mlist" | sed -n "2p" | awk '{ print $4 }' )
 	xrandr --output "$primary" --off &
 fi
+
+# https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Configuring_VDPAU
+# export VDPAU_DRIVER=nvidia
+# export LIBVA_DRIVER_NAME=i965
 
 # Mouse cursor
 xsetroot -cursor_name left_ptr
@@ -33,18 +39,21 @@ fcitx -d &
 # xpad &
 # transmission-gtk -m &
 
-# Wallpaper
 ~/.fehbg &
-
 compton &
 xset s on
 xset s 300
 xss-lock $HOME/workspace/ubuntu-fresh/unimatrix.sh &
-~/.config/polybar/main.sh &
 plank &
-if [[ $XDG_CURRENT_DESKTOP = "i3" ]]; then
+
+if [ $XDG_CURRENT_DESKTOP == "i3" ]; then
 	exec i3
-	return 0
+
+elif [ $XDG_CURRENT_DESKTOP == "awesome" ]; then
+	exec /usr/bin/awesome > ~/.cache/awesome/stdout 2> ~/.cache/awesome/stderr
+
+else
+	~/.config/polybar/main.sh &
+	sxhkd &
+	exec bspwm > ~/.cache/bspwm/stdout 2> ~/.cache/bspwm/stderr
 fi
-sxhkd &
-exec bspwm
