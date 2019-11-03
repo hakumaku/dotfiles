@@ -12,17 +12,13 @@ FAVORITE=(
 	"stacer.desktop"
 	"nvidia-settings.desktop"
 )
-#
 # Favorites
-#
-for app in ${FAVORITE[*]}; do
-	gset="${gset:+"${gset}, "}'${app}'"
-done
-gsettings set org.gnome.shell favorite-apps "[${gset[*]}]"
+# for app in ${FAVORITE[*]}; do
+# 	gset="${gset:+"${gset}, "}'${app}'"
+# done
+# gsettings set org.gnome.shell favorite-apps "[${gset[*]}]"
 
-#
 # Desktop
-#
 gsettings set org.gnome.desktop.background show-desktop-icons 'false'
 gsettings set org.gnome.desktop.background picture-options 'wallpaper'
 gsettings set org.gnome.desktop.screensaver picture-options 'wallpaper'
@@ -31,6 +27,13 @@ gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
 gsettings set org.gnome.software download-updates 'false'
+
+# Interface
+gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
+gsettings set org.gnome.desktop.privacy show-full-name-in-top-bar false
+gsettings set org.gnome.desktop.privacy remember-recent-files false
+gsettings set org.gnome.desktop.privacy recent-files-max-age -1
+gsettings set org.gnome.desktop.session idle-delay 0
 
 # gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
 # gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
@@ -41,9 +44,7 @@ gsettings set org.gnome.software download-updates 'false'
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash 'false'
 gsettings set org.gnome.shell.extensions.desktop-icons show-home 'false'
 
-#
 # Extensions
-#
 SCHEMADIR="$HOME/.local/share/gnome-shell/extensions"
 
 for dir in $SCHEMADIR/dash-to-dock*; do
@@ -156,7 +157,7 @@ gsettings set org.gnome.shell.extensions.user-theme name "Yaru"
 #
 # gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
-gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>e']"
+# gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>e']"
 
 # Disable default bindings.
 # <Super>: overlay key

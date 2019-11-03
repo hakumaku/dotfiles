@@ -44,7 +44,8 @@ ARCH_PACKAGE=(
 	"libva" "libva-vdpau-driver" "libva-utils"
 	"gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
-	"alsa-utils" "pavucontrol" "udisks2" "zsh"
+	"alsa-utils" "pavucontrol" "udisks2"
+	"zsh" "diff-so-fancy" "bat" "ripgrep" "exa" "fd"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"clang" "gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
@@ -92,6 +93,7 @@ install_arch_package () {
 	sudo systemctl enable NetworkManager
 	sudo systemctl enable gdm
 	sudo systemctl enable --now snapd.socket
+	sudo echo "static domain_name_servers=1.1.1.1 1.0.0.1" >> "/etc/dhcpcd.conf"
 }
 install_optimus () {
 	local optimus=(
@@ -641,6 +643,10 @@ config_zsh () {
 	# zsh-syntax-highlighting
 	url="https://github.com/zsh-users/zsh-syntax-highlighting.git"
 	git clone "$url" "${DIR[parent]}/zsh-syntax-highlighting"
+
+	# zsh-dircolors-solarized
+	url="https://github.com/joel-porquet/zsh-dircolors-solarized"
+	git clone --recursive "$url" "${DIR[parent]}/zsh-dircolors-solarized"
 }
 # }}}
 
@@ -740,6 +746,7 @@ package_install () {
 			git)
 				git config --global user.email "gentlebuuny@gmail.com"
 				git config --global user.name "hakumaku"
+				git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 			;;
 			sxiv) config_sxiv ;;
 			sync)

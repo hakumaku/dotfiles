@@ -7,7 +7,7 @@ keys=(
 	"Calculator, gnome-calculator, <Super>C"
 	"Simple Terminal, st, <Super>Return"
 	"Ranger, st -e ranger, <Super>E"
-	"Ranger, st -e gotop -c solarized, <Super>X"
+	"Gotop, st -e gotop -c solarized, <Super>X"
 	"Rofi, rofi -show drun, <Super>R"
 	"Web Browser, firefox, <Super>W"
 	"Steam, steam, <Super>G"
