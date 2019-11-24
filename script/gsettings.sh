@@ -34,6 +34,7 @@ gsettings set org.gnome.desktop.privacy show-full-name-in-top-bar false
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set org.gnome.desktop.privacy recent-files-max-age -1
 gsettings set org.gnome.desktop.session idle-delay 0
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 
 # gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
 # gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
