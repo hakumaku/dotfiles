@@ -177,6 +177,8 @@ gsettings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys video-out "[]"
 # <Super>Above_Tab: switch-group
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
 # <Super>S: toggle-overview
 gsettings set org.gnome.shell.keybindings toggle-overview "[]"
 # <Super>Escape: Restore the keyboard shortcuts
