@@ -45,7 +45,7 @@ ARCH_PACKAGE=(
 	"gdm" "gnome" "gnome-tweaks"
 	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
 	"alsa-utils" "pavucontrol" "udisks2"
-	"zsh" "diff-so-fancy" "bat" "ripgrep" "exa" "fd"
+	"alacritty" "zsh" "diff-so-fancy" "bat" "ripgrep" "exa" "fd"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"clang" "gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"
@@ -554,12 +554,17 @@ install_ranger_devicons () {
 install_pip () {
 	local packages=(
 		"virtualenv"
-		"powerline-status"
 		"ranger-fm"
-		"gdbgui"
 	)
 	for pack in ${packages[@]}; do
 		pip3 install --user "$pack"
+	done
+
+	packages=(
+		"ueberzug"
+	)
+	for pack in ${packages[@]}; do
+		sudo pip3 install "$pack"
 	done
 	PATH=$PATH:"$HOME/.local/bin"
 }
