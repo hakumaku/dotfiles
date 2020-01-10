@@ -46,6 +46,7 @@ ARCH_PACKAGE=(
 	"networkmanager" "bluez" "bluez-utils" "mesa-demos"
 	"alsa-utils" "pavucontrol" "udisks2"
 	"alacritty" "zsh" "diff-so-fancy" "bat" "ripgrep" "exa" "fd" "xclip"
+	"man-pages"
 	"bash-completion" "tmux" "rofi" "plank" "htop" "neofetch" "wget" "curl"
 	"clang" "gdb" "valgrind" "git" "gvim" "autogen" "ctags" "automake" "cmake"
 	"tar" "unzip" "dnsutils" "moreutils" "python-pip"

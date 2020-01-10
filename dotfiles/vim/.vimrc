@@ -32,9 +32,22 @@ filetype plugin indent on    " required
 
 " {{{ Vim Basic Settings
 syntax on
-set t_Co=256			" True colors
 if (has("termguicolors"))
 	set termguicolors
+endif
+
+" For gvim
+set guioptions-=m		"remove menu bar
+set guioptions-=T		"remove toolbar
+set guioptions-=r		"remove right-hand scroll bar
+set guioptions-=L		"remove left-hand scroll bar
+if has("gui_running")
+	if has("gui_gtk3") || has("gui_gtk2")
+		" set guifont=SauceCodePro\ Nerd\ Font\ 16
+		set guifont=UbuntuMono\ Nerd\ Font\ Bold\ 16
+	elseif has("gui_win32")
+		set guifont=UbuntuMono\ NF\ Bold:h16
+	end
 endif
 
 " set spell
@@ -61,6 +74,7 @@ set showmode			" Show insert, replace, or visual mode in last line
 set showcmd				" Show command in last line
 set wildmenu			" On pressing 'wildchar' to invoke completion
 set encoding=utf-8		" Encoding
+set fileencoding=utf-8
 set nobackup			" No backup files
 set nowritebackup
 set noswapfile
@@ -82,6 +96,20 @@ set smartcase			" Case sensitive if contains at least one capital letter
 set laststatus=2
 set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
+
+packadd termdebug
+nnoremap <F2> :vert term<CR>
+func! OpenTermDebug()
+	if bufexists("gdb communication")
+		:call TermDebugSendCommand('quit')
+	else
+		:Termdebug
+		:wincmd h
+		:wincmd L
+	endif
+endfunc
+nnoremap <F3> :call OpenTermDebug()<CR>
+let g:termdebug_wide = 1
 " }}}
 
 " {{{ Customized Shortcut
@@ -126,16 +154,13 @@ nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
 nnoremap <BS> :bd<CR>
 
-" Set command line arguments
-nnoremap <F4> :call SetCLA()<CR>
-
 " Execute python file
 au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
 
 " Compile and Run C file
-au FileType c noremap <F2> :call CompileAssem()<CR>
+" au FileType c noremap <F2> :call CompileAssem()<CR>
 au FileType c noremap <C-e> :call CompileRun()<CR>
-au FileType c noremap <F3> :call CompileDebug()<CR>
+" au FileType c noremap <F3> :call CompileDebug()<CR>
 
 " Execute bash file
 au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
@@ -369,10 +394,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 set background=dark
-" silent! colorscheme solarized8
-" silent! colorscheme solarized8_low
-" silent! colorscheme solarized8_high
-silent! colorscheme solarized8_flat
+" Options: solarized8_high, solarized8, solarized8_low solarized8_flat
+silent! colorscheme solarized8_high
 " }}}
 " {{{ vim-syntastic
 set statusline+=%#warningmsg#

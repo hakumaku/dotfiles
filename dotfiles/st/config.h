@@ -15,6 +15,8 @@
 static char *font =
 "SauceCodePro Nerd Font Mono:style=Bold:pixelsize=19:antialias=true:autohint=true";
 // static char *font =
+// "D2Coding:style=Bold:pixelsize=19:antialias=true:autohint=true";
+// static char *font =
 // "Inconsolata Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
 // static char *font =
 // "Anonymice Nerd Font:style=Bold:pixelsize=19:antialias=true:autohint=true";
@@ -101,41 +103,25 @@ float alpha = 0.85;
 
 static const char *colorname[] = {
 	/* Solarized Dark */
-	"#073642",  /*  0: black    */
-	"#dc322f",  /*  1: red      */
-	"#859900",  /*  2: green    */
-	"#b58900",  /*  3: yellow   */
-	"#268bd2",  /*  4: blue     */
-	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#eee8d5",  /*  7: white    */
-	"#002b36",  /*  8: brblack  */
-	"#cb4b16",  /*  9: brred    */
-	"#586e75",  /* 10: brgreen  */
-	"#657b83",  /* 11: bryellow */
-	"#839496",  /* 12: brblue   */
-	"#6c71c4",  /* 13: brmagenta*/
-	"#93a1a1",  /* 14: brcyan   */
-	"#fdf6e3",  /* 15: brwhite  */
+	"#073642",  /*  0: black    */ "#dc322f",  /*  1: red      */
+	"#859900",  /*  2: green    */ "#b58900",  /*  3: yellow   */
+	"#268bd2",  /*  4: blue     */ "#d33682",  /*  5: magenta  */
+	"#2aa198",  /*  6: cyan     */ "#eee8d5",  /*  7: white    */
+	"#002b36",  /*  8: brblack  */ "#cb4b16",  /*  9: brred    */
+	"#586e75",  /* 10: brgreen  */ "#657b83",  /* 11: bryellow */
+	"#839496",  /* 12: brblue   */ "#6c71c4",  /* 13: brmagenta*/
+	"#93a1a1",  /* 14: brcyan   */ "#fdf6e3",  /* 15: brwhite  */
 };
 // static const char *colorname[] = {
 // 	/* Solarized Light */
-// 	"#eee8d5",  /*  0: black    */
-// 	"#dc322f",  /*  1: red      */
-// 	"#859900",  /*  2: green    */
-// 	"#b58900",  /*  3: yellow   */
-// 	"#268bd2",  /*  4: blue     */
-// 	"#d33682",  /*  5: magenta  */
-// 	"#2aa198",  /*  6: cyan     */
-// 	"#073642",  /*  7: white    */
-// 	"#fdf6e3",  /*  8: brblack  */
-// 	"#cb4b16",  /*  9: brred    */
-// 	"#93a1a1",  /* 10: brgreen  */
-// 	"#839496",  /* 11: bryellow */
-// 	"#657b83",  /* 12: brblue   */
-// 	"#6c71c4",  /* 13: brmagenta*/
-// 	"#586e75",  /* 14: brcyan   */
-// 	"#002b36",  /* 15: brwhite  */
+// 	"#eee8d5",  /*  0: black    */ "#dc322f",  /*  1: red      */
+// 	"#859900",  /*  2: green    */ "#b58900",  /*  3: yellow   */
+// 	"#268bd2",  /*  4: blue     */ "#d33682",  /*  5: magenta  */
+// 	"#2aa198",  /*  6: cyan     */ "#073642",  /*  7: white    */
+// 	"#fdf6e3",  /*  8: brblack  */ "#cb4b16",  /*  9: brred    */
+// 	"#93a1a1",  /* 10: brgreen  */ "#839496",  /* 11: bryellow */
+// 	"#657b83",  /* 12: brblue   */ "#6c71c4",  /* 13: brmagenta*/
+// 	"#586e75",  /* 14: brcyan   */ "#002b36",  /* 15: brwhite  */
 // };
 unsigned int defaultfg = 12;
 unsigned int defaultbg = 8;
