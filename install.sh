@@ -556,17 +556,12 @@ install_pip () {
 	local packages=(
 		"virtualenv"
 		"ranger-fm"
+		"ueberzug"
 	)
 	for pack in ${packages[@]}; do
 		pip3 install --user "$pack"
 	done
 
-	packages=(
-		"ueberzug"
-	)
-	for pack in ${packages[@]}; do
-		sudo pip3 install "$pack"
-	done
 	PATH=$PATH:"$HOME/.local/bin"
 }
 # }}}
