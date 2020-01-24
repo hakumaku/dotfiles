@@ -97,6 +97,7 @@ set laststatus=2
 set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
 
+" For GDB in vim
 packadd termdebug
 nnoremap <F2> :vert term<CR>
 func! OpenTermDebug()
@@ -150,9 +151,9 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
-nnoremap <BS> :bd<CR>
+nnoremap <C-n> :bn<CR>:echo @%<CR>
+nnoremap <C-p> :bp<CR>:echo @%<CR>
+nnoremap <BS> :bd<CR>:echo @%<CR>
 
 " Execute python file
 au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
