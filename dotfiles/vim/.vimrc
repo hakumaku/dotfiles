@@ -148,23 +148,13 @@ vnoremap <C-g> y:call ExactReplace()<CR>
 " If you are using ubuntu or gnome environment,
 " run 'sudo apt install vim-gnome'
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
-inoremap <C-v> <ESC>"+pa:echo 'Pasted from clipboard'<CR>
+inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
 nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
 nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
-" Execute python file
-au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
-
-" Compile and Run C file
-" au FileType c noremap <F2> :call CompileAssem()<CR>
-au FileType c noremap <C-e> :call CompileRun()<CR>
-" au FileType c noremap <F3> :call CompileDebug()<CR>
-
-" Execute bash file
-au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
 " }}}
 
 " {{{ Vim Functions
@@ -330,6 +320,11 @@ augroup file_c
 	au FileType c call Iab('while', 'while ()<CR>{<CR>}<esc>2ba')
 	au FileType c call Iab('for', 'for (int i = 0; i < ; i++)<CR>{<CR>}<esc>3Bi')
 	au FileType c call Iab('switch', 'switch ()<CR>{<CR>default:<CR>break;<CR>}<esc>6ba')
+
+	" Compile and Run C file
+	" au FileType c noremap <F2> :call CompileAssem()<CR>
+	au FileType c noremap <C-e> :call CompileRun()<CR>
+	" au FileType c noremap <F3> :call CompileDebug()<CR>
 augroup END
 
 augroup file_cc
@@ -364,6 +359,15 @@ augroup file_py
 	au FileType python call Iab('try', 'try:<CR>pass<CR><CR>except :<CR>pass<esc>2bi')
 	au FileType python call Iab('pdb', 'import pdb; pdb.set_trace()')
 	" au FileType python call Iab('Main', 'if __name__ == ''__main__'':<CR>main()<CR>')
+
+	" Execute python file
+	au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
+augroup END
+
+augroup file_bash
+	au!
+	" Execute bash file
+	au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
 augroup END
 
 augroup file_java
