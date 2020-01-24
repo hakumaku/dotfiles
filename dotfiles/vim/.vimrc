@@ -121,18 +121,18 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
 " Move the current line one down.
-nnoremap <C-j> :m+1<CR>:echo 'Move line down'<CR>
+nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
-nnoremap <C-k> :m-2<CR>:echo 'Move line up'<CR>
-nnoremap <C-s> :NERDTreeToggle<CR>:echo @%<CR>
+nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
+nnoremap <silent> <C-s> :NERDTreeToggle<Bar>echo @%<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
-nnoremap <C-_> :set nolist!<CR>
+nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
 " Commentate
 vnoremap <C-_> :call Commentate()<CR>
 
 " Removes any search highlighting.
-nnoremap <C-q> :nohl<CR>
+nnoremap <silent> <C-q> :nohl<Bar>echo 'Turn off highlights'<CR>
 " Insert space in normal mode
 nnoremap <space> i<space><esc>
 " Toggle .vimrc file.
@@ -148,12 +148,12 @@ vnoremap <C-g> y:call ExactReplace()<CR>
 " If you are using ubuntu or gnome environment,
 " run 'sudo apt install vim-gnome'
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
-inoremap <C-v> <ESC>"+pa
+inoremap <C-v> <ESC>"+pa:echo 'Pasted from clipboard'<CR>
 
 " Cycle through buffers
-nnoremap <C-n> :bn<CR>:echo @%<CR>
-nnoremap <C-p> :bp<CR>:echo @%<CR>
-nnoremap <BS> :bd<CR>:echo @%<CR>
+nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
+nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
+nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
 " Execute python file
 au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
