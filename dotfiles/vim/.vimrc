@@ -21,10 +21,7 @@ call vundle#begin()
 	Plugin 'vim-airline/vim-airline-themes'
 
 	" syntax highlighting
-	" Plugin 'mattn/emmet-vim'
-	" Plugin 'arm9/arm-syntax-vim'
-	" Plugin 'pangloss/vim-javascript'
-	" Plugin 'artur-shaik/vim-javacomplete2'
+	Plugin 'vim-python/python-syntax'
 	" Plugin 'octol/vim-cpp-enhanced-highlight'
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -412,9 +409,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_c_compiler_options = '-std=c99'
-let g:syntastic_cpp_compiler_options = '-std=c++14'
+let g:syntastic_cpp_compiler_options = '-std=c++17'
 let g:syntastic_loc_list_height=1
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
 let g:syntastic_python_python_exec = 'python3'
 " }}}
 " {{{ vim-airline & vim-airline-themes
@@ -439,9 +436,12 @@ let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " {{{ YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 " Disable scratch window.
-set completeopt-=preview
+" set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
+" }}}
+" {{{ python-syntax
+let g:python_highlight_all = 1
 " }}}

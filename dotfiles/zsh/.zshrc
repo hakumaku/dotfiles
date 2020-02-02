@@ -32,7 +32,7 @@ wm () {
 }
 twitch () {
 	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
-	# "https://www.twitch.tv/popout/$1/chat?popout=" &!
+	firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
 snapicons () {
 	local app=$1
@@ -56,7 +56,6 @@ snapicons () {
 
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
-
 
 # Environment variables & aliases
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
@@ -90,6 +89,7 @@ alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
 alias gv='cd $HOME/Videos'
+alias zshrc='vim ~/.zshrc'
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias bashrc="vim ${BASH_SOURCE[0]} -c 'normal zt'"
