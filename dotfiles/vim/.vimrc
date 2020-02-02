@@ -403,7 +403,7 @@ silent! colorscheme solarized8_high
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_c_checkers = ['gcc']
@@ -440,6 +440,8 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_complete_in_comments = 1
+let g:ycm_open_loclist_on_ycm_diags = 0
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ python-syntax
