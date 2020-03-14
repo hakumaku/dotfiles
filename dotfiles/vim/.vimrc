@@ -8,10 +8,18 @@ call vundle#begin()
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'scrooloose/syntastic'
 	Plugin 'scrooloose/nerdtree'
+	Plugin 'ryanoasis/vim-devicons'
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'raimondi/delimitmate'
-	Plugin 'ryanoasis/vim-devicons'
+
+	" Enhanced Python
+	" Plugin 'davidhalter/jedi-vim'
+	Plugin 'vim-python/python-syntax'
+
+	" Enhanced Cpp
+	Plugin 'bfrg/vim-cpp-modern'
+	Plugin 'majutsushi/tagbar'
 
 	" Colorschemes
 	Plugin 'lifepillar/vim-solarized8'
@@ -19,10 +27,6 @@ call vundle#begin()
 	" Status line
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
-
-	" syntax highlighting
-	Plugin 'vim-python/python-syntax'
-	" Plugin 'octol/vim-cpp-enhanced-highlight'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -33,7 +37,7 @@ if (has("termguicolors"))
 	set termguicolors
 endif
 
-" For gvim
+" {{{ For gvim
 set guioptions-=m		"remove menu bar
 set guioptions-=T		"remove toolbar
 set guioptions-=r		"remove right-hand scroll bar
@@ -46,6 +50,7 @@ if has("gui_running")
 		set guifont=UbuntuMono\ NF\ Bold:h16
 	end
 endif
+" }}}
 
 " set spell
 set hidden				" Hide buffers when abandoned
@@ -108,6 +113,15 @@ func! OpenTermDebug()
 endfunc
 nnoremap <F3> :call OpenTermDebug()<CR>
 let g:termdebug_wide = 1
+
+" {{{ Common typos
+iabbrev sturct struct
+iabbrev wrod word
+iabbrev wrods words
+iabbrev teh the
+iabbrev mian main
+" }}}
+
 " }}}
 
 " {{{ Customized Shortcut
@@ -121,7 +135,12 @@ nnoremap <CR> o<ESC>k
 nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
 nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
+
+" Open NerdTree
 nnoremap <silent> <C-s> :NERDTreeToggle<Bar>echo @%<CR>
+
+" YCM quick fix
+nnoremap <C-f> :YcmCompleter FixIt<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
@@ -229,7 +248,7 @@ func ExactReplace()
 	execute '%s/\<'.@".'\>/'.word.'/gc'
 endfunc
 
-" The following three functions are for better 'iab'.
+" {{{ Iab
 func! EatWhitespace()
 	let c = nr2char(getchar())
 	return (c =~ '\s') ? '' : c
@@ -251,6 +270,7 @@ func! Iab(ab, full)
 		\a:ab."', '".escape(a:full.'<C-R>=EatWhitespace()<CR>', '<>"').
 		\"')<CR>"
 endfunc
+" }}}
 
 let g:argv = ''
 func! SetCLA()
@@ -306,17 +326,23 @@ augroup file_c
 	au FileType c call Iab('icom', '/*  */<esc>2<Left>i')
 	au FileType c call Iab('com', '/*<CR> <CR>/<Up>')
 	" Insert #include
-	au FileType c call Iab('Inc', '#include <.h><esc>2ba')
+	au FileType c call Iab('incg', '#include <.h><esc>2ba')
+	au FileType c call Iab('incl', '#include ".h"<esc>2ba')
 	" Insert C main function
 	au FileType c call Iab('Main', 'int main(int argc, const char *argv[])<CR>
 					\{<CR>}<CR><esc><Up>Oreturn 0;<esc>O<esc>O')
 	" if statement
-	au FileType c call Iab('if', 'if ()<CR>{<CR>}<esc>2ba')
-	au FileType c call Iab('elif', 'else if ()<CR>{<CR>}<esc>2ba')
-	au FileType c call Iab('else', 'else<CR>{<CR>}<esc>O')
-	au FileType c call Iab('while', 'while ()<CR>{<CR>}<esc>2ba')
-	au FileType c call Iab('for', 'for (int i = 0; i < ; i++)<CR>{<CR>}<esc>3Bi')
-	au FileType c call Iab('switch', 'switch ()<CR>{<CR>default:<CR>break;<CR>}<esc>6ba')
+	au FileType c call Iab('if', 'if () {<CR>}<esc>2ba')
+	au FileType c call Iab('elif', 'else if () {<CR>}<esc>2ba')
+	au FileType c call Iab('else', 'else {<CR>}<esc>O')
+	au FileType c call Iab('while', 'while () {<CR>}<esc>2ba')
+	au FileType c call Iab('fori', 'for (int i = 0; i < ; i++) {<CR>}<esc>3Bi')
+	au FileType c call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
+
+	" Include Guard
+	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
+				\#define <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
+				\<esc>Go<CR>#endif /* <C-R>%<esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 
 	" Compile and Run C file
 	" au FileType c noremap <F2> :call CompileAssem()<CR>
@@ -330,17 +356,28 @@ augroup file_cc
 	au FileType cpp call Iab('icom', '/*  */<esc>2<Left>i')
 	au FileType cpp call Iab('com', '/*<CR> <CR>/<Up>')
 	" Insert #include
-	au FileType cpp call Iab('Inc', '#include <.h><esc>2ba')
+	au FileType cpp call Iab('incg', '#include <><esc>ba')
+	au FileType cpp call Iab('incl', '#include ".h"<esc>2ba')
 	" Insert C main function
 	au FileType cpp call Iab('Main', 'int main(int argc, const char *argv[])<CR>
 					\{<CR>}<CR><esc><Up>Oreturn 0;<esc>O<esc>O')
+
+	" Common functions
+	au FileType cpp call Iab('sout', 'std::cout << << std::endl;<esc>2gEa ')
+
 	" if statement
-	au FileType cpp call Iab('if', 'if ()<CR>{<CR>}<esc>2ba')
-	au FileType cpp call Iab('elif', 'else if ()<CR>{<CR>}<esc>2ba')
-	au FileType cpp call Iab('else', 'else<CR>{<CR>}<esc>O')
-	au FileType cpp call Iab('while', 'while ()<CR>{<CR>}<esc>2ba')
-	au FileType cpp call Iab('for', 'for (int i = 0; i < ; i++)<CR>{<CR>}<esc>3Bi')
-	au FileType cpp call Iab('switch', 'switch ()<CR>{<CR>default:<CR>break;<CR>}<esc>6ba')
+	au FileType cpp call Iab('if', 'if () {<CR>}<esc>2ba')
+	au FileType cpp call Iab('elif', 'else if () {<CR>}<esc>2ba')
+	au FileType cpp call Iab('else', 'else {<CR>}<esc>O')
+	au FileType cpp call Iab('while', 'while () {<CR>}<esc>2ba')
+	au FileType cpp call Iab('fori', 'for (int i = 0; i < ; i++) {<CR>}<esc>3Bi')
+	au FileType cpp call Iab('fore', 'for (const auto &item : ) {<CR>}<esc>2Bi')
+	au FileType cpp call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
+
+	" Include Guard
+	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
+				\#define <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
+				\<esc>Go<CR>#endif /* <C-R>%<esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 augroup END
 
 augroup file_py

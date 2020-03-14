@@ -32,12 +32,13 @@ wm () {
 }
 twitch () {
 	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
-	firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
+	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
-snapicons () {
+icons () {
 	local app=$1
 	local path="/var/lib/snapd/desktop/applications"
 	local icon=""
+
 	if [ "$app" = "lol" ] || [ "$app" = "leagueoflegends" ]; then
 		icon="leagueoflegends"
 		app="leagueoflegends_leagueoflegends.desktop"
@@ -54,6 +55,7 @@ snapicons () {
 		return 1
 	fi
 
+	echo $PATH
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
