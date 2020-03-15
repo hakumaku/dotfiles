@@ -340,9 +340,9 @@ augroup file_c
 	au FileType c call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
 
 	" Include Guard
-	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
-				\#define <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
-				\<esc>Go<CR>#endif /* <C-R>%<esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
+	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 
 	" Compile and Run C file
 	" au FileType c noremap <F2> :call CompileAssem()<CR>
@@ -375,9 +375,9 @@ augroup file_cc
 	au FileType cpp call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
 
 	" Include Guard
-	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
-				\#define <C-R>%<esc>BviwUf.Da_INCLUDED<CR>
-				\<esc>Go<CR>#endif /* <C-R>%<esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
+	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 augroup END
 
 augroup file_py
