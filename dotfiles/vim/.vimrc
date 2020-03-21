@@ -12,6 +12,7 @@ call vundle#begin()
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'raimondi/delimitmate'
+	Plugin 'airblade/vim-gitgutter'
 
 	" Enhanced Python
 	" Plugin 'davidhalter/jedi-vim'
@@ -113,6 +114,13 @@ func! OpenTermDebug()
 endfunc
 nnoremap <F3> :call OpenTermDebug()<CR>
 let g:termdebug_wide = 1
+
+" clang-format
+function! Formatonsave()
+	let l:formatdiff = 1
+	py3f /usr/share/clang/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 
 " {{{ Common typos
 iabbrev sturct struct
