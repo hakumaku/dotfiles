@@ -7,8 +7,11 @@ call vundle#begin()
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'scrooloose/syntastic'
+
 	Plugin 'scrooloose/nerdtree'
+	Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plugin 'ryanoasis/vim-devicons'
+
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'raimondi/delimitmate'
@@ -100,6 +103,8 @@ set laststatus=2
 set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
 
+set lazyredraw          "Do not redraw screen in the middle of a macro
+
 " For GDB in vim
 packadd termdebug
 nnoremap <F2> :vert term<CR>
@@ -143,6 +148,8 @@ nnoremap <CR> o<ESC>k
 nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
 nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
+" Jump to the next tab ')'
+inoremap <C-l> <C-o>f)
 
 " Open NerdTree
 nnoremap <silent> <C-s> :NERDTreeToggle<Bar>echo @%<CR>
