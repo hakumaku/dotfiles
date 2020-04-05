@@ -181,6 +181,9 @@ vnoremap <C-g> y:call ExactReplace()<CR>
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
+" Reverse selected lines.
+vnoremap <leader>r :g/^/m'<<CR>:nohl<Bar>echo 'Reversed lines'<CR>
+
 " Cycle through buffers
 nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
 nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
