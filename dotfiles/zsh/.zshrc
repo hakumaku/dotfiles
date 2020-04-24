@@ -97,6 +97,7 @@ alias zshrc='vim ~/.zshrc'
 alias bashrc="vim ${BASH_SOURCE[0]} -c 'normal zt'"
 alias vimrc="vim $HOME/.vimrc"
 alias sxiv='sxiv -a -f'
+alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # Tmux

@@ -14,6 +14,9 @@ call vundle#begin()
 
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
+	Plugin 'tpope/vim-repeat'
+	Plugin 'tpope/vim-speeddating'
+
 	Plugin 'raimondi/delimitmate'
 	Plugin 'airblade/vim-gitgutter'
 
