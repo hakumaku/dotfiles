@@ -20,7 +20,7 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # powerline10k settings
-source $HOME/workspace/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/workspace/powerlevel10k.git/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
@@ -30,10 +30,12 @@ wm () {
 		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
 		/^WM_NAME/{sub(/.* =/, "title:"); print}'
 }
+
 twitch () {
 	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
 	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
+
 icons () {
 	local app=$1
 	local path="/var/lib/snapd/desktop/applications"
@@ -55,7 +57,6 @@ icons () {
 		return 1
 	fi
 
-	echo $PATH
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
@@ -73,6 +74,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export EDITOR=/usr/bin/vim
 # Disable pressing <C-s> to freeze.
 stty -ixon
+alias python='/usr/bin/python3'
 alias ls="exa --group-directories-first -s extension"
 alias l.="exa -d .*"
 alias la="exa -lahF"
@@ -106,7 +108,7 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
 fi
 
 # zsh-syntax-highlighting
-source $HOME/workspace/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
 
 # zsh-dircolors-solarized
 source $HOME/workspace/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh

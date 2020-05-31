@@ -126,7 +126,7 @@ let g:termdebug_wide = 1
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
-	py3f /usr/share/clang/clang-format.py
+	py3f /usr/share/clang/clang-format-10/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 
@@ -136,6 +136,7 @@ iabbrev wrod word
 iabbrev wrods words
 iabbrev teh the
 iabbrev mian main
+iabbrev lenght length
 " }}}
 
 " }}}
@@ -144,6 +145,7 @@ iabbrev mian main
 " Move cursor by virtual lines.
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap Y y$
 
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
@@ -155,10 +157,14 @@ nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
 inoremap <C-l> <C-o>f)
 
 " Open NerdTree
-nnoremap <silent> <C-s> :NERDTreeToggle<Bar>echo @%<CR>
+execute ":set <A-o>=\eo"
+nnoremap <silent> <A-o> :NERDTreeToggle<Bar>echo @%<CR>
+" Open TagBar
+execute ":set <A-p>=\ep"
+nnoremap <silent> <A-p> :TagBarToggle<Bar>echo @%<CR>
 
 " YCM quick fix
-nnoremap <C-f> :YcmCompleter FixIt<CR>
+nnoremap <C-Space> :YcmCompleter FixIt<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
@@ -169,8 +175,6 @@ vnoremap <C-_> :call Commentate()<CR>
 nnoremap <silent> <C-q> :nohl<Bar>echo 'Turn off highlights'<CR>
 " Insert space in normal mode
 nnoremap <space> i<space><esc>
-" Toggle .vimrc file.
-nnoremap <expr> <Home> bufname('%') == $MYVIMRC ? ':bd<CR>' : ':e $MYVIMRC<CR>'
 " Replace
 vnoremap <C-h> y:call Replace()<CR>
 " Exact replace
@@ -180,21 +184,28 @@ vnoremap <C-g> y:call ExactReplace()<CR>
 " features: vim --version | grep 'clipboard'.
 " ( '+' means it supports, '-' not.)
 " If you are using ubuntu or gnome environment,
-" run 'sudo apt install vim-gnome'
+" run 'sudo apt install vim-gtk3'
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Reverse selected lines.
-vnoremap <leader>r :g/^/m'<<CR>:nohl<Bar>echo 'Reversed lines'<CR>
+vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 
 " Cycle through buffers
 nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
 nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
-
 " }}}
 
 " {{{ Vim Functions
+func ReverseLines()
+	let l:start = line("'<")
+	let l:end = line("'>")
+	let l:lines = getline(start, end)
+	let l:lines = reverse(lines)
+	call setline(start, lines)
+endfunc
+
 func! Commentate() range
 	let l:line = getline("'<")
 	let l:indent = matchstr(l:line, '^\s*')
@@ -337,7 +348,7 @@ endfunc
 " {{{ Autocommand
 augroup project
 	au!
-	au BufRead,BufNewFile *.h,*.c set filetype=c
+	au BufRead,BufNewFile *.h,*.c set filetype=cpp
 	au BufRead,BufNewFile * setlocal signcolumn=yes
 augroup END
 
@@ -361,7 +372,7 @@ augroup file_c
 	au FileType c call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
 
 	" Include Guard
-	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+	au FileType c call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 
@@ -399,6 +410,7 @@ augroup file_cc
 	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
+	setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
 
 augroup file_py
@@ -492,12 +504,12 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " }}}
 " {{{ YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 " Disable scratch window.
-" set completeopt-=preview
+set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
