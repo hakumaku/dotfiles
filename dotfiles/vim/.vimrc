@@ -188,13 +188,15 @@ vnoremap <C-g> y:call ExactReplace()<CR>
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
-" Reverse selected lines.
-vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
-
 " Cycle through buffers
 nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
 nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
+
+" Reverse selected lines.
+vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
+" clang-format
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>
 " }}}
 
 " {{{ Vim Functions
