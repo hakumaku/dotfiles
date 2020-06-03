@@ -159,9 +159,9 @@ inoremap <C-l> <C-o>f)
 " Open NerdTree
 execute ":set <A-o>=\eo"
 nnoremap <silent> <A-o> :NERDTreeToggle<Bar>echo @%<CR>
-" Open TagBar
+" Open Tagbar
 execute ":set <A-p>=\ep"
-nnoremap <silent> <A-p> :TagBarToggle<Bar>echo @%<CR>
+nnoremap <silent> <A-p> :TagbarToggle<CR>
 
 " YCM quick fix
 nnoremap <C-Space> :YcmCompleter FixIt<CR>
@@ -196,7 +196,7 @@ nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 " clang-format
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<Bar>echo 'Formatted lines'<CR>
 " }}}
 
 " {{{ Vim Functions
