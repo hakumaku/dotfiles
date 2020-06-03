@@ -12,7 +12,7 @@ install_ycm() {
 	# YouCompleteMe dependencies
 	local dependencies=(
 	"build-essential" "cmake" "python3-dev" "clangd"
-	"clang-format" "clang-tidy")
+	"clang-format" "clang-tidy" "exuberant-ctags" "cscope")
 
 	local ycm="$HOME/.vim/bundle/YouCompleteMe"
 	sudo apt install ${dependencies[@]} &&

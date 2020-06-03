@@ -514,6 +514,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ python-syntax
