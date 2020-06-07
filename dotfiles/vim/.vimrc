@@ -197,6 +197,8 @@ nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 " clang-format
 nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<Bar>echo 'Formatted lines'<CR>
+" YCM
+nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " }}}
 
 " {{{ Vim Functions
@@ -412,7 +414,7 @@ augroup file_cc
 	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
-	setlocal shiftwidth=2 softtabstop=2 tabstop=2
+	au FileType cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
 
 augroup file_py
