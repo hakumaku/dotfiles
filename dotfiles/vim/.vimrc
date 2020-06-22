@@ -23,6 +23,7 @@ call vundle#begin()
 	" Enhanced Python
 	" Plugin 'davidhalter/jedi-vim'
 	Plugin 'vim-python/python-syntax'
+	Plugin 'pboettch/vim-cmake-syntax'
 
 	" Enhanced Cpp
 	Plugin 'bfrg/vim-cpp-modern'
@@ -30,6 +31,7 @@ call vundle#begin()
 
 	" Colorschemes
 	Plugin 'lifepillar/vim-solarized8'
+	Plugin 'morhetz/gruvbox'
 
 	" Status line
 	Plugin 'vim-airline/vim-airline'
@@ -106,11 +108,10 @@ set laststatus=2
 set fillchars=fold:\ 	" Replace - with ' '
 set signcolumn="yes"
 
-set lazyredraw          "Do not redraw screen in the middle of a macro
+set lazyredraw          " Do not redraw screen in the middle of a macro
 
 " For GDB in vim
 packadd termdebug
-nnoremap <F2> :vert term<CR>
 func! OpenTermDebug()
 	if bufexists("gdb communication")
 		:call TermDebugSendCommand('quit')
@@ -120,15 +121,24 @@ func! OpenTermDebug()
 		:wincmd L
 	endif
 endfunc
-nnoremap <F3> :call OpenTermDebug()<CR>
 let g:termdebug_wide = 1
+execute ":set <A-b>=\eb"
+" break /full/path/to/file:LineNr
+nnoremap <A-b> :call TermDebugSendCommand('break '.expand('%:p').':'.line('.'))<CR>
+execute ":set <A-n>=\en"
+nnoremap <A-n> :call TermDebugSendCommand('next')<CR>
+execute ":set <A-s>=\es"
+nnoremap <A-s> :call TermDebugSendCommand('step')<CR>
+execute ":set <A-c>=\ec"
+nnoremap <A-s> :call TermDebugSendCommand('continue')<CR>
 
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
 	py3f /usr/share/clang/clang-format-10/clang-format.py
 endfunction
-autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+" autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<Bar>echo 'Formatted lines'<CR>
 
 " {{{ Common typos
 iabbrev sturct struct
@@ -165,6 +175,7 @@ nnoremap <silent> <A-p> :TagbarToggle<CR>
 
 " YCM quick fix
 nnoremap <C-Space> :YcmCompleter FixIt<CR>
+nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
@@ -195,10 +206,6 @@ nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
-" clang-format
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<Bar>echo 'Formatted lines'<CR>
-" YCM
-nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " }}}
 
 " {{{ Vim Functions
@@ -469,9 +476,14 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
-set background=dark
+" set background=dark
 " Options: solarized8_high, solarized8, solarized8_low solarized8_flat
-silent! colorscheme solarized8_high
+" silent! colorscheme solarized8_high
+" }}}
+" {{{ gruvbox (https://github.com/morhetz/gruvbox)
+set background=dark
+let g:gruvbox_contrast = 'hard'
+silent! colorscheme gruvbox
 " }}}
 " {{{ vim-syntastic
 set statusline+=%#warningmsg#
