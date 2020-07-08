@@ -68,7 +68,7 @@ set relativenumber		" Relative numbers instead of absolute
 set tabstop=4			" Tab size = 4
 set shiftwidth=4		" Size of the indent
 set softtabstop=0		" Insert a combination of spaces when set to non-zero
-set noexpandtab			" No spaces when tab
+set expandtab			" No spaces when tab
 set mouse=a				" Enable mouse scrolling
 set autoindent
 set listchars=tab:»\ ,eol:↲,trail:·
@@ -130,15 +130,16 @@ nnoremap <A-n> :call TermDebugSendCommand('next')<CR>
 execute ":set <A-s>=\es"
 nnoremap <A-s> :call TermDebugSendCommand('step')<CR>
 execute ":set <A-c>=\ec"
-nnoremap <A-s> :call TermDebugSendCommand('continue')<CR>
+nnoremap <A-c> :call TermDebugSendCommand('continue')<CR>
 
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
-	py3f /usr/share/clang/clang-format-10/clang-format.py
+	py3f /usr/share/clang/clang-format-9/clang-format.py
 endfunction
-" autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<Bar>echo 'Formatted lines'<CR>
+autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-9/clang-format.py<CR>:echo 'Formatted lines'<CR>
+vnoremap <leader>f :py3f /usr/share/clang/clang-format-9/clang-format.py<CR>:echo 'Formatted lines'<CR>
 
 " {{{ Common typos
 iabbrev sturct struct
