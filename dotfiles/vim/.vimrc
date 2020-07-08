@@ -130,7 +130,7 @@ nnoremap <A-n> :call TermDebugSendCommand('next')<CR>
 execute ":set <A-s>=\es"
 nnoremap <A-s> :call TermDebugSendCommand('step')<CR>
 execute ":set <A-c>=\ec"
-nnoremap <A-s> :call TermDebugSendCommand('continue')<CR>
+nnoremap <A-c> :call TermDebugSendCommand('continue')<CR>
 
 " clang-format
 function! Formatonsave()
