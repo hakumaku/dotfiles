@@ -311,8 +311,9 @@ func! MapNoContext(key, seq)
 endfunc
 
 func! Iab(ab, full)
+	let single_quote_escaped_full = substitute(a:full, "'", "''", "g")
 	exe "iab <silent> <buffer> ".a:ab." <C-R>=MapNoContext('".
-		\a:ab."', '".escape(a:full.'<C-R>=EatWhitespace()<CR>', '<>"').
+		\a:ab."', '".escape(single_quote_escaped_full.'<C-R>=EatWhitespace()<CR>', '<>\"').
 		\"')<CR>"
 endfunc
 " }}}
@@ -408,7 +409,7 @@ augroup file_cc
 					\{<CR>}<CR><esc><Up>Oreturn 0;<esc>O<esc>O')
 
 	" Common functions
-	au FileType cpp call Iab('sout', 'std::cout << << std::endl;<esc>2gEa ')
+	au FileType cpp call Iab('sout', 'std::cout << << ''\n'';<esc>2gEa ')
 
 	" if statement
 	au FileType cpp call Iab('if', 'if () {<CR>}<esc>2ba')
@@ -494,10 +495,10 @@ set statusline+=%*
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_c_checkers = ['gcc']
-let g:syntastic_c_compiler = 'gcc'
+let g:syntastic_c_checkers = ['clang']
+let g:syntastic_c_compiler = 'clang'
 let g:syntastic_c_compiler_options = '-std=c99'
-let g:syntastic_cpp_compiler_options = '-std=c++17'
+let g:syntastic_cpp_compiler_options = '-std=c++20'
 let g:syntastic_loc_list_height=1
 let g:ycm_show_diagnostics_ui = 1
 let g:syntastic_python_python_exec = 'python3'
@@ -531,6 +532,7 @@ let g:ycm_clangd_binary_path = "/usr/bin/clangd"
 let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_always_populate_location_list = 1
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ python-syntax
