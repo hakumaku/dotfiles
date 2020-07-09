@@ -175,7 +175,8 @@ execute ":set <A-p>=\ep"
 nnoremap <silent> <A-p> :TagbarToggle<CR>
 
 " YCM quick fix
-nnoremap <C-Space> :YcmCompleter FixIt<CR>
+inoremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>i
+noremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>
 nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
@@ -186,7 +187,7 @@ vnoremap <C-_> :call Commentate()<CR>
 " Removes any search highlighting.
 nnoremap <silent> <C-q> :nohl<Bar>echo 'Turn off highlights'<CR>
 " Insert space in normal mode
-nnoremap <space> i<space><esc>
+nnoremap <space> i<space><ESC>
 " Replace
 vnoremap <C-h> y:call Replace()<CR>
 " Exact replace
