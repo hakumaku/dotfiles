@@ -11,14 +11,16 @@ install_vundle() {
 install_ycm() {
 	# YouCompleteMe dependencies
 	local dependencies=(
-	"build-essential" "cmake" "python3-dev" "clangd"
-	"clang-format" "clang-tidy" "exuberant-ctags" "cscope")
+	"build-essential" "cmake" "python3-dev" "exuberant-ctags" "cscope")
+
+	# Install latest clang
+	sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
 	local ycm="$HOME/.vim/bundle/YouCompleteMe"
 	sudo apt install ${dependencies[@]} &&
-		(cd && mkdir ycm_build && cd ycm_build &&
-		cmake -G "Unix Makefiles" . $ycm/third_party/ycmd/cpp &&
-		cmake --build . --target ycm_core) &&
+		# (cd && mkdir ycm_build && cd ycm_build &&
+		# cmake -G "Unix Makefiles" . $ycm/third_party/ycmd/cpp &&
+		# cmake --build . --target ycm_core) &&
 		# watchdog installation
 		pip3 install setuptools &&
 		(cd $ycm/third_party/ycmd/third_party/watchdog_deps/watchdog &&
