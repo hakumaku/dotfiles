@@ -110,6 +110,10 @@ set signcolumn="yes"
 
 set lazyredraw          " Do not redraw screen in the middle of a macro
 
+set noesckeys			" <ESC> delay
+" set timeoutlen=1000
+" set ttimeoutlen=5
+
 " For GDB in vim
 packadd termdebug
 func! OpenTermDebug()
