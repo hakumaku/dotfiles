@@ -5,7 +5,7 @@ workspace="$HOME/workspace"
 
 install_ranger_devicons() {
 	local url="https://github.com/alexanderjeurissen/ranger_devicons"
-	local output="$workspace/${url##*/}"
+	local output="$HOME/.config/ranger/plugins/ranger_devicons"
 	git clone -q "$url" "$output"
 }
 
@@ -48,6 +48,6 @@ install_ueberzug() {
 }
 
 sudo apt install python3-distutils &&
-git clone https://github.com/ranger/ranger &&
+git clone https://github.com/ranger/ranger "${workspace}/ranger" &&
 	(cd ranger && sudo make install && install_ranger_devicons &&
 	config_ranger && install_ueberzug)
