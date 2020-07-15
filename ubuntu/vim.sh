@@ -11,7 +11,7 @@ install_vundle() {
 install_ycm() {
 	# YouCompleteMe dependencies
 	local dependencies=(
-	"build-essential" "cmake" "python3-dev" "exuberant-ctags" "cscope")
+	"build-essential" "cmake" "python3-dev" "exuberant-ctags" "cscope" "clang-format")
 
 	# Install latest clang
 	sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
