@@ -3,6 +3,7 @@
 install() {
 	local fonts=(
 		"https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Ubuntu.zip"
+		"https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip"
 	)
 	local font_dir="$HOME/.local/share/fonts"
 	mkdir -p $font_dir && {
