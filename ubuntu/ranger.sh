@@ -6,7 +6,7 @@ workspace="$HOME/workspace"
 install_ranger_devicons() {
 	local url="https://github.com/alexanderjeurissen/ranger_devicons"
 	local output="$workspace/${url##*/}"
-	git clone -q "$url" "$output" && (cd "$output" && make install)
+	git clone -q "$url" "$output"
 }
 
 config_ranger() {
