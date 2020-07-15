@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # script path
 DIR="$HOME/workspace/ubuntu-fresh"
 FAVORITE=(
