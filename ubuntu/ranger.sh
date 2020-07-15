@@ -49,5 +49,5 @@ install_ueberzug() {
 
 sudo apt install python3-distutils &&
 git clone https://github.com/ranger/ranger &&
-	(cd ranger && sudo make install && install_ranger_deviocns &&
+	(cd ranger && sudo make install && install_ranger_devicons &&
 	config_ranger && install_ueberzug)
