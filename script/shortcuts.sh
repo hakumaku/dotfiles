@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 DIR="$HOME/workspace/ubuntu-fresh"
 keys=(
