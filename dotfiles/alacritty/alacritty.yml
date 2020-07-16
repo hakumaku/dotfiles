@@ -82,9 +82,6 @@ scrolling:
   multiplier: 3
 # }}}
 
-# Spaces per Tab (changes require restart)
-tabspaces: 8
-
 # {{{ Font configuration (changes require restart)
 font:
   # Normal (roman) font face
