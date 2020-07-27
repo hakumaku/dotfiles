@@ -7,6 +7,7 @@ call vundle#begin()
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'scrooloose/syntastic'
+	Plugin 'junegunn/fzf'
 
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
