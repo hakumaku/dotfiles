@@ -137,15 +137,6 @@ nnoremap <A-s> :call TermDebugSendCommand('step')<CR>
 execute ":set <A-c>=\ec"
 nnoremap <A-c> :call TermDebugSendCommand('continue')<CR>
 
-" clang-format
-function! Formatonsave()
-	let l:formatdiff = 1
-	py3f /usr/share/clang/clang-format-10/clang-format.py
-endfunction
-autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
-vnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
-
 " {{{ Common typos
 iabbrev sturct struct
 iabbrev wrod word
@@ -172,18 +163,6 @@ nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
 " Jump to the next tab ')'
 inoremap <C-l> <C-o>f)
 
-" Open NerdTree
-execute ":set <A-o>=\eo"
-nnoremap <silent> <A-o> :NERDTreeToggle<Bar>echo @%<CR>
-" Open Tagbar
-execute ":set <A-p>=\ep"
-nnoremap <silent> <A-p> :TagbarToggle<CR>
-
-" YCM quick fix
-inoremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>i
-noremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>
-nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
 " Commentate
@@ -207,12 +186,32 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-nnoremap <silent> <C-n> :silent bn<Bar>echo @%<CR>
-nnoremap <silent> <C-p> :silent bp<Bar>echo @%<CR>
+nnoremap <silent> gn :silent bn<Bar>echo @%<CR>
+nnoremap <silent> gN :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
+" Run fuzzy finder
+nnoremap <C-s> :FZF<CR>
+" Open NerdTree
+execute ":set <A-o>=\eo"
+nnoremap <silent> <A-o> :NERDTreeToggle<Bar>echo @%<CR>
+" Open Tagbar
+execute ":set <A-t>=\et"
+nnoremap <silent> <A-t> :TagbarToggle<CR>
+" YCM quick fix
+inoremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>i
+noremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>
+nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" clang-format
+function! Formatonsave()
+	let l:formatdiff = 1
+	py3f /usr/share/clang/clang-format-10/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
+vnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
 " }}}
 
 " {{{ Vim Functions
@@ -544,6 +543,9 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args = ['-log=verbose', '-pretty']
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
+" }}}
+" {{{ FZF
+let g:fzf_layout = { 'down': '40%', 'window': '10new' }
 " }}}
 " {{{ python-syntax
 let g:python_highlight_all = 1
