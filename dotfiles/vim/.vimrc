@@ -6,7 +6,7 @@ call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
-	Plugin 'scrooloose/syntastic'
+	" Plugin 'scrooloose/syntastic'
 	Plugin 'junegunn/fzf'
 
 	Plugin 'scrooloose/nerdtree'
@@ -491,19 +491,18 @@ let g:gruvbox_contrast = 'hard'
 silent! colorscheme gruvbox
 " }}}
 " {{{ vim-syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_c_checkers = ['clang']
-let g:syntastic_c_compiler = 'clang'
-let g:syntastic_c_compiler_options = '-std=c99'
-let g:syntastic_cpp_compiler_options = '-std=c++20'
-let g:syntastic_loc_list_height=1
-let g:ycm_show_diagnostics_ui = 1
-let g:syntastic_python_python_exec = 'python3'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_c_checkers = ['clang']
+" let g:syntastic_c_compiler = 'clang'
+" let g:syntastic_c_compiler_options = '-std=c99'
+" let g:syntastic_cpp_compiler_options = '-std=c++20'
+" let g:syntastic_loc_list_height=1
+" let g:syntastic_python_python_exec = 'python3'
 " }}}
 " {{{ vim-airline & vim-airline-themes
 let g:airline#extensions#tabline#enabled = 1			" turn on buffer list
@@ -534,7 +533,7 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_always_populate_location_list = 1
-
+let g:ycm_show_diagnostics_ui = 1
 " Let clangd fully control code completion
 let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
