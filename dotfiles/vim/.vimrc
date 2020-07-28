@@ -195,11 +195,9 @@ vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 " Run fuzzy finder
 nnoremap <C-s> :FZF<CR>
 " Open NerdTree
-execute ":set <A-o>=\eo"
-nnoremap <silent> <A-o> :NERDTreeToggle<Bar>echo @%<CR>
+nnoremap <silent> <C-w>o :NERDTreeToggle<Bar>echo @%<CR>
 " Open Tagbar
-execute ":set <A-t>=\et"
-nnoremap <silent> <A-t> :TagbarToggle<CR>
+nnoremap <silent> <C-w>t :TagbarToggle<CR>
 " YCM quick fix
 inoremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>i
 noremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>
