@@ -18,7 +18,7 @@ call vundle#begin()
 	Plugin 'tpope/vim-repeat'
 	Plugin 'tpope/vim-speeddating'
 
-	Plugin 'raimondi/delimitmate'
+	" Plugin 'raimondi/delimitmate'
 	Plugin 'airblade/vim-gitgutter'
 
 	" Enhanced Python
@@ -489,20 +489,6 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 let g:gruvbox_contrast = 'hard'
 silent! colorscheme gruvbox
-" }}}
-" {{{ vim-syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_c_checkers = ['clang']
-" let g:syntastic_c_compiler = 'clang'
-" let g:syntastic_c_compiler_options = '-std=c99'
-" let g:syntastic_cpp_compiler_options = '-std=c++20'
-" let g:syntastic_loc_list_height=1
-" let g:syntastic_python_python_exec = 'python3'
 " }}}
 " {{{ vim-airline & vim-airline-themes
 let g:airline#extensions#tabline#enabled = 1			" turn on buffer list
