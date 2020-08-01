@@ -100,7 +100,7 @@ set foldlevel=5
 set splitbelow			" When opening h splits, place cursor in the new split
 set splitright			" When opening v splits, place cursor in the new split
 
-set cursorline			" Show cursor line
+" set cursorline			" Show cursor line
 set incsearch			" Dynamic search
 set hlsearch			" Highlight search
 set ignorecase			" Case insensitive search
