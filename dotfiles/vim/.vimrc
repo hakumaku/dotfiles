@@ -6,7 +6,6 @@ call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
-	" Plugin 'scrooloose/syntastic'
 	Plugin 'junegunn/fzf'
 
 	Plugin 'scrooloose/nerdtree'
@@ -18,7 +17,7 @@ call vundle#begin()
 	Plugin 'tpope/vim-repeat'
 	Plugin 'tpope/vim-speeddating'
 
-	" Plugin 'raimondi/delimitmate'
+	Plugin 'raimondi/delimitmate'
 	Plugin 'airblade/vim-gitgutter'
 
 	" Enhanced Python
