@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-sudo apt install cargo llvm libclang-dev &&
+bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" &&
+sudo apt install cargo make &&
     cargo install --locked exa fd-find bat ytop &&
     # Add $HOME/.cargo to $PATH variable.
     [ -f "$HOME/.profile" ] && cat <<EOT >> "$HOME/.profile"
