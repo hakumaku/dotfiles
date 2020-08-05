@@ -21,6 +21,10 @@ change_icons() {
 		icon="system"
 		app="gnome-system-monitor_gnome-system-monitor.desktop"
 
+	elif [ "$app" = "code" ] || [ "$app" = "vscode" ]; then
+		icon="visual-studio-code"
+		app="code_code.desktop"
+
 	elif [ "$app" = "alacritty" ]; then
 		icon="terminal"
 		app="com.alacritty.Alacritty.desktop"
