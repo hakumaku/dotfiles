@@ -7,7 +7,7 @@ sudo apt install cargo make &&
     [ -f "$HOME/.profile" ] && cat <<EOT >> "$HOME/.profile"
 
 # Add .cargo path to \$PATH variable
-if [ -d "$HOME/.cargo" ]; then
-    path="\$HOME/.cargo/bin:\$PATH"
+if [ -d "\$HOME/.cargo" ]; then
+    PATH="\$HOME/.cargo/bin:\$PATH"
 fi
 EOT
