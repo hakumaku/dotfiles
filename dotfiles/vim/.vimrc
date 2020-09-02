@@ -80,7 +80,7 @@ set ttimeout			" Time waited for key press to complete
 set ttimeoutlen=50
 
 set scrolloff=3			" Show 3 lines above or below cursor when scrolling
-set colorcolumn=81
+set colorcolumn=101
 set showmode			" Show insert, replace, or visual mode in last line
 set showcmd				" Show command in last line
 set wildmenu			" On pressing 'wildchar' to invoke completion
@@ -185,8 +185,8 @@ vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
 
 " Cycle through buffers
-nnoremap <silent> gn :silent bn<Bar>echo @%<CR>
-nnoremap <silent> gN :silent bp<Bar>echo @%<CR>
+nnoremap <silent> gt :silent bn<Bar>echo @%<CR>
+nnoremap <silent> gT :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
 " Reverse selected lines.
@@ -517,13 +517,20 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_always_populate_location_list = 1
+let g:ycm_always_populate_location_list = 0
 let g:ycm_show_diagnostics_ui = 1
+let g:ycm_max_num_candidates = 10
+let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_max_diagnostics_to_display = 10
+let g:ycm_key_list_stop_completion = ['<C-y>']
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_disable_for_files_larger_than_kb = 1000
 " Let clangd fully control code completion
+let g:ycm_use_clangd = 1
 let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args = ['-log=verbose', '-pretty']
+let g:ycm_clangd_args = ['-log=verbose', '-pretty', '--clang-tidy']
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ FZF
