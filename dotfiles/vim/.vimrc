@@ -530,7 +530,7 @@ let g:ycm_use_clangd = 1
 let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args = ['-log=verbose', '-pretty', '--clang-tidy']
+let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10']
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ FZF
