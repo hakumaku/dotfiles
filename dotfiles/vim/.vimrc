@@ -1,12 +1,13 @@
 " {{{ Vundle (https://github.com/VundleVim/Vundle.vim.git)
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible			  " be iMproved, required
+filetype off				  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 	" Essential
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'junegunn/fzf'
+	Plugin 'puremourning/vimspector'
 
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -36,8 +37,8 @@ call vundle#begin()
 	" Status line
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()			 " required
+filetype plugin indent on	 " required
 " }}}
 
 " {{{ Vim Basic Settings
@@ -105,10 +106,10 @@ set hlsearch			" Highlight search
 set ignorecase			" Case insensitive search
 set smartcase			" Case sensitive if contains at least one capital letter
 set laststatus=2
-set fillchars=fold:\ 	" Replace - with ' '
+set fillchars=fold:\	" Replace - with ' '
 set signcolumn="yes"
 
-set lazyredraw          " Do not redraw screen in the middle of a macro
+set lazyredraw			" Do not redraw screen in the middle of a macro
 
 set noesckeys			" <ESC> delay
 " set timeoutlen=1000
@@ -370,7 +371,7 @@ augroup END
 augroup file_c
 	au!
 	" Insert comment
-	au FileType c call Iab('icom', '/*  */<esc>2<Left>i')
+	au FileType c call Iab('icom', '/*	*/<esc>2<Left>i')
 	au FileType c call Iab('com', '/*<CR> <CR>/<Up>')
 	" Insert #include
 	au FileType c call Iab('incg', '#include <.h><esc>2ba')
@@ -535,6 +536,26 @@ noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ FZF
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
+" }}}
+" {{{ vimspector
+" Changing the default window sizes
+let g:vimspector_enable_mappings = 'HUMAN'
+" noremap <F5> <Plug>VimspectorContinue
+" noremap <F3> <Plug>VimspectorStop
+" noremap <F4> <Plug>VimspectorRestart
+" noremap <F6> <Plug>VimspectorPause
+" noremap <F9> <Plug>VimspectorToggleBreakpoint
+" noremap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
+" noremap <F8> <Plug>VimspectorAddFunctionBreakpoint
+" noremap <F10> <Plug>VimspectorStepOver
+" noremap <F11> <Plug>VimspectorStepInto
+" noremap <F12> <Plug>VimspectorStepOut
+let g:vimspector_sidebar_width = 75
+let g:vimspector_bottombar_height = 15
+" Changing the terminal size
+let g:vimspector_code_minwidth = 90
+let g:vimspector_terminal_maxwidth = 75
+let g:vimspector_terminal_minwidth = 20
 " }}}
 " {{{ python-syntax
 let g:python_highlight_all = 1
