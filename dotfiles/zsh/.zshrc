@@ -60,6 +60,35 @@ icons () {
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
+vimspec () {
+cat << EOF > .vimspector.json
+{
+  "configurations": {
+    "Launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "a.out",
+        "args": [],
+        "cwd": "~/workspace/debug",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb"
+      }
+    },
+    "Attach": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "attach",
+        "program": "a.out",
+        "MIMode": "gdb"
+      }
+    }
+  }
+}
+EOF
+}
+
 # Environment variables & aliases
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
