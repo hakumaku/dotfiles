@@ -550,11 +550,11 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " noremap <F10> <Plug>VimspectorStepOver
 " noremap <F11> <Plug>VimspectorStepInto
 " noremap <F12> <Plug>VimspectorStepOut
-let g:vimspector_sidebar_width = 75
-let g:vimspector_bottombar_height = 15
+let g:vimspector_sidebar_width = 30
+let g:vimspector_bottombar_height = 10
 " Changing the terminal size
 let g:vimspector_code_minwidth = 90
-let g:vimspector_terminal_maxwidth = 75
+let g:vimspector_terminal_maxwidth = 20
 let g:vimspector_terminal_minwidth = 20
 " }}}
 " {{{ python-syntax
