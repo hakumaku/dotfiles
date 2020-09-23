@@ -115,28 +115,6 @@ set noesckeys			" <ESC> delay
 " set timeoutlen=1000
 " set ttimeoutlen=5
 
-" For GDB in vim
-packadd termdebug
-func! OpenTermDebug()
-	if bufexists("gdb communication")
-		:call TermDebugSendCommand('quit')
-	else
-		:Termdebug
-		:wincmd h
-		:wincmd L
-	endif
-endfunc
-let g:termdebug_wide = 1
-execute ":set <A-b>=\eb"
-" break /full/path/to/file:LineNr
-nnoremap <A-b> :call TermDebugSendCommand('break '.expand('%:p').':'.line('.'))<CR>
-execute ":set <A-n>=\en"
-nnoremap <A-n> :call TermDebugSendCommand('next')<CR>
-execute ":set <A-s>=\es"
-nnoremap <A-s> :call TermDebugSendCommand('step')<CR>
-execute ":set <A-c>=\ec"
-nnoremap <A-c> :call TermDebugSendCommand('continue')<CR>
-
 " {{{ Common typos
 iabbrev sturct struct
 iabbrev wrod word
@@ -157,9 +135,9 @@ nnoremap Y y$
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
 " Move the current line one down.
-nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
+" nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
-nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
+" nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
 " Jump to the next tab ')'
 inoremap <C-l> <C-o>f)
 
@@ -317,47 +295,6 @@ func! Iab(ab, full)
 	exe "iab <silent> <buffer> ".a:ab." <C-R>=MapNoContext('".
 		\a:ab."', '".escape(single_quote_escaped_full.'<C-R>=EatWhitespace()<CR>', '<>\"').
 		\"')<CR>"
-endfunc
-" }}}
-
-let g:argv = ''
-func! SetCLA()
-	call inputsave()
-	let l:new_args = input("Command line arguments(type \'clear\' to reset): ")
-	call inputrestore()
-	redraw
-	if l:new_args == "clear"
-		let g:argv = ''
-		echo 'Cleared command line arguments.'
-	else
-		let g:argv = g:argv.' '.l:new_args
-		echo 'Current argv: ['.g:argv.' ]'
-	endif
-endfunc
-
-func! CompileRun()
-	let l:cwd = getcwd()
-	let l:flags = "-Wall -Wextra -Wshadow -O2 -std=c99"
-	silent exe 'cd' fnameescape(expand("%:h"))
-	silent exe '!gcc' shellescape(expand("%")) l:flags
-	exe '!./a.out'
-	silent exe 'cd' fnameescape(l:cwd)
-endfunc
-
-func! CompileDebug()
-	let l:cwd = getcwd()
-	let l:flags = "-Wall -Wextra -Wshadow -g2 -std=c99"
-	silent exe 'cd' fnameescape(expand("%:h"))
-	silent exe "!gcc" "%" l:flags
-	exe "!gdb a.out"
-	silent exe 'cd' fnameescape(l:cwd)
-endfunc
-
-func! CompileAssem()
-	let l:flags = "-fverbose-asm -S -O2 -std=c99"
-	let l:output = expand("%:r").".s"
-	silent exe "!gcc" "%" l:flags "-o ".l:output
-	exe "edit" l:output
 endfunc
 " }}}
 
@@ -538,24 +475,34 @@ noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
 " }}}
 " {{{ vimspector
-" Changing the default window sizes
-let g:vimspector_enable_mappings = 'HUMAN'
-" noremap <F5> <Plug>VimspectorContinue
-" noremap <F3> <Plug>VimspectorStop
-" noremap <F4> <Plug>VimspectorRestart
+" let g:vimspector_enable_mappings = 'HUMAN'
+noremap <F5> :call vimspector#Continue()<CR>
+noremap <F4> :call vimspector#Reset()<CR>
 " noremap <F6> <Plug>VimspectorPause
-" noremap <F9> <Plug>VimspectorToggleBreakpoint
+noremap <C-b> :call vimspector#ToggleBreakpoint()<CR>
 " noremap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
 " noremap <F8> <Plug>VimspectorAddFunctionBreakpoint
-" noremap <F10> <Plug>VimspectorStepOver
-" noremap <F11> <Plug>VimspectorStepInto
-" noremap <F12> <Plug>VimspectorStepOut
+noremap <C-h> :call vimspector#Restart()<CR>
+noremap <C-j> :call vimspector#StepInto()<CR>
+noremap <C-k> :call vimspector#StepOut()<CR>
+noremap <C-l> :call vimspector#StepOver()<CR>
+" Changing the default window sizes
 let g:vimspector_sidebar_width = 30
 let g:vimspector_bottombar_height = 10
 " Changing the terminal size
 let g:vimspector_code_minwidth = 90
 let g:vimspector_terminal_maxwidth = 20
 let g:vimspector_terminal_minwidth = 20
+func! CustomiseUI()
+	call win_gotoid( g:vimspector_session_windows.code )
+	" Clear the existing WinBar created by Vimspector
+	nunmenu WinBar
+endfunction
+
+augroup MyVimspectorUICustomistaion
+	autocmd!
+	autocmd User VimspectorUICreated call CustomiseUI()
+augroup END
 " }}}
 " {{{ python-syntax
 let g:python_highlight_all = 1
