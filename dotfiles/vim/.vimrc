@@ -476,10 +476,10 @@ let g:fzf_layout = { 'down': '40%', 'window': '10new' }
 " }}}
 " {{{ vimspector
 " let g:vimspector_enable_mappings = 'HUMAN'
-noremap <F5> :call vimspector#Continue()<CR>
+noremap <C-n> :call vimspector#Continue()<CR>
 noremap <F4> :call vimspector#Reset()<CR>
 " noremap <F6> <Plug>VimspectorPause
-noremap <C-b> :call vimspector#ToggleBreakpoint()<CR>
+noremap <C-p> :call vimspector#ToggleBreakpoint()<CR>
 " noremap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
 " noremap <F8> <Plug>VimspectorAddFunctionBreakpoint
 noremap <C-h> :call vimspector#Restart()<CR>
