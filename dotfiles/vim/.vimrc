@@ -75,10 +75,12 @@ set autoindent
 set listchars=tab:»\ ,eol:↲,trail:·
 
 " Soft wrapping text
-set wrap linebreak nolist
+" set wrap linebreak nolist
 set ttyfast				" More characters will be sent to the screen
 set ttimeout			" Time waited for key press to complete
 set ttimeoutlen=50
+set updatetime=750
+set shortmess+=c
 
 set scrolloff=3			" Show 3 lines above or below cursor when scrolling
 set colorcolumn=101
@@ -107,10 +109,18 @@ set ignorecase			" Case insensitive search
 set smartcase			" Case sensitive if contains at least one capital letter
 set laststatus=2
 set fillchars=fold:\	" Replace - with ' '
-set signcolumn="yes"
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+nmap <silent> [g :lnext<CR>
+nmap <silent> ]g :lprev<CR>
 
 set lazyredraw			" Do not redraw screen in the middle of a macro
-
 set noesckeys			" <ESC> delay
 " set timeoutlen=1000
 " set ttimeoutlen=5
@@ -418,14 +428,14 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
-" set background=dark
+set background=dark
 " Options: solarized8_high, solarized8, solarized8_low solarized8_flat
-" silent! colorscheme solarized8_high
+silent! colorscheme solarized8
 " }}}
 " {{{ gruvbox (https://github.com/morhetz/gruvbox)
-set background=dark
-let g:gruvbox_contrast = 'hard'
-silent! colorscheme gruvbox
+" set background=dark
+" let g:gruvbox_contrast = 'hard'
+" silent! colorscheme gruvbox
 " }}}
 " {{{ vim-airline & vim-airline-themes
 let g:airline#extensions#tabline#enabled = 1			" turn on buffer list
@@ -455,7 +465,7 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_complete_in_comments = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_always_populate_location_list = 0
+let g:ycm_always_populate_location_list = 1
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_max_num_candidates = 10
 let g:ycm_max_num_identifier_candidates = 10
@@ -468,7 +478,7 @@ let g:ycm_use_clangd = 1
 let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10']
+let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10', '-j=4', '--suggest-missing-includes']
 noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ FZF
