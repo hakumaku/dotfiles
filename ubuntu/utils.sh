@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" &&
+sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" &&
 sudo apt install cargo make &&
     cargo install --locked exa fd-find bat ytop &&
     # Add $HOME/.cargo to $PATH variable.
