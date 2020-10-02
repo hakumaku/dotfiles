@@ -10,7 +10,8 @@ if [ "$XDG_CURRENT_DESKTOP" == "$yaru" ]; then
 	return 0
 fi
 
-export BACKLIGHT_SCRIPT="$HOME/workspace/ubuntu-fresh/backlight.sh"
+export SCRIPT_PATH="$HOME/workspace/ubuntu-fresh/dotfiles/script"
+export BACKLIGHT_SCRIPT="$SCRIPT_PATH/backlight.sh"
 # If you have nvidia graphics, you'll get error message:
 # Couldn't retrieve monitors via randr.
 # if [ ! -z $( lspci | grep NVIDIA ) ]; then
@@ -43,7 +44,7 @@ fcitx -d &
 compton &
 xset s on
 xset s 300
-xss-lock $HOME/workspace/ubuntu-fresh/unimatrix.sh &
+xss-lock $SCRIPT_PATH/unimatrix.sh &
 plank &
 
 if [ $XDG_CURRENT_DESKTOP == "i3" ]; then
@@ -52,8 +53,10 @@ if [ $XDG_CURRENT_DESKTOP == "i3" ]; then
 elif [ $XDG_CURRENT_DESKTOP == "awesome" ]; then
 	exec /usr/bin/awesome > ~/.cache/awesome/stdout 2> ~/.cache/awesome/stderr
 
-else
+elif [ $XDG_CURRENT_DESKTOP == "awesome" ]; then
 	~/.config/polybar/main.sh &
 	sxhkd &
 	exec bspwm > ~/.cache/bspwm/stdout 2> ~/.cache/bspwm/stderr
+else
+	return 0
 fi
