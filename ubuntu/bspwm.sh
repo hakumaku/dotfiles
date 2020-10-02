@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+dotfiles="$HOME/workspace/ubuntu-fresh/dotfiles"
 workspace="$HOME/workspace"
 
 dependencies=(
@@ -24,11 +25,20 @@ dependencies=(
 	"unifont"
 )
 
-sudo apt install ${dependencies[@]} &&
+packages=(
+	"compton"
+	"feh"
+)
+
+sudo apt install ${packages[@]} ${dependencies[@]} &&
 	git clone "https://github.com/polybar/polybar" "$workspace" &&
 	cd "$workspace/polybar" &&
 	mkdir build &&
 	cd build &&
 	cmake .. &&
 	make -j4 &&
-	sudo make install
+	sudo make install && {
+		(cd $HOME/.config && ln -s "$dotfiles/bspwm" . && ln -s "$dotfiles/sxhkd" .) &&
+		(cd $HOME && ln -s "$dotfiles/xprofile" .xprofile) &&
+		(cd $HOME/.config && ln -s "$dotfiles/polybar" .)
+	}

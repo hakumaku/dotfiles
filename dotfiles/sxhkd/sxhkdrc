@@ -1,6 +1,6 @@
 # Terminal emulator
 super + Return
-	st
+	alacritty
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -11,11 +11,11 @@ super + v
 super + w
 	firefox
 super + e
-	st -e ranger
+	alacritty -e ranger
 super + m
-	st -e cmus
+	alacritty -e cmus
 super + x
-	st -e gotop -c solarized
+	alacritty -e ytop -c solarized
 super + r
 	rofi -show drun
 super + bracketleft

@@ -1,28 +1,44 @@
 #!/usr/bin/env bash
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
-PATH=$PATH:"$HOME/.local/bin"
 
-yaru="Yaru:ubuntu:GNOME"
-if [ "$XDG_CURRENT_DESKTOP" == "$yaru" ]; then
+if [[ "$XDG_SESSION_DESKTOP" == *"ubuntu:GNOME"* ]]; then
 	return 0
 fi
 
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+
 export SCRIPT_PATH="$HOME/workspace/ubuntu-fresh/dotfiles/script"
 export BACKLIGHT_SCRIPT="$SCRIPT_PATH/backlight.sh"
+
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+mlist=$( xrandr --listmonitors )
+if [[ $(echo "$mlist" | sed -n "1p" | awk '{ print $2 }') -gt 1 ]]; then
+	primary=$( echo "$mlist" | sed -n "2p" | awk '{ print $4 }' )
+	xrandr --output "$primary" --off &
+fi
+
+setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
+
+launch_bspwm() {
+	~/.fehbg &
+    compton &
+    xset s on
+    xset s 300
+    xss-lock $SCRIPT_PATH/unimatrix.sh &
+    plank &
+	~/.config/polybar/main.sh &
+	sxhkd &
+	exec bspwm > ~/.cache/bspwm/stdout 2> ~/.cache/bspwm/stderr
+}
+
+# PATH=$PATH:"$HOME/.local/bin"
+
 # If you have nvidia graphics, you'll get error message:
 # Couldn't retrieve monitors via randr.
 # if [ ! -z $( lspci | grep NVIDIA ) ]; then
 # fi
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-mlist=$( xrandr --listmonitors )
-if [ $(echo "$mlist" | sed -n "1p" | awk '{ print $2 }') -gt 1 ]; then
-	primary=$( echo "$mlist" | sed -n "2p" | awk '{ print $4 }' )
-	xrandr --output "$primary" --off &
-fi
 
 # https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Configuring_VDPAU
 # export VDPAU_DRIVER=nvidia
@@ -36,27 +52,8 @@ xsetroot -cursor_name left_ptr
 # nm-applet &
 # cbatticon &
 # redshift -l 37.50:126.85 -t 6500K:3200K &
-fcitx -d &
+# fcitx -d &
 # xpad &
 # transmission-gtk -m &
 
-~/.fehbg &
-compton &
-xset s on
-xset s 300
-xss-lock $SCRIPT_PATH/unimatrix.sh &
-plank &
-
-if [ $XDG_CURRENT_DESKTOP == "i3" ]; then
-	exec i3
-
-elif [ $XDG_CURRENT_DESKTOP == "awesome" ]; then
-	exec /usr/bin/awesome > ~/.cache/awesome/stdout 2> ~/.cache/awesome/stderr
-
-elif [ $XDG_CURRENT_DESKTOP == "awesome" ]; then
-	~/.config/polybar/main.sh &
-	sxhkd &
-	exec bspwm > ~/.cache/bspwm/stdout 2> ~/.cache/bspwm/stderr
-else
-	return 0
-fi
+launch_bspwm
