@@ -41,9 +41,11 @@ config_ranger() {
 install_ueberzug() {
 	local dependencies=(
 		"python3" "python-is-python3" "python3-pip"
+		"libjpeg-dev" "zlib1g-dev"
 		"libxcomposite-dev" "libx11-dev"
 		"ffmpegthumbnailer")
 	sudo apt install ${dependencies[@]} &&
+		CC="cc -mavx2" pip3 install -U --force-reinstall pillow-simd &&
 		pip3 install ueberzug
 }
 
