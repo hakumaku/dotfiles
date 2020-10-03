@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$XDG_SESSION_DESKTOP" == *"ubuntu:GNOME"* ]]; then
+if [[ ! "$XDG_SESSION_DESKTOP" == "bspwm" ]]; then
 	return 0
 fi
 

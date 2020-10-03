@@ -49,7 +49,7 @@ install_ueberzug() {
 		pip3 install ueberzug
 }
 
-sudo apt install python3-distutils &&
+sudo apt install python3-distutils sxiv &&
 git clone https://github.com/ranger/ranger "${workspace}/ranger" && install_ueberzug &&
 	(cd "${workspace}/ranger" && sudo make install && install_ranger_devicons &&
 	config_ranger)
