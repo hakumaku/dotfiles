@@ -4,31 +4,33 @@ filetype off				  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
-	" Essential
-	Plugin 'Valloric/YouCompleteMe', has('nvim') ? {'on': []} : {}
-	Plugin 'junegunn/fzf'
+	" Cpp Development
+	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'puremourning/vimspector'
+	Plugin 'majutsushi/tagbar'
+	" Cpp Syntax Highlight via LSP
+	Plugin 'prabirshrestha/async.vim'
+	Plugin 'prabirshrestha/vim-lsp'
+	Plugin 'jackguo380/vim-lsp-cxx-highlight'
+	Plugin 'bfrg/vim-cpp-modern'
+	" CMake
+	Plugin 'pboettch/vim-cmake-syntax'
 
+	" Vim Utility
+	Plugin 'junegunn/fzf'
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plugin 'ryanoasis/vim-devicons'
-
 	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'tpope/vim-repeat'
 	Plugin 'tpope/vim-speeddating'
-
 	Plugin 'raimondi/delimitmate'
 	Plugin 'airblade/vim-gitgutter'
 
 	" Enhanced Python
 	" Plugin 'davidhalter/jedi-vim'
 	Plugin 'vim-python/python-syntax'
-	Plugin 'pboettch/vim-cmake-syntax'
-
-	" Enhanced Cpp
-	Plugin 'bfrg/vim-cpp-modern'
-	Plugin 'majutsushi/tagbar'
 
 	" Colorschemes
 	Plugin 'lifepillar/vim-solarized8'
@@ -195,11 +197,11 @@ nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
-	py3f /usr/share/clang/clang-format-10/clang-format.py
+	py3f /usr/share/clang/clang-format-11/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
-vnoremap <leader>f :py3f /usr/share/clang/clang-format-10/clang-format.py<CR>:echo 'Formatted lines'<CR>
+nnoremap <leader>f :py3f /usr/share/clang/clang-format-11/clang-format.py<CR>:echo 'Formatted lines'<CR>
+vnoremap <leader>f :py3f /usr/share/clang/clang-format-11/clang-format.py<CR>:echo 'Formatted lines'<CR>
 " }}}
 
 " {{{ Vim Functions
@@ -311,6 +313,36 @@ endfunc
 " }}}
 
 " {{{ Autocommand
+if executable('clangd')
+	augroup lsp_clangd
+		autocmd!
+		autocmd User lsp_setup call lsp#register_server({
+			\ 'name': 'clangd',
+			\ 'cmd': {server_info->['clangd']},
+			\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+			\ })
+		autocmd FileType c setlocal omnifunc=lsp#complete
+		autocmd FileType cpp setlocal omnifunc=lsp#complete
+		autocmd FileType objc setlocal omnifunc=lsp#complete
+		autocmd FileType objcpp setlocal omnifunc=lsp#complete
+	augroup end
+endif
+
+" also see https://github.com/prabirshrestha/vim-lsp/wiki/Servers-ccls
+" highlight.lsRanges = true
+" is only necessary if vim doesn't have +byte_offset
+if executable('ccls')
+	au User lsp_setup call lsp#register_server({
+		\ 'name': 'ccls',
+		\ 'cmd': {server_info->['ccls']},
+		\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+		\ 'initialization_options': {
+		\   'highlight': { 'lsRanges' : v:true },
+		\ },
+		\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+		\ })
+endif
+
 augroup project
 	au!
 	au BufRead,BufNewFile *.h,*.c set filetype=cpp
@@ -430,8 +462,8 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
-set background=dark
 " Options: solarized8_high, solarized8, solarized8_low solarized8_flat
+set background=dark
 silent! colorscheme solarized8
 " }}}
 " {{{ gruvbox (https://github.com/morhetz/gruvbox)
@@ -481,7 +513,6 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10', '-j=4', '--suggest-missing-includes']
-noremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " }}}
 " {{{ FZF
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
