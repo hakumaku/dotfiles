@@ -12,4 +12,4 @@ set_ssh() {
 }
 
 sudo apt install git &&
-	(cd && ln -s $dotfiles/git/.gitconfig)
+	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
