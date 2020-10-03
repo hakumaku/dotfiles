@@ -28,5 +28,9 @@ install_ycm() {
 		python setup.py build --build-base=build/3 --build-lib=build/lib3)
 }
 
+install_coc() {
+	curl -sL install-node.now.sh/lts | bash
+}
+
 sudo apt install vim vim-gtk3 &&
 	install_vundle && install_ycm

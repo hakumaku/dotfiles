@@ -23,12 +23,13 @@ setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
 
 launch_bspwm() {
 	~/.fehbg &
-    compton &
-    xset s on
-    xset s 300
-    xss-lock $SCRIPT_PATH/unimatrix.sh &
-    plank &
-	~/.config/polybar/main.sh &
+	compton &
+	xset s on
+	xset s 300
+	xss-lock $SCRIPT_PATH/unimatrix.sh &
+	fcitx -d &
+	plank &
+	~/.config/polybar/launch.sh &
 	sxhkd &
 	exec bspwm > ~/.cache/bspwm/stdout 2> ~/.cache/bspwm/stderr
 }
@@ -52,7 +53,6 @@ xsetroot -cursor_name left_ptr
 # nm-applet &
 # cbatticon &
 # redshift -l 37.50:126.85 -t 6500K:3200K &
-# fcitx -d &
 # xpad &
 # transmission-gtk -m &
 

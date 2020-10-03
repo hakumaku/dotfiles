@@ -26,19 +26,37 @@ dependencies=(
 )
 
 packages=(
+	"xss-lock"
 	"compton"
 	"feh"
 )
 
-sudo apt install ${packages[@]} ${dependencies[@]} &&
-	git clone "https://github.com/polybar/polybar" "$workspace" &&
-	cd "$workspace/polybar" &&
-	mkdir build &&
-	cd build &&
-	cmake .. &&
-	make -j4 &&
-	sudo make install && {
-		(cd $HOME/.config && ln -s "$dotfiles/bspwm" . && ln -s "$dotfiles/sxhkd" .) &&
-		(cd $HOME && ln -s "$dotfiles/xprofile" .xprofile) &&
-		(cd $HOME/.config && ln -s "$dotfiles/polybar" .)
-	}
+install_polybar() {
+	sudo apt install ${packages[@]} ${dependencies[@]} &&
+		git clone "https://github.com/polybar/polybar" "$workspace" &&
+		cd "$workspace/polybar" &&
+		mkdir build &&
+		cd build &&
+		cmake .. &&
+		make -j4 &&
+		sudo make install
+}
+
+install_polybar_theme() {
+	if [[ ! -d $HOME/.config/polybar ]]; then
+		mkdir -p $HOME/.config/polybar
+	fi
+
+	git clone "https://github.com/adi1090x/polybar-themes" "$workspace" &&
+		cd "${workspace}/polybar-themes/polybar-12" &&
+		cp -r fonts/* $HOME/.local/share/fonts && fc-cache -v &&
+		sudo rm /etc/fonts/conf.d/70-no-bitmaps.conf &&
+		cp -r * $HOME/.config/polybar
+}
+
+config_bspwm() {
+	(cd $HOME/.config && ln -s "$dotfiles/bspwm" . && ln -s "$dotfiles/sxhkd" .) &&
+	(cd $HOME && ln -s "$dotfiles/xprofile" .xprofile)
+}
+
+sudo apt install bspwm && config_bspwm && install_polybar && install_polybar_theme

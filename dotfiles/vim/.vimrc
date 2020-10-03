@@ -5,7 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 	" Essential
-	Plugin 'Valloric/YouCompleteMe'
+	Plugin 'Valloric/YouCompleteMe', has('nvim') ? {'on': []} : {}
 	Plugin 'junegunn/fzf'
 	Plugin 'puremourning/vimspector'
 
@@ -69,7 +69,7 @@ set relativenumber		" Relative numbers instead of absolute
 set tabstop=4			" Tab size = 4
 set shiftwidth=4		" Size of the indent
 set softtabstop=0		" Insert a combination of spaces when set to non-zero
-set expandtab			" No spaces when tab
+set noexpandtab			" No spaces when tab
 set mouse=a				" Enable mouse scrolling
 set autoindent
 set listchars=tab:»\ ,eol:↲,trail:·
@@ -112,16 +112,18 @@ set fillchars=fold:\	" Replace - with ' '
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+	" Recently vim can merge signcolumn and number column into one
+	set signcolumn=number
 else
-  set signcolumn=yes
+	set signcolumn=yes
 endif
 nmap <silent> [g :lnext<CR>
 nmap <silent> ]g :lprev<CR>
 
 set lazyredraw			" Do not redraw screen in the middle of a macro
-set noesckeys			" <ESC> delay
+if !has('nvim')
+	set noesckeys			" <ESC> delay
+endif
 " set timeoutlen=1000
 " set ttimeoutlen=5
 
