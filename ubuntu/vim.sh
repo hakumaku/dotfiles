@@ -23,8 +23,8 @@ install_vundle() {
 }
 
 install_cclc() {
-	git clone --depth=1 --recursive https://github.com/MaskRay/ccls $workspace &&
-		(cd "${workspace}/ccls" &&
+	git clone --depth=1 --recursive https://github.com/MaskRay/ccls $workspace/cclc &&
+		(cd "${workspace}/cclc" &&
 			cmake -H. -BRelease -DCMAKE_BUILD_TYPE=Release \
 				-DCMAKE_PREFIX_PATH=/usr/lib/llvm-${version} \
 				-DLLVM_INCLUDE_DIR=/usr/lib/llvm-${version}/include \
@@ -44,7 +44,9 @@ install_coc() {
 	curl -sL install-node.now.sh/lts | bash
 }
 
-sudo apt install cmake vim vim-gtk3 &&
-	install_clang &&
-	install_vundle &&
-	install_ycm
+# sudo apt install cmake vim vim-gtk3 &&
+# 	install_clang &&
+# 	install_vundle &&
+# 	install_ycm &&
+# 	install_cclc
+install_cclc
