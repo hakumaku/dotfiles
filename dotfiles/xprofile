@@ -23,7 +23,7 @@ setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl
 
 launch_bspwm() {
 	~/.fehbg &
-	compton &
+	# compton &
 	xset s on
 	xset s 300
 	xss-lock $SCRIPT_PATH/unimatrix.sh &

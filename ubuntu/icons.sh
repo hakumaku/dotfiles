@@ -30,6 +30,12 @@ change_icons() {
 		app="com.alacritty.Alacritty.desktop"
 		path="/usr/share/applications"
 
+	elif [ "$app" = "thunderbird" ]; then
+		app="thunderbird.desktop"
+		path="/usr/share/applications"
+		sudo sed -ri '/(StartupNotify=.*)/a StartupWMClass=Thunderbird' "$path/$app"
+		return 0
+
 	else
 		return 2
 	fi

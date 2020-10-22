@@ -32,7 +32,7 @@ wm () {
 }
 
 twitch () {
-	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
+	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | cvlc -f - &!
 	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
 

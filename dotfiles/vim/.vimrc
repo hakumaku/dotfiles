@@ -4,6 +4,8 @@ filetype off				  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
+	" Startify
+	Plugin 'mhinz/vim-startify'
 	" Cpp Development
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'puremourning/vimspector'
@@ -184,6 +186,8 @@ nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
 
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
+" External Utilities
+nnoremap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 " Run fuzzy finder
 nnoremap <C-s> :FZF<CR>
 " Open NerdTree
