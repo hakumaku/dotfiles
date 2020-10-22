@@ -13,6 +13,7 @@ if [ -d "\$HOME/workspace/diff-so-fancy" ]; then
     PATH="\$HOME/workspace/diff-so-fancy:\$PATH"
 fi
 EOT
+	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 }
 
 set_ssh() {
