@@ -16,6 +16,13 @@ EOT
 	git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 }
 
+install_tig() {
+	local dependencies=( "libncursesw6" )
+	sudo apt install ${dependencies[@]} &&
+	git clone "https://github.com/jonas/tig" "$workspace/tig" &&
+		(cd "$workspace/tig" && make && sudo make install prefix=/usr/local)
+}
+
 set_ssh() {
 	ssh-keygen -t rsa -b 4096 -C "gentlebuuny@gmail.com" &&
 		eval "$(ssh-agent -s)" &&
@@ -25,6 +32,7 @@ set_ssh() {
 		firefox https://github.com/settings/ssh/new
 }
 
-# sudo apt install git &&
-# 	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
-install_diff_so_fancy
+sudo apt install git &&
+	install_diff_so_fancy &&
+	install_tig &&
+	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
