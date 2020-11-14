@@ -12,7 +12,6 @@ call vundle#begin()
 	Plugin 'majutsushi/tagbar'
 	Plugin 'junegunn/fzf'
 	" Cpp Syntax Highlight via LSP
-	Plugin 'prabirshrestha/async.vim'
 	Plugin 'prabirshrestha/vim-lsp'
 	Plugin 'jackguo380/vim-lsp-cxx-highlight'
 	" CMake
@@ -335,17 +334,17 @@ endif
 " also see https://github.com/prabirshrestha/vim-lsp/wiki/Servers-ccls
 " highlight.lsRanges = true
 " is only necessary if vim doesn't have +byte_offset
-" if executable('ccls')
-" 	au User lsp_setup call lsp#register_server({
-" 		\ 'name': 'ccls',
-" 		\ 'cmd': {server_info->['ccls']},
-" 		\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-" 		\ 'initialization_options': {
-" 		\   'highlight': { 'lsRanges' : v:true },
-" 		\ },
-" 		\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-" 		\ })
-" endif
+if executable('ccls')
+	au User lsp_setup call lsp#register_server({
+		\ 'name': 'ccls',
+		\ 'cmd': {server_info->['ccls']},
+		\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+		\ 'initialization_options': {
+		\   'highlight': { 'lsRanges' : v:true },
+		\ },
+		\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+		\ })
+endif
 
 augroup project
 	au!
@@ -517,6 +516,12 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 " Use installed clangd, not YCM-bundled clangd which doesn't get updates.
 let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10', '-j=4', '--suggest-missing-includes']
+let g:ycm_language_server = [{
+                          \   'name': 'ccls',
+                          \   'cmdline': [ 'ccls' ],
+                          \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+                          \   'project_root_files': [ 'compile_commands.json', '.ccls-root' ]
+                          \ }]
 " }}}
 " {{{ FZF
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
