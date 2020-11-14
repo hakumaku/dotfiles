@@ -10,25 +10,23 @@ call vundle#begin()
 	Plugin 'Valloric/YouCompleteMe'
 	Plugin 'puremourning/vimspector'
 	Plugin 'majutsushi/tagbar'
+	Plugin 'junegunn/fzf'
 	" Cpp Syntax Highlight via LSP
 	Plugin 'prabirshrestha/async.vim'
 	Plugin 'prabirshrestha/vim-lsp'
 	Plugin 'jackguo380/vim-lsp-cxx-highlight'
-	Plugin 'bfrg/vim-cpp-modern'
 	" CMake
 	Plugin 'pboettch/vim-cmake-syntax'
-
-	" Vim Utility
-	Plugin 'junegunn/fzf'
+	" Git
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'airblade/vim-gitgutter'
+	" Utility
 	Plugin 'scrooloose/nerdtree'
 	Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plugin 'ryanoasis/vim-devicons'
-	Plugin 'tpope/vim-fugitive'
 	Plugin 'tpope/vim-surround'
 	Plugin 'tpope/vim-repeat'
-	Plugin 'tpope/vim-speeddating'
 	Plugin 'raimondi/delimitmate'
-	Plugin 'airblade/vim-gitgutter'
 
 	" Enhanced Python
 	" Plugin 'davidhalter/jedi-vim'
@@ -198,6 +196,8 @@ nnoremap <silent> <C-w>t :TagbarToggle<CR>
 inoremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>i
 noremap <C-@> <ESC>:YcmCompleter FixIt<CR>:echo 'Quick Fix'<CR>
 nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" vim-fugitive
+nnoremap <leader>gs :Gvdiffsplit!
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
@@ -335,17 +335,17 @@ endif
 " also see https://github.com/prabirshrestha/vim-lsp/wiki/Servers-ccls
 " highlight.lsRanges = true
 " is only necessary if vim doesn't have +byte_offset
-if executable('ccls')
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'ccls',
-		\ 'cmd': {server_info->['ccls']},
-		\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-		\ 'initialization_options': {
-		\   'highlight': { 'lsRanges' : v:true },
-		\ },
-		\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-		\ })
-endif
+" if executable('ccls')
+" 	au User lsp_setup call lsp#register_server({
+" 		\ 'name': 'ccls',
+" 		\ 'cmd': {server_info->['ccls']},
+" 		\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+" 		\ 'initialization_options': {
+" 		\   'highlight': { 'lsRanges' : v:true },
+" 		\ },
+" 		\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+" 		\ })
+" endif
 
 augroup project
 	au!
@@ -523,16 +523,16 @@ let g:fzf_layout = { 'down': '40%', 'window': '10new' }
 " }}}
 " {{{ vimspector
 " let g:vimspector_enable_mappings = 'HUMAN'
-noremap <C-n> :call vimspector#Continue()<CR>
-noremap <F4> :call vimspector#Reset()<CR>
+" noremap <C-n> :call vimspector#Continue()<CR>
+" noremap <F4> :call vimspector#Reset()<CR>
 " noremap <F6> <Plug>VimspectorPause
-noremap <C-p> :call vimspector#ToggleBreakpoint()<CR>
+" noremap <C-p> :call vimspector#ToggleBreakpoint()<CR>
 " noremap <leader><F9> <Plug>VimspectorToggleConditionalBreakpoint
 " noremap <F8> <Plug>VimspectorAddFunctionBreakpoint
-noremap <C-h> :call vimspector#Restart()<CR>
-noremap <C-j> :call vimspector#StepInto()<CR>
-noremap <C-k> :call vimspector#StepOut()<CR>
-noremap <C-l> :call vimspector#StepOver()<CR>
+" noremap <C-h> :call vimspector#Restart()<CR>
+" noremap <C-j> :call vimspector#StepInto()<CR>
+" noremap <C-k> :call vimspector#StepOut()<CR>
+" noremap <C-l> :call vimspector#StepOver()<CR>
 " Changing the default window sizes
 let g:vimspector_sidebar_width = 30
 let g:vimspector_bottombar_height = 10
