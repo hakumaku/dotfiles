@@ -44,9 +44,8 @@ install_coc() {
 	curl -sL install-node.now.sh/lts | bash
 }
 
-# sudo apt install cmake vim vim-gtk3 &&
-# 	install_clang &&
-# 	install_vundle &&
-# 	install_ycm &&
-# 	install_cclc
-install_cclc
+sudo apt install cmake vim vim-gtk3 &&
+	install_clang &&
+	install_vundle &&
+	install_ycm &&
+	install_cclc
