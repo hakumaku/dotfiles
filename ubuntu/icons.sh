@@ -25,6 +25,10 @@ change_icons() {
 		icon="visual-studio-code"
 		app="code_code.desktop"
 
+	elif [ "$app" = "pycharm" ]; then
+		icon="pycharm"
+		app="pycharm-community_pycharm-community.desktop"
+
 	elif [ "$app" = "alacritty" ]; then
 		icon="terminal"
 		app="com.alacritty.Alacritty.desktop"
