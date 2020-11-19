@@ -510,6 +510,7 @@ let g:ycm_max_diagnostics_to_display = 10
 let g:ycm_key_list_stop_completion = ['<C-y>']
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_disable_for_files_larger_than_kb = 1000
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 " Let clangd fully control code completion
 let g:ycm_use_clangd = 1
 let g:ycm_clangd_uses_ycmd_caching = 0
@@ -517,11 +518,11 @@ let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args = ['-log=error', '-pretty', '--clang-tidy', '--limit-results=10', '-j=4', '--suggest-missing-includes']
 let g:ycm_language_server = [{
-                          \   'name': 'ccls',
-                          \   'cmdline': [ 'ccls' ],
-                          \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
-                          \   'project_root_files': [ 'compile_commands.json', '.ccls-root' ]
-                          \ }]
+						  \   'name': 'ccls',
+						  \   'cmdline': [ 'ccls' ],
+						  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+						  \   'project_root_files': [ 'compile_commands.json', '.ccls-root' ]
+						  \ }]
 " }}}
 " {{{ FZF
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
