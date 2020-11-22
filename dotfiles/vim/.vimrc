@@ -464,6 +464,9 @@ augroup END
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
+" {{{ Termdebug
+let g:termdebug_wide=1
+" }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 " Options: solarized8_high, solarized8, solarized8_low solarized8_flat
 set background=dark
@@ -528,7 +531,8 @@ let g:ycm_language_server = [{
 let g:fzf_layout = { 'down': '40%', 'window': '10new' }
 " }}}
 " {{{ vimspector
-" let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_enable_mappings = 'HUMAN'
+" packadd! vimspector
 " noremap <C-n> :call vimspector#Continue()<CR>
 " noremap <F4> :call vimspector#Reset()<CR>
 " noremap <F6> <Plug>VimspectorPause
