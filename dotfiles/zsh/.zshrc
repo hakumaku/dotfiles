@@ -60,35 +60,6 @@ icons () {
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
-vimspec () {
-cat << EOF > .vimspector.json
-{
-  "configurations": {
-    "Launch": {
-      "adapter": "vscode-cpptools",
-      "configuration": {
-        "request": "launch",
-        "program": "a.out",
-        "args": [],
-        "cwd": "~/workspace/debug",
-        "environment": [],
-        "externalConsole": true,
-        "MIMode": "gdb"
-      }
-    },
-    "Attach": {
-      "adapter": "vscode-cpptools",
-      "configuration": {
-        "request": "attach",
-        "program": "a.out",
-        "MIMode": "gdb"
-      }
-    }
-  }
-}
-EOF
-}
-
 # Environment variables & aliases
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
@@ -100,7 +71,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/nvim
 # Disable pressing <C-s> to freeze.
 stty -ixon
 alias python='/usr/bin/python3'
@@ -122,11 +93,11 @@ alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
 alias gv='cd $HOME/Videos'
-alias zshrc='vim ~/.zshrc'
+alias zshrc='nvim ~/.zshrc'
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
-alias bashrc="vim ${BASH_SOURCE[0]} -c 'normal zt'"
-alias vimrc="vim $HOME/.vimrc"
+alias bashrc="nvim ${BASH_SOURCE[0]} -c 'normal zt'"
+alias vimrc="nvim $HOME/.vimrc"
 alias sxiv='sxiv -a -f'
 alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
