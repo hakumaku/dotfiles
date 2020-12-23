@@ -99,19 +99,19 @@ export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export EDITOR=/usr/bin/vim
 # Disable pressing <C-s> to freeze.
 stty -ixon
 alias python='/usr/bin/python3'
-alias ls="exa --group-directories-first -s extension"
-alias l.="exa -d .*"
-alias la="exa -lahF"
-# alias ls='ls --color -h --group-directories-first'
-# alias l.='ls -d .* --color=auto'
+# alias ls="exa --group-directories-first -s extension"
+# alias l.="exa -d .*"
+# alias la="exa -lahF"
+alias ls='ls --color -h --group-directories-first'
+alias l.='ls -d .* --color=auto'
 alias diff="diff-so-fancy"
-alias cat="bat"
-alias find="fd"
+# alias cat="bat"
+# alias find="fd"
 alias grep='grep --color=auto'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
@@ -141,3 +141,5 @@ source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
 
 # zsh-dircolors-solarized
 source $HOME/workspace/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
