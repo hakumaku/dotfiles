@@ -98,6 +98,7 @@ alias zshrc='nvim ~/.zshrc'
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias bashrc="nvim ${BASH_SOURCE[0]} -c 'normal zt'"
 alias vimrc="nvim $HOME/.vimrc"
+alias nvimrc="nvim $HOME/.config/nvim/init.vim"
 alias sxiv='sxiv -a -f'
 alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
