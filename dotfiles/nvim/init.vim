@@ -167,7 +167,11 @@ inoremap <C-v> <ESC>"+pa
 nnoremap <silent> gt :silent bn<Bar>echo @%<CR>
 nnoremap <silent> gT :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
-
+" Escape terminal mode
+let g:termdebug_useFloatingHover = 0
+let g:termdebug_use_prompt = 1
+tnoremap <Esc> <C-\><C-n>
+nnoremap <RightMouse> :Break<CR>
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 " External Utilities
