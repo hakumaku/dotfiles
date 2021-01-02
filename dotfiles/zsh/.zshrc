@@ -32,7 +32,7 @@ wm () {
 }
 
 twitch () {
-	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | cvlc -f - &!
+	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
 	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
 
@@ -71,7 +71,8 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 # export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export EDITOR=/usr/bin/nvim
+export EDITOR=nvim
+export VISUAL="$EDITOR"
 # Disable pressing <C-s> to freeze.
 stty -ixon
 alias python='/usr/bin/python3'
@@ -94,13 +95,13 @@ alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
 alias gv='cd $HOME/Videos'
 alias zshrc='nvim ~/.zshrc'
-# Move to the directory when exiting.
-# alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
-alias bashrc="nvim ${BASH_SOURCE[0]} -c 'normal zt'"
+alias bashrc="nvim ~/.bashrc -c 'normal zt'"
 alias vimrc="nvim $HOME/.vimrc"
 alias nvimrc="nvim $HOME/.config/nvim/init.vim"
 alias sxiv='sxiv -a -f'
 alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
+# Move to the directory when exiting.
+# alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # Tmux
