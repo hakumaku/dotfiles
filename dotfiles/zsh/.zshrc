@@ -60,6 +60,52 @@ icons () {
 	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
 }
 
+gf () {
+	# %h: abbreviated commit hash
+	# %ar: author date, relative
+	# %d: ref names
+	# %s: subject
+	# %+b: a line-feed and body
+	# %ae: author email
+	local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+	git log            \
+		--reverse      \
+		--color=always \
+		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(black)%ae" "$@" |
+		fzf +s                                                  \
+			--tiebreak=index                                    \
+			--no-multi                                          \
+			--ansi                                              \
+			--preview="$_viewGitLogLine"                        \
+			--header "enter: view, C-c:copy hash"               \
+			--bind   "enter:execute:$_viewGitLogLine | less -R" \
+			--bind   "ctrl-c:execute:$_gitLogLineToHash | xclip -r -selection clipboard"
+}
+# FZF (https://github.com/junegunn/fzf)
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
+# Options to fzf command
+export FZF_COMPLETION_OPTS='+c -x'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fdfind --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fdfind --type d --hidden --follow --exclude ".git" . "$1"
+}
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fdfind --type f'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Environment variables & aliases
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
