@@ -13,6 +13,7 @@ call plug#begin(stdpath('data').'/plugged')
 	" Cpp Development
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'majutsushi/tagbar', { 'on':  'TagbarToggle' }
+	Plug 'liuchengxu/vista.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'raimondi/delimitmate'
@@ -181,7 +182,9 @@ nnoremap <C-s> :FZF<CR>
 " Open NerdTree
 nnoremap <silent> <C-w>o :NERDTreeToggle<Bar>echo @%<CR>
 " Open Tagbar
-nnoremap <silent> <C-w>t :TagbarToggle<CR>
+" nnoremap <silent> <C-w>t :TagbarToggle<CR>
+let g:vista_default_executive = 'coc'
+nnoremap <silent> <C-w>t :Vista!!<CR>
 " vim-fugitive
 nnoremap <leader>gd :Gvdiffsplit!<CR>
 nnoremap <leader>gs :Gstatus<CR>
