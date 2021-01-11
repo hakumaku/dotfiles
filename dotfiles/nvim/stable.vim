@@ -12,6 +12,7 @@ call plug#begin(stdpath('data').'/plugged')
 
 	" Cpp Development
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'
 	Plug 'majutsushi/tagbar', { 'on':  'TagbarToggle' }
 	Plug 'liuchengxu/vista.vim'
 	Plug 'tpope/vim-surround'
