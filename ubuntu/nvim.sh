@@ -29,6 +29,6 @@ install_nodejs() {
 
 sudo apt install neovim &&
 	install_clang &&
-	install_coc &&
+	install_nodejs &&
 	install_plug
 
