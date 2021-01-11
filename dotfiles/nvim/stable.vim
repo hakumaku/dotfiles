@@ -27,6 +27,7 @@ call plug#begin(stdpath('data').'/plugged')
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
+	Plug 'ryanoasis/vim-devicons'
 
 	" Status line
 	Plug 'vim-airline/vim-airline'
@@ -460,7 +461,8 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " }}}
 " {{{ FZF
-let g:fzf_layout = { 'down': '40%', 'window': '10new' }
+" let g:fzf_layout = { 'down': '40%', 'window': '10new' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 " }}}
 
 " {{{ coc
