@@ -27,7 +27,6 @@ call plug#begin(stdpath('data').'/plugged')
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
-	Plug 'ryanoasis/vim-devicons'
 
 	" Status line
 	Plug 'vim-airline/vim-airline'
