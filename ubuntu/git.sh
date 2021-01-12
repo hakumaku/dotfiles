@@ -3,6 +3,10 @@
 workspace="$HOME/workspace"
 dotfiles="$HOME/workspace/ubuntu-fresh/dotfiles"
 
+install_delta() {
+
+}
+
 install_diff_so_fancy() {
 	git clone "https://github.com/so-fancy/diff-so-fancy" "$workspace/diff-so-fancy"
 	# Add $HOME/.cargo to $PATH variable.
