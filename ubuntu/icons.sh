@@ -29,6 +29,10 @@ change_icons() {
 		icon="pycharm"
 		app="pycharm-community_pycharm-community.desktop"
 
+	elif [ "$app" = "zenkit" ]; then
+		icon="zenkit"
+		app="zenkit_zenkit.desktop"
+
 	elif [ "$app" = "alacritty" ]; then
 		icon="terminal"
 		app="com.alacritty.Alacritty.desktop"
