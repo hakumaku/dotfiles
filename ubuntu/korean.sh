@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 config_fcitx() {
+	im-config -n fcitx
 	if [[ ! -d "$HOME/.config/fcitx" ]]; then
 		( exec fcitx -d & )
 	fi
-	im-config -n fcitx
 
 	local profile="$HOME/.config/fcitx/profile"
 	local config="$HOME/.config/fcitx/config"

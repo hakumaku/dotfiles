@@ -27,8 +27,17 @@ install_nodejs() {
 	sh -c 'curl -sL install-node.now.sh/lts | sudo bash'
 }
 
+install_dev_utilities() {
+	local packages=("delta" "bat" "fzf" "fd" "ripgrep")
+	sudo apt install ${packages[@]}
+	mkdir -p ~/.local/bin
+	ln -s /usr/bin/batcat ~/.local/bin/bat
+	ln -s /usr/bin/fdfind ~/.local/bin/fd
+}
+
 sudo apt install neovim &&
 	install_clang &&
 	install_nodejs &&
-	install_plug
+	install_plug &&
+	install_dev_utilities
 
