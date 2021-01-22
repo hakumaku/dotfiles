@@ -21,9 +21,6 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-	" CMake
-	Plug 'pboettch/vim-cmake-syntax'
-
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
@@ -65,7 +62,9 @@ set softtabstop=0		" Insert a combination of spaces when set to non-zero
 set noexpandtab			" No spaces when tab
 set mouse=a				" Enable mouse scrolling
 set autoindent
+set autoread
 set listchars=tab:»\ ,eol:↲,trail:·
+set backspace=indent,eol,start
 " Soft wrapping text
 " set wrap linebreak nolist
 set ttyfast				" More characters will be sent to the screen
@@ -84,6 +83,8 @@ set nobackup			" No backup files
 set cmdheight=2
 set nowritebackup
 set noswapfile
+set history=1000
+set tabpagemax=50
 " Enable folding
 set foldmethod=syntax
 set nofoldenable
@@ -96,8 +97,13 @@ set incsearch			" Dynamic search
 set hlsearch			" Highlight search
 set ignorecase			" Case insensitive search
 set smartcase			" Case sensitive if contains at least one capital letter
+set smarttab
+set nrformats-=octal
+set sessionoptions-=options
+set viewoptions-=options
 set laststatus=2
 set fillchars=fold:\	" Replace - with ' '
+set ruler
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -112,9 +118,6 @@ nmap <silent> ]g :lprev<CR>
 set lazyredraw			" Do not redraw screen in the middle of a macro
 if !has('nvim')
 	set noesckeys		" <ESC> delay
-else
-	set timeoutlen=1000
-	set ttimeoutlen=5
 endif
 
 " {{{ Common typos
@@ -133,6 +136,8 @@ iabbrev lenght length
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap Y y$
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
 
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
@@ -149,7 +154,7 @@ nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
 vnoremap <C-_> :call Commentate()<CR>
 
 " Removes any search highlighting.
-nnoremap <silent> <C-q> :nohl<Bar>echo 'Turn off highlights'<CR>
+nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 " Insert space in normal mode
 nnoremap <space> i<space><ESC>
 " Replace

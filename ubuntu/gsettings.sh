@@ -21,6 +21,7 @@ FAVORITE=(
 
 # Desktop
 gsettings set org.gnome.desktop.background show-desktop-icons 'false'
+gsettings set org.gnome.shell.extensions.desktop-icons show-mount 'false'
 gsettings set org.gnome.desktop.background picture-options 'wallpaper'
 gsettings set org.gnome.desktop.screensaver picture-options 'wallpaper'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
