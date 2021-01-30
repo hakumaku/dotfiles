@@ -174,6 +174,8 @@ inoremap <C-v> <ESC>"+pa
 nnoremap <silent> gt :silent bn<Bar>echo @%<CR>
 nnoremap <silent> gT :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
+nnoremap <silent> ]q :cnext<CR>	
+nnoremap <silent> [q :cprevious<CR>
 " Escape terminal mode
 let g:termdebug_useFloatingHover = 0
 let g:termdebug_use_prompt = 1
