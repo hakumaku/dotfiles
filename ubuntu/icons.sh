@@ -38,6 +38,11 @@ change_icons() {
 		app="com.alacritty.Alacritty.desktop"
 		path="/usr/share/applications"
 
+	elif [ "$app" = "gitkraken" ] || [ "$app" = "kraken" ]; then
+		icon="gitkraken"
+		app="gitkraken.desktop"
+		path="/usr/share/applications"
+
 	elif [ "$app" = "thunderbird" ]; then
 		app="thunderbird.desktop"
 		path="/usr/share/applications"
