@@ -48,6 +48,10 @@ change_icons() {
 		app="gitkraken.desktop"
 		path="/usr/share/applications"
 
+	elif [ "$app" = "clion" ]; then
+		icon="clion"
+		app="clion_clion.desktop"
+
 	elif [ "$app" = "thunderbird" ]; then
 		app="thunderbird.desktop"
 		path="/usr/share/applications"
