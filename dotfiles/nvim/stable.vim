@@ -174,7 +174,7 @@ inoremap <C-v> <ESC>"+pa
 nnoremap <silent> gt :silent bn<Bar>echo @%<CR>
 nnoremap <silent> gT :silent bp<Bar>echo @%<CR>
 nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
-nnoremap <silent> ]q :cnext<CR>	
+nnoremap <silent> ]q :cnext<CR>
 nnoremap <silent> [q :cprevious<CR>
 " Escape terminal mode
 let g:termdebug_useFloatingHover = 0
@@ -195,7 +195,7 @@ let g:vista_default_executive = 'coc'
 nnoremap <silent> <C-w>t :Vista!!<CR>
 " vim-fugitive
 nnoremap <leader>gd :Gvdiffsplit!<CR>
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :vertical Gstatus<CR>
 " clang-format
 function! Formatonsave()
 	let l:formatdiff = 1
@@ -475,7 +475,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+								\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -493,25 +493,25 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+	\ pumvisible() ? "\<C-n>" :
+	\ <SID>check_back_space() ? "\<Tab>" :
+	\ coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	elseif (coc#rpc#ready())
+		call CocActionAsync('doHover')
+	else
+		execute '!' . &keywordprg . " " . expand('<cword>')
+	endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
