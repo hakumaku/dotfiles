@@ -8,3 +8,5 @@ sudo apt update &&
 	sudo apt install kitware-archive-keyring &&
 	sudo rm /etc/apt/trusted.gpg.d/kitware.gpg &&
 	sudo apt install cmake
+
+sudo apt install linux-tools-`uname -r` valgrind
