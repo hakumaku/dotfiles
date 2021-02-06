@@ -366,15 +366,6 @@ augroup file_cc
 	" Common functions
 	au FileType cpp call Iab('sout', 'std::cout << << ''\n'';<esc>2gEa ')
 
-	" if statement
-	au FileType cpp call Iab('if', 'if () {<CR>}<esc>2ba')
-	au FileType cpp call Iab('elif', 'else if () {<CR>}<esc>2ba')
-	au FileType cpp call Iab('else', 'else {<CR>}<esc>O')
-	au FileType cpp call Iab('while', 'while () {<CR>}<esc>2ba')
-	au FileType cpp call Iab('fori', 'for (int i = 0; i < ; i++) {<CR>}<esc>3Bi')
-	au FileType cpp call Iab('fore', 'for (const auto &item : ) {<CR>}<esc>2Bi')
-	au FileType cpp call Iab('switch', 'switch () {<CR>default:<CR>break;<CR>}<esc>6ba')
-
 	" Include Guard
 	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
