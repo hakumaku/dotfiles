@@ -40,13 +40,21 @@ change_icons() {
 
 	elif [ "$app" = "slack" ]; then
 		icon="slack"
-		app="slack.desktop"
-		path="/usr/share/applications"
+		if [ -f "/usr/share/applications/slack.desktop" ]; then
+			path="/usr/share/applications"
+			app="slack.desktop"
+		else
+			app="slack_slack.desktop"
+		fi
 
 	elif [ "$app" = "gitkraken" ] || [ "$app" = "kraken" ]; then
 		icon="gitkraken"
-		app="gitkraken.desktop"
-		path="/usr/share/applications"
+		if [ -f "/usr/share/applications/gitkraken.desktop" ]; then
+			path="/usr/share/applications"
+			app="gitkraken.desktop"
+		else
+			app="gitkraken_gitkraken.desktop"
+		fi
 
 	elif [ "$app" = "clion" ]; then
 		icon="clion"
