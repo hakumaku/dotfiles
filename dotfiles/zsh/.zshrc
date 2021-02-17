@@ -67,18 +67,21 @@ gf () {
 	# %s: subject
 	# %+b: a line-feed and body
 	# %ae: author email
+	local _delta="delta --side-by-side --width ${FZF_PREVIEW_COLUMNS:-$COLUMNS}"
 	local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta'"
+	local _viewGitLogLineFocused="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | $_delta'"
+
 	git log            \
 		--color=always \
 		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(black)%ae" "$@" |
-		fzf +s                                                  \
-			--tiebreak=index                                    \
-			--no-multi                                          \
-			--ansi                                              \
-			--preview="$_viewGitLogLine"                        \
-			--header "enter: view, C-c:copy hash"               \
-			--bind   "enter:execute:$_viewGitLogLine | less -R" \
+		fzf +s                                                         \
+			--tiebreak=index                                           \
+			--no-multi                                                 \
+			--ansi                                                     \
+			--preview="$_viewGitLogLine"                               \
+			--header "enter: view, C-c:copy hash"                      \
+			--bind   "enter:execute:$_viewGitLogLineFocused | less -R" \
 			--bind   "ctrl-c:execute:$_gitLogLineToHash | xclip -r -selection clipboard"
 }
 # FZF (https://github.com/junegunn/fzf)
