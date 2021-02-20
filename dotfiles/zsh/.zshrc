@@ -67,15 +67,19 @@ gf () {
 	# %s: subject
 	# %+b: a line-feed and body
 	# %ae: author email
+	# %an: author name
 	local _delta="delta --side-by-side --width ${FZF_PREVIEW_COLUMNS:-$COLUMNS}"
 	local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta'"
 	local _viewGitLogLineFocused="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | $_delta'"
 
 	git log            \
+		--graph        \
+		--decorate     \
 		--color=always \
-		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(black)%ae" "$@" |
-		fzf +s                                                         \
+		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(auto)%an" "$@" |
+		fzf --no-sort                                                  \
+			--reverse                                                  \
 			--tiebreak=index                                           \
 			--no-multi                                                 \
 			--ansi                                                     \

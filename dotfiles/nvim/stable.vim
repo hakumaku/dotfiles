@@ -360,17 +360,17 @@ augroup file_cc
 	au FileType cpp call Iab('incg', '#include <><esc>ba')
 	au FileType cpp call Iab('incl', '#include ".h"<esc>2ba')
 	" Insert C main function
-	au FileType cpp call Iab('Main', 'int main(int argc, const char *argv[])<CR>
-					\{<CR>}<CR><esc><Up>Oreturn 0;<esc>O<esc>O')
+	" au FileType cpp call Iab('Main', 'int main(int argc, const char *argv[])<CR>
+	" 				\{<CR>}<CR><esc><Up>Oreturn 0;<esc>O<esc>O')
 
 	" Common functions
-	au FileType cpp call Iab('sout', 'std::cout << << ''\n'';<esc>2gEa ')
+	" au FileType cpp call Iab('sout', 'std::cout << << ''\n'';<esc>2gEa ')
+	" au FileType cpp call Iab('std', 'std::')
 
 	" Include Guard
-	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
-				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
-				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
-	au FileType cpp call Iab('std', 'std::')
+	" au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+	" 			\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
+	" 			\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
 	au FileType cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
 
@@ -545,4 +545,19 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}}
+
+" {{{ coc-snippets
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 " }}}
