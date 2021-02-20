@@ -370,6 +370,7 @@ augroup file_cc
 	au FileType cpp call Iab('#g', '<esc>ddggO#ifndef <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\#define <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED<CR>
 				\<esc>Go<CR>#endif /* <C-R>=expand("%:t")<CR><esc>BviwUf.Da_INCLUDED */<esc>2<C-o>')
+	au FileType cpp call Iab('std', 'std::')
 	au FileType cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2
 augroup END
 

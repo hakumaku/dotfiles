@@ -1,76 +1,98 @@
 #!/usr/bin/env bash
 
+application=""
+
+search_app() {
+	local default_path="/usr/share/applications"
+	local snap_path="/var/lib/snapd/desktop/applications"
+	local local_path="$HOME/.local/share/applications"
+
+	while [ $# -gt 0 ]; do
+		local app=$1
+		if [ -f "${snap_path}/${app}_${app}.desktop" ]; then
+			application="${snap_path}/${app}_${app}.desktop"
+		elif [ -f "${default_path}/${app}.desktop" ]; then
+			application="${default_path}/${app}.desktop"
+		elif [ -f "${local_path}/${app}.desktop" ]; then
+			application="${local_path}/${app}.desktop"
+		fi
+		if [ ! -z "$application" ]; then
+			return
+		fi
+		shift
+	done
+}
+
 change_icons() {
-	if [ -z $1 ]; then
-		return 1
-	fi
+	while [ $# -gt 0 ]; do
+		local input=$1
+		local icon=""
 
-	local app=$1
-	local path="/var/lib/snapd/desktop/applications"
-	local icon=""
+		case "$input" in
+			"lol"|"leagueoflegends")
+				icon="leagueoflegends"
+				search_app "leagueoflegends"
+				;;
+			"discord")
+				icon="discord"
+				search_app "discord"
+				;;
+			"system"|"gnome-system-monitor")
+				icon="system"
+				search_app "gnome-system-monitor"
+				;;
+			"code"|"vscode")
+				icon="visual-studio-code"
+				search_app "code"
+				;;
+			"zenkit")
+				icon="zenkit"
+				search_app "zenkit"
+				;;
+			"alacritty")
+				icon="terminal"
+				search_app "com.alacritty.Alacritty"
+				;;
+			"slack")
+				icon="slack"
+				search_app "slack"
+				;;
+			"gitkraken"|"kraken")
+				icon="gitkraken"
+				search_app "gitkraken"
+				;;
+			"thunderbird")
+				icon="thunderbird"
+				search_app "thunderbird"
+				if [ ! -z $application ]; then
+					sudo sed -ri '/(StartupNotify=.*)/a StartupWMClass=Thunderbird' "$application"
+					shift
+					continue
+				fi
+				;;
+				# Jetbrains applications
+				"pycharm")
+				icon="$input"
+				search_app "${input}-community" "${input}-professional" "jetbrains-${input}-community" "jetbrains-${input}-professional"
+				;;
+			"toolbox")
+				icon="jetbrains-$input"
+				search_app "$input" "jetbrains-$input"
+				;;
+			"clion"|"datagrip")
+				icon="$input"
+				search_app "$input" "jetbrains-$input"
+				;;
+		esac
 
-	if [ "$app" = "lol" ] || [ "$app" = "leagueoflegends" ]; then
-		icon="leagueoflegends"
-		app="leagueoflegends_leagueoflegends.desktop"
-
-	elif [ "$app" = "discord" ]; then
-		icon="discord"
-		app="discord_discord.desktop"
-
-	elif [ "$app" = "system" ]; then
-		icon="system"
-		app="gnome-system-monitor_gnome-system-monitor.desktop"
-
-	elif [ "$app" = "code" ] || [ "$app" = "vscode" ]; then
-		icon="visual-studio-code"
-		app="code_code.desktop"
-
-	elif [ "$app" = "pycharm" ]; then
-		icon="pycharm"
-		app="pycharm-community_pycharm-community.desktop"
-
-	elif [ "$app" = "zenkit" ]; then
-		icon="zenkit"
-		app="zenkit_zenkit.desktop"
-
-	elif [ "$app" = "alacritty" ]; then
-		icon="terminal"
-		app="com.alacritty.Alacritty.desktop"
-		path="/usr/share/applications"
-
-	elif [ "$app" = "slack" ]; then
-		icon="slack"
-		if [ -f "/usr/share/applications/slack.desktop" ]; then
-			path="/usr/share/applications"
-			app="slack.desktop"
+		if [ ! -z "$application" ]; then
+			sudo sed -ri 's/(Icon=)(.*)/\1'${icon}'/' "${application}"
 		else
-			app="slack_slack.desktop"
+			echo "Cannot find such application: ${input}"
 		fi
 
-	elif [ "$app" = "gitkraken" ] || [ "$app" = "kraken" ]; then
-		icon="gitkraken"
-		if [ -f "/usr/share/applications/gitkraken.desktop" ]; then
-			path="/usr/share/applications"
-			app="gitkraken.desktop"
-		else
-			app="gitkraken_gitkraken.desktop"
-		fi
-
-	elif [ "$app" = "clion" ]; then
-		icon="clion"
-		app="clion_clion.desktop"
-
-	elif [ "$app" = "thunderbird" ]; then
-		app="thunderbird.desktop"
-		path="/usr/share/applications"
-		sudo sed -ri '/(StartupNotify=.*)/a StartupWMClass=Thunderbird' "$path/$app"
-		return 0
-
-	else
-		return 2
-	fi
-
-	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
+		shift
+	done
 }
 
 change_icons "$@"
