@@ -77,7 +77,7 @@ gf () {
 		--graph        \
 		--decorate     \
 		--color=always \
-		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(auto)%an" "$@" |
+		--format="%C(cyan)%h %C(auto)%d %C(yellow)%s%+b %C(auto)%an" "$@" |
 		fzf --no-sort                                                  \
 			--reverse                                                  \
 			--tiebreak=index                                           \
