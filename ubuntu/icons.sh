@@ -25,6 +25,7 @@ search_app() {
 
 change_icons() {
 	while [ $# -gt 0 ]; do
+		application=""
 		local input=$1
 		local icon=""
 
