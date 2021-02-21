@@ -204,6 +204,7 @@ endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 nnoremap <leader>f :py3f /usr/share/clang/clang-format-11/clang-format.py<CR>:echo 'Formatted lines'<CR>
 vnoremap <leader>f :py3f /usr/share/clang/clang-format-11/clang-format.py<CR>:echo 'Formatted lines'<CR>
+nnoremap <leader>cf :!clang-include-fixer-11<cr>
 " }}}
 
 " {{{ Vim Functions

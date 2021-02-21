@@ -1,0 +1,258 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet incg "#include <...>"
+#include <${1}>
+endsnippet
+
+snippet incg "#include ..."
+#include "${1}"
+endsnippet
+
+snippet Main "int main(...)"
+int main(int argc, const char* argv[])
+{
+	${1}
+	return 0;
+}
+endsnippet
+
+snippet using "using name = ...;"
+using ${1:name} = ${2:type};
+endsnippet
+
+snippet template "template<...>"
+template <typename ${1:_InputIter}>
+endsnippet
+
+snippet class "class ..."
+class ${1:`!p snip.rv = snip.basename or "name"`} {
+public:
+	${1/(\w+).*/$1/}(${2:arguments});
+};
+endsnippet
+
+snippet struct "struct ..."
+struct ${1:`!p snip.rv = snip.basename or "name"`} {
+};
+endsnippet
+
+snippet enum "enum ..."
+enum class ${1:`!p snip.rv = snip.basename or "name"`} {
+};
+endsnippet
+
+snippet union "union ..."
+union ${1:`!p snip.rv = snip.basename or "name"`} {
+};
+endsnippet
+
+snippet ns "namespace ..."
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}$0
+}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+endsnippet
+
+# Syntatic sugar
+snippet fori "for (int i = 0; i < ...; ++i)"
+for (int ${1:i} = 0; ${2:condition}; ++${1/(\w+).*/$1/}) {
+	${3}
+}
+endsnippet
+
+snippet fore "for (auto ... : ...)"
+for (const auto& ${1:item} : ${2:col}) {
+	${3}
+}
+endsnippet
+
+snippet forb "for (auto it = ...; it != ...; ++it)"
+for (auto ${1:it} = std::begin(${2:item}); ${1/(\w+).*/$1/} != std::end(${2/(\w+).*/$1/}); ++${1/(\w+).*/$1/}) {
+	${3}
+}
+endsnippet
+
+snippet lambda "[...](...) {...}"
+[${1}](const auto& ${2:args}) {
+	${3}
+}
+endsnippet
+
+snippet if "if (...) {...}"
+if ($1) {
+	$0
+}
+endsnippet
+
+snippet elif "else if (...) {...}"
+else if ($1) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet else "else {...}"
+else {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet switch "switch (...) {...}"
+switch (${1}) {
+	case ${2}:
+		break;
+	default:
+		break;
+}
+endsnippet
+
+snippet case "case ...: break;"
+case ${1}:
+	break;
+endsnippet
+
+snippet try "try {...} catch (...) {...}"
+try {
+	${VISUAL}$1
+} catch (${2:const std::exception& e}) {
+	$3
+}
+endsnippet
+
+snippet fswap "friend swap(...) {...}"
+void swap(${1:auto}& other) noexcept {
+	using std::swap;
+	swap(${2:x}, other.${2/(\w+).*/$1/});
+}
+
+friend void swap(${1:auto}& lhs, ${1/(\w+).*/$1/}& rhs) noexcept { lhs.swap(rhs); }
+endsnippet
+
+snippet cla "An entire .h generator" b
+#ifndef ${2:`!v substitute(vim_snippets#Filename('$1_H','ClassName'),'.*','\U&\E','')`}
+#define $2
+
+class ${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}
+{
+public:
+	$1();
+};
+
+#endif /* $2 */
+endsnippet
+
+# Standard Functions/Templates
+snippet std "std::"
+std::${1}
+endsnippet
+
+snippet sout "std::cout << ..."
+std::cout << "${1}\n";
+endsnippet
+
+snippet printf "std::printf(...)"
+std::printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet puts "std::puts(...)"
+std::puts("${1:text}");
+endsnippet
+
+snippet string "std::string ..."
+std::string ${1}{"${2}"};
+endsnippet
+
+snippet strv "std::string_view ..."
+std::string_view ${1}{"${2}"};
+endsnippet
+
+snippet vector "std::vector<...> ..."
+std::vector<${1:char}> v$0;
+endsnippet
+
+snippet array "std::array<..., ...> ..."
+std::array<${1:int}, ${2}> a$0;
+endsnippet
+
+snippet umap "std::unordered_map<..., ...> ..."
+std::unordered_map<${1:key}, ${2:value}> map$0;
+endsnippet
+
+snippet map "std::map<..., ...> ..."
+std::map<${1:key}, ${2:value}> map$0;
+endsnippet
+
+snippet uset "std::unordered_set<...> ..."
+std::unordered_set<${1:key}> set$0;
+endsnippet
+
+snippet set "std::set<...> ..."
+std::set<${1:key}> set$0;
+endsnippet
+
+snippet unique "std::unique_ptr<...> uptr;"
+std::unique_ptr<${1:type}> uptr$0;
+endsnippet
+
+snippet make_unique "std::make_unique<...>(...)"
+std::make_unique<${1:type}>(${2:args});
+endsnippet
+
+snippet shared "std::shared_ptr<...> sptr;"
+std::shared_ptr<${1:type}> sptr$0;
+endsnippet
+
+snippet make_shared "std::make_shared<...>(...)"
+std::make_shared<${1:type}>(${2:args});
+endsnippet
+
+snippet pair "std::pair<..., ...> p;"
+std::pair<${1:first}, ${2:second}> p$0;
+endsnippet
+
+snippet make_pair "std::make_pair(..., ...)"
+std::make_pair(${1:first}, ${2:second});
+endsnippet
+
+snippet fw "std::forward<...>(...)"
+std::forward<${1:type}>(${2:args});
+endsnippet
+
+snippet mv "std::move(...)"
+std::move(${1:type});
+endsnippet
+
+snippet ex "std::exchange(...)"
+std::exchange(${1:lhs}, ${2:rhs});
+endsnippet
+
+snippet eit "std::enable_if_t<...>"
+std::enable_if_t<${1:condition}>
+endsnippet
+
+snippet isame "std::is_same_v<...>"
+std::is_same_v<${1:T1}, ${2:T2}>
+endsnippet
