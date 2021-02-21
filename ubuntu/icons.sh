@@ -71,10 +71,10 @@ change_icons() {
 					continue
 				fi
 				;;
-				# Jetbrains applications
-				"pycharm")
+			# Jetbrains applications
+			"pycharm")
 				icon="$input"
-				search_app "${input}-community" "${input}-professional" "jetbrains-${input}-community" "jetbrains-${input}-professional"
+				search_app "${input}-community" "${input}-professional" "jetbrains-${input}" "jetbrains-${input}-community" "jetbrains-${input}-professional"
 				;;
 			"toolbox")
 				icon="jetbrains-$input"
