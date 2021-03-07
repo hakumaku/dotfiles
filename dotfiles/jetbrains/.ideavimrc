@@ -1,0 +1,9 @@
+set surround
+
+set relativenumber
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+nmap <C-s> :action GotoSymbol<CR>
