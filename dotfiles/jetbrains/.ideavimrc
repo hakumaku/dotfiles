@@ -7,3 +7,9 @@ set incsearch
 set hlsearch
 
 nmap <C-s> :action GotoSymbol<CR>
+
+vmap <C-c> :action EditorCopy<CR>
+imap <C-v> <ESC>:action EditorPaste<CR>a
+
+nmap ]g :action GotoNextError<CR>
+nmap [g :action GotoPreviousError<CR>
