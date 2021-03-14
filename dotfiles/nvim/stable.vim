@@ -24,6 +24,7 @@ call plug#begin(stdpath('data').'/plugged')
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
+	Plug 'joshdick/onedark.vim'
 
 	" Status line
 	Plug 'vim-airline/vim-airline'
@@ -426,8 +427,11 @@ let g:termdebug_wide=1
 " }}}
 " {{{ vim-solarized8 (https://github.com/lifepillar/vim-solarized8)
 " Options: solarized8_high, solarized8, solarized8_low solarized8_flat
-set background=dark
-silent! colorscheme solarized8
+" set background=dark
+" silent! colorscheme solarized8
+" }}}
+" {{{ one dark pro (https://github.com/joshdick/onedark.vim)
+silent! colorscheme onedark
 " }}}
 " {{{ gruvbox (https://github.com/morhetz/gruvbox)
 " set background=dark
@@ -445,7 +449,7 @@ let g:airline_section_b = '%{strftime("%H:%M:%S")}'
 let g:airline_section_y = '%{&fenc} %{WebDevIconsGetFileFormatSymbol()}'
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='light'
-let g:airline_solarized_bg='dark'
+" let g:airline_solarized_bg='dark'
 " }}}
 " {{{ NERDTree
 let g:NERDTreeGlyphReadOnly = "RO"
