@@ -3,9 +3,8 @@
 workspace="$HOME/workspace"
 dotfiles="$HOME/workspace/ubuntu-fresh/dotfiles"
 
-install_delta() {
-
-}
+# install_delta() {
+# }
 
 install_diff_so_fancy() {
 	git clone "https://github.com/so-fancy/diff-so-fancy" "$workspace/diff-so-fancy"
@@ -48,6 +47,5 @@ set_ssh() {
 }
 
 sudo apt install git &&
-	install_diff_so_fancy &&
 	install_tig &&
-	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
+ 	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
