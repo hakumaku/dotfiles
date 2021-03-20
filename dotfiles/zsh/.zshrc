@@ -36,28 +36,9 @@ twitch () {
 	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
 }
 
-icons () {
-	local app=$1
-	local path="/var/lib/snapd/desktop/applications"
-	local icon=""
-
-	if [ "$app" = "lol" ] || [ "$app" = "leagueoflegends" ]; then
-		icon="leagueoflegends"
-		app="leagueoflegends_leagueoflegends.desktop"
-
-	elif [ "$app" = "discord" ]; then
-		icon="discord"
-		app="discord_discord.desktop"
-
-	elif [ "$app" = "system" ]; then
-		icon="system"
-		app="gnome-system-monitor_gnome-system-monitor.desktop"
-
-	else
-		return 1
-	fi
-
-	sudo sed -ri 's/(Icon=)(.*)/\1'$icon'/' "$path/$app"
+enable_perf () {
+	sudo sh -c 'echo 1 >/proc/sys/kernel/perf_event_paranoid'
+	sudo sh -c 'echo 0 >/proc/sys/kernel/kptr_restrict'
 }
 
 gf () {

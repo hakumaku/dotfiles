@@ -1,5 +1,12 @@
 {
 	"codeLens.enable": true,
+	"diagnostic.virtualText": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.checkCurrentLine": true,
+	"diagnostic.messageTarget": "echo",
+
+	"coc.preferences.enableMessageDialog": false,
+
 	"clangd.semanticHighlighting": true,
 	"clangd.enabled": true,
 	"clangd.arguments": ["--clang-tidy", "--clang-tidy-checks=cppcoreguidelines-*,clang-analyzer-*"],
