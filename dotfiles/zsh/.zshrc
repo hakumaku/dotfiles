@@ -81,15 +81,15 @@ export FZF_COMPLETION_OPTS='+c -x'
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  fdfind --hidden --follow --exclude ".git" . "$1"
+  fd --hidden --follow --exclude ".git" . "$1"
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fdfind --type d --hidden --follow --exclude ".git" . "$1"
+  fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 # Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fdfind --type f'
+export FZF_DEFAULT_COMMAND='fd --type f'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -114,9 +114,6 @@ alias python='/usr/bin/python3'
 # alias la="exa -lahF"
 alias ls='ls --color -h --group-directories-first'
 alias l.='ls -d .* --color=auto'
-alias diff="diff-so-fancy"
-# alias cat="bat"
-# alias find="fd"
 alias grep='grep --color=auto'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
