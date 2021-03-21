@@ -133,6 +133,7 @@ alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keym
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias nvim="$HOME/squashfs-root/usr/bin/nvim"
 alias nvimg="nvim -c 'Gstatus | wincmd o' ."
 
 # Tmux

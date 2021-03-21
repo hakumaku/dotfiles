@@ -1,6 +1,6 @@
 " Specify a directory for plugins
 call plug#begin(stdpath('data').'/plugged')
-	" Startify
+	" Startify & NERDTree
 	Plug 'mhinz/vim-startify'
 	Plug 'scrooloose/nerdtree'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -13,13 +13,16 @@ call plug#begin(stdpath('data').'/plugged')
 	" Cpp Development
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
-	Plug 'majutsushi/tagbar', { 'on':  'TagbarToggle' }
-	Plug 'liuchengxu/vista.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'raimondi/delimitmate'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'jackguo380/vim-lsp-cxx-highlight'
+	Plug 'liuchengxu/vista.vim'
+	" Telescope
+	Plug 'nvim-lua/popup.nvim'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
 
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
@@ -187,7 +190,8 @@ vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
 " External Utilities
 nnoremap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 " Run fuzzy finder
-nnoremap <C-s> :FZF<CR>
+nnoremap <C-s> :Telescope find_files<CR>
+nnoremap <C-f> :Telescope live_grep<CR>
 " Open NerdTree
 nnoremap <silent> <C-w>o :NERDTreeToggle<Bar>echo @%<CR>
 " Open Tagbar
