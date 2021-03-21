@@ -17,7 +17,8 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'tpope/vim-repeat'
 	Plug 'raimondi/delimitmate'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'jackguo380/vim-lsp-cxx-highlight'
+	" Plug 'jackguo380/vim-lsp-cxx-highlight'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 	Plug 'liuchengxu/vista.vim'
 	" Telescope
 	Plug 'nvim-lua/popup.nvim'
@@ -569,4 +570,19 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+" }}}
+" {{{ TreeSitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c", "cpp", "python", "comment", "json", "regex", "bash", "html", "css", "yaml", "javascript"},
+  highlight = {
+    enable = true,
+    disable = {"java", "kotlin", "nix", "dart", "lua", "rst", "fennel", "erlang", "ocaml",
+               "ocaml_interface", "teal", "ocamllex", "clojure", "swift", "r", "c_sharp", "svelte", "tsx", "julia",
+               "typescript", "rust", "gdscript", "ledger", "sparql", "query", "verilog", "scala",
+               "supercollider", "go", "haskell", "jsdoc", "toml", "glimmer", "ruby", "ql", "elm", "jsonc",
+               "vue", "graphql", "turtle", "php", "devicetree"}
+  }
+}
+EOF
 " }}}
