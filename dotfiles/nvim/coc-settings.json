@@ -9,7 +9,7 @@
 
 	"clangd.semanticHighlighting": true,
 	"clangd.enabled": true,
-	"clangd.arguments": ["--clang-tidy", "--clang-tidy-checks=cppcoreguidelines-*,clang-analyzer-*"],
+	"clangd.arguments": ["--clang-tidy", "--clang-tidy-checks=cppcoreguidelines-*,clang-analyzer-*,misc-*,bugprone-*,performance-*,readability-*"],
 	"clangd.checkUpdates": false,
 	"clangd.disableDiagnostics": false,
 	"clangd.disableSnippetCompletion": false,
