@@ -1,38 +1,38 @@
 " Specify a directory for plugins
 call plug#begin(stdpath('data').'/plugged')
-	" Startify & NERDTree
-	Plug 'mhinz/vim-startify'
-	Plug 'scrooloose/nerdtree'
-	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-	Plug 'ryanoasis/vim-devicons'
-
-	" Git
-	Plug 'tpope/vim-fugitive'
-	Plug 'airblade/vim-gitgutter'
-
-	" Cpp Development
+	" Vim basic utility
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'raimondi/delimitmate'
+	Plug 'scrooloose/nerdtree'
+	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'ryanoasis/vim-devicons'
+
+	" Neovim 5.0+
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	" Plug 'jackguo380/vim-lsp-cxx-highlight'
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 	Plug 'liuchengxu/vista.vim'
 	" Telescope
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'kyazdani42/nvim-web-devicons'
 
+	" Git
+	Plug 'tpope/vim-fugitive'
+	Plug 'airblade/vim-gitgutter'
+
+	" Startify & NERDTree
+	Plug 'mhinz/vim-startify'
+	" Status line
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
 	Plug 'joshdick/onedark.vim'
-
-	" Status line
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
 " Initialize plugin system
 call plug#end()
 
