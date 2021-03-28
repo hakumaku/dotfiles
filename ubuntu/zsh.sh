@@ -15,6 +15,9 @@ install_zsh_extensions() {
 	# zsh-dircolors-solarized
 	url="https://github.com/joel-porquet/zsh-dircolors-solarized"
 	git clone --recursive "$url" "$workspace/${url##*/}"
+
+	url="https://github.com/zsh-users/zsh-autosuggestions"
+	git clone "$url" "$workspace/${url##*/}"
 }
 
 sudo apt install zsh &&

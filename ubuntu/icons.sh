@@ -57,6 +57,10 @@ change_icons() {
         icon="slack"
         search_app application "slack"
         ;;
+      "atom")
+        icon="atom"
+        search_app application "atom"
+        ;;
       "gitkraken"|"kraken")
         icon="gitkraken"
         search_app application "gitkraken"

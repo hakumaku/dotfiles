@@ -6,6 +6,7 @@
 	"diagnostic.messageTarget": "echo",
 
 	"coc.preferences.enableMessageDialog": false,
+	"coc.preferences.colorSupport": true,
 
 	"clangd.semanticHighlighting": true,
 	"clangd.enabled": true,
