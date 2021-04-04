@@ -131,17 +131,12 @@ draw_bold_text_with_bright_colors: true
 # {{{ Color schemes (https://github.com/jwilm/alacritty/wiki/Color-schemes)
 schemes:
   solarized_light: &solarized_light
-    # Default colors
     primary:
       background: '0xfdf6e3' # base3
       foreground: '0x657b83' # base00
-
-    # Cursor colors
     cursor:
       text:   '0xfdf6e3' # base3
       cursor: '0x657b83' # base00
-
-    # Normal colors
     normal:
       black:   '0x073642' # base02
       red:     '0xdc322f' # red
@@ -151,8 +146,6 @@ schemes:
       magenta: '0xd33682' # magenta
       cyan:    '0x2aa198' # cyan
       white:   '0xeee8d5' # base2
-
-    # Bright colors
     bright:
       black:   '0x002b36' # base03
       red:     '0xcb4b16' # orange
@@ -164,17 +157,12 @@ schemes:
       white:   '0xfdf6e3' # base3
 
   solarized_dark: &solarized_dark
-    # Default colors
     primary:
       background: '0x002b36' # base03
       foreground: '0x839496' # base0
-
-    # Cursor colors
     cursor:
       text:   '0x002b36' # base03
       cursor: '0x839496' # base0
-
-    # Normal colors
     normal:
       black:   '0x073642' # base02
       red:     '0xdc322f' # red
@@ -184,6 +172,15 @@ schemes:
       magenta: '0xd33682' # magenta
       cyan:    '0x2aa198' # cyan
       white:   '0xeee8d5' # base2
+# bright:
+#   black:   '#002b36' # base03
+#   red:     '#cb4b16' # orange
+#   green:   '#586e75' # base01
+#   yellow:  '#657b83' # base00
+#   blue:    '#839496' # base0
+#   magenta: '#6c71c4' # violet
+#   cyan:    '#93a1a1' # base1
+#   white:   '#fdf6e3' # base3
 
   gruvbox_light: &gruvbox_light
     # Bright colors
@@ -282,22 +279,53 @@ schemes:
       magenta: '0x6c71c4'
       cyan:    '0x35434d'
       white:   '0xffffff'
+
+  one_dark: &one_dark
+    primary:
+      background: '#282c34'
+      foreground: '#abb2bf'
+    cursor:
+      text:       CellBackground
+      cursor:     '#528bff' # syntax-cursor-color
+    selection:
+      text:       CellForeground
+      background: '#3e4451' # syntax-selection-color
+    normal:
+      black:      '#5c6370' # mono-3
+      red:        '#e06c75' # red 1
+      green:      '#98c379'
+      yellow:     '#e5c07b' # orange 2
+      blue:       '#61afef'
+      magenta:    '#c678dd'
+      cyan:       '#56b6c2'
+      white:      '#828997' # mono-2
+  one_light: &one_light
+    primary:
+      background: '#fafafa'
+      foreground: '#383a42'
+    cursor:
+      text:       CellBackground
+      cursor:     '#526eff' # syntax-cursor-color
+    selection:
+      text:       CellForeground
+      background: '#e5e5e6' # syntax-selection-color
+    normal:
+      black:      '#696c77' # mono-2
+      red:        '#e45649' # red 1
+      green:      '#50a14f'
+      yellow:     '#c18401' # orange 2
+      blue:       '#4078f2'
+      magenta:    '#a626a4'
+      cyan:       '#0184bc'
+      white:      '#a0a1a7' # mono-3
 # }}}
 colors: *solarized_dark
-background_opacity: 0.8
+background_opacity: 1.0
 cursor:
-  # Cursor style
-  #
-  # Values for `style`:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
   style: Block
-
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
   unfocused_hollow: true
-
 
 # Visual Bell
 #
