@@ -90,5 +90,11 @@ func! Iab(ab, full)
 		\a:ab."', '".escape(single_quote_escaped_full.'<C-R>=EatWhitespace()<CR>', '<>\"').
 		\"')<CR>"
 endfunc
+
+func! TrimWhitespace()
+	let l:save = winsaveview()
+	keeppatterns %s/\s\+$//e
+	call winrestview(l:save)
+endfunc
 " }}}
 

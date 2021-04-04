@@ -5,6 +5,7 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
+	Plug 'mbbill/undotree'
 	Plug 'raimondi/delimitmate'
 	Plug 'scrooloose/nerdtree'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'

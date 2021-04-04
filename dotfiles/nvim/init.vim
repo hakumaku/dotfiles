@@ -23,6 +23,7 @@ endif
 " set cursorline		" Show cursor line
 " set spell
 " set wrap linebreak nolist
+" set signcolumn=number
 set autoindent
 set autoread            " When a file has been changed outside of Vim, automatically read it againautoread
 set backspace=indent,eol,start
@@ -47,18 +48,18 @@ set nobackup			" No backup files
 set noexpandtab			" No spaces when tab
 set nofoldenable        " Disable all folds to be open
 set noswapfile          " No .swp
+set nowrap
 set nowritebackup       " No backup
 set nrformats-=octal    " No octal format when using CTRL-A and CTRL-X. E,g. 007 -> 010
 set number				" Show line number
 set relativenumber		" Relative numbers instead of absolute
 set ruler               " Show the line and column number of the cursor position, separated by a comma
-set scrolloff=3			" Show 3 lines above or below cursor when scrolling
+set scrolloff=8			" Show 8 lines above or below cursor when scrolling
 set sessionoptions-=options
 set shiftwidth=4		" Size of the indent
 set shortmess+=c        " Don't give ins-completion-menu messages
 set showcmd				" Show command in last line
 set showmode			" Show insert, replace, or visual mode in last line
-" set signcolumn=number
 set signcolumn=yes:1
 set smartcase			" Case sensitive if contains at least one capital letter
 set smarttab
@@ -69,6 +70,8 @@ set tabpagemax=50
 set tabstop=4			" Tab size = 4
 set ttimeout			" Time waited for key press to complete
 set ttimeoutlen=50
+set undodir=~/.vim/undo-dir
+set undofile
 set updatetime=300
 set viewoptions-=options
 set wildmenu			" On pressing 'wildchar' to invoke completion
