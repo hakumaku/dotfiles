@@ -320,7 +320,7 @@ schemes:
       white:      '#a0a1a7' # mono-3
 # }}}
 colors: *solarized_dark
-background_opacity: 1.0
+background_opacity: 0.8
 cursor:
   style: Block
   # If this is `true`, the cursor will be rendered as a hollow box when the

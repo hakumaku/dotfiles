@@ -30,7 +30,20 @@ install_nodejs() {
 	sh -c 'curl -sL install-node.now.sh/lts | sudo bash'
 }
 
-sudo apt install neovim curl &&
+install_nvim() {
+	local dependencies=(
+		"ninja-build" "gettext" "libtool" "libtool-bin"
+		"autoconf" "automake" "pkg-config" "unzip")
+	local output="${workspace}/neovim"
+	if [[ ! -f "$output" ]]; then
+		sudo apt install ${dependencies[@]} &&
+			git clone "https://github.com/neovim/neovim" $output
+	fi
+	(cd $output && make CMAKE_BUILD_TYPE=Release && sudo make install)
+}
+
+install_nvim &&
+sudo apt install curl &&
 	install_clang &&
 	install_nodejs &&
 	install_plug

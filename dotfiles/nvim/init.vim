@@ -125,5 +125,3 @@ augroup END
 source $NVIM_CONFIG_DIR/functions.vim
 source $NVIM_CONFIG_DIR/plugins.vim
 source $NVIM_CONFIG_DIR/shortcuts.vim
-
-command! CMake lua require('neocmake').cmake()
