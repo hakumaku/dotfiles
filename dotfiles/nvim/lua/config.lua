@@ -22,3 +22,4 @@ require('nvim-treesitter.configs').setup {
                "vue", "graphql", "turtle", "php", "devicetree"}
   }
 }
+

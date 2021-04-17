@@ -75,6 +75,7 @@ set undofile
 set updatetime=300
 set viewoptions-=options
 set wildmenu			" On pressing 'wildchar' to invoke completion
+let g:termdebug_wide=1
 
 au CmdLineEnter * if !exists('b:NERDTree') | set norelativenumber | redraw
 au CmdlineLeave * if !exists('b:NERDTree') | set relativenumber
@@ -125,3 +126,5 @@ augroup END
 source $NVIM_CONFIG_DIR/functions.vim
 source $NVIM_CONFIG_DIR/plugins.vim
 source $NVIM_CONFIG_DIR/shortcuts.vim
+
+lua require('config')

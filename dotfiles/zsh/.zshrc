@@ -133,7 +133,7 @@ alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keym
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias nvimg="nvim -c 'Gstatus | wincmd o' ."
+alias nvimg="nvim -c 'Git | wincmd o' ."
 
 # Tmux
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then

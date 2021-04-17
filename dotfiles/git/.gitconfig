@@ -11,7 +11,7 @@
     file-decoration-style = none
 [user]
 	email = gentlebuuny@gmail.com
-	name = hakumaku
+	name = haku
 [mergetool "fugitive"]
 	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [merge]
