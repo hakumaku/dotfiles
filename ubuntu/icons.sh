@@ -74,6 +74,15 @@ change_icons() {
           continue
         fi
         ;;
+      "brave")
+        icon="brave-browser"
+        search_app application "thunderbird"
+        if [ ! -z $application ]; then
+          sudo sed -ri '/(StartupNotify=.*)/a StartupWMClass=brave-browser' "$application"
+          shift
+          continue
+        fi
+        ;;
         # Jetbrains applications
         "pycharm")
         icon="$input"
