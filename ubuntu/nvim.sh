@@ -35,11 +35,11 @@ install_nvim() {
 		"ninja-build" "gettext" "libtool" "libtool-bin"
 		"autoconf" "automake" "pkg-config" "unzip")
 	local output="${workspace}/neovim"
-	if [[ ! -f "$output" ]]; then
+	if [ ! -d "$output" ]; then
 		sudo apt install ${dependencies[@]} &&
 			git clone "https://github.com/neovim/neovim" $output
 	fi
-	(cd $output && make CMAKE_BUILD_TYPE=Release && sudo make install)
+	(cd $output && make MIN_LOG_LEVEL=1 CMAKE_BUILD_TYPE=Release && sudo make install)
 }
 
 install_nvim &&
@@ -47,4 +47,3 @@ sudo apt install curl &&
 	install_clang &&
 	install_nodejs &&
 	install_plug
-
