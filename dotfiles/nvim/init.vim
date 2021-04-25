@@ -77,8 +77,8 @@ set viewoptions-=options
 set wildmenu			" On pressing 'wildchar' to invoke completion
 let g:termdebug_wide=1
 
-au CmdLineEnter * if !exists('b:NERDTree') | set norelativenumber | redraw
-au CmdlineLeave * if !exists('b:NERDTree') | set relativenumber
+" au CmdLineEnter * if !exists('b:NERDTree') | set norelativenumber | redraw
+" au CmdlineLeave * if !exists('b:NERDTree') | set relativenumber
 
 iabbrev sturct struct
 iabbrev wrod word
