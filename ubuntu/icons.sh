@@ -51,7 +51,8 @@ change_icons() {
         ;;
       "alacritty")
         icon="terminal"
-        search_app application "com.alacritty.Alacritty"
+        search_app application "com.alacritty.Alacritty" \
+                               "Alacritty"
         ;;
       "slack")
         icon="slack"
@@ -76,7 +77,7 @@ change_icons() {
         ;;
       "brave")
         icon="brave-browser"
-        search_app application "thunderbird"
+        search_app application "brave-browser"
         if [ ! -z $application ]; then
           sudo sed -ri '/(StartupNotify=.*)/a StartupWMClass=brave-browser' "$application"
           shift

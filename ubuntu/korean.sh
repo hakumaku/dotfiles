@@ -3,7 +3,7 @@
 config_fcitx() {
 	im-config -n fcitx
 	if [[ ! -d "$HOME/.config/fcitx" ]]; then
-		( exec fcitx -d & )
+		fcitx -d &
 	fi
 
 	local profile="$HOME/.config/fcitx/profile"
