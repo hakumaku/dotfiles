@@ -46,6 +46,6 @@ set_ssh() {
 		firefox https://github.com/settings/ssh/new
 }
 
-sudo apt install git &&
+sudo apt install git xclip &&
 	install_tig &&
  	(cd && ln -s $dotfiles/git/.gitconfig) && set_ssh
