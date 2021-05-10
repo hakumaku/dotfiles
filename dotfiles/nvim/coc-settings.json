@@ -29,5 +29,6 @@
 				"buildDirectory": "build"
 			}
 		}
-}
+	},
+	"Lua.diagnostics.globals": ["vim"]
 }
