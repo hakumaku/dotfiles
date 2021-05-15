@@ -27,4 +27,5 @@ update_keyvalue() {
 
 install_codium &&
 	update_keyvalue serviceUrl https://marketplace.visualstudio.com/_apis/public/gallery &&
-	update_keyvalue itemUrl https://marketplace.visualstudio.com/items
+	update_keyvalue itemUrl https://marketplace.visualstudio.com/items &&
+	codium --install-extension shan.code-settings-sync
