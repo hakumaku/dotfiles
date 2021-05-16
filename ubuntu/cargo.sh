@@ -4,7 +4,7 @@ dotfile="$HOME/workspace/ubuntu-fresh/dotfiles"
 workspace="$HOME/workspace"
 
 install_dev_utilities() {
-	local packages=("git-delta" "bat" "fd-find" "ripgrep")
+	local packages=("git-delta" "bat" "fd-find" "ripgrep" "bottom")
 	sudo apt install cargo &&
 		cargo install ${packages[@]}
 
