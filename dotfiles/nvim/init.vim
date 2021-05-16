@@ -57,6 +57,8 @@ set ruler               " Show the line and column number of the cursor position
 set scrolloff=8			" Show 8 lines above or below cursor when scrolling
 set sessionoptions-=options
 set shiftwidth=4		" Size of the indent
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
 set shortmess+=c        " Don't give ins-completion-menu messages
 set showcmd				" Show command in last line
 set showmode			" Show insert, replace, or visual mode in last line
@@ -128,3 +130,4 @@ source $NVIM_CONFIG_DIR/plugins.vim
 source $NVIM_CONFIG_DIR/shortcuts.vim
 
 lua require('config')
+lua require('lsp')

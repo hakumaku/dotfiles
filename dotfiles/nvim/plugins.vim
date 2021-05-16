@@ -1,8 +1,6 @@
 " Specify a directory for plugins
 call plug#begin(stdpath('data').'/plugged')
 	" Vim basic utility
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-repeat'
 	Plug 'mbbill/undotree'
@@ -12,23 +10,24 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'ryanoasis/vim-devicons'
 
 	" Neovim 5.0+
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-	Plug 'liuchengxu/vista.vim'
-	" Telescope
+	Plug 'neovim/nvim-lspconfig'
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-lua/completion-nvim'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+	" Telescope
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'kyazdani42/nvim-web-devicons'
-	" Lua
-	Plug 'rafcamlet/coc-nvim-lua'
+	" Neovim lua
+	Plug 'tjdevries/nlua.nvim'
+	" Etc
+	Plug 'mhinz/vim-startify'
+	Plug 'liuchengxu/vista.vim'
 
 	" Git
 	Plug 'tpope/vim-fugitive'
 	Plug 'airblade/vim-gitgutter'
 
-	" Startify
-	Plug 'mhinz/vim-startify'
 	" Status line
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
@@ -92,15 +91,10 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_airline_statusline_fileformat_symbols = 1
 " }}}
 
-" {{{ FZF
-" let g:fzf_layout = { 'down': '40%', 'window': '10new' }
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-" }}}
-
-" {{{ coc
-" Highlight the symbol and its references when holding the cursor.
-autocmd VimEnter * hi link CocHighlightText Visual
-autocmd CursorHold * silent call CocActionAsync('highlight')
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-let g:coc_snippet_next = '<tab>'
+" {{{ completion-nvim
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_auto_popup = 1
+let g:completion_matching_smart_case = 1
+let g:completion_trigger_character = ['.', '::', '->']
+let g:completion_trigger_keyword_length = 2 " default = 1
 " }}}
