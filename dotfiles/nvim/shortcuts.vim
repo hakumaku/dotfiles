@@ -11,8 +11,6 @@ nnoremap <CR> o<ESC>k
 " nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
 " nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
-" Jump to the next tab ')'
-inoremap <C-l> <C-o>f)
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>

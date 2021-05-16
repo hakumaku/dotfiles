@@ -131,3 +131,6 @@ source $NVIM_CONFIG_DIR/shortcuts.vim
 
 lua require('config')
 lua require('lsp')
+lua utils = require('utils.functions')
+" Jump to the next tab ')'
+inoremap <C-l> <esc>:lua utils.jump_right()<CR>a
