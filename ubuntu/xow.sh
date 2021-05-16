@@ -9,9 +9,7 @@ install_xow() {
 		sudo apt install ${dependencies[@]} &&
 			git clone https://github.com/medusalix/xow "$workspace/xow"
 	fi
-	(cd $output && make BUILD=RELEASE -j8 && sudo make install) &&
-		sudo systemctl enable xow &&
-		sudo systemctl start xow
+	(cd $output && make BUILD=RELEASE -j8 && sudo make install)
 }
 
 install_xow
