@@ -15,6 +15,8 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-lua/completion-nvim'
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+	" Completion for the current buffer
+	Plug 'steelsojka/completion-buffers'
 	" Telescope
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'kyazdani42/nvim-web-devicons'
@@ -97,4 +99,9 @@ let g:completion_enable_auto_popup = 1
 let g:completion_matching_smart_case = 1
 let g:completion_trigger_character = ['.', '::', '->']
 let g:completion_trigger_keyword_length = 2 " default = 1
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet', 'buffers']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+\]
 " }}}
