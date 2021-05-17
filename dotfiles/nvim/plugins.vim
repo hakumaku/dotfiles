@@ -25,6 +25,7 @@ call plug#begin(stdpath('data').'/plugged')
 	" Etc
 	Plug 'mhinz/vim-startify'
 	Plug 'liuchengxu/vista.vim'
+	Plug 'kdav5758/TrueZen.nvim'
 
 	" Git
 	Plug 'tpope/vim-fugitive'

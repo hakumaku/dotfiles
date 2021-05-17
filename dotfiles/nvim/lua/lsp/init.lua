@@ -64,7 +64,9 @@ require('nlua.lsp.nvim').setup(lspconfig, lua)
 
 local servers = {
 	['clangd'] = require('lsp.clangd'),
-	['cmake'] = require('lsp.cmake')
+	['cmake'] = require('lsp.cmake'),
+	['bashls'] = require('lsp.bashls'),
+	['pyright'] = require('lsp.pyright')
 }
 for lsp, setup in pairs(servers) do
 	setup.on_attach = on_attach
