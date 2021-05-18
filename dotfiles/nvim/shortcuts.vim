@@ -5,12 +5,21 @@ nnoremap Y y$
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
+" cmdline-editing
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-j> <Left>
+cnoremap <C-k> <Right>
+cnoremap <C-l> <Delete>
+cnoremap <C-d> <S-Left>
+cnoremap <C-f> <S-Right>
+
 " Insert a newline in normal mode.
 nnoremap <CR> o<ESC>k
 " Move the current line one down.
-" nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
+nnoremap <silent> <C-j> :m+1<Bar>echo 'Move line down'<CR>
 " Move the current line one up.
-" nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
+nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
