@@ -77,6 +77,7 @@ set undofile
 set updatetime=300
 set viewoptions-=options
 set wildmenu			" On pressing 'wildchar' to invoke completion
+set pumblend=15
 let g:termdebug_wide=1
 
 " au CmdLineEnter * if !exists('b:NERDTree') | set norelativenumber | redraw
