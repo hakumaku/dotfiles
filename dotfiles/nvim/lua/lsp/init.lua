@@ -58,17 +58,14 @@ local on_attach = function(client, bufnr)
     require('completion').on_attach()
 end
 
-local lua = require('lsp.lua')
-lua.on_attach = on_attach
-require('nlua.lsp.nvim').setup(lspconfig, lua)
-
 local servers = {
-	['clangd'] = require('lsp.clangd'),
-	['cmake'] = require('lsp.cmake'),
-	['bashls'] = require('lsp.bashls'),
-	['pyright'] = require('lsp.pyright')
+    ['clangd'] = require('lsp.clangd'),
+    ['cmake'] = require('lsp.cmake'),
+    ['bashls'] = require('lsp.bashls'),
+    ['pyright'] = require('lsp.pyright'),
+    ['sumneko_lua'] = require('lsp.lua'),
 }
 for lsp, setup in pairs(servers) do
-	setup.on_attach = on_attach
-	lspconfig[lsp].setup(setup)
+    setup.on_attach = on_attach
+    lspconfig[lsp].setup(setup)
 end
