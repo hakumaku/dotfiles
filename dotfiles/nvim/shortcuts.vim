@@ -78,7 +78,7 @@ vnoremap <leader>f :py3f /usr/share/clang/clang-format-12/clang-format.py<CR>:ec
 " nnoremap <leader>cf :!clang-include-fixer-11<CR>
 
 " completion-nvim
-imap <C-space> <Plug>(completion_trigger)
+imap <C-Space> <Plug>(completion_trigger)
 imap <tab> <Plug>(completion_smart_tab)
 imap <s-tab> <Plug>(completion_smart_s_tab)
 

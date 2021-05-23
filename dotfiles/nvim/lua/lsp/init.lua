@@ -17,7 +17,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>',
                    opts)
     buf_set_keymap('n', '<leader>s', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
-    buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>',
+                   opts)
     buf_set_keymap('n', '<leader>c', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
                    opts)
@@ -63,7 +64,7 @@ local servers = {
     ['cmake'] = require('lsp.cmake'),
     ['bashls'] = require('lsp.bashls'),
     ['pyright'] = require('lsp.pyright'),
-    ['sumneko_lua'] = require('lsp.lua'),
+    ['sumneko_lua'] = require('lsp.lua')
 }
 for lsp, setup in pairs(servers) do
     setup.on_attach = on_attach

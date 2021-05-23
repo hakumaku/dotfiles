@@ -18,6 +18,8 @@ call plug#begin(stdpath('data').'/plugged')
 	" Completion for the current buffer
 	" Plug 'steelsojka/completion-buffers'
 	Plug 'onsails/lspkind-nvim'
+	Plug 'folke/lsp-colors.nvim'
+	Plug 'folke/trouble.nvim'
 	" Telescope
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'kyazdani42/nvim-web-devicons'
@@ -33,7 +35,6 @@ call plug#begin(stdpath('data').'/plugged')
 	" Status line
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'

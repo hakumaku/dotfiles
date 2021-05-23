@@ -6,7 +6,7 @@ return {
 	settings = {
 		Lua = {
 			runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
-			diagnostics = {globals = {'vim'}},
+			diagnostics = {globals = {'vim', 'describe'}},
 			workspace = {
 				library = {
 					[vim.fn.expand('$VIMRUNTIME/lua')] = true,
