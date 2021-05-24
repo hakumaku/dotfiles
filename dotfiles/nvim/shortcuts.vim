@@ -51,6 +51,8 @@ nnoremap <RightMouse> :Break<CR>
 
 " Reverse selected lines.
 vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
+" Jump to the next tab ')'
+inoremap <C-l> <esc>:lua utils.jump_right()<CR>a
 " External Utilities
 nnoremap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 

@@ -38,7 +38,7 @@ call plug#begin(stdpath('data').'/plugged')
 	" Colorschemes
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'morhetz/gruvbox'
-	Plug 'joshdick/onedark.vim'
+	Plug 'monsonjeremy/onedark.nvim'
 " Initialize plugin system
 call plug#end()
 
@@ -54,7 +54,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " silent! colorscheme solarized8
 " }}}
 
-" {{{ one dark pro (https://github.com/joshdick/onedark.vim)
+" {{{ one dark pro (https://github.com/monsonjeremy/onedark.nvim)
 silent! colorscheme onedark
 " }}}
 
