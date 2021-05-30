@@ -1,9 +1,9 @@
 " Move cursor by virtual lines.
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+" nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+" nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap Y y$
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
 
 " cmdline-editing
 cnoremap <C-a> <Home>
@@ -23,25 +23,14 @@ nnoremap <silent> <C-k> :m-2<Bar>echo 'Move line up'<CR>
 
 " Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap <silent> <C-_> :set nolist!<Bar>echo 'Show whitespaces'<CR>
-" Commentate
-vnoremap <C-_> :call Commentate()<CR>
 
 " Removes any search highlighting.
-nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+nnoremap <silent> <C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 " Insert space in normal mode
 nnoremap <space> i<space><ESC>
 " Copy & Paste
 vnoremap <C-c> "+y:echo 'Yanked to clipboard'<CR>
 inoremap <C-v> <ESC>"+pa
-
-" Cycle through buffers
-nnoremap <silent> gt :silent bn<Bar>echo @%<CR>
-nnoremap <silent> gT :silent bp<Bar>echo @%<CR>
-nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
-nnoremap <silent> ]q :cnext<CR>
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> [g :lnext<CR>
-nnoremap <silent> ]g :lprev<CR>
 
 " Escape terminal mode
 let g:termdebug_useFloatingHover = 0
@@ -50,24 +39,30 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <RightMouse> :Break<CR>
 
 " Reverse selected lines.
-vnoremap <leader>r y:call ReverseLines()<Bar>echo 'Reversed lines'<CR>
+vnoremap <silent> <leader>r y:lua utils.reverse_lines()<CR>
 " Jump to the next tab ')'
-inoremap <C-l> <esc>:lua utils.jump_right()<CR>a
+inoremap <silent> <C-l> <esc>:lua utils.jump_right()<CR>a
 " External Utilities
 nnoremap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 
-" Run fuzzy finder
-nnoremap <C-s> :Telescope find_files<CR>
-nnoremap <C-f> :Telescope live_grep<CR>
+" Cycle through buffers
+nnoremap <silent> ]b :bn<CR>
+nnoremap <silent> [b :bp<CR>
+nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> [g :lnext<CR>
+nnoremap <silent> ]g :lprev<CR>
+nnoremap <silent> ]d :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> [d :lua vim.lsp.diagnostic.goto_prev()<CR>
 
-" Open NerdTree
-nnoremap <silent> <C-w>o :NERDTreeToggle<Bar>echo @%<CR>
-" Open vista
-let g:vista_default_executive = 'coc'
-nnoremap <silent> <C-w>t :Vista!!<CR>
-" vim-fugitive
-nnoremap <silent> <C-w>gd :Gvdiffsplit!<CR>
-nnoremap <silent> <C-w>gs :vertical Git<CR>
+" LSP config
+nnoremap <silent> <C-]>     :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K         :lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-Space> :lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>s :ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>c :lua vim.lsp.buf.rename()<CR>
 
 " clang-format
 function! Formatonsave()
@@ -79,10 +74,27 @@ nnoremap <leader>f :py3f /usr/share/clang/clang-format-12/clang-format.py<CR>:ec
 vnoremap <leader>f :py3f /usr/share/clang/clang-format-12/clang-format.py<CR>:echo 'Formatted lines'<CR>
 " nnoremap <leader>cf :!clang-include-fixer-11<CR>
 
-" completion-nvim
-imap <C-Space> <Plug>(completion_trigger)
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
+" Telescope
+nnoremap <C-s>f :Telescope find_files<CR>
+nnoremap <C-s>s :Telescope live_grep<CR>
+nnoremap <C-s>b :Telescope buffers<CR>
+nnoremap <C-s>/ :Telescope current_buffer_fuzzy_find<CR>
 
-" TrueZen.vim
-nnoremap Z :TZAtaraxis<CR>
+" NerdTree
+" nnoremap <silent> <C-w>o :NERDTreeToggle<Bar>echo @%<CR>
+" NvimTree
+nnoremap <silent> <C-w>o :NvimTreeToggle<CR>
+
+" Vista
+nnoremap <silent> <C-w>t :Vista!!<CR>
+
+" vim-fugitive
+nnoremap <silent> <C-w>gd :Gvdiffsplit!<CR>
+nnoremap <silent> <C-w>gs :vertical Git<CR>
+
+" nvim-compe
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })

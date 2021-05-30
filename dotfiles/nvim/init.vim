@@ -45,7 +45,7 @@ set lazyredraw			" Do not redraw screen in the middle of a macro
 set listchars=tab:»\ ,eol:↲,trail:·
 set mouse=a				" Enable mouse scrolling
 set nobackup			" No backup files
-set noexpandtab			" No spaces when tab
+set expandtab			" No spaces when tab
 set nofoldenable        " Disable all folds to be open
 set noswapfile          " No .swp
 set nowrap
@@ -126,10 +126,9 @@ augroup file_vim
 augroup END
 " }}}
 
-source $NVIM_CONFIG_DIR/functions.vim
 source $NVIM_CONFIG_DIR/plugins.vim
 source $NVIM_CONFIG_DIR/shortcuts.vim
 
-lua require('config')
-lua require('lsp')
 lua utils = require('utils.functions')
+lua require('lsp')
+lua require('config')
