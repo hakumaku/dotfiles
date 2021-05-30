@@ -88,6 +88,9 @@ nnoremap <silent> <C-w>o :NvimTreeToggle<CR>
 " Vista
 nnoremap <silent> <C-w>t :Vista!!<CR>
 
+" trouble.nvim
+nnoremap <silent> <C-w>T :TroubleToggle<CR>
+
 " vim-fugitive
 nnoremap <silent> <C-w>gd :Gvdiffsplit!<CR>
 nnoremap <silent> <C-w>gs :vertical Git<CR>
