@@ -12,10 +12,6 @@ install_zsh_extensions() {
 	url="https://github.com/zsh-users/zsh-syntax-highlighting.git"
 	git clone "$url" "$workspace/${url##*/}"
 
-	# zsh-dircolors-solarized
-	url="https://github.com/joel-porquet/zsh-dircolors-solarized"
-	git clone --recursive "$url" "$workspace/${url##*/}"
-
 	url="https://github.com/zsh-users/zsh-autosuggestions"
 	git clone "$url" "$workspace/${url##*/}"
 }

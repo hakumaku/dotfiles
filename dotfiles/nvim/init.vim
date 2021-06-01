@@ -27,7 +27,7 @@ endif
 set autoindent
 set autoread            " When a file has been changed outside of Vim, automatically read it againautoread
 set backspace=indent,eol,start
-set cmdheight=2
+set cmdheight=1
 set colorcolumn=101
 set encoding=utf-8		" Encoding
 set fileencoding=utf-8  " Encoding

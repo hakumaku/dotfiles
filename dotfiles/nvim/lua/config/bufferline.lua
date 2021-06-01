@@ -1,6 +1,6 @@
 require('bufferline').setup {
   options = {
-    indicator_icon = '▎',
+    indicator_icon = '▊ ',
     separator_style = 'thick',
     show_close_icon = false,
     diagnostics = 'false',

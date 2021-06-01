@@ -10,6 +10,7 @@ gls.left[1] = {
     highlight = {colors.blue, colors.bg}
   }
 }
+
 gls.left[2] = {
   ViMode = {
     provider = function()
@@ -61,6 +62,7 @@ gls.left[2] = {
     highlight = {colors.red, colors.bg, 'bold'}
   }
 }
+
 gls.left[3] = {
   FileSize = {
     provider = 'FileSize',
@@ -68,6 +70,7 @@ gls.left[3] = {
     highlight = {colors.fg, colors.bg}
   }
 }
+
 gls.left[4] = {
   FileIcon = {
     provider = 'FileIcon',
@@ -94,6 +97,7 @@ gls.left[6] = {
     highlight = {colors.violet, colors.bg, 'bold'}
   }
 }
+
 gls.left[7] = {
   GitBranch = {
     provider = 'GitBranch',
@@ -103,6 +107,7 @@ gls.left[7] = {
     highlight = {colors.violet, colors.bg, 'bold'}
   }
 }
+
 gls.left[8] = {
   DiffAdd = {
     provider = 'DiffAdd',
@@ -111,6 +116,7 @@ gls.left[8] = {
     highlight = {colors.green, colors.bg}
   }
 }
+
 gls.left[9] = {
   DiffModified = {
     provider = 'DiffModified',
@@ -119,6 +125,7 @@ gls.left[9] = {
     highlight = {colors.orange, colors.bg}
   }
 }
+
 gls.left[10] = {
   DiffRemove = {
     provider = 'DiffRemove',
@@ -127,6 +134,7 @@ gls.left[10] = {
     highlight = {colors.red, colors.bg}
   }
 }
+
 gls.left[13] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
@@ -134,6 +142,7 @@ gls.left[13] = {
     highlight = {colors.red, colors.bg}
   }
 }
+
 gls.left[14] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
@@ -141,6 +150,7 @@ gls.left[14] = {
     highlight = {colors.yellow, colors.bg}
   }
 }
+
 gls.left[15] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
@@ -148,6 +158,7 @@ gls.left[15] = {
     highlight = {colors.cyan, colors.bg}
   }
 }
+
 gls.left[16] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
@@ -156,7 +167,7 @@ gls.left[16] = {
   }
 }
 
-gls.mid[1] = {
+gls.right[1] = {
   ShowLspClient = {
     provider = 'GetLspClient',
     condition = function()
@@ -169,7 +180,7 @@ gls.mid[1] = {
   }
 }
 
-gls.right[1] = {
+gls.right[2] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' ',
@@ -177,7 +188,8 @@ gls.right[1] = {
     highlight = {colors.fg, colors.bg}
   }
 }
-gls.right[2] = {
+
+gls.right[3] = {
   PerCent = {
     provider = 'LinePercent',
     separator = ' ',
@@ -185,7 +197,8 @@ gls.right[2] = {
     highlight = {colors.fg, colors.bg, 'bold'}
   }
 }
-gls.right[3] = {
+
+gls.right[4] = {
   FileEncode = {
     provider = 'FileEncode',
     condition = condition.hide_in_width,
@@ -194,7 +207,7 @@ gls.right[3] = {
     highlight = {colors.green, colors.bg, 'bold'}
   }
 }
-gls.right[4] = {
+gls.right[5] = {
   FileFormat = {
     provider = 'FileFormat',
     condition = condition.hide_in_width,
@@ -203,9 +216,10 @@ gls.right[4] = {
     highlight = {colors.green, colors.bg, 'bold'}
   }
 }
-gls.right[5] = {
+
+gls.right[6] = {
   RainbowBlue = {
-    provider = function() return ' ▊' end,
+    provider = function() return '  ▊' end,
     highlight = {colors.blue, colors.bg}
   }
 }
@@ -218,6 +232,7 @@ gls.short_line_left[1] = {
     highlight = {colors.blue, colors.bg, 'bold'}
   }
 }
+
 gls.short_line_left[2] = {
   SFileName = {
     provider = 'SFileName',
@@ -225,6 +240,7 @@ gls.short_line_left[2] = {
     highlight = {colors.fg, colors.bg, 'bold'}
   }
 }
+
 gls.short_line_right[1] = {
   BufferIcon = {provider = 'BufferIcon', highlight = {colors.fg, colors.bg}}
 }

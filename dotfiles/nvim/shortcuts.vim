@@ -64,15 +64,8 @@ nnoremap <silent> <leader>s :ClangdSwitchSourceHeader<CR>
 nnoremap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>c :lua vim.lsp.buf.rename()<CR>
 
-" clang-format
-function! Formatonsave()
-	let l:formatdiff = 1
-	py3f /usr/share/clang/clang-format-12/clang-format.py
-endfunction
-autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
-nnoremap <leader>f :py3f /usr/share/clang/clang-format-12/clang-format.py<CR>:echo 'Formatted lines'<CR>
-vnoremap <leader>f :py3f /usr/share/clang/clang-format-12/clang-format.py<CR>:echo 'Formatted lines'<CR>
-" nnoremap <leader>cf :!clang-include-fixer-11<CR>
+" neoformat
+nnoremap <leader>f :Neoformat<CR>
 
 " Telescope
 nnoremap <C-s>f :Telescope find_files<CR>
