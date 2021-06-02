@@ -85,8 +85,9 @@ nnoremap <silent> <C-w>t :Vista!!<CR>
 nnoremap <silent> <C-w>T :TroubleToggle<CR>
 
 " vim-fugitive
-nnoremap <silent> <C-w>gd :Gvdiffsplit!<CR>
-nnoremap <silent> <C-w>gs :vertical Git<CR>
+nnoremap <silent> gd :Gvdiffsplit!<CR>
+nnoremap <silent> gs :vertical Git<CR>
+nnoremap <silent> gb :Gitsigns toggle_current_line_blame<CR>
 
 " nvim-compe
 inoremap <silent><expr> <C-Space> compe#complete()
