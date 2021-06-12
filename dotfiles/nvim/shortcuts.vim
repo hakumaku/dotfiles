@@ -95,3 +95,25 @@ inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+nnoremap <A-1> :echo 'alt-1'<CR>
+nnoremap <A-2> :echo 'alt-2'<CR>
+nnoremap <A-3> :echo 'alt-3'<CR>
+nnoremap <A-4> :echo 'alt-4'<CR>
+nnoremap <A-5> :echo 'alt-5'<CR>
+nnoremap <A-6> :echo 'alt-6'<CR>
+nnoremap <A-7> :echo 'alt-7'<CR>
+nnoremap <A-8> :echo 'alt-8'<CR>
+nnoremap <A-9> :echo 'alt-9'<CR>
+nnoremap <A-0> :echo 'alt-0'<CR>
+
+nnoremap <silent><C-w>1 :lua utils.select_buffer(1)<CR>
+nnoremap <silent><C-w>2 :lua utils.select_buffer(2)<CR>
+nnoremap <silent><C-w>3 :lua utils.select_buffer(3)<CR>
+nnoremap <silent><C-w>4 :lua utils.select_buffer(4)<CR>
+nnoremap <silent><C-w>5 :lua utils.select_buffer(5)<CR>
+nnoremap <silent><C-w>6 :lua utils.select_buffer(6)<CR>
+nnoremap <silent><C-w>7 :lua utils.select_buffer(7)<CR>
+nnoremap <silent><C-w>8 :lua utils.select_buffer(8)<CR>
+nnoremap <silent><C-w>9 :lua utils.select_buffer(9)<CR>
+nnoremap <silent><C-w>0 :lua utils.select_buffer(10)<CR>

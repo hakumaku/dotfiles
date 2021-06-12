@@ -144,9 +144,14 @@ fi
 source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
 
 # zsh-dircolors-solarized
-source $HOME/workspace/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
+# source $HOME/workspace/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 
 # zsh-autosuggestions
 source $HOME/workspace/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias luamake=/home/haku/workspace/ubuntu-fresh/ubuntu/luamake
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+fpath+=${ZDOTDIR:-~}/.zsh_functions

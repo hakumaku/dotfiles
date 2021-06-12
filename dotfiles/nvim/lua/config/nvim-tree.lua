@@ -1,4 +1,6 @@
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
+vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
+vim.g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'CMakeLists.txt' }
 vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_auto_open = 0
 vim.g.nvim_tree_auto_close = 0

@@ -24,6 +24,7 @@ call plug#begin(stdpath('data').'/plugged')
 	Plug 'akinsho/nvim-bufferline.lua'
 	Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 	Plug 'monsonjeremy/onedark.nvim'
+    Plug 'mhinz/vim-startify'
 call plug#end()
 
 silent! colorscheme onedark

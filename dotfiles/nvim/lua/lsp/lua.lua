@@ -22,8 +22,8 @@ local plugins = vim.fn.stdpath('data') .. '/plugged/'
 local library = {
   [plugins .. 'plenary.nvim'] = true,
   [plugins .. 'popup.nvim'] = true,
-  [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-  [vim.fn.expand('$VIMRUNTIME/lua/vim')] = true,
+  -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+  -- [vim.fn.expand('$VIMRUNTIME/lua/vim')] = true,
   [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
   [vim.fn.expand('$VIMRUNTIME/lua/vim/treesitter')] = true
 }

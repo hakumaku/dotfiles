@@ -1,10 +1,11 @@
 [Desktop Entry]
+Categories=Utility;
 Type=Application
+Name=plank
+GenericName=Dock
 Exec=plank
+Icon=plank
+Terminal=false
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=plank
-Name=plank
-Comment[en_US]=
-Comment=

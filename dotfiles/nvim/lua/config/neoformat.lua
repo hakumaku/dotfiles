@@ -8,3 +8,5 @@ vim.g.neoformat_basic_format_retab = 1
 vim.g.neoformat_basic_format_trim = 1
 
 vim.g.neoformat_enabled_python = {'autopep8'}
+
+vim.g.shfmt_opt="-i 2 -ci -bn"
