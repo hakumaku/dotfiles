@@ -48,7 +48,6 @@ main() {
         exec ./develop/fonts.sh
         ;;
       "fresh")
-        figlet 'Fresh Setup'
         install_essentials
         ;;
       "git")
@@ -65,7 +64,7 @@ main() {
           echo "ssh already configured"
         fi
         ;;
-      "git")
+      "fcitx")
         figlet 'Fcitx'
         if ! command -v fcitx &>/dev/null; then
           # A bit buggy, don't know why yet.
