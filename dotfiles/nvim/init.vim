@@ -1,5 +1,5 @@
-let $NVIM_CONFIG_DIR = expand('$HOME/.config/nvim')
-
+if exists('g:vscode')
+else
 set guioptions-=m		"remove menu bar
 set guioptions-=T		"remove toolbar
 set guioptions-=r		"remove right-hand scroll bar
@@ -126,9 +126,11 @@ augroup file_vim
 augroup END
 " }}}
 
+let $NVIM_CONFIG_DIR = expand('$HOME/.config/nvim')
 source $NVIM_CONFIG_DIR/plugins.vim
 source $NVIM_CONFIG_DIR/shortcuts.vim
 
 lua utils = require('utils.functions')
 lua require('lsp')
 lua require('config')
+endif

@@ -48,7 +48,7 @@ nnoremap <leader>1 :.!toilet -w 200 -f term -F border<CR>
 " Cycle through buffers
 nnoremap <silent> ]b :bn<CR>
 nnoremap <silent> [b :bp<CR>
-nnoremap <silent> <BS> :silent bd<Bar>echo @%<CR>
+nnoremap <silent> <BS> :lua utils.delete_buffer()<CR>
 nnoremap <silent> ]q :cnext<CR>
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> [g :lnext<CR>
