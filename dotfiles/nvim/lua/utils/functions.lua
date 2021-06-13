@@ -1,8 +1,7 @@
 local M = {}
 
 local function is_valid_buffer(buffer)
-  return vim.api.nvim_buf_is_loaded(buffer) and
-             vim.api.nvim_buf_get_option(buffer, 'buflisted')
+  return vim.api.nvim_buf_get_option(buffer, 'buflisted')
 end
 
 local function get_valid_buffers()
@@ -46,7 +45,7 @@ function M.delete_buffer()
     for i = 1, #buffers do
       if buffers[i] == curbuf then
         if i == #buffers then
-          next_index = 1
+          next_index = i - 1
         else
           next_index = i + 1
         end
