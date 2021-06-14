@@ -80,9 +80,6 @@ set wildmenu			" On pressing 'wildchar' to invoke completion
 set pumblend=15
 let g:termdebug_wide=1
 
-" au CmdLineEnter * if !exists('b:NERDTree') | set norelativenumber | redraw
-" au CmdlineLeave * if !exists('b:NERDTree') | set relativenumber
-
 iabbrev sturct struct
 iabbrev wrod word
 iabbrev wrods words
