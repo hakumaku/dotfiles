@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install_utilities() {
-  local packages=("git-delta" "bat" "fd-find" "ripgrep" "bottom")
+  local packages=("git-delta" "exa" "bat" "fd-find" "ripgrep" "bottom")
   cargo install ${packages[@]}
 }
 
