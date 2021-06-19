@@ -4028,7 +4028,7 @@ vout=any
 #spu=1
 
 # On Screen Display (boolean)
-osd=0
+#osd=1
 
 # Text rendering module (string)
 text-renderer=any
