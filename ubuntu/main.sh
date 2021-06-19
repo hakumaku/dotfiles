@@ -2,30 +2,6 @@
 
 set -euo pipefail
 
-install_essentials() {
-  local packages=(
-    "git" "xclip" "figlet"
-    "apt-transport-https" "ca-certificates" "software-properties-common"
-    "gnupg" "build-essential" "wget" "curl" "autoconf" "automake"
-    "python3" "python-is-python3" "python3-pip" "python3-distutils"
-    "cargo" "npm" "snap")
-  # Check if it's run once previously.
-  if command -v cargo &>/dev/null; then
-    return
-  fi
-
-  sudo apt install ${packages[@]}
-  sh -c 'curl -sL install-node.now.sh/lts | sudo bash'
-
-  # Add $HOME/.cargo to $PATH variable.
-  cat <<EOT >>"$HOME/.profile"
-# Add cargo binary path to \$PATH variable
-if [ -d "\$HOME/.cargo/bin" ]; then
-    PATH="\$HOME/.cargo/bin:\$PATH"
-fi
-EOT
-}
-
 main() {
   export prefix="$HOME/workspace"
   export dotfile="$prefix/ubuntu-fresh/dotfiles"
@@ -42,27 +18,6 @@ main() {
       "cmake")
         figlet 'CMake'
         exec ./develop/cmake.sh
-        ;;
-      "fonts")
-        figlet 'Fonts'
-        exec ./develop/fonts.sh
-        ;;
-      "fresh")
-        install_essentials
-        ;;
-      "git")
-        figlet 'Git Setup'
-        if [ ! -f ~/.ssh/id_rsa ]; then
-          ssh-keygen -t rsa -b 4096 -C "gentlebuuny@gmail.com"
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          git remote set-url origin "https://github.com/hakumaku/ubuntu-fresh"
-          xclip -sel clip <~/.ssh/id_rsa.pub
-          sensible-browser "https://github.com/settings/ssh/new"
-          (cd && ln -s $dotfile/git/.gitconfig)
-        else
-          echo "ssh already configured"
-        fi
         ;;
       "fcitx")
         figlet 'Fcitx'
@@ -92,6 +47,31 @@ main() {
           echo "Fcitx has already been installed."
         fi
         ;;
+      "fonts")
+        figlet 'Fonts'
+        exec ./develop/fonts.sh
+        ;;
+      "fresh")
+        exec ./develop/essentials.sh
+        ;;
+      "git")
+        figlet 'Git Setup'
+        if [ ! -f ~/.ssh/id_rsa ]; then
+          ssh-keygen -t rsa -b 4096 -C "gentlebuuny@gmail.com"
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          git remote set-url origin "https://github.com/hakumaku/ubuntu-fresh"
+          xclip -sel clip <~/.ssh/id_rsa.pub
+          sensible-browser "https://github.com/settings/ssh/new"
+          (cd && ln -s $dotfile/git/.gitconfig)
+        else
+          echo "ssh already configured"
+        fi
+        ;;
+      "icons")
+          figlet 'Change Icons'
+          exec ./icons/icons.sh "$@"
+          ;;
       "nvim" | "neovim")
         figlet 'Neovim'
         exec ./develop/nvim.sh

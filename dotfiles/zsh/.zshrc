@@ -2,7 +2,7 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-zstyle :compinstall filename '/home/haku/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
 autoload -Uz compinit promptinit
@@ -18,102 +18,28 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-
-# powerline10k settings
-source $HOME/workspace/powerlevel10k.git/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-# Customize
-wm () {
-	xprop | awk '
-		/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
-		/^WM_NAME/{sub(/.* =/, "title:"); print}'
-}
-
-twitch () {
-	youtube-dl --quiet -o - "https://www.twitch.tv/""$1" | vlc -f - &!
-	# firefox "https://www.twitch.tv/popout/$1/chat?popout=" &!
-}
-
-enable_perf () {
-	sudo sh -c 'echo 1 >/proc/sys/kernel/perf_event_paranoid'
-	sudo sh -c 'echo 0 >/proc/sys/kernel/kptr_restrict'
-}
-
-gf () {
-	# %h: abbreviated commit hash
-	# %ar: author date, relative
-	# %d: ref names
-	# %s: subject
-	# %+b: a line-feed and body
-	# %ae: author email
-	# %an: author name
-	local _delta="delta --side-by-side --width ${FZF_PREVIEW_COLUMNS:-$COLUMNS}"
-	local _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | delta'"
-	local _viewGitLogLineFocused="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | $_delta'"
-
-	git log            \
-		--graph        \
-		--decorate     \
-		--color=always \
-		--format="%C(cyan)%h %C(auto)%d %C(yellow)%s%+b %C(auto)%an" "$@" |
-		fzf --no-sort                                                  \
-			--reverse                                                  \
-			--tiebreak=index                                           \
-			--no-multi                                                 \
-			--ansi                                                     \
-			--preview="$_viewGitLogLine"                               \
-			--header "enter: view, C-c:copy hash"                      \
-			--bind   "enter:execute:$_viewGitLogLineFocused | less -R" \
-			--bind   "ctrl-c:execute:$_gitLogLineToHash | xclip -r -selection clipboard"
-}
-# FZF (https://github.com/junegunn/fzf)
-# Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='~~'
-
-# Options to fzf command
-export FZF_COMPLETION_OPTS='+c -x'
-
-# Use fd (https://github.com/sharkdp/fd) instead of the default find
-# command for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-# Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# Environment variables & aliases
-export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
-export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-export LESS="--ignore-case --window=-4 -R"
-export PAGER="less"
-# export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export EDITOR=nvim
-export VISUAL="$EDITOR"
 # Disable pressing <C-s> to freeze.
 stty -ixon
+
+# Environment variables & aliases
+export LESS="--ignore-case --window=-4 -R"
+export PAGER="less"
+if command -v bat &>/dev/null; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+export EDITOR=nvim
+export VISUAL="$EDITOR"
+
 alias python='/usr/bin/python3'
-# alias ls="exa --group-directories-first -s extension"
-# alias l.="exa -d .*"
-# alias la="exa -lahF"
-alias ls='ls --color -h --group-directories-first'
-alias l.='ls -d .* --color=auto'
+if command -v exa &>/dev/null; then
+  alias ls="exa --group-directories-first -s extension"
+  alias l.="exa -d .*"
+  alias la="exa -lahF"
+else
+  alias ls='ls --color -h --group-directories-first'
+  alias l.='ls -d .* --color=auto'
+  alias la="ls -lahF"
+fi
 alias grep='grep --color=auto'
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
@@ -132,26 +58,44 @@ alias sxiv='sxiv -a -f'
 alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+# alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias nvimg="nvim -c 'Git | wincmd o' ."
 
 # Tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	exec tmux
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
 fi
+
+# powerline10k settings
+source $HOME/workspace/powerlevel10k.git/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# FZF (https://github.com/junegunn/fzf)
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+# Options to fzf command
+export FZF_COMPLETION_OPTS='+c -x'
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 # zsh-syntax-highlighting
 source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
-
-# zsh-dircolors-solarized
-# source $HOME/workspace/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
-
 # zsh-autosuggestions
 source $HOME/workspace/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias luamake=/home/haku/workspace/ubuntu-fresh/ubuntu/luamake
-fpath+=${ZDOTDIR:-~}/.zsh_functions
-fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath+=${ZDOTDIR:-~}/.zsh_functions
