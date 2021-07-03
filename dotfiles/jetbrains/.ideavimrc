@@ -1,15 +1,19 @@
 set surround
 
+set number
 set relativenumber
 set ignorecase
 set smartcase
 set incsearch
 set hlsearch
 
-nmap <C-s> :action GotoSymbol<CR>
-
-vmap <C-c> :action EditorCopy<CR>
+nmap <C-s> <Action>(GotoSymbol)
+vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
+imap <C-j> <CR>
 
-nmap ]g :action GotoNextError<CR>
-nmap [g :action GotoPreviousError<CR>
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+nmap ]b <Action>(NextTab)
+nmap [b <Action>(PreviousTab)
+nmap \f <Action>(ReformatCode)
