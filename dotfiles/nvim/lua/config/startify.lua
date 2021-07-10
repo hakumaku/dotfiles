@@ -1,5 +1,5 @@
 vim.g.startify_bookmarks = {
-  {z = "~/.zshrc"}, {g = "~/.gitconfig"}, {n = "~/.config/nvim/init.vim"},
+  {z = "~/.zshrc"}, {g = "~/.gitconfig"}, {n = "~/.config/nvim/init.lua"},
   {t = "~/.tmux.conf"}, {a = "~/.config/alacritty/alacritty.yml"},
   {w = "~/workspace/test"}
 }
