@@ -142,8 +142,8 @@ augroup file_vim
 augroup END
 ]])
 
+  utils = require("utils.functions")
   require("plugins")
-  require("utils.functions")
   require("shortcuts")
   require("lsp")
 end

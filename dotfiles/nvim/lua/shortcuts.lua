@@ -1,9 +1,19 @@
-local function nnoremap(combo, mapping)
-  vim.api.nvim_set_keymap("n", combo, mapping, {noremap = true})
+local function nnoremap(combo, mapping, opts)
+  if not opts then
+    vim.api.nvim_set_keymap("n", combo, mapping, {noremap = true})
+  else
+    opts.noremap = true
+    vim.api.nvim_set_keymap("n", combo, mapping, opts)
+  end
 end
 
-local function inoremap(combo, mapping)
-  vim.api.nvim_set_keymap("i", combo, mapping, {noremap = true})
+local function inoremap(combo, mapping, opts)
+  if not opts then
+    vim.api.nvim_set_keymap("i", combo, mapping, {noremap = true})
+  else
+    opts.noremap = true
+    vim.api.nvim_set_keymap("i", combo, mapping, opts)
+  end
 end
 
 local function vnoremap(combo, mapping)
@@ -67,15 +77,15 @@ inoremap("<C-l>", "<esc>:lua utils.jump_right()<CR>a")
 nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 
 -- Cycle through buffers
-nnoremap("]b ", ":bn<CR>")
-nnoremap("[b ", ":bp<CR>")
-nnoremap("<BS> ", ":lua utils.delete_buffer()<CR>")
-nnoremap("]q ", ":cnext<CR>")
-nnoremap("[q ", ":cprevious<CR>")
-nnoremap("[g ", ":lnext<CR>")
-nnoremap("]g ", ":lprev<CR>")
-nnoremap("]d ", ":lua vim.lsp.diagnostic.goto_next()<CR>")
-nnoremap("[d ", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
+nnoremap("]b", ":bn<CR>")
+nnoremap("[b", ":bp<CR>")
+nnoremap("<BS>", ":lua utils.delete_buffer()<CR>")
+nnoremap("]q", ":cnext<CR>")
+nnoremap("[q", ":cprevious<CR>")
+nnoremap("[g", ":lnext<CR>")
+nnoremap("]g", ":lprev<CR>")
+nnoremap("]d", ":lua vim.lsp.diagnostic.goto_next()<CR>")
+nnoremap("[d", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
 
 -- LSP config
 nnoremap("<C-]>", ":lua utils.lsp_goto_definition<CR>")
@@ -109,11 +119,11 @@ nnoremap("gs", ":vertical Git<CR>")
 nnoremap("gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 -- nvim-compe
-inoremap("<C-Space>", "compe#complete()")
-inoremap("<CR>", "compe#confirm('<CR>')")
-inoremap("<C-e>", "compe#close('<C-e>')")
-inoremap("<C-f>", "compe#scroll({ 'delta': +4 })")
-inoremap("<C-d>", "compe#scroll({ 'delta': -4 })")
+inoremap("<C-Space>", "compe#complete()", {expr = true})
+inoremap("<CR>", "compe#confirm('<CR>')", {expr = true})
+inoremap("<C-e>", "compe#close('<C-e>')", {expr = true})
+inoremap("<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true})
+inoremap("<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true})
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")
@@ -126,13 +136,13 @@ nnoremap("<A-8>", ":echo 'alt-8'<CR>")
 nnoremap("<A-9>", ":echo 'alt-9'<CR>")
 nnoremap("<A-0>", ":echo 'alt-0'<CR>")
 
-nnoremap("<C-w>1", ":lua utils.select_buffer(1)<CR>")
-nnoremap("<C-w>2", ":lua utils.select_buffer(2)<CR>")
-nnoremap("<C-w>3", ":lua utils.select_buffer(3)<CR>")
-nnoremap("<C-w>4", ":lua utils.select_buffer(4)<CR>")
-nnoremap("<C-w>5", ":lua utils.select_buffer(5)<CR>")
-nnoremap("<C-w>6", ":lua utils.select_buffer(6)<CR>")
-nnoremap("<C-w>7", ":lua utils.select_buffer(7)<CR>")
-nnoremap("<C-w>8", ":lua utils.select_buffer(8)<CR>")
-nnoremap("<C-w>9", ":lua utils.select_buffer(9)<CR>")
-nnoremap("<C-w>0", ":lua utils.select_buffer(10)<CR>")
+nnoremap("<C-w>1", ":lua utils.select_buffer(1)<CR>", {silent = true})
+nnoremap("<C-w>2", ":lua utils.select_buffer(2)<CR>", {silent = true})
+nnoremap("<C-w>3", ":lua utils.select_buffer(3)<CR>", {silent = true})
+nnoremap("<C-w>4", ":lua utils.select_buffer(4)<CR>", {silent = true})
+nnoremap("<C-w>5", ":lua utils.select_buffer(5)<CR>", {silent = true})
+nnoremap("<C-w>6", ":lua utils.select_buffer(6)<CR>", {silent = true})
+nnoremap("<C-w>7", ":lua utils.select_buffer(7)<CR>", {silent = true})
+nnoremap("<C-w>8", ":lua utils.select_buffer(8)<CR>", {silent = true})
+nnoremap("<C-w>9", ":lua utils.select_buffer(9)<CR>", {silent = true})
+nnoremap("<C-w>0", ":lua utils.select_buffer(10)<CR>", {silent = true})
