@@ -4,6 +4,10 @@ local function is_valid_buffer(buffer)
   return vim.api.nvim_buf_get_option(buffer, 'buflisted')
 end
 
+function M.lsp_goto_definition() vim.lsp.buf.definition() end
+
+function M.lsp_code_action() vim.lsp.buf.code_action() end
+
 local function get_valid_buffers()
   local buffers = {}
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do

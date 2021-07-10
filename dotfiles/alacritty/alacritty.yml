@@ -101,9 +101,9 @@ font:
     #style: Bold
 
   # Italic font face
-  # italic:
+  italic:
     #family: monospace
-    #style: Italic
+    style: bold italic
 
   # Point size
   size: 14.0

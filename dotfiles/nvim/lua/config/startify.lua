@@ -5,7 +5,7 @@ vim.g.startify_bookmarks = {
 }
 vim.g.startify_lists = {
   {header = {'  Bookmarks'}, type = 'bookmarks'},
-  {header = {'  Most Recently Used'}, type = 'dir'},
+  {header = {'  Most Recently Used'}, type = 'dir'}
   -- {header = {'  Commits'}, type = list_commits}
 }
 
