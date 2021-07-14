@@ -14,6 +14,7 @@ install_cpp() {
   sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${version} 100
   sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-${version} 100
   sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-${version} 100
+  sudo update-alternatives --install /usr/bin/lldb-vscode lldb-vscode /usr/bin/lldb-vscode-${version} 100
 }
 
 # Lua

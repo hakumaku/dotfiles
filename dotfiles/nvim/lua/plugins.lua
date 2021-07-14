@@ -37,6 +37,14 @@ return require('packer').startup(function(use)
     'akinsho/nvim-toggleterm.lua',
     config = function() require("config.toggleterm") end
   }
+  -- DAP
+  use {'mfussenegger/nvim-dap', config = function() require("config/dap") end}
+  use {
+    'mfussenegger/nvim-dap-python',
+    config = function() require('dap-python').setup('python3') end
+  }
+  use {'rcarriga/nvim-dap-ui', config = function() require('config.dapui') end}
+  use {'nvim-telescope/telescope-dap.nvim'}
   -- Look & Feel
   use {'kyazdani42/nvim-web-devicons'}
   use {'folke/lsp-colors.nvim'}

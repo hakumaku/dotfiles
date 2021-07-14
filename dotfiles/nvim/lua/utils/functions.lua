@@ -1,7 +1,7 @@
 local M = {}
 
-local function is_valid_buffer(buffer)
-  return vim.api.nvim_buf_get_option(buffer, 'buflisted')
+local function is_valid_buffer(bufnr)
+  return vim.api.nvim_buf_get_option(bufnr, 'buflisted')
 end
 
 function M.lsp_goto_definition() vim.lsp.buf.definition() end
@@ -9,11 +9,14 @@ function M.lsp_goto_definition() vim.lsp.buf.definition() end
 function M.lsp_code_action() vim.lsp.buf.code_action() end
 
 local function get_valid_buffers()
-  local buffers = {}
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if is_valid_buffer(buf) then buffers[#buffers + 1] = buf end
+  local valid_buffers = {}
+  local buffers = vim.api.nvim_list_bufs()
+  for bufnr = 1, #buffers do
+    if is_valid_buffer(buffers[bufnr]) then
+      valid_buffers[#valid_buffers + 1] = buffers[bufnr]
+    end
   end
-  return buffers
+  return valid_buffers
 end
 
 function M.jump_right()
@@ -69,5 +72,15 @@ function M.grep_prompt()
   }
 end
 
-return M
+function M.dap_quit()
+  local dap = require("dap")
+  dap.disconnect()
+  dap.stop()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.fn.bufname(buf) == "[dap-repl]" then
+      vim.api.nvim_buf_delete(buf, {force = true, unload = false})
+    end
+  end
+end
 
+return M

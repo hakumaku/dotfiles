@@ -12,3 +12,4 @@ require('telescope').setup {
   pickers = {git_status = {theme = "dropdown", previewer = false}}
 }
 
+require('telescope').load_extension('dap')

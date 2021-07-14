@@ -79,21 +79,36 @@ nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 -- Cycle through buffers
 nnoremap("]b", ":bn<CR>")
 nnoremap("[b", ":bp<CR>")
-nnoremap("<BS>", ":lua utils.delete_buffer()<CR>")
+nnoremap("<BS>", ":lua utils.delete_buffer()<CR>", {silent = true})
 nnoremap("]q", ":cnext<CR>")
 nnoremap("[q", ":cprevious<CR>")
 nnoremap("[g", ":lnext<CR>")
 nnoremap("]g", ":lprev<CR>")
-nnoremap("]d", ":lua vim.lsp.diagnostic.goto_next()<CR>")
-nnoremap("[d", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
+nnoremap("]d", ":lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true})
+nnoremap("[d", ":lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true})
 
 -- LSP config
-nnoremap("<C-]>", ":lua utils.lsp_goto_definition()<CR>")
-nnoremap("K", ":lua vim.lsp.buf.hover()<CR>")
-nnoremap("<C-Space>", ":lua utils.lsp_code_action()<CR>")
-nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>")
-nnoremap("<leader>r", ":lua vim.lsp.buf.references()<CR>")
-nnoremap("<leader>c", ":lua vim.lsp.buf.rename()<CR>")
+nnoremap("<C-]>", ":lua utils.lsp_goto_definition()<CR>", {silent = true})
+nnoremap("K", ":lua vim.lsp.buf.hover()<CR>", {silent = true})
+nnoremap("<C-Space>", ":lua utils.lsp_code_action()<CR>", {silent = true})
+nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
+nnoremap("<leader>r", ":lua vim.lsp.buf.references()<CR>", {silent = true})
+nnoremap("<leader>c", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
+
+-- DAP
+nnoremap("<leader>dc", ":lua require('dap').continue()<CR>", {silent = true})
+nnoremap("<leader>db", ":lua require('dap').toggle_breakpoint()<CR>", {silent = true})
+nnoremap("<leader>di", ":lua require('dap').step_into()<CR>", {silent = true})
+nnoremap("<leader>do", ":lua require('dap').step_out()<CR>", {silent = true})
+nnoremap("<leader>dn", ":lua require('dap').step_over()<CR>", {silent = true})
+nnoremap("<leader>dq", ":lua utils.dap_quit()<CR>", {silent = true})
+nnoremap("<A-h>", ":lua require('dap').toggle_breakpoint()<CR>", {silent = true})
+nnoremap("<A-j>", ":lua require('dap').step_into()<CR>", {silent = true})
+nnoremap("<A-k>", ":lua require('dap').step_out()<CR>", {silent = true})
+nnoremap("<A-l>", ":lua require('dap').step_over()<CR>", {silent = true})
+-- DAP Telescope
+nnoremap("<leader>df", ":Telescope dap frames<CR>", {silent = true})
+
 
 -- neoformat
 nnoremap("<leader>f", ":Neoformat<CR>")

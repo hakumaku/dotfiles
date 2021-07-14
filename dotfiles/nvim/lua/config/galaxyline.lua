@@ -2,7 +2,10 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
-gl.short_line_list = {'NvimTree', '__vista__', 'dbui', 'packer'}
+gl.short_line_list = {
+  'NvimTree', '__vista__', 'DAP Scopes', 'DAP BreakPoints', 'DAP Stacks',
+  'DAP Watches', 'dbui', 'packer'
+}
 
 gls.left[1] = {
   RainbowRed = {
