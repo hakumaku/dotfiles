@@ -10,6 +10,11 @@ require('bufferline').setup {
         text = 'File Explorer',
         highlight = 'Directory',
         text_align = 'center'
+      }, {
+        filetype = 'vista',
+        text = 'Tags',
+        highlight = 'Directory',
+        text_align = 'center'
       }
     }
   }

@@ -33,6 +33,10 @@ return require('packer').startup(function(use)
   }
   use {'folke/trouble.nvim', config = function() require("config/trouble") end}
   use {'liuchengxu/vista.vim', config = function() require("config/vista") end}
+  use {
+    'akinsho/nvim-toggleterm.lua',
+    config = function() require("config.toggleterm") end
+  }
   -- Look & Feel
   use {'kyazdani42/nvim-web-devicons'}
   use {'folke/lsp-colors.nvim'}
@@ -49,11 +53,14 @@ return require('packer').startup(function(use)
     branch = 'main',
     config = function() require("config/galaxyline") end
   }
-  use {'monsonjeremy/onedark.nvim'}
   use {
-    'projekt0n/github-nvim-theme',
-    config = function() require("config/github-theme") end
+    'monsonjeremy/onedark.nvim',
+    config = function() require("config/onedark") end
   }
+  -- use {
+  --   'projekt0n/github-nvim-theme',
+  --   config = function() require("config/github-theme") end
+  -- }
   use {'mhinz/vim-startify', config = function() require("config/startify") end}
 
   -- Post-install/update hook with call of vimscript function with argument

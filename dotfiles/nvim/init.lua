@@ -1,4 +1,7 @@
 if vim.g.vscode then
+  vim.opt.incsearch = true
+  vim.opt.ignorecase = true
+  require("vscode.shortcuts")
 elseif vim.g.started_by_firenvim then
 else
   vim.opt.syntax = "on"

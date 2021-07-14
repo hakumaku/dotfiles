@@ -45,7 +45,7 @@ cnoremap("<C-d>", "<S-Left>")
 cnoremap("<C-f>", "<S-Right>")
 
 -- Insert a newline in normal mode.
-nnoremap("<CR>", "o<ESC>k")
+-- nnoremap("<CR>", "o<ESC>k")
 -- Move the current line one down.
 nnoremap("<C-j>", ":m+1<Bar>echo 'Move line down'<CR>")
 -- Move the current line one up.
@@ -88,9 +88,9 @@ nnoremap("]d", ":lua vim.lsp.diagnostic.goto_next()<CR>")
 nnoremap("[d", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
 
 -- LSP config
-nnoremap("<C-]>", ":lua utils.lsp_goto_definition<CR>")
+nnoremap("<C-]>", ":lua utils.lsp_goto_definition()<CR>")
 nnoremap("K", ":lua vim.lsp.buf.hover()<CR>")
-nnoremap("<C-Space>", ":lua utils.lsp_code_action<CR>")
+nnoremap("<C-Space>", ":lua utils.lsp_code_action()<CR>")
 nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>")
 nnoremap("<leader>r", ":lua vim.lsp.buf.references()<CR>")
 nnoremap("<leader>c", ":lua vim.lsp.buf.rename()<CR>")
@@ -102,6 +102,8 @@ nnoremap("<leader>f", ":Neoformat<CR>")
 nnoremap("<C-s>f", ":Telescope find_files<CR>")
 nnoremap("<C-s>s", ":Telescope live_grep<CR>")
 nnoremap("<C-s>b", ":Telescope buffers<CR>")
+nnoremap("<C-s>u", ":Telescope git_status<CR>")
+nnoremap("<C-s>g", ":lua utils.grep_prompt()<CR>")
 nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
 
 -- NvimTree

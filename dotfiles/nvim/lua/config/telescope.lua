@@ -8,5 +8,7 @@ require('telescope').setup {
         ['<C-k>'] = actions.move_selection_previous
       }
     }
-  }
+  },
+  pickers = {git_status = {theme = "dropdown", previewer = false}}
 }
+
