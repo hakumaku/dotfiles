@@ -128,7 +128,7 @@ main() {
         ;;
       "xow")
         figlet 'xow'
-        exec ./develop/xow.sh
+        exec ./applications/xow.sh
         ;;
       "zsh")
         figlet 'Zsh'
@@ -138,14 +138,18 @@ main() {
           "https://github.com/zsh-users/zsh-autosuggestions")
         if ! command -v zsh &>/dev/null; then
           for repo in ${repos[@]}; do
-            git clone "$repo" "$prefix/${repo##*/}"
+            repo="${repo##*/}"
+            repo="${repo%.*}"
+            git clone "$repo" "$prefix/${repo}"
           done
 
           sudo apt install zsh
           chsh -s $(which zsh)
         else
           for repo in ${repos[@]}; do
-            git -C "$prefix/${repo##*/}" pull
+            repo="${repo##*/}"
+            repo="${repo%.*}"
+            git -C "$prefix/${repo}" pull
           done
         fi
         ;;

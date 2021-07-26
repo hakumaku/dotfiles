@@ -35,14 +35,6 @@ config_ranger() {
   if [[ -f "$config" ]]; then
     sed -in 's/flag f = sxiv/& -abfsh/' $config
   fi
-
-  # Set rc.conf
-  (cd $HOME/.config/ranger && {
-    # Remove rc.conf craeted by ranger_devicons if exists.
-    if [[ -f rc.conf ]]; then
-      rm rc.conf
-    fi
-  }
 }
 
 install_ranger() {
