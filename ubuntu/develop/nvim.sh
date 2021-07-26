@@ -68,7 +68,6 @@ install_nvim() {
     local packer="https://github.com/wbthomason/packer.nvim"
     local packer_dest="~/.local/share/nvim/site/pack/packer/start/packer.nvim"
     git clone $packer $packer_dest 
-    mkdir -p $HOME/.config && cd $config && ln -s "$dotfile/nvim"
   else
     git -C $dest pull
   fi

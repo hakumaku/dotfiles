@@ -9,7 +9,11 @@ require('telescope').setup {
       }
     }
   },
-  pickers = {git_status = {theme = "dropdown", previewer = false}}
+  pickers = {
+    git_status = {theme = "dropdown", previewer = false},
+    current_buffer_fuzzy_find = {theme = "dropdown", previewer = false},
+    buffers = {theme = "dropdown", previewer = false},
+  }
 }
 
 require('telescope').load_extension('dap')

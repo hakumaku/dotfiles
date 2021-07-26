@@ -18,7 +18,6 @@ install_alacritty() {
     git clone $url "$dir"
     sudo apt install ${dependencies[@]}
     cd "$dir" && build_alacritty
-    (mkdir -p ~/.config && cd ~/.config && ln -s $dotfile/alacritty)
   fi
 }
 

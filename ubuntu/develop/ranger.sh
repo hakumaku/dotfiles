@@ -33,7 +33,7 @@ config_ranger() {
   # Find 'flag f = sxiv' text and append '-a' option.
   config="$HOME/.config/ranger/rifle.conf"
   if [[ -f "$config" ]]; then
-    sed -in 's/flag f = sxiv/& -a/' $config
+    sed -in 's/flag f = sxiv/& -abfsh/' $config
   fi
 
   # Set rc.conf
@@ -42,8 +42,7 @@ config_ranger() {
     if [[ -f rc.conf ]]; then
       rm rc.conf
     fi
-  } \
-    && ln -s $dotfile/ranger/rc.conf)
+  }
 }
 
 install_ranger() {

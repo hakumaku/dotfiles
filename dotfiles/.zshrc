@@ -97,5 +97,8 @@ source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
 source $HOME/workspace/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

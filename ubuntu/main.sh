@@ -3,8 +3,7 @@
 set -euo pipefail
 
 main() {
-  export prefix="$HOME/workspace"
-  export dotfile="$prefix/ubuntu-fresh/dotfiles"
+  export prefix="$HOME/.packages"
 
   while [ $# -gt 0 ]; do
     local opt=$1
@@ -52,7 +51,11 @@ main() {
         exec ./develop/fonts.sh
         ;;
       "fresh")
+        # Also performs stow dotfiles
         exec ./develop/essentials.sh
+        ;;
+      "fzf")
+          # TODO:
         ;;
       "git")
         figlet 'Git Setup'
@@ -63,7 +66,6 @@ main() {
           git remote set-url origin "https://github.com/hakumaku/ubuntu-fresh"
           xclip -sel clip <~/.ssh/id_rsa.pub
           sensible-browser "https://github.com/settings/ssh/new"
-          (cd && ln -s $dotfile/git/.gitconfig)
         else
           echo "ssh already configured"
         fi
@@ -81,7 +83,6 @@ main() {
         if ! command -v plank &>/dev/null; then
           sudo apt remove gnome-shell-extension-ubuntu-dock
           sudo apt install plank
-          (cd && ln -s $dotfile/plank)
         else
           echo "Plank has already been installed."
         fi
@@ -94,7 +95,6 @@ main() {
         figlet 'Rofi'
         if ! command -v rofi &>/dev/null; then
           sudo apt install rofi
-          (cd $HOME/.config && ln -s $dotfile/rofi)
         else
           echo "Rofi has already been installed."
         fi
@@ -103,7 +103,6 @@ main() {
         figlet 'Tmux'
         if ! command -v tmux &>/dev/null; then
           sudo apt install tmux
-          (cd && ln -s $dotfile/tmux/.tmux.conf)
         else
           echo "Tmux has already been installed."
         fi
@@ -123,7 +122,6 @@ main() {
         if ! command -v tmux &>/dev/null; then
           sudo apt install vlc ffmpeg
           mkdir -p $HOME/.config/vlc
-          (cd $HOME/.config/vlc && rm -f vlcrc && ln -s $dotfile/vlc/vlcrc)
         else
           echo "VLC has already been installed."
         fi
@@ -145,7 +143,6 @@ main() {
 
           sudo apt install zsh
           chsh -s $(which zsh)
-          (cd && ln -s $dotfile/zsh/.zshrc && ln -s $dotfile/zsh/.p10k.zsh)
         else
           for repo in ${repos[@]}; do
             git -C "$prefix/${repo##*/}" pull
