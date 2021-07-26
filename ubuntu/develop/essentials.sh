@@ -25,4 +25,6 @@ EOT
 }
 
 install_essentials
-stow --target=$HOME $prefix/ubuntu-fresh/dotfiles
+pushd $prefix/ubuntu-fresh
+stow --target=$HOME dotfiles
+popd
