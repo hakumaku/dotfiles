@@ -140,6 +140,7 @@ main() {
         local repos=(
           "https://github.com/romkatv/powerlevel10k.git"
           "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+          "https://github.com/jeffreytse/zsh-vi-mode"
           "https://github.com/zsh-users/zsh-autosuggestions")
         if ! command -v zsh &>/dev/null; then
           for repo in ${repos[@]}; do

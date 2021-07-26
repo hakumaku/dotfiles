@@ -96,6 +96,8 @@ _fzf_compgen_dir() {
 source $HOME/.packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
 source $HOME/.packages/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-vi-mode
+source $HOME/.packages/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 

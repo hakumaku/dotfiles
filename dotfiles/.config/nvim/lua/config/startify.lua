@@ -1,7 +1,7 @@
 vim.g.startify_bookmarks = {
   {z = "~/.zshrc"}, {g = "~/.gitconfig"}, {n = "~/.config/nvim/init.lua"},
   {t = "~/.tmux.conf"}, {a = "~/.config/alacritty/alacritty.yml"},
-  {w = "~/workspace/test"}
+  {w = "~/workspace/test"}, {u = "~/.packages/ubuntu-fresh/ubuntu/main.sh"}
 }
 vim.g.startify_lists = {
   {header = {'  Bookmarks'}, type = 'bookmarks'},
