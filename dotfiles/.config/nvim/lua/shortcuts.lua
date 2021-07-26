@@ -97,7 +97,8 @@ nnoremap("<leader>c", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
 -- DAP
 nnoremap("<leader>dc", ":lua require('dap').continue()<CR>", {silent = true})
-nnoremap("<leader>db", ":lua require('dap').toggle_breakpoint()<CR>", {silent = true})
+nnoremap("<leader>db", ":lua require('dap').toggle_breakpoint()<CR>",
+         {silent = true})
 nnoremap("<leader>di", ":lua require('dap').step_into()<CR>", {silent = true})
 nnoremap("<leader>do", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<leader>dn", ":lua require('dap').step_over()<CR>", {silent = true})
@@ -108,7 +109,6 @@ nnoremap("<A-k>", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<A-l>", ":lua require('dap').step_over()<CR>", {silent = true})
 -- DAP Telescope
 nnoremap("<leader>df", ":Telescope dap frames<CR>", {silent = true})
-
 
 -- neoformat
 nnoremap("<leader>f", ":Neoformat<CR>")
@@ -137,7 +137,8 @@ nnoremap("gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 -- nvim-compe
 inoremap("<C-Space>", "compe#complete()", {expr = true})
-inoremap("<CR>", "compe#confirm('<CR>')", {expr = true})
+inoremap("<CR>", "compe#confirm({ 'keys': \"\\<Plug>delimitMateCR\", 'mode': '' })",
+         {expr = true})
 inoremap("<C-e>", "compe#close('<C-e>')", {expr = true})
 inoremap("<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true})
 inoremap("<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true})

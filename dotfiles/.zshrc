@@ -10,14 +10,6 @@ zmodload zsh/complist
 compinit
 promptinit
 
-# Key bindings
-bindkey -v
-bindkey "^j" history-beginning-search-forward
-bindkey "^k" history-beginning-search-backward
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 # Disable pressing <C-s> to freeze.
 stty -ixon
 
@@ -99,6 +91,17 @@ source $HOME/.packages/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-vi-mode
 source $HOME/.packages/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+function zsh_vi_mode_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # Key bindings
+    bindkey -v
+    bindkey "^j" history-beginning-search-forward
+    bindkey "^k" history-beginning-search-backward
+    bindkey -M menuselect 'h' vi-backward-char
+    bindkey -M menuselect 'k' vi-up-line-or-history
+    bindkey -M menuselect 'l' vi-forward-char
+    bindkey -M menuselect 'j' vi-down-line-or-history
+}
+zvm_after_init_commands+=(zsh_vi_mode_init)
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
