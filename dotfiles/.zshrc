@@ -67,7 +67,7 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
 fi
 
 # powerline10k settings
-source $HOME/workspace/powerlevel10k.git/powerlevel10k.zsh-theme
+source $HOME/.packages/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
@@ -93,11 +93,9 @@ _fzf_compgen_dir() {
 }
 
 # zsh-syntax-highlighting
-source $HOME/workspace/zsh-syntax-highlighting.git/zsh-syntax-highlighting.zsh
+source $HOME/.packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
-source $HOME/workspace/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-fpath+=${ZDOTDIR:-~}/.zsh_functions
+source $HOME/.packages/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 

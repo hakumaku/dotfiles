@@ -55,7 +55,12 @@ main() {
         exec ./develop/essentials.sh
         ;;
       "fzf")
-          # TODO:
+        if [ ! -d ~/.fzf ]; then
+          git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        else
+          git -C ~/.fzf pull
+        fi
+        ~/.fzf/install
         ;;
       "git")
         figlet 'Git Setup'
@@ -71,9 +76,9 @@ main() {
         fi
         ;;
       "icons")
-          figlet 'Change Icons'
-          exec ./icons/icons.sh "$@"
-          ;;
+        figlet 'Change Icons'
+        exec ./icons/icons.sh "$@"
+        ;;
       "nvim" | "neovim")
         figlet 'Neovim'
         exec ./develop/nvim.sh
