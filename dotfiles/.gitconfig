@@ -3,6 +3,8 @@
     editor = nvim
 [commit]
     verbose = true
+[alias]
+    fzf = !zsh -c 'source $HOME/.zshrc && fzf_commit'
 [interactive]
     diffFilter = delta --color-only
 [delta]

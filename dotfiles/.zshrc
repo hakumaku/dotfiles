@@ -93,15 +93,30 @@ source $HOME/.packages/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 function zsh_vi_mode_init() {
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    # Key bindings
-    bindkey -v
-    bindkey "^j" history-beginning-search-forward
-    bindkey "^k" history-beginning-search-backward
-    bindkey -M menuselect 'h' vi-backward-char
-    bindkey -M menuselect 'k' vi-up-line-or-history
-    bindkey -M menuselect 'l' vi-forward-char
-    bindkey -M menuselect 'j' vi-down-line-or-history
+  # Key bindings
+  bindkey -v
+  bindkey "^j" history-beginning-search-forward
+  bindkey "^k" history-beginning-search-backward
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
+  bindkey -M menuselect 'j' vi-down-line-or-history
 }
 zvm_after_init_commands+=(zsh_vi_mode_init)
 
 alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+
+fzf_commit() {
+  local filter
+  if [ -n $@ ] && [ -e $@ ]; then
+    filter="-- $@"
+  fi
+  export LESS='-R'
+  export BAT_PAGER='less -S -R -M -i'
+  git log \
+    --graph --color=always --abbrev=7 \
+    --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
+    | fzf --ansi --no-sort --layout=reverse --tiebreak=index \
+      --preview="f() { set -- \$(echo -- \$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \$# -eq 0 ] || git show --color=always \$1 \$filter | delta --line-numbers; }; f {}" \
+      --preview-window=right:60%
+}
