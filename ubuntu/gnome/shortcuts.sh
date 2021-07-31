@@ -1,20 +1,15 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/workspace/ubuntu-fresh"
 keys=(
   "Shutdown, gnome-session-quit --power-off, <Super>Escape"
   "Gnome Tweaks, gnome-tweaks, <Super>U"
   "Calculator, gnome-calculator, <Super>C"
   "Alacritty, alacritty, <Super>Return"
   "Ranger, alacritty -e ranger, <Super>E"
-  "ytop, alacritty -e ytop -c solarized, <Super>X"
+  "btm, alacritty -e btm, <Super>X"
   "Rofi, rofi -show drun, <Super>R"
   "Web Browser, firefox, <Super>W"
   "Steam, steam, <Super>G"
-  "Nvidia Dmenu, $DIR/nvidia.sh, <Super>Semicolon"
-  "Nightlight, $DIR/nightlight.sh, <Super>Backslash"
-  "Brightness up, $DIR/backlight.sh -i, <Super>braceright"
-  "Brightness down, $DIR/backlight.sh -d, <Super>braceleft"
 )
 
 gsettings_init() {

@@ -1,23 +1,13 @@
 #!/usr/bin/env bash
-# script path
-DIR="$HOME/workspace/ubuntu-fresh"
-FAVORITE=(
-  "firefox.desktop"
-  "steam.desktop"
-  "rhythmbox.desktop"
-  "vlc.desktop"
-  "st.desktop"
-  "org.gnome.Nautilus.desktop"
-  "org.gnome.tweaks.desktop"
-  "gnome-control-center.desktop"
-  "stacer.desktop"
-  "nvidia-settings.desktop"
-)
-# Favorites
-# for app in ${FAVORITE[*]}; do
-# 	gset="${gset:+"${gset}, "}'${app}'"
-# done
-# gsettings set org.gnome.shell favorite-apps "[${gset[*]}]"
+
+
+# org.gnome.nautilus.list-view default-column-order ['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'date_created', 'recency', 'starred']
+# com.ubuntu.update-notifier regular-auto-launch-interval 7
+# org.gnome.nautilus.window-state sidebar-width 223
+# org.gnome.nautilus.window-state start-with-location-bar true
+# org.gnome.nautilus.window-state initial-size (830, 746)
+# org.gnome.nautilus.window-state start-with-sidebar true
+# org.gnome.nautilus.window-state maximized false
 
 # Desktop
 gsettings set org.gnome.desktop.background show-desktop-icons 'false'
@@ -28,7 +18,6 @@ gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
-gsettings set org.gnome.software download-updates 'false'
 
 # Interface
 gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
@@ -42,10 +31,6 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 # gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
 # gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
 # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Ubuntu Bold 11'
-
-# GNOME Shell version 3.32.0
-gsettings set org.gnome.shell.extensions.desktop-icons show-trash 'false'
-gsettings set org.gnome.shell.extensions.desktop-icons show-home 'false'
 
 # Extensions
 SCHEMADIR="$HOME/.local/share/gnome-shell/extensions"
@@ -147,17 +132,12 @@ for dir in $SCHEMADIR/drawOnYourScreen*; do
   break
 done
 
-#
 # Theme
-#
 gsettings set org.gnome.desktop.interface gtk-theme "Yaru"
-gsettings set org.gnome.desktop.interface icon-theme "Suru++"
+gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 gsettings set org.gnome.desktop.interface cursor-theme "Yaru"
-gsettings set org.gnome.shell.extensions.user-theme name "Yaru"
 
-#
 # Keyboard shortcuts
-#
 # gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
 # gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>e']"
@@ -175,8 +155,6 @@ gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
 # <Super>P: switch-monitor
 gsettings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
-# <Super>P: video out
-gsettings set org.gnome.settings-daemon.plugins.media-keys video-out "[]"
 # <Super>Above_Tab: switch-group
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
@@ -225,13 +203,13 @@ gsettings set org.gnome.desktop.interface enable-animations true
 
 # Switching to specific workspace
 gsettings set org.gnome.mutter dynamic-workspaces false
-gsettings set org.gnome.desktop.wm.preferences num-workspace 4
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 6
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-# gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-6 "['<Super>6']"
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super>7']"
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super>8']"
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super>9']"
