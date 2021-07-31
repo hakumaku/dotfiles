@@ -36,7 +36,7 @@ main() {
           sed -Ei "s/(hangul:)False/\1True/" "$profile"
           # Disable some keys and set TriggerKey to 'hangul'
           local config="$conf/config"
-          sed -Ei "s/#(TriggerKey=).*/\1HANGUL/" "$config"
+          sed -Ei "s/#(TriggerKey=).*/\1HANGUL CTRL_SHIFT_SPACE/" "$config"
           sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
           sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
           # Disable ctrl+; key in fcitx-clipboard.config

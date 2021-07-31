@@ -11,7 +11,10 @@ require("dapui").setup({
     open_on_start = true,
     elements = {
       -- You can change the order of elements in the sidebar
-      "scopes", "stacks", "watches", "breakpoints"
+      "scopes",
+      "stacks",
+      "watches",
+      "breakpoints"
     },
     width = 40,
     position = "left" -- Can be "left" or "right"

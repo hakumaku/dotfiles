@@ -34,6 +34,8 @@ dap.configurations.cpp = {
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
-vim.fn.sign_define('DapBreakpoint', {text='*', texthl='ErrorMsg', linehl='', numhl=''})
-vim.fn.sign_define('DapStopped', {text='', texthl='', linehl='Visual', numhl=''})
+vim.fn.sign_define('DapBreakpoint',
+                   {text = '*', texthl = 'ErrorMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DapStopped',
+                   {text = '', texthl = '', linehl = 'Visual', numhl = ''})
 vim.cmd([[au FileType dap-repl lua require('dap.ext.autocompl').attach()]])

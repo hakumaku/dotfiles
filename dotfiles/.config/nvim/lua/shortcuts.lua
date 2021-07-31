@@ -32,6 +32,12 @@ end
 -- nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 -- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap("Y", "y$")
+nnoremap("n", "nzz")
+nnoremap("N", "Nzz$")
+nnoremap("J", "mzJ`z")
+nnoremap("k", "(v:count > 5 ? \"m'\".v:count : \"\").'k'", {expr = true})
+nnoremap("j", "(v:count > 5 ? \"m'\".v:count : \"\").'j'", {expr = true})
+
 inoremap("<C-u>", "<C-g>u<C-u>")
 inoremap("<C-w> ", "<C-g>u<C-w>")
 
@@ -48,8 +54,10 @@ cnoremap("<C-f>", "<S-Right>")
 -- nnoremap("<CR>", "o<ESC>k")
 -- Move the current line one down.
 nnoremap("<C-j>", ":m+1<Bar>echo 'Move line down'<CR>")
+vnoremap("<C-j>", ":m '>+1<CR>gv=gv")
 -- Move the current line one up.
 nnoremap("<C-k>", ":m-2<Bar>echo 'Move line up'<CR>")
+vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
 
 -- Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap("<C-_>", ":set nolist!<Bar>echo 'Show whitespaces'<CR>")
@@ -137,7 +145,8 @@ nnoremap("gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 -- nvim-compe
 inoremap("<C-Space>", "compe#complete()", {expr = true})
-inoremap("<CR>", "compe#confirm({ 'keys': \"\\<Plug>delimitMateCR\", 'mode': '' })",
+inoremap("<CR>",
+         "compe#confirm({ 'keys': \"\\<Plug>delimitMateCR\", 'mode': '' })",
          {expr = true})
 inoremap("<C-e>", "compe#close('<C-e>')", {expr = true})
 inoremap("<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true})
