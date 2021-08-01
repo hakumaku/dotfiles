@@ -75,6 +75,11 @@ main() {
           echo "ssh already configured"
         fi
         ;;
+      "lazygit" | "lg" | "lazy")
+        figlet 'Lazygit'
+        sudo add-apt-repository ppa:lazygit-team/release
+        sudo apt install lazygit
+        ;;
       "icons")
         figlet 'Change Icons'
         exec ./icons/icons.sh "$@"
