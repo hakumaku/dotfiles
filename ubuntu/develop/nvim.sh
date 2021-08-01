@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
 
-# C/C++
-install_cpp() {
-  # TODO: auto version detection
-  local version="12"
-  local packages=(
-    "clang-${version}" "libclang-${version}-dev" "libclang-cpp${version}-dev"
-    "clang-tools-${version}" "clang-format-${version}" "clang-tidy-${version}")
-  # Install latest clang
-  sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-  sudo apt install ${packages[@]}
-  sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-${version} 100
-  sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${version} 100
-  sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-${version} 100
-  sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-${version} 100
-  sudo update-alternatives --install /usr/bin/lldb-vscode lldb-vscode /usr/bin/lldb-vscode-${version} 100
-}
-
 # Lua
 # sumneko_lua, LuaFormatter
 install_lua_lsp() {
@@ -90,7 +73,6 @@ install_external_dependencies() {
   local snap_packages=("shfmt")
 
   if ! command -v clang &>/dev/null; then
-    install_cpp
     pip3 install --upgrade ${python_packages[@]}
     npm install --global ${npm_packages[@]}
     sudo snap install ${snap_packages}

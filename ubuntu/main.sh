@@ -14,10 +14,6 @@ main() {
         figlet 'Cargo packages'
         exec ./develop/cargo.sh
         ;;
-      "cmake")
-        figlet 'CMake'
-        exec ./develop/cmake.sh
-        ;;
       "fcitx")
         figlet 'Fcitx'
         if ! command -v fcitx &>/dev/null; then
@@ -53,27 +49,15 @@ main() {
       "fresh")
         # Also performs stow dotfiles
         exec ./develop/essentials.sh
+        exec ./develop/cppdev.sh
         ;;
       "fzf")
-        if [ ! -d ~/.fzf ]; then
-          git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        if [ ! -d "$prefix/fzf" ]; then
+          git clone --depth 1 https://github.com/junegunn/fzf.git "$prefix/fzf"
         else
-          git -C ~/.fzf pull
+          git -C "$prefix/fzf" pull
         fi
-        ~/.fzf/install
-        ;;
-      "git")
-        figlet 'Git Setup'
-        if [ ! -f ~/.ssh/id_rsa ]; then
-          ssh-keygen -t rsa -b 4096 -C "gentlebuuny@gmail.com"
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          git remote set-url origin "https://github.com/hakumaku/ubuntu-fresh"
-          xclip -sel clip <~/.ssh/id_rsa.pub
-          sensible-browser "https://github.com/settings/ssh/new"
-        else
-          echo "ssh already configured"
-        fi
+        $prefix/fzf/install
         ;;
       "lazygit" | "lg" | "lazy")
         figlet 'Lazygit'
