@@ -1,14 +1,20 @@
+# History settings
+HISTFILE=$HOME/.cache/.zsh_histfile
+HISTSIZE=500
+SAVEHIST=500
 # zsh basic settings
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-zstyle :compinstall filename '$HOME/.zshrc'
+# compinit: advanced tab-completion
+# promptinit: advanced prompt support
+zstyle :compinstall filename '$ZDOTDIR/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 autoload -Uz compinit promptinit
 zmodload zsh/complist
 compinit
 promptinit
+# Enable the auto-correction of the commands typed.
+setopt correctall
 
 # Disable pressing <C-s> to freeze.
 stty -ixon
@@ -42,7 +48,7 @@ alias ....='cd ../../..'
 alias gm='cd $HOME/Music'
 alias gd='cd $HOME/Downloads'
 alias gv='cd $HOME/Videos'
-alias zshrc='nvim ~/.zshrc'
+alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias bashrc="nvim ~/.bashrc -c 'normal zt'"
 alias vimrc="nvim $HOME/.vimrc"
 alias nvimrc="nvim $HOME/.config/nvim/init.vim"
@@ -61,7 +67,7 @@ fi
 # powerline10k settings
 source $HOME/.packages/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+[[ -f ~/.config/zsh/.p10k.zsh ]] && source ~/.config/zsh/.p10k.zsh
 
 # FZF (https://github.com/junegunn/fzf)
 # Use ~~ as the trigger sequence instead of the default **
@@ -92,7 +98,15 @@ source $HOME/.packages/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.packages/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 function zsh_vi_mode_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  # Setup fzf
+  if [[ ! "$PATH" == */home/haku/.packages/fzf/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}$HOME/.packages/fzf/bin"
+  fi
+  # Auto-completion
+  [[ $- == *i* ]] && source "$HOME/.packages/fzf/shell/completion.zsh" 2>/dev/null
+  # Key bindings
+  source "$HOME/.packages/fzf/shell/key-bindings.zsh"
+
   # Key bindings
   bindkey -v
   bindkey "^j" history-beginning-search-forward

@@ -144,6 +144,7 @@ main() {
           "https://github.com/zsh-users/zsh-syntax-highlighting.git"
           "https://github.com/jeffreytse/zsh-vi-mode"
           "https://github.com/zsh-users/zsh-autosuggestions")
+        echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
         if ! command -v zsh &>/dev/null; then
           for repo in ${repos[@]}; do
             repo="${repo##*/}"
