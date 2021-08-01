@@ -139,9 +139,19 @@ nnoremap("<C-w>t", ":Vista!!<CR>")
 nnoremap("<C-w>T", ":TroubleToggle<CR>")
 
 -- vim-fugitive
-nnoremap("gd", ":Gvdiffsplit!<CR>")
-nnoremap("gs", ":vertical Git<CR>")
-nnoremap("gb", ":Gitsigns toggle_current_line_blame<CR>")
+nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
+nnoremap("<leader>gs", ":vertical Git<CR>")
+nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
+-- nvim-toggleterm.lua
+LazyGit = {}
+function LazyGit:toggle()
+  if not self.__term then
+    local Terminal = require('toggleterm.terminal').Terminal
+    self.__term = Terminal:new({cmd = "lazygit", hidden = true})
+  end
+  self.__term:toggle()
+end
+nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
 
 -- nvim-compe
 inoremap("<C-Space>", "compe#complete()", {expr = true})

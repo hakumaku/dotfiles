@@ -8,3 +8,8 @@ gui:
       - reverse
     selectedRangeBgColor:
       - reverse
+
+keybinding:
+  universal:
+    quit-alt1: ' ' 
+    return: '<C-c>'
