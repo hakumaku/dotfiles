@@ -104,6 +104,10 @@ main() {
           echo "Rofi has already been installed."
         fi
         ;;
+      "shell")
+        figlet 'Pop Shell'
+        exec ./shell/pop-shell.sh
+        ;;
       "tmux")
         figlet 'Tmux'
         if ! command -v tmux &>/dev/null; then

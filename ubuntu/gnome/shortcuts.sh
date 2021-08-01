@@ -3,7 +3,6 @@
 keys=(
   "Shutdown, gnome-session-quit --power-off, <Super>Escape"
   "Gnome Tweaks, gnome-tweaks, <Super>U"
-  "Calculator, gnome-calculator, <Super>C"
   "Alacritty, alacritty, <Super>Return"
   "Ranger, alacritty -e ranger, <Super>E"
   "btm, alacritty -e btm, <Super>X"
