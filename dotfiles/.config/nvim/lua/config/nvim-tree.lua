@@ -1,4 +1,5 @@
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
+vim.g.nvim_tree_icons = {folder = {arrow_open = "", arrow_closed = ""}}
 vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
 vim.g.nvim_tree_special_files = {
   'README.md',
