@@ -59,71 +59,6 @@ for dir in $SCHEMADIR/dash-to-dock*; do
   break
 done
 
-for dir in $SCHEMADIR/caffeine*; do
-  if [ -d "$dir" ]; then
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.caffeine user-enabled true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.caffeine enable-fullscreen true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.caffeine show-indicator true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.caffeine restore-state true
-  fi
-  break
-done
-
-for dir in $SCHEMADIR/no-title-bar*; do
-  if [ -d "$dir" ]; then
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.no-title-bar change-appmenu false
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.no-title-bar button-position 'hidden'
-  fi
-  break
-done
-
-for dir in $SCHEMADIR/dynamic-panel-transparency*; do
-  if [ -d "$dir" ]; then
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.dynamic-panel-transparency unmaximized-opacity 154
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.dynamic-panel-transparency transition-speed 500
-  fi
-  break
-done
-
-for dir in $SCHEMADIR/openweather*; do
-  if [ -d "$dir" ]; then
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather weather-provider 'openweathermap'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather center-forecast false
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather days-forecast 2
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather unit 'celsius'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather geolocation-provider 'openstreetmaps'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather menu-alignment 75.0
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather actual-city 0
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather use-default-owm-key true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather show-text-in-panel true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather show-comment-in-panel false
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather location-text-length 0
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather position-in-panel 'right'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather appid-fc ''
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather refresh-interval-forecast 3600
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather city '37.5666791,126.9782914>서울, 대한민국 >-1'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather appid ''
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather translate-condition true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather refresh-interval-current 600
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather use-text-on-buttons false
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather wind-direction true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather use-symbolic-icons true
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather pressure-unit 'hPa'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather geolocation-appid-mapquest ''
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather decimal-places 1
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather wind-speed-unit 'm/s'
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.openweather show-comment-in-forecast true
-  fi
-  break
-done
-
-for dir in $SCHEMADIR/status-area-horizontal-spacing*; do
-  if [ -d "$dir" ]; then
-    gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.status-area-horizontal-spacing hpadding 2
-  fi
-  break
-done
-
 for dir in $SCHEMADIR/drawOnYourScreen*; do
   if [ -d "$dir" ]; then
     gsettings --schemadir "$dir/schemas" set org.gnome.shell.extensions.draw-on-your-screen erase-drawing "['<Alt>space']"
@@ -176,8 +111,8 @@ gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>J']"
 gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>M']"
 
 # Switching workspaces
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>N']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>P']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>N']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>P']"
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Left']"
 # gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Right']"
 
