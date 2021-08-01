@@ -86,27 +86,26 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: SauceCodePro Nerd Font
-  # family: Ubuntu Nerd Font
-  # family: Fira Code Nerd Font
-  # family: Fira Mono Nerd Font
-  # family: Inconsolata Nerd Font
-  # family: Iosevka Nerd Font
-  # family: D2Coding ligature
-    style: bold
+    family: "MesloLGS NF"
+  # family: "SauceCodePro Nerd Font"
+  # family: "Ubuntu Nerd Font"
+  # family: "Fira Code Nerd Font"
+  # family: "Fira Mono Nerd Font"
+  # family: "Inconsolata Nerd Font"
+  # family: "Iosevka Nerd Font"
+  # family: "D2Coding ligature"
+    style: regular
 
   # Bold font face
-  # bold:
-    #family: monospace
-    #style: Bold
+  bold:
+    style: bold
 
   # Italic font face
   italic:
-    #family: monospace
-    style: bold italic
+    style: italic
 
   # Point size
-  size: 14.0
+  size: 16.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
