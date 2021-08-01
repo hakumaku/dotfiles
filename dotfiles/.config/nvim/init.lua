@@ -102,7 +102,11 @@ else
   -- Time waited for key press to complete
   vim.opt.ttimeout = true
   vim.opt.ttimeoutlen = 50
-  vim.opt.undodir = "/home/haku/.vim/undo-dir"
+  if not vim.env.XDG_DATA_HOME then
+    vim.opt.undodir = vim.env.HOME .. "/.config/vim-undo"
+  else
+    vim.opt.undodir = vim.env.XDG_DATA_HOME .. "/vim-undo"
+  end
   vim.opt.undofile = true
   vim.opt.updatetime = 300
   vim.opt.viewoptions:remove("options")
