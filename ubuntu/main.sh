@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+if [ -z "${XDG_DATA_HOME}" ]; then
+  export prefix="$XDG_DATA_HOME"
+else
+  export prefix="$HOME/.local/share"
+fi
 
 main() {
-  export prefix="$HOME/.packages"
-
   while [ $# -gt 0 ]; do
     local opt=$1
     shift
