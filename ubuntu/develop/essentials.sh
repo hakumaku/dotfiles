@@ -22,6 +22,14 @@ if [ -d "\$HOME/.cargo/bin" ]; then
     PATH="\$HOME/.cargo/bin:\$PATH"
 fi
 EOT
+
+  # Specify XDG base directory specification variables
+  cat <<EOT >>"$HOME/.pam_environment"
+XDG_CACHE_HOME  DEFAULT=@{HOME}/.cache
+XDG_CONFIG_HOME DEFAULT=@{HOME}/.config
+XDG_DATA_HOME   DEFAULT=@{HOME}/.local/share
+XDG_STATE_HOME  DEFAULT=@{HOME}/.local/state
+EOT
 }
 
 install_essentials
