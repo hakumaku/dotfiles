@@ -88,6 +88,15 @@ main() {
         if ! command -v plank &>/dev/null; then
           sudo apt remove gnome-shell-extension-ubuntu-dock
           sudo apt install plank
+          local schemas="/net/launchpad/plank/docks/dock1"
+          dconf write "$schemas/alignment" 'center'
+          dconf write "$schemas/hide-mode" 'window-dodge'
+          dconf write "$schemas/icon-size" 64
+          dconf write "$schemas/items-alignment" 'center'
+          dconf write "$schemas/position" 'bottom'
+          dconf write "$schemas/theme" 'Transparent'
+          dconf write "$schemas/zoom-enabled" true
+          dconf write "$schemas/zoom-percent" 150
         else
           echo "Plank has already been installed."
         fi
