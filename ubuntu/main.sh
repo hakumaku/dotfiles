@@ -2,9 +2,9 @@
 
 set -euo pipefail
 if [ -z "${XDG_DATA_HOME}" ]; then
-  export prefix="$XDG_DATA_HOME"
+  export prefix="$XDG_DATA_HOME/ubuntu-fresh-sites"
 else
-  export prefix="$HOME/.local/share"
+  export prefix="$HOME/.local/share/ubuntu-fresh-sites"
 fi
 
 main() {
@@ -61,6 +61,8 @@ main() {
           git -C "$prefix/fzf" pull
         fi
         $prefix/fzf/install
+        rm ~/.fzf.zsh
+        rm ~/.fzf.bash
         ;;
       "lazygit" | "lg" | "lazy")
         figlet 'Lazygit'
@@ -147,8 +149,8 @@ main() {
           "https://github.com/zsh-users/zsh-syntax-highlighting.git"
           "https://github.com/jeffreytse/zsh-vi-mode"
           "https://github.com/zsh-users/zsh-autosuggestions")
-        echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
         if ! command -v zsh &>/dev/null; then
+          echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
           for repo in ${repos[@]}; do
             repo="${repo##*/}"
             repo="${repo%.*}"

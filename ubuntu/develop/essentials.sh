@@ -33,6 +33,6 @@ EOT
 }
 
 install_essentials
-pushd $prefix/ubuntu-fresh
+pushd $XDG_DATA_HOME/ubuntu-fresh 
 stow --target=$HOME dotfiles
 popd

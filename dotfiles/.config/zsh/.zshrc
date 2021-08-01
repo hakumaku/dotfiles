@@ -58,6 +58,7 @@ alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keym
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 # alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias nvimg="nvim -c 'Git | wincmd o' ."
+alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
 # Tmux
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
@@ -65,9 +66,37 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
 fi
 
 # powerline10k settings
-source $HOME/.packages/powerlevel10k/powerlevel10k.zsh-theme
+source $XDG_DATA_HOME/ubuntu-fresh-sites/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.config/zsh/.p10k.zsh ]] && source ~/.config/zsh/.p10k.zsh
+
+# zsh-syntax-highlighting
+source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh-autosuggestions
+source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-vi-mode
+source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+function zsh_vi_mode_init() {
+  # Setup fzf
+  if [[ ! "$PATH" == */$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/bin"
+  fi
+  # Auto-completion
+  [[ $- == *i* ]] && source "$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/shell/completion.zsh" 2>/dev/null
+  # Key bindings
+  source "$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/shell/key-bindings.zsh"
+
+  # Key bindings
+  bindkey -v
+  bindkey "^j" history-beginning-search-forward
+  bindkey "^k" history-beginning-search-backward
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
+  bindkey -M menuselect 'j' vi-down-line-or-history
+}
+zvm_after_init_commands+=(zsh_vi_mode_init)
 
 # FZF (https://github.com/junegunn/fzf)
 # Use ~~ as the trigger sequence instead of the default **
@@ -89,36 +118,6 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
-
-# zsh-syntax-highlighting
-source $HOME/.packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# zsh-autosuggestions
-source $HOME/.packages/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh-vi-mode
-source $HOME/.packages/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-function zsh_vi_mode_init() {
-  # Setup fzf
-  if [[ ! "$PATH" == */home/haku/.packages/fzf/bin* ]]; then
-    export PATH="${PATH:+${PATH}:}$HOME/.packages/fzf/bin"
-  fi
-  # Auto-completion
-  [[ $- == *i* ]] && source "$HOME/.packages/fzf/shell/completion.zsh" 2>/dev/null
-  # Key bindings
-  source "$HOME/.packages/fzf/shell/key-bindings.zsh"
-
-  # Key bindings
-  bindkey -v
-  bindkey "^j" history-beginning-search-forward
-  bindkey "^k" history-beginning-search-backward
-  bindkey -M menuselect 'h' vi-backward-char
-  bindkey -M menuselect 'k' vi-up-line-or-history
-  bindkey -M menuselect 'l' vi-forward-char
-  bindkey -M menuselect 'j' vi-down-line-or-history
-}
-zvm_after_init_commands+=(zsh_vi_mode_init)
-
-alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
 fzf_commit() {
   local filter
