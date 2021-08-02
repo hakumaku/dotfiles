@@ -33,7 +33,7 @@ end
 -- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap("Y", "y$")
 nnoremap("n", "nzz")
-nnoremap("N", "Nzz$")
+nnoremap("N", "Nzz")
 nnoremap("J", "mzJ`z")
 nnoremap("k", "(v:count > 5 ? \"m'\".v:count : \"\").'k'", {expr = true})
 nnoremap("j", "(v:count > 5 ? \"m'\".v:count : \"\").'j'", {expr = true})

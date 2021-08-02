@@ -1,0 +1,76 @@
+snippet min "cmake_minimum_required(...)"
+cmake_minimum_required(VERSION ${0:3.21})
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+project(
+  ${1:hello_world}
+  VERSION 1.0.0
+  LANGUAGES CXX
+)
+endsnippet
+
+snippet cxx "set_target_properties(...)"
+set_target_properties(
+  ${PROJECT_NAME}
+  PROPERTIES
+  CMAKE_CXX_STANDARD ${0:20}
+  CMAKE_CXX_STANDARD_REQUIRED ON
+)
+endsnippet
+
+snippet exe "add_executable(...)"
+add_executable(
+  ${PROJECT_NAME}
+)
+endsnippet
+
+snippet lib "add_library(STATIC)"
+add_library(
+  ${PROJECT_NAME}
+  STATIC
+)
+endsnippet
+
+snippet intlib "add_library(INTERFACE)"
+add_library(
+  ${PROJECT_NAME}
+  INTERFACE
+)
+endsnippet
+
+snippet objlib "add_library(OBJECT)"
+add_library(
+  ${PROJECT_NAME}
+  OBJECT
+)
+endsnippet
+
+snippet alias "add_library(ALIAS)"
+add_library(${0:name} ALIAS ${1:target})
+endsnippet
+	
+
+snippet tid "target_include_directories(...)"
+target_include_directories(
+  ${PROJECT_NAME}
+  PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+endsnippet
+
+snippet tll "target_link_libraries(...)"
+target_link_libraries(
+  ${PROJECT_NAME}
+  PRIVATE
+)
+endsnippet
+
+snippet tcd "target_compile_definitions(...)"
+target_compile_definitions(
+  ${PROJECT_NAME}
+  PRIVATE
+)
+endsnippet
