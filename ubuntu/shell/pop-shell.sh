@@ -28,7 +28,7 @@ update_shortcuts() {
   dconf write "$schemas/gap-outer" 4
   dconf write "$schemas/show-title" false
   dconf write "$schemas/tile-by-default" true
-  dconf write "$schemas/tile-enter" ['<Super>Space']
+  dconf write "$schemas/tile-enter" "['<Super>Space']"
   dconf write "$schemas/hint-color-rgba" "'rgb(233, 84, 32, 1)'"
 }
 
