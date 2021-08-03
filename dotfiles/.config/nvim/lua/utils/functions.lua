@@ -4,10 +4,6 @@ local function is_valid_buffer(bufnr)
   return vim.api.nvim_buf_get_option(bufnr, 'buflisted')
 end
 
-function M.lsp_goto_definition() vim.lsp.buf.definition() end
-
-function M.lsp_code_action() vim.lsp.buf.code_action() end
-
 local function get_valid_buffers()
   local valid_buffers = {}
   local buffers = vim.api.nvim_list_bufs()
@@ -17,6 +13,19 @@ local function get_valid_buffers()
     end
   end
   return valid_buffers
+end
+
+function M.dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. M.dump(v) .. ','
+      end
+      return s .. '}'
+   else
+      return tostring(o)
+   end
 end
 
 function M.jump_right()

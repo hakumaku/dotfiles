@@ -14,13 +14,13 @@ require('compe').setup {
 
   -- priority
   source = {
-    path = true,
+    ultisnips = true,
     buffer = true,
-    calc = true,
+    path = true,
     nvim_lsp = true,
     nvim_lua = true,
+    calc = true,
     vsnip = true,
-    ultisnips = true
   }
 }
 
