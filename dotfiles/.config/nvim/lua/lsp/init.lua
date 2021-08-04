@@ -1,21 +1,34 @@
 local lspconfig = require('lspconfig')
 
-local function codeaction_callback(_, _, action)
-    -- Select the first item
-    local _, edit = next(action[1].edit.changes)
-    vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
-end
+local function definition_callback(_, _, action) end
 
 local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  vim.lsp.handlers['textDocument/codeAction'] = codeaction_callback
+  vim.lsp.handlers['textDocument/codeAction'] =
+      function(_, _, action)
+        -- Select the first item
+        local _, edit = next(action[1].edit.changes)
+        vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
+      end
+
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
       vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = {severity_limit = "Warning"},
         virtual_text = {prefix = "●", spacing = 2},
         signs = {severity_limit = "Warning"}
       })
+  vim.lsp.handlers["textDocument/definition"] =
+      function(_, _, locations, _, def_bufnr)
+        if #locations > 1 then
+          -- Returns items
+          vim.lsp.util.locations_to_items(locations)
+        else
+          -- Returns boolean value
+          vim.lsp.util.jump_to_location(locations[1])
+          vim.cmd "normal! zz"
+        end
+      end
 
   -- Set autocommands conditional on server_capabilities
   -- if client.resolved_capabilities.document_highlight then

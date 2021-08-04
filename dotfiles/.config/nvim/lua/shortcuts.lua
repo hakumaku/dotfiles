@@ -28,6 +28,15 @@ local function tnoremap(combo, mapping)
   vim.api.nvim_set_keymap("t", combo, mapping, {noremap = true})
 end
 
+local function snoremap(combo, mapping, opts)
+  if not opts then
+    vim.api.nvim_set_keymap("s", combo, mapping, {noremap = true})
+  else
+    opts.noremap = true
+    vim.api.nvim_set_keymap("s", combo, mapping, opts)
+  end
+end
+
 -- Move cursor by virtual lines.
 -- nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 -- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -52,6 +61,8 @@ cnoremap("<C-f>", "<S-Right>")
 
 -- Insert a newline in normal mode.
 -- nnoremap("<CR>", "o<ESC>k")
+-- Insert space in normal mode
+nnoremap("<Space>", "i<space><ESC>")
 -- Move the current line one down.
 nnoremap("<C-j>", ":m+1<Bar>echo 'Move line down'<CR>")
 vnoremap("<C-j>", ":m '>+1<CR>gv=gv")
@@ -65,8 +76,6 @@ nnoremap("<C-_>", ":set nolist!<Bar>echo 'Show whitespaces'<CR>")
 -- Removes any search highlighting.
 nnoremap("<C-l>",
          ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>")
--- Insert space in normal mode
-nnoremap("<Space>", "i<space><ESC>")
 -- Copy & Paste
 vnoremap("<C-c>", '"+y:echo ' .. "'Yanked to clipboard'<CR>")
 inoremap("<C-v>", '<ESC>"+pa')
@@ -154,13 +163,51 @@ end
 nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
 
 -- nvim-compe
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+local check_back_space = function()
+  local col = vim.fn.col('.') - 1
+  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    return true
+  else
+    return false
+  end
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+    return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+    return t "<C-R>=UltiSnips#JumpBackwards()<CR>"
+  else
+    return t "<S-Tab>"
+  end
+end
+
 inoremap("<C-Space>", "compe#complete()", {expr = true})
-inoremap("<CR>",
-         "compe#confirm({ 'keys': \"\\<Plug>delimitMateCR\", 'mode': '' })",
-         {expr = true})
+inoremap("<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
 inoremap("<C-e>", "compe#close('<C-e>')", {expr = true})
 inoremap("<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true})
 inoremap("<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true})
+inoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
+snoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
+inoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+snoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")
