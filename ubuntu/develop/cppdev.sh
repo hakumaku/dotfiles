@@ -25,8 +25,17 @@ install_clang() {
   # TODO: auto version detection
   local version="12"
   local packages=(
-    "clang-${version}" "libclang-${version}-dev" "libclang-cpp${version}-dev"
-    "clang-tools-${version}" "clang-format-${version}" "clang-tidy-${version}")
+    "clang-${version}"
+    "clangd-${version}"
+    "clang-tools-${version}"
+    "clang-format-${version}"
+    "python-clang-${version}"
+    "clang-${version}-doc"
+    "lldb-${version}"
+    "libclang-common-${version}-dev"
+    "libclang-${version}-dev"
+    "libclang1-${version}"
+  )
   # Install latest clang
   sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
   sudo apt install ${packages[@]}
