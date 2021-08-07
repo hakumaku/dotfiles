@@ -123,6 +123,8 @@ iabbrev wrods words
 iabbrev teh the
 iabbrev mian main
 iabbrev lenght length
+iabbrev wheil while
+iabbrev whiel while
 ]])
 
   -- autocmd

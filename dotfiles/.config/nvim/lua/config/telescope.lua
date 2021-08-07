@@ -12,7 +12,11 @@ require('telescope').setup {
   pickers = {
     git_status = {theme = "dropdown", previewer = false},
     current_buffer_fuzzy_find = {theme = "dropdown", previewer = false},
-    buffers = {theme = "dropdown", previewer = false}
+    buffers = {theme = "dropdown", previewer = false},
+    lsp_workspace_symbols = {
+      theme = "dropdown",
+      previewer = false
+    }
   }
 }
 
