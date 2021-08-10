@@ -5,7 +5,7 @@ install_cmake() {
     return
   fi
 
-  local code="focal"
+  local code=$(lsb_release -cs)
   if add-apt-repository -L | grep 'kitware' &>/dev/null; then
     sudo apt install cmake
   else

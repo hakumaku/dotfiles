@@ -133,3 +133,7 @@ fzf_commit() {
       --preview="f() { set -- \$(echo -- \$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \$# -eq 0 ] || git show --color=always \$1 \$filter | delta --line-numbers; }; f {}" \
       --preview-window=right:60%
 }
+
+if command -v neofetch &>/dev/null; then
+  neofetch
+fi
