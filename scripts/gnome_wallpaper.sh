@@ -5,10 +5,10 @@ main() {
   size=${#wallpapers[*]}
 
   while true; do
-    indices=$(seq $size | shuf)
-    for index in ${indices[@]}; do
+    temp=$(printf "%s\n" "${wallpapers[@]}" | sort -R)
+    for wallpaper in "${temp[@]}"; do
+      echo gsettings set org.gnome.desktop.background picture-uri "$wallpaper"
       echo gsettings set org.gnome.desktop.background picture-options "scaled"
-      echo gsettings set org.gnome.desktop.background picture-uri "${wallpapers[$index-1]}"
       sleep 1m
     done
   done
