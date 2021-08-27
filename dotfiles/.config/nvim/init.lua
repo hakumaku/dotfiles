@@ -129,6 +129,8 @@ iabbrev whiel while
 
   -- autocmd
   vim.cmd([[
+au FocusGained,BufEnter * checktime
+
 augroup project
 	au!
 	au BufRead,BufNewFile *.h,*.c set filetype=cpp
