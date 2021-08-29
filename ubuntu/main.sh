@@ -88,6 +88,7 @@ main() {
               'jetbrains-pycharm.dockitem', \
               'codium.dockitem', \
               'Alacritty.dockitem', \
+              'gitkraken.dockitem', \
               'slack.dockitem', \
               'steam.dockitem', \
               'org.gnome.Nautilus.dockitem', \
