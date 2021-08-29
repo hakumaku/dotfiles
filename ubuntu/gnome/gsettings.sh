@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # org.gnome.nautilus.list-view default-column-order ['name', 'size', 'type', 'owner', 'group', 'permissions', 'mime_type', 'where', 'date_modified', 'date_modified_with_time', 'date_accessed', 'date_created', 'recency', 'starred']
 # com.ubuntu.update-notifier regular-auto-launch-interval 7
 # org.gnome.nautilus.window-state sidebar-width 223
@@ -27,6 +26,7 @@ gsettings set org.gnome.desktop.privacy recent-files-max-age -1
 gsettings set org.gnome.desktop.session idle-delay 0
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 
+# TODO: keep fonts config?
 # gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
 # gsettings set org.gnome.desktop.interface document-font-name 'Sans 11'
 # gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
@@ -73,9 +73,8 @@ gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 gsettings set org.gnome.desktop.interface cursor-theme "Yaru"
 
 # Keyboard shortcuts
-# gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:escape']"
 gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
-# gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>e']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
 
 # Disable default bindings.
 # <Super>: overlay key
@@ -102,6 +101,8 @@ gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
 gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
 # <Alt>space: window menu
 gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[]"
+# Gnome-shell debug
+gsettings set org.gnome.desktop.wm.keybindings panel-run-dialog "['<Super>slash']"
 
 # Window tiling keybindings
 gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super>H']"
@@ -130,9 +131,6 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q', '<Alt>F4']"
 # Disable animation
 gsettings set org.gnome.desktop.interface enable-animations true
-# Text ellipsis limit
-# gsettings set org.gnome.nautilus.desktop text-ellipsis-limit 1
-# gsettings set org.gnome.nautilus.icon-view text-ellipsis-limit "['1']"
 
 # Switching to specific workspace
 gsettings set org.gnome.mutter dynamic-workspaces false

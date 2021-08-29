@@ -34,6 +34,8 @@ update_shortcuts() {
 
   dconf write "/org/gnome/mutter/keybindings/toggle-tiled-right" "['']"
   dconf write "/org/gnome/mutter/keybindings/toggle-tiled-left" "['']"
+  dconf write "/org/gnome/settings-daemon/plugins/media-keys/home" "['<Super>f']"
+  dconf write "/org/gnome/desktop/wm/keybindings/panel-run-dialog" "['<Super>slash']"
 }
 
 install_popshell

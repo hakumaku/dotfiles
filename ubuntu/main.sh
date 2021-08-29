@@ -79,10 +79,25 @@ main() {
         if ! command -v plank &>/dev/null; then
           sudo apt remove gnome-shell-extension-ubuntu-dock
           sudo apt install plank
-          exec plank&
+          exec plank &
           sleep 3s
           local schemas="/net/launchpad/plank/docks/dock1"
-          # TODO: order of dock items
+          local items="'firefox.dockitem', \
+              'thunderbird.dockitem', \
+              'jetbrains-clion.dockitem', \
+              'jetbrains-pycharm.dockitem', \
+              'codium.dockitem', \
+              'Alacritty.dockitem', \
+              'slack.dockitem', \
+              'steam.dockitem', \
+              'org.gnome.Nautilus.dockitem', \
+              'gimp.dockitem', \
+              'vlc.dockitem', \
+              'transmission-gtk.dockitem', \
+              'gnome-control-center.dockitem', \
+              'org.gnome.tweaks.dockitem', \
+              'org.gnome.Extensions.dockitem'"
+          dconf write "$schemas/dock-itmes" "[$items]"
           dconf write "$schemas/alignment" "'center'"
           dconf write "$schemas/hide-mode" "'window-dodge'"
           dconf write "$schemas/icon-size" 64
