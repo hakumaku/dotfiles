@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
+export PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh-sites"
+export SCRIPT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh"
 set -euo pipefail
-if [ -z "${XDG_DATA_HOME}" ]; then
-  export prefix="$XDG_DATA_HOME/ubuntu-fresh-sites"
-else
-  export prefix="$HOME/.local/share/ubuntu-fresh-sites"
-fi
 
 main() {
   while [ $# -gt 0 ]; do
@@ -55,12 +52,12 @@ main() {
         exec ./develop/cppdev.sh
         ;;
       "fzf")
-        if [ ! -d "$prefix/fzf" ]; then
-          git clone --depth 1 https://github.com/junegunn/fzf.git "$prefix/fzf"
+        if [ ! -d "$PREFIX/fzf" ]; then
+          git clone --depth 1 https://github.com/junegunn/fzf.git "$PREFIX/fzf"
         else
-          git -C "$prefix/fzf" pull
+          git -C "$PREFIX/fzf" pull
         fi
-        $prefix/fzf/install
+        $PREFIX/fzf/install
         rm ~/.fzf.zsh
         rm ~/.fzf.bash
         ;;
@@ -82,13 +79,16 @@ main() {
         if ! command -v plank &>/dev/null; then
           sudo apt remove gnome-shell-extension-ubuntu-dock
           sudo apt install plank
+          exec plank&
+          sleep 3s
           local schemas="/net/launchpad/plank/docks/dock1"
-          dconf write "$schemas/alignment" 'center'
-          dconf write "$schemas/hide-mode" 'window-dodge'
+          # TODO: order of dock items
+          dconf write "$schemas/alignment" "'center'"
+          dconf write "$schemas/hide-mode" "'window-dodge'"
           dconf write "$schemas/icon-size" 64
-          dconf write "$schemas/items-alignment" 'center'
-          dconf write "$schemas/position" 'bottom'
-          dconf write "$schemas/theme" 'Transparent'
+          dconf write "$schemas/items-alignment" "'center'"
+          dconf write "$schemas/position" "'bottom'"
+          dconf write "$schemas/theme" "'Transparent'"
           dconf write "$schemas/zoom-enabled" true
           dconf write "$schemas/zoom-percent" 150
         else
@@ -150,20 +150,20 @@ main() {
           "https://github.com/jeffreytse/zsh-vi-mode"
           "https://github.com/zsh-users/zsh-autosuggestions")
         if ! command -v zsh &>/dev/null; then
+          sudo apt install zsh
+          chsh -s $(which zsh)
+
           echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
           for repo in ${repos[@]}; do
             repo="${repo##*/}"
             repo="${repo%.*}"
-            git clone "$repo" "$prefix/${repo}"
+            git clone "$repo" "$PREFIX/${repo}"
           done
-
-          sudo apt install zsh
-          chsh -s $(which zsh)
         else
           for repo in ${repos[@]}; do
             repo="${repo##*/}"
             repo="${repo%.*}"
-            git -C "$prefix/${repo}" pull
+            git -C "$PREFIX/${repo}" pull
           done
         fi
         ;;

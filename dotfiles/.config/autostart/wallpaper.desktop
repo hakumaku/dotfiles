@@ -6,4 +6,4 @@ Exec=$XDG_DATA_HOME/ubuntu-fresh/scripts/gnome_wallpaper.sh
 Icon=wallpaper
 Hidden=false
 NoDisplay=false
-X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-enabled=false

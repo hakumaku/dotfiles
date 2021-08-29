@@ -1,13 +1,33 @@
 #!/usr/bin/env bash
 
 install_cargo_utilities() {
-  local packages=("alacritty" "git-delta" "exa" "bat" "fd-find" "ripgrep" "bottom")
+  local dependencies=(
+    "pkg-config"
+    "libxkbcommon-dev"
+    "libfreetype6-dev"
+    "libfontconfig1-dev"
+    "libxcb-xfixes0-dev"
+  )
+  sudo apt install ${dependencies[@]}
+
+  local packages=(
+    "alacritty"
+    "git-delta"
+    "exa"
+    "bat"
+    "fd-find"
+    "ripgrep"
+    "bottom"
+  )
   cargo install ${packages[@]}
+  # Place Alacritty.desktop to applications
+  cp $SCRIPT_HOME/dotfiles/.config/alacritty/Alacritty.desktop \
+    $XDG_DATA_HOME/applications
 }
 
 install_alacritty() {
   local url="https://github.com/alacritty/alacritty.git"
-  local dir="${prefix}/alacritty"
+  local dir="${PREFIX}/alacritty"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -35,7 +55,7 @@ install_alacritty() {
 
 install_bat() {
   local url="https://github.com/sharkdp/bat"
-  local dir="${prefix}/bat"
+  local dir="${PREFIX}/bat"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -57,7 +77,7 @@ install_bat() {
 
 install_bottom() {
   local url="https://github.com/ClementTsang/bottom"
-  local dir="${prefix}/bottom"
+  local dir="${PREFIX}/bottom"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -78,7 +98,7 @@ install_bottom() {
 
 install_exa() {
   local url="https://github.com/ogham/exa"
-  local dir="${prefix}/exa"
+  local dir="${PREFIX}/exa"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -103,7 +123,7 @@ install_exa() {
 
 install_fd() {
   local url="https://github.com/sharkdp/fd"
-  local dir="${prefix}/fd"
+  local dir="${PREFIX}/fd"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -122,7 +142,7 @@ install_fd() {
 
 install_gitdelta() {
   local url="https://github.com/dandavison/delta"
-  local dir="${prefix}/delta"
+  local dir="${PREFIX}/delta"
 
   if [ -d "$dir" ]; then
     git -C $dir pull
@@ -138,7 +158,7 @@ install_gitdelta() {
 
 install_ripgrep() {
   local url="https://github.com/BurntSushi/ripgrep"
-  local dir="${prefix}/ripgrep"
+  local dir="${PREFIX}/ripgrep"
 
   if [ -d "$dir" ]; then
     git -C $dir pull

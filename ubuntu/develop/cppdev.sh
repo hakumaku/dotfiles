@@ -5,16 +5,17 @@ install_cmake() {
     return
   fi
 
-  local code=$(lsb_release -cs)
+  # local code=$(lsb_release -cs)
+  local code="focal"
   if add-apt-repository -L | grep 'kitware' &>/dev/null; then
     sudo apt install cmake
   else
     local url="https://apt.kitware.com/keys/kitware-archive-latest.asc"
+    local gpg="/usr/share/keyrings/kitware-archive-keyring.gpg"
+
     wget -O - $url 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-    sudo add-apt-repository "deb https://apt.kitware.com/ubuntu/ ${code} main" \
-      && sudo add-apt-repository "deb https://apt.kitware.com/ubuntu/ ${code}-rc main" \
-      && sudo apt install kitware-archive-keyring
-    sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
+    sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ ${code} main"
+    sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ ${code}-rc main"
   fi
 }
 
@@ -22,14 +23,17 @@ install_clang() {
   if command -v clang &>/dev/null; then
     return
   fi
+  
   # TODO: auto version detection
-  local version="12"
+  local version="13"
+  local code="hirsute"
+  
   local packages=(
     "clang-${version}"
     "clangd-${version}"
     "clang-tools-${version}"
     "clang-format-${version}"
-    "python-clang-${version}"
+    # "python-clang-${version}"
     "clang-${version}-doc"
     "lldb-${version}"
     "libclang-common-${version}-dev"
@@ -37,7 +41,11 @@ install_clang() {
     "libclang1-${version}"
   )
   # Install latest clang
-  sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+  # sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+  local url="https://apt.llvm.org/llvm-snapshot.gpg.key"
+  wget -O - $url 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/llvm.gpg >/dev/null
+  sudo add-apt-repository "deb http://apt.llvm.org/${code}/ llvm-toolchain-${code}-${version} main"
+
   sudo apt install ${packages[@]}
   sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-${version} 100
   sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${version} 100

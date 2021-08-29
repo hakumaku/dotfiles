@@ -2,3 +2,8 @@ packer_compiled.lua
 vlc-qt-interface.conf
 **/lazygit/state.yml
 **/zsh/.zcompdump
+**/ranger/plugins/**
+**/ranger/commands.py
+**/ranger/commands_full.py
+**/ranger/rifle.conf
+**/ranger/scope.sh

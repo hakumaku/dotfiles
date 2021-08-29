@@ -21,7 +21,7 @@ install_lua_lsp() {
 }
 
 install_lua_formatter() {
-  local dest="${prefix}/LuaFormatter"
+  local dest="${PREFIX}/LuaFormatter"
   if [ ! -d "$dest" ]; then
     # Fresh install
     local url="https://github.com/Koihik/LuaFormatter.git"
@@ -41,7 +41,7 @@ install_lua() {
 }
 
 install_nvim() {
-  local dest="${prefix}/neovim"
+  local dest="${PREFIX}/neovim"
   if [ ! -d "$dest" ]; then
     local dependencies=(
       "ninja-build" "gettext" "libtool" "libtool-bin"

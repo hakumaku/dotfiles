@@ -39,7 +39,7 @@ config_ranger() {
 
 install_ranger() {
   local url="https://github.com/ranger/ranger"
-  local dest="${prefix}/${url##*/}"
+  local dest="${PREFIX}/${url##*/}"
   if [ ! -d "$dest" ]; then
     git clone "$url" "$dest"
     (cd "$dest" && sudo make install)

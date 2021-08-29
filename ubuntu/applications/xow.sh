@@ -2,7 +2,7 @@
 
 install_xow() {
   local url="https://github.com/medusalix/xow"
-  local dest="${prefix}/${url##*/}"
+  local dest="${PREFIX}/${url##*/}"
   if [ ! -d "$dest" ]; then
     local dependencies=("cabextract" "libusb-1.0-0-dev")
     sudo apt install ${dependencies[@]}

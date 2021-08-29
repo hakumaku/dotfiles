@@ -108,7 +108,7 @@ gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super>H']"
 gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Super>L']"
 gsettings set org.gnome.desktop.wm.keybindings maximize "['<Super>K']"
 gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>J']"
-gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>M']"
+gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>,']"
 
 # Switching workspaces
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>N']"
@@ -126,8 +126,6 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><C
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Super><Ctrl>H']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><Ctrl>L']"
 
-# Minimize window
-gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>M']"
 # Close window
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q', '<Alt>F4']"
 # Disable animation
