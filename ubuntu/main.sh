@@ -99,9 +99,20 @@ main() {
         figlet 'Pop Shell'
         exec ./shell/pop-shell.sh
         ;;
+      "streamlink")
+        figlet 'Streamlink'
+        if ! command -v streamlink &>/dev/null; then
+          sudo add-apt-repository ppa:nilarimogard/webupd8
+        fi
+        local url="https://github.com/streamlink/streamlink-twitch-gui"
+        local link=$(curl -Ls $url/releases/latest | grep -wo "download.*x86_64.AppImage")
+        curl -Lo ${HOME}/.local/bin/streamlink-twitch-gui "$url/releases/$link"
+        chmod +x ${HOME}/.local/bin/streamlink-twitch-gui
+        sudo apt install streamlink
+        ;;
       "youtube-dl" | "youtube" | "yt")
         figlet 'Youtube-dl'
-        if ! command -v tmux &>/dev/null; then
+        if ! command -v youtube-dl &>/dev/null; then
           local bin="/usr/local/bin/youtube-dl"
           sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o $bin
           sudo chmod a+rx $bin
@@ -111,7 +122,7 @@ main() {
         ;;
       "vlc")
         figlet 'vlc'
-        if ! command -v tmux &>/dev/null; then
+        if ! command -v vlc &>/dev/null; then
           sudo apt install vlc ffmpeg
           mkdir -p $HOME/.config/vlc
         else
