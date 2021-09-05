@@ -6,4 +6,4 @@ Terminal=false
 Exec=streamlink-twitch-gui
 Name=Twitch Streamlink GUI
 StartupWMClass=streamlink-twitch-gui
-Icon=twitch
+Icon=streamlink-twitch-gui
