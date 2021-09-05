@@ -95,25 +95,9 @@ main() {
         figlet 'Ranger'
         exec ./develop/ranger.sh
         ;;
-      "rofi")
-        figlet 'Rofi'
-        if ! command -v rofi &>/dev/null; then
-          sudo apt install rofi
-        else
-          echo "Rofi has already been installed."
-        fi
-        ;;
       "shell")
         figlet 'Pop Shell'
         exec ./shell/pop-shell.sh
-        ;;
-      "tmux")
-        figlet 'Tmux'
-        if ! command -v tmux &>/dev/null; then
-          sudo apt install tmux
-        else
-          echo "Tmux has already been installed."
-        fi
         ;;
       "youtube-dl" | "youtube" | "yt")
         figlet 'Youtube-dl'

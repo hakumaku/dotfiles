@@ -7,7 +7,7 @@ install_essentials() {
   fi
 
   local packages=(
-    "git" "xclip" "figlet"
+    "git" "xclip" "figlet" "tmux" "rofi"
     "apt-transport-https" "ca-certificates" "software-properties-common"
     "gnupg" "build-essential" "wget" "curl" "autoconf" "automake"
     "python3" "python-is-python3" "python3-pip" "python3-distutils" "npm" "stow")
