@@ -77,12 +77,12 @@ install_external_dependencies() {
 
   if ! command -v clang &>/dev/null; then
     pip3 install --upgrade ${python_packages[@]}
-    npm install --global ${npm_packages[@]}
+    sudo npm install --global ${npm_packages[@]}
     sudo snap install ${snap_packages}
     install_lua
   else
     pip3 install --upgrade ${python_packages[@]}
-    npm update ${npm_packages[@]}
+    sudo npm update ${npm_packages[@]}
     sudo snap refresh ${snap_packages}
     install_lua
   fi

@@ -5,11 +5,9 @@ install_cmake() {
     return
   fi
 
-  # local code=$(lsb_release -cs)
   local code="focal"
-  if add-apt-repository -L | grep 'kitware' &>/dev/null; then
-    sudo apt install cmake
-  else
+
+  if !(add-apt-repository -L | grep 'kitware' &>/dev/null); then
     local url="https://apt.kitware.com/keys/kitware-archive-latest.asc"
     local gpg="/usr/share/keyrings/kitware-archive-keyring.gpg"
 
@@ -17,6 +15,7 @@ install_cmake() {
     sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ ${code} main"
     sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ ${code}-rc main"
   fi
+  sudo apt install cmake
 }
 
 install_clang() {

@@ -14,6 +14,8 @@ install_essentials() {
   sudo apt install ${packages[@]}
 
   # Install rust
+  export CARGO_HOME=${HOME}/.local/share/cargo
+  export RUSTUP_HOME=${HOME}/.local/share/rustup
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
   # Install nodejs
@@ -32,6 +34,6 @@ EOT
 }
 
 install_essentials
-pushd $XDG_DATA_HOME/ubuntu-fresh 
+pushd $SCRIPT_HOME
 stow --target=$HOME dotfiles
 popd
