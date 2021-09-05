@@ -103,11 +103,13 @@ main() {
         figlet 'Streamlink'
         if ! command -v streamlink &>/dev/null; then
           sudo add-apt-repository ppa:nilarimogard/webupd8
+          cp $SCRIPT_HOME/scripts/twitch.desktop ${XDG_DATA_HOME:-$HOME/.local/share}/applications/
         fi
         local url="https://github.com/streamlink/streamlink-twitch-gui"
         local link=$(curl -Ls $url/releases/latest | grep -wo "download.*x86_64.AppImage")
-        curl -Lo ${HOME}/.local/bin/streamlink-twitch-gui "$url/releases/$link"
-        chmod +x ${HOME}/.local/bin/streamlink-twitch-gui
+        local output="${HOME}/.local/bin/streamlink-twitch-gui"
+        curl -Lo $output "$url/releases/$link"
+        chmod +x $output
         sudo apt install streamlink
         ;;
       "youtube-dl" | "youtube" | "yt")
