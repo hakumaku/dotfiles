@@ -48,20 +48,23 @@ install_nvim() {
       "autoconf" "automake" "pkg-config" "unzip")
     sudo apt install ${dependencies[@]}
     git clone "https://github.com/neovim/neovim" $dest
-    local packer="https://github.com/wbthomason/packer.nvim"
-    local packer_dest="~/.local/share/nvim/site/pack/packer/start/packer.nvim"
-    git clone $packer $packer_dest 
-  else
-    git -C $dest pull
-  fi
+    cd $dest
+    make MIN_LOG_LEVEL=1 CMAKE_BUILD_TYPE=Release
+    sudo make install
 
-  cd $dest
-  make MIN_LOG_LEVEL=1 CMAKE_BUILD_TYPE=Release
-  sudo make install
-  if [ ! -d "$dest" ]; then
+    local packer="https://github.com/wbthomason/packer.nvim"
+    local packer_dest="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    git clone $packer $packer_dest 
+
     nvim +PackerInstall +qall
     nvim +PackerCompile +qall
   else
+    git -C $dest pull
+
+    cd $dest
+    make MIN_LOG_LEVEL=1 CMAKE_BUILD_TYPE=Release
+    sudo make install
+
     nvim +PackerSync +qall
   fi
 }

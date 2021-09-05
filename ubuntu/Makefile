@@ -1,5 +1,4 @@
-.phony:
-	cargo fcitx fonts fresh fzf git \
+.PHONY: cargo fcitx fonts fresh fzf git \
 		lazygit lg lazy icons nvim neovim plank ranger rofi \
 		shell tmux youtube-dl youtube yt vlc xow zsh
 

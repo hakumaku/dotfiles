@@ -6,7 +6,7 @@ keys=(
   "Alacritty, alacritty, <Super>Return"
   # "Ranger, alacritty -e ranger, <Super>E"
   "btm, alacritty -e btm, <Super>X"
-  # "Rofi, rofi -show drun, <Super>R"
+  "Rofi, rofi -show drun, <Super>R"
   "Web Browser, firefox, <Super>W"
   "Steam, steam, <Super>G"
 )

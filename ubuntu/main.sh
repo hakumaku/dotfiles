@@ -81,35 +81,32 @@ main() {
           sudo apt install plank
           exec plank &
           sleep 3s
-          local schemas="/net/launchpad/plank/docks/dock1"
-          local items="'firefox.dockitem', \
-              'thunderbird.dockitem', \
-              'jetbrains-clion.dockitem', \
-              'jetbrains-pycharm.dockitem', \
-              'codium.dockitem', \
-              'Alacritty.dockitem', \
-              'gitkraken.dockitem', \
-              'slack.dockitem', \
-              'steam.dockitem', \
-              'org.gnome.Nautilus.dockitem', \
-              'gimp.dockitem', \
-              'vlc.dockitem', \
-              'transmission-gtk.dockitem', \
-              'gnome-control-center.dockitem', \
-              'org.gnome.tweaks.dockitem', \
-              'org.gnome.Extensions.dockitem'"
-          dconf write "$schemas/dock-itmes" "[$items]"
-          dconf write "$schemas/alignment" "'center'"
-          dconf write "$schemas/hide-mode" "'window-dodge'"
-          dconf write "$schemas/icon-size" 64
-          dconf write "$schemas/items-alignment" "'center'"
-          dconf write "$schemas/position" "'bottom'"
-          dconf write "$schemas/theme" "'Transparent'"
-          dconf write "$schemas/zoom-enabled" true
-          dconf write "$schemas/zoom-percent" 150
-        else
-          echo "Plank has already been installed."
         fi
+        local schemas="/net/launchpad/plank/docks/dock1"
+        local items="'firefox.dockitem', \
+            'thunderbird.dockitem', \
+            'jetbrains-clion.dockitem', \
+            'jetbrains-pycharm.dockitem', \
+            'codium.dockitem', \
+            'Alacritty.dockitem', \
+            'gitkraken.dockitem', \
+            'slack.dockitem', \
+            'steam.dockitem', \
+            'org.gnome.Nautilus.dockitem', \
+            'gimp.dockitem', \
+            'vlc.dockitem', \
+            'transmission-gtk.dockitem', \
+            'gnome-control-center.dockitem', \
+            'org.gnome.tweaks.dockitem', \
+            'org.gnome.Extensions.dockitem'"
+        dconf write "$schemas/alignment" "'center'"
+        dconf write "$schemas/hide-mode" "'window-dodge'"
+        dconf write "$schemas/icon-size" 64
+        dconf write "$schemas/items-alignment" "'center'"
+        dconf write "$schemas/position" "'bottom'"
+        dconf write "$schemas/theme" "'Transparent'"
+        dconf write "$schemas/zoom-enabled" true
+        dconf write "$schemas/zoom-percent" 150
         ;;
       "ranger")
         figlet 'Ranger'
@@ -163,23 +160,23 @@ main() {
         local repos=(
           "https://github.com/romkatv/powerlevel10k.git"
           "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-          "https://github.com/jeffreytse/zsh-vi-mode"
-          "https://github.com/zsh-users/zsh-autosuggestions")
+          "https://github.com/jeffreytse/zsh-vi-mode.git"
+          "https://github.com/zsh-users/zsh-autosuggestions.git")
         if ! command -v zsh &>/dev/null; then
           sudo apt install zsh
           chsh -s $(which zsh)
 
           echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
           for repo in ${repos[@]}; do
-            repo="${repo##*/}"
-            repo="${repo%.*}"
-            git clone "$repo" "$PREFIX/${repo}"
+            repo_name="${repo##*/}"
+            repo_name="${repo_name%.*}"
+            git clone "$repo" "$PREFIX/${repo_name}"
           done
         else
           for repo in ${repos[@]}; do
-            repo="${repo##*/}"
-            repo="${repo%.*}"
-            git -C "$PREFIX/${repo}" pull
+            repo_name="${repo##*/}"
+            repo_name="${repo_name%.*}"
+            git -C "$PREFIX/${repo_name}" pull
           done
         fi
         ;;
