@@ -1,6 +1,6 @@
-.PHONY: cargo fcitx fonts fresh fzf git \
-		lazygit lg lazy icons nvim neovim plank ranger rofi \
-		shell tmux youtube-dl youtube yt vlc xow zsh
+.PHONY: cargo fcitx fonts fresh fzf \
+		icons nvim neovim plank ranger \
+		shell youtube-dl youtube yt vlc xow zsh
 
 cargo:
 	@./main.sh "cargo"
@@ -17,12 +17,6 @@ fresh:
 fzf:
 	@./main.sh "fzf"
 
-git:
-	@./main.sh "git"
-
-lazygit lg lazy:
-	@./main.sh "lazygit"
-
 nvim neovim:
 	@./main.sh "nvim"
 
@@ -32,14 +26,11 @@ plank:
 ranger:
 	@./main.sh "ranger"
 
-rofi:
-	@./main.sh "rofi"
-
 shell:
 	@./main.sh "shell"
 
-tmux:
-	@./main.sh "tmux"
+streamlink:
+	@./main.sh "streamlink"
 
 youtube-dl youtube yt:
 	@./main.sh "youtube"

@@ -2,12 +2,13 @@
 
 install_essentials() {
   # Check if it's run once previously.
-  if command -v cargo &>/dev/null; then
+  if command -v tmux &>/dev/null; then
     return
   fi
 
+  sudo add-apt-repository ppa:lazygit-team/release
   local packages=(
-    "git" "xclip" "figlet" "tmux" "rofi"
+    "git" "lazygit" "xclip" "figlet" "tmux" "rofi"
     "apt-transport-https" "ca-certificates" "software-properties-common"
     "gnupg" "build-essential" "wget" "curl" "autoconf" "automake"
     "python3" "python-is-python3" "python3-pip" "python3-distutils" "npm" "stow")

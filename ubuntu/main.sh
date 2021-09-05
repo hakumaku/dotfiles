@@ -61,11 +61,6 @@ main() {
         rm ~/.fzf.zsh
         rm ~/.fzf.bash
         ;;
-      "lazygit" | "lg" | "lazy")
-        figlet 'Lazygit'
-        sudo add-apt-repository ppa:lazygit-team/release
-        sudo apt install lazygit
-        ;;
       "icons")
         figlet 'Change Icons'
         exec ./icons/icons.sh "$@"
