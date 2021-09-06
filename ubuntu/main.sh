@@ -77,6 +77,7 @@ main() {
           exec plank &
           sleep 3s
         fi
+        local schemas="/net/launchpad/plank/docks/dock1"
         dconf write "$schemas/alignment" "'center'"
         dconf write "$schemas/hide-mode" "'window-dodge'"
         dconf write "$schemas/icon-size" 64
