@@ -14,6 +14,9 @@ install_docker() {
   curl -fsSL $url | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   echo $source_list | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
   sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io
+  getent group docker || sudo groupadd docker
+  sudo usermod -aG docker $USER
+  newgrp docker
 }
 
 install_docker
