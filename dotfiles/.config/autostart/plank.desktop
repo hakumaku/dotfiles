@@ -65,3 +65,6 @@ Exec=plank
 Icon=plank
 Terminal=false
 NoDisplay=false
+Hidden=false
+X-GNOME-Autostart-Delay=2
+X-GNOME-Autostart-enabled=true
