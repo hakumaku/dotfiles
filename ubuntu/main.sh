@@ -91,6 +91,10 @@ main() {
         figlet 'Ranger'
         exec ./develop/ranger.sh
         ;;
+      "rofi")
+        figlet 'Rofi'
+        exec ./develop/rofi.sh
+        ;;
       "shell")
         figlet 'Pop Shell'
         exec ./shell/pop-shell.sh

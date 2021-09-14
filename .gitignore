@@ -1,6 +1,7 @@
 packer_compiled.lua
 vlc-qt-interface.conf
-**/lazygit/state.yml
+**/lazygit/*
+!**/lazygit/config.yml
 **/zsh/.zcompdump
 **/ranger/plugins/**
 **/ranger/commands.py

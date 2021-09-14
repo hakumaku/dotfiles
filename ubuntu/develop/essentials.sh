@@ -8,7 +8,7 @@ install_essentials() {
 
   sudo add-apt-repository ppa:lazygit-team/release
   local packages=(
-    "git" "lazygit" "xclip" "figlet" "tmux" "rofi"
+    "git" "lazygit" "xclip" "figlet" "tmux"
     "apt-transport-https" "ca-certificates" "software-properties-common"
     "gnupg" "build-essential" "wget" "curl" "autoconf" "automake"
     "python3" "python-is-python3" "python3-pip" "python3-distutils" "npm" "stow")

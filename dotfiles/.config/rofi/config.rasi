@@ -19,7 +19,6 @@ configuration {
 	run-shell-command: "{terminal} -e {cmd}";
 	window-command: "xkill -id {window}";
 	window-match-fields: "all";
-	drun-icon-theme: "Suru++";
 	drun-match-fields: "name,generic,exec,categories";
 	disable-history: false;
 	sort: false;
@@ -50,7 +49,7 @@ configuration {
 	window-format: "{w}    {i}{c}   {t}";
 	click-to-exit: true;
 	show-match: true;
-	theme: "~/.config/rofi/solarized.rasi";
+	theme: "~/.config/rofi/theme.rasi";
 	/* color-normal: ; */
 	/* color-urgent: ; */
 	/* color-active: ; */

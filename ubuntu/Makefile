@@ -1,5 +1,5 @@
 .PHONY: cargo fcitx fonts fresh fzf \
-		icons nvim neovim plank ranger \
+		icons nvim neovim plank ranger rofi \
 		shell youtube-dl youtube yt vlc xow zsh
 
 cargo:
@@ -25,6 +25,9 @@ plank:
 
 ranger:
 	@./main.sh "ranger"
+
+rofi:
+	@./main.sh "rofi"
 
 shell:
 	@./main.sh "shell"
