@@ -2,8 +2,11 @@
 
 * {
   al:  #00000000;
-  bg:  #000000ff;
+  bg:  #00000088;
   se:  #101010ff;
   fg:  #FFFFFFff;
-  ac:  #EC7875ff;
+  ac:  #E95420ff;
+  element-bg: #00000000;
+  element-fg: #FFFFFFff;
 }
+/* vim:ft=css

@@ -74,7 +74,7 @@ inputbar {
 listview {
   background-color: @al;
   padding: 0px;
-  columns: 6;
+  columns: 5;
   lines: 3;
   spacing: 1%;
   cycle: false;
@@ -93,8 +93,8 @@ mainbox {
 }
 
 element {
-  background-color: @bg;
-  text-color: @fg;
+  background-color: @element-bg;
+  text-color: @element-fg;
   orientation: vertical;
   border-radius: 0%;
   padding: 0%;
@@ -105,12 +105,10 @@ element-icon {
   text-color: inherit;
   horizontal-align: 0.5;
   vertical-align: 0.5;
-  size: 8%;
-  border: 1%;
-  border-color: @se;
-  border-radius: 15px;
-  background-color: @se;
-  padding: 2% 1% 2% 1%;
+  size: 6%;
+  border: 2px;
+  border-color: inherit;
+  padding: 0.5% 1% 0.5% 1%;
 }
 
 element-text {
@@ -119,7 +117,7 @@ element-text {
   expand: true;
   horizontal-align: 0.5;
   vertical-align: 0.5;
-  margin: 0.5% 0.25% 0.5% 0.25%;
+  margin: 0.5% 0.20% 0.5% 0.20%;
   padding: 1% 0.5% 1% 0.5%;
 }
 
@@ -131,3 +129,4 @@ element-text selected {
   text-color: @bg;
   border-radius: 100%;
 }
+/* vim:ft=css
