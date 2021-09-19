@@ -35,6 +35,8 @@ main() {
           sed -Ei "s/#(TriggerKey=).*/\1HANGUL CTRL_SHIFT_SPACE/" "$config"
           sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
           sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
+          # Disable ctrl+5 key (ReloadConfig)
+          sed -Ei "s/#(ReloadConfig=).*/\1/" "$config"
           # Disable ctrl+; key in fcitx-clipboard.config
           local clipboard="$conf/conf/fcitx-clipboard.config"
           sed -Ei "s/#(TriggerKey=).*/\1/" "$clipboard"
