@@ -24,11 +24,11 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet i< "#include <...>"
+snippet i< "#include <...>" A
 #include <${1}>
 endsnippet
 
-snippet i" "#include ..."
+snippet i" "#include ..." A
 #include "${1}"
 endsnippet
 
@@ -44,28 +44,46 @@ snippet using "using name = ...;"
 using ${1:name} = ${2:type};
 endsnippet
 
-snippet template "template<...>"
-template <typename ${1:_InputIter}>
+snippet tpl "template<...>"
+template <typename ${1:T}>
 endsnippet
 
-snippet class "class ..."
+snippet cl "class ..."
 class ${1:`!p snip.rv = snip.basename or "name"`} {
   public:
-    ${1/(\w+).*/$1/}(${2:arguments});
+    ${1/(\w+).*/$1/}() = default;
 };
 endsnippet
 
-snippet struct "struct ..."
+snippet dt "~class() = default"
+~${1}() = default;
+endsnippet
+
+snippet vdt "virtual ~class() = default;"
+virtual ~${1}() = default;
+endsnippet
+
+snippet cct "class(const class& other) = default;"
+${1}(const ${1/(\w+).*/$1/}& other) = default;
+${1/(\w+).*/$1/}& operator=(const ${1/(\w+).*/$1/}& other) = default;
+endsnippet
+
+snippet mct "class(class&& other) = default;"
+${1}(${1/(\w+).*/$1/}&& other) = default;
+${1/(\w+).*/$1/}& operator=(${1/(\w+).*/$1/}&& other) = default;
+endsnippet
+
+snippet stt "struct ..."
 struct ${1:`!p snip.rv = snip.basename or "name"`} {
 };
 endsnippet
 
-snippet enum "enum ..."
+snippet enm "enum ..."
 enum class ${1:`!p snip.rv = snip.basename or "name"`} {
 };
 endsnippet
 
-snippet union "union ..."
+snippet unn "union ..."
 union ${1:`!p snip.rv = snip.basename or "name"`} {
 };
 endsnippet
@@ -96,8 +114,8 @@ for (auto ${1:it} = std::begin(${2:item}); ${1/(\w+).*/$1/} != std::end(${2/(\w+
 }
 endsnippet
 
-snippet lambda "[...](...) {...}"
-[${1}](const auto& ${2:args}) {
+snippet ld "[...](...) {...}"
+[${1}](${2:args}) {
     ${3}
 }
 endsnippet
@@ -142,6 +160,19 @@ try {
 }
 endsnippet
 
+snippet sca
+static_cast<${1:type}>(${2:expr})
+endsnippet
+snippet dca
+dynamic_cast<${1:type}>(${2:expr})
+endsnippet
+snippet rca
+reinterpret_cast<${1:type}>(${2:expr})
+endsnippet
+snippet cca
+const_cast<${1:type}>(${2:expr})
+endsnippet
+
 snippet fswap "friend swap(...) {...}"
 void swap(${1:auto}& other) noexcept {
     using std::swap;
@@ -181,78 +212,78 @@ snippet puts "std::puts(...)"
 std::puts("${1:text}");
 endsnippet
 
-snippet string "std::string ..."
-std::string ${1}{"${2}"};
+snippet string "std::string ..." i
+std::string ${1}{"${2}"}
 endsnippet
 
-snippet strv "std::string_view ..."
-std::string_view ${1}{"${2}"};
+snippet strv "std::string_view ..." i
+std::string_view ${1}{"${2}"}
 endsnippet
 
-snippet vector "std::vector<...> ..."
-std::vector<${1:char}> v$0;
+snippet vector "std::vector<...> ..." i
+std::vector<${1:char}> v$0
 endsnippet
 
-snippet array "std::array<..., ...> ..."
-std::array<${1:int}, ${2}> a$0;
+snippet array "std::array<..., ...> ..." i
+std::array<${1:int}, ${2}> a$0
 endsnippet
 
-snippet umap "std::unordered_map<..., ...> ..."
-std::unordered_map<${1:key}, ${2:value}> map$0;
+snippet umap "std::unordered_map<..., ...> ..." i
+std::unordered_map<${1:key}, ${2:value}> map$0
 endsnippet
 
-snippet map "std::map<..., ...> ..."
-std::map<${1:key}, ${2:value}> map$0;
+snippet map "std::map<..., ...> ..." i
+std::map<${1:key}, ${2:value}> map$0
 endsnippet
 
-snippet uset "std::unordered_set<...> ..."
-std::unordered_set<${1:key}> set$0;
+snippet uset "std::unordered_set<...> ..." i
+std::unordered_set<${1:key}> set$0
 endsnippet
 
-snippet set "std::set<...> ..."
-std::set<${1:key}> set$0;
+snippet set "std::set<...> ..." i
+std::set<${1:key}> set$0
 endsnippet
 
-snippet unique "std::unique_ptr<...> uptr;"
-std::unique_ptr<${1:type}> uptr$0;
+snippet up "std::unique_ptr<...> uptr" i
+std::unique_ptr<${1:type}> $0
 endsnippet
 
-snippet make_unique "std::make_unique<...>(...)"
-std::make_unique<${1:type}>(${2:args});
+snippet mup "std::make_unique<...>(...)" i
+std::make_unique<${1:type}>(${2:args})
 endsnippet
 
-snippet shared "std::shared_ptr<...> sptr;"
-std::shared_ptr<${1:type}> sptr$0;
+snippet sp "std::shared_ptr<...> sptr" i
+std::shared_ptr<${1:type}> $0
 endsnippet
 
-snippet make_shared "std::make_shared<...>(...)"
-std::make_shared<${1:type}>(${2:args});
+snippet msp "std::make_shared<...>(...)" i
+std::make_shared<${1:type}>(${2:args})
 endsnippet
 
-snippet pair "std::pair<..., ...> p;"
-std::pair<${1:first}, ${2:second}> p$0;
+snippet pair "std::pair<..., ...> p" i
+std::pair<${1:first}, ${2:second}> p$0
 endsnippet
 
-snippet make_pair "std::make_pair(..., ...)"
-std::make_pair(${1:first}, ${2:second});
+snippet mpair "std::make_pair(..., ...)" i
+std::make_pair(${1:first}, ${2:second})
 endsnippet
 
-snippet fw "std::forward<...>(...)"
-std::forward<${1:type}>(${2:args});
+snippet fw "std::forward<...>(...)" i
+std::forward<${1:type}>(${2:args})
 endsnippet
 
-snippet mv "std::move(...)"
-std::move(${1:type});
+snippet mv "std::move(...)" i
+std::move(${1:type})
 endsnippet
 
-snippet ex "std::exchange(...)"
-std::exchange(${1:lhs}, ${2:rhs});
+snippet ex "std::exchange(...)" i
+std::exchange(${1:lhs}, ${2:rhs})
 endsnippet
 
-snippet eit "std::enable_if_t<...>"
+snippet eit "std::enable_if_t<...>" i
 std::enable_if_t<${1:condition}>
 endsnippet
 
-snippet isame "std::is_same_v<...>"
+snippet is "std::is_same_v<...>" i
 std::is_same_v<${1:T1}, ${2:T2}>
 endsnippet

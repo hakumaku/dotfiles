@@ -23,7 +23,6 @@ return require('packer').startup(function(use)
   }
   use {'hrsh7th/nvim-compe', config = function() require("config/compe") end}
   use {'SirVer/ultisnips', config = function() require("config/ultisnips") end}
-  use {'honza/vim-snippets'}
   use {
     'lewis6991/gitsigns.nvim',
     config = function() require("config/gitsigns") end
