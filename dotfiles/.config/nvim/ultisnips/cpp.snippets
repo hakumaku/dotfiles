@@ -35,8 +35,8 @@ endsnippet
 snippet Main "int main(...)"
 int main(int argc, const char* argv[])
 {
-    ${1}
-    return 0;
+  ${1}
+  return 0;
 }
 endsnippet
 
@@ -91,44 +91,44 @@ endsnippet
 snippet ns "namespace ..."
 namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
 {
-    ${VISUAL}$0
+  ${VISUAL}$0
 }${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
 endsnippet
 
 # Syntatic sugar
 snippet fori "for (int i = 0; i < ...; ++i)"
 for (int ${1:i} = 0; ${2:condition}; ++${1/(\w+).*/$1/}) {
-    ${3}
+  ${3}
 }
 endsnippet
 
 snippet fore "for (auto ... : ...)"
 for (const auto& ${1:item} : ${2:col}) {
-    ${3}
+  ${3}
 }
 endsnippet
 
 snippet forb "for (auto it = ...; it != ...; ++it)"
 for (auto ${1:it} = std::begin(${2:item}); ${1/(\w+).*/$1/} != std::end(${2/(\w+).*/$1/}); ++${1/(\w+).*/$1/}) {
-    ${3}
+  ${3}
 }
 endsnippet
 
 snippet ld "[...](...) {...}"
 [${1}](${2:args}) {
-    ${3}
+  ${3}
 }
 endsnippet
 
 snippet if "if (...) {...}"
 if ($1) {
-    $0
+  $0
 }
 endsnippet
 
 snippet elif "else if (...) {...}"
 else if ($1) {
-    ${VISUAL}$0
+  ${VISUAL}$0
 }
 endsnippet
 
@@ -140,23 +140,23 @@ endsnippet
 
 snippet switch "switch (...) {...}"
 switch (${1}) {
-    case ${2}:
-        break;
-    default:
-        break;
+  case ${2}:
+    break;
+  default:
+    break;
 }
 endsnippet
 
 snippet case "case ...: break;"
 case ${1}:
-    break;
+  break;
 endsnippet
 
 snippet try "try {...} catch (...) {...}"
 try {
-    ${VISUAL}$1
+  ${VISUAL}$1
 } catch (${2:const std::exception& e}) {
-    $3
+  $3
 }
 endsnippet
 
@@ -175,8 +175,8 @@ endsnippet
 
 snippet fswap "friend swap(...) {...}"
 void swap(${1:auto}& other) noexcept {
-    using std::swap;
-    swap(${2:x}, other.${2/(\w+).*/$1/});
+  using std::swap;
+  swap(${2:x}, other.${2/(\w+).*/$1/});
 }
 
 friend void swap(${1:auto}& lhs, ${1/(\w+).*/$1/}& rhs) noexcept { lhs.swap(rhs); }
@@ -189,7 +189,7 @@ snippet cla "An entire .h generator" b
 class ${1:`!v substitute(substitute(vim_snippets#Filename('$1','ClassName'),'^.','\u&',''), '_\(\w\)', '\u\1', 'g')`}
 {
 public:
-    $1();
+  $1();
 };
 
 #endif /* $2 */
@@ -244,20 +244,32 @@ snippet set "std::set<...> ..." i
 std::set<${1:key}> set$0
 endsnippet
 
+snippet beg "std::begin(...)" i
+std::begin($0)
+endsnippet
+
+snippet end "std::end(...)" i
+std::end($0)
+endsnippet
+
+snippet range "std::begin(...), std::end(...)" i
+std::begin($1), std::end(${1/(\w+).*/$1/})
+endsnippet
+
 snippet up "std::unique_ptr<...> uptr" i
-std::unique_ptr<${1:type}> $0
+std::unique_ptr<${1:T}> $0
 endsnippet
 
 snippet mup "std::make_unique<...>(...)" i
-std::make_unique<${1:type}>(${2:args})
+std::make_unique<${1:T}>(${2:args})
 endsnippet
 
 snippet sp "std::shared_ptr<...> sptr" i
-std::shared_ptr<${1:type}> $0
+std::shared_ptr<${1:T}> $0
 endsnippet
 
 snippet msp "std::make_shared<...>(...)" i
-std::make_shared<${1:type}>(${2:args})
+std::make_shared<${1:T}>(${2:args})
 endsnippet
 
 snippet pair "std::pair<..., ...> p" i
@@ -269,12 +281,15 @@ std::make_pair(${1:first}, ${2:second})
 endsnippet
 
 snippet fw "std::forward<...>(...)" i
-std::forward<${1:type}>(${2:args})
+std::forward<${1:T}>(${2:args})
 endsnippet
 
 snippet mv "std::move(...)" i
-std::move(${1:type})
+std::move(${1})
 endsnippet
+# snippet "(\w+).mv" "std::move(...)" r
+# std::move(`!p snip.rv = match.group(1)`$1)$0
+# endsnippet
 
 snippet ex "std::exchange(...)" i
 std::exchange(${1:lhs}, ${2:rhs})
