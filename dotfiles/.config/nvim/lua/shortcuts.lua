@@ -166,13 +166,13 @@ nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
+local check_next_char_is_bracket = function ()
+  local col = vim.fn.col('.')
+  return vim.fn.getline('.'):sub(col, col):match('[%)%]}>]')
+end
 local check_back_space = function()
   local col = vim.fn.col('.') - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-    return true
-  else
-    return false
-  end
+  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
 end
 
 -- Use (s-)tab to:
@@ -183,6 +183,8 @@ _G.tab_complete = function()
     return t "<C-n>"
   elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
     return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
+  elseif check_next_char_is_bracket() then
+    return t "<esc>:lua utils.jump_right()<CR>a"
   elseif check_back_space() then
     return t "<Tab>"
   else

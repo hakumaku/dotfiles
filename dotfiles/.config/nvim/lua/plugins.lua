@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
     'kyazdani42/nvim-tree.lua',
     config = function() require("config/nvim-tree") end
   }
-  use {'folke/trouble.nvim', config = function() require("config/trouble") end}
   use {'liuchengxu/vista.vim', config = function() require("config/vista") end}
   use {
     'akinsho/nvim-toggleterm.lua',
@@ -66,10 +65,6 @@ return require('packer').startup(function(use)
     'monsonjeremy/onedark.nvim',
     config = function() require("config/onedark") end
   }
-  -- use {
-  --   'projekt0n/github-nvim-theme',
-  --   config = function() require("config/github-theme") end
-  -- }
   use {'mhinz/vim-startify', config = function() require("config/startify") end}
 
   -- Post-install/update hook with call of vimscript function with argument
