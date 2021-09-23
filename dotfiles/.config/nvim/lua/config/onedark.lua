@@ -12,4 +12,12 @@ require("onedark").setup({
 })
 
 vim.cmd [[colorscheme onedark]]
-vim.cmd([[hi link GitSignsCurrentLineBlame Comment]])
+-- nvim 0.6 version
+vim.cmd([[
+hi link GitSignsCurrentLineBlame Comment
+
+hi link DiagnosticError LspDiagnosticsDefaultError
+hi link DiagnosticWarn LspDiagnosticsDefaultWarning
+hi link DiagnosticHint LspDiagnosticsDefaultHint
+hi link DiagnosticInfo LspDiagnosticsDefaultInformation
+]])

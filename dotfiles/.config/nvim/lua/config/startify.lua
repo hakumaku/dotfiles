@@ -1,11 +1,11 @@
 vim.g.startify_bookmarks = {
-  {z = "~/.zshrc"},
-  {g = "~/.gitconfig"},
+  {z = "~/.config/zsh/.zshrc"},
+  {g = "~/.config/git/config"},
   {n = "~/.config/nvim/init.lua"},
-  {t = "~/.tmux.conf"},
+  {t = "~/.config/tmux/tmux.conf"},
   {a = "~/.config/alacritty/alacritty.yml"},
   {w = "~/workspace/test"},
-  {u = "~/.packages/ubuntu-fresh/ubuntu/main.sh"},
+  {u = "~/.local/share/ubuntu-fresh/ubuntu/main.sh"},
   {m = "~/.config/awesome/rc.lua"},
   {c = "~/.config/compton/compton.conf"}
 }

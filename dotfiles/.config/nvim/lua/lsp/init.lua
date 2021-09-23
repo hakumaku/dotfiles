@@ -1,8 +1,7 @@
 local lspconfig = require('lspconfig')
 
-local function definition_callback(_, _, action) end
-
-local on_attach = function(client, bufnr)
+-- function(client, bufnr)
+local on_attach = function(_, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   vim.lsp.handlers['textDocument/codeAction'] =
@@ -14,12 +13,21 @@ local on_attach = function(client, bufnr)
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
       vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = {severity_limit = "Warning"},
-        virtual_text = {prefix = "●", spacing = 2},
-        signs = {severity_limit = "Warning"}
+        underline = {
+          severity_limit = "Warning"
+        },
+        virtual_text = {
+          prefix = "●",
+          spacing = 2,
+        },
+        signs = {
+          severity_limit = "Warning"
+        }
       })
   vim.lsp.handlers["textDocument/definition"] =
-      function(_, _, locations, _, def_bufnr)
+      function(_, locations, ctx, _)
+        -- local bufnr = ctx.bufnr
+        if locations == nil or vim.tbl_isempty(locations) then return end
         if #locations > 1 then
           -- Returns items
           vim.lsp.util.locations_to_items(locations)
@@ -54,27 +62,28 @@ for lsp, setup in pairs(servers) do
   lspconfig[lsp].setup(setup)
 end
 
-vim.fn.sign_define('LspDiagnosticsSignError', {
+-- https://github.com/neovim/neovim/blob/master/runtime/plugin/diagnostic.vim
+vim.fn.sign_define('DiagnosticSignError', {
   text = '',
-  texthl = 'LspDiagnosticsSignError',
+  texthl = 'LspDiagnosticsDefaultError',
   linehl = '',
   numhl = ''
 })
-vim.fn.sign_define('LspDiagnosticsSignWarning', {
+vim.fn.sign_define('DiagnosticSignWarn', {
   text = '',
-  texthl = 'LspDiagnosticsSignWarning',
+  texthl = 'LspDiagnosticsDefaultWarning',
   linehl = '',
   numhl = ''
 })
-vim.fn.sign_define('LspDiagnosticsSignHint', {
+vim.fn.sign_define('DiagnosticSignHint', {
   text = '',
-  texthl = 'LspDiagnosticsSignHint',
+  texthl = 'LspDiagnosticsDefaultHint',
   linehl = '',
   numhl = ''
 })
-vim.fn.sign_define('LspDiagnosticsSignInformation', {
+vim.fn.sign_define('DiagnosticSignInfo', {
   text = '',
-  texthl = 'LspDiagnosticsSignInformation',
+  texthl = 'LspDiagnosticsDefaultInformation',
   linehl = '',
   numhl = ''
 })

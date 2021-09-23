@@ -30,6 +30,7 @@ install_clang() {
   local packages=(
     "clang-${version}"
     "clangd-${version}"
+    "clang-tidy-${version}"
     "clang-tools-${version}"
     "clang-format-${version}"
     # "python-clang-${version}"
@@ -46,10 +47,11 @@ install_clang() {
   sudo add-apt-repository "deb http://apt.llvm.org/${code}/ llvm-toolchain-${code}-${version} main"
 
   sudo apt install ${packages[@]}
-  sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-${version} 100
   sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${version} 100
   sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-${version} 100
+  sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-${version} 100
   sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-${version} 100
+  sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-${version} 100
   sudo update-alternatives --install /usr/bin/lldb-vscode lldb-vscode /usr/bin/lldb-vscode-${version} 100
 }
 
