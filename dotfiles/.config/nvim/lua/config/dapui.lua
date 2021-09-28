@@ -8,7 +8,6 @@ require("dapui").setup({
     edit = "e"
   },
   sidebar = {
-    open_on_start = true,
     elements = {
       -- You can change the order of elements in the sidebar
       "scopes",
@@ -20,7 +19,6 @@ require("dapui").setup({
     position = "left" -- Can be "left" or "right"
   },
   tray = {
-    open_on_start = true,
     elements = {"repl"},
     size = 10,
     position = "bottom" -- Can be "bottom" or "top"

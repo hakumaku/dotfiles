@@ -67,6 +67,16 @@ main() {
         figlet 'Change Icons'
         exec ./icons/icons.sh "$@"
         ;;
+      "lazygit")
+        figlet 'Lazygit'
+        local url="https://github.com/jesseduffield/lazygit"
+        local link=$(curl -Ls $url/releases/latest | grep -wo "jesseduffield/.*lazygit_.*_Linux_x86_64\.tar\.gz")
+        local tmpdir=$(dirname $(mktemp -u))
+        local output="$tmpdir/lazygit.tar.gz"
+        curl -Lo $output "https://github.com/$link"
+        tar -xvzf $output --directory "$HOME/.local/bin"
+        rm "$HOME/.local/bin/LICENSE" "$HOME/.local/bin/README.md"
+        ;;
       "nvim" | "neovim")
         figlet 'Neovim'
         exec ./develop/nvim.sh
