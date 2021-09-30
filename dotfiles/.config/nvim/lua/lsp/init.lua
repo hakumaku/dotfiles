@@ -5,9 +5,9 @@ local on_attach = function(_, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   vim.lsp.handlers['textDocument/codeAction'] =
-      function(_, _, action)
+      function(_, actions, _, _, _)
         -- Select the first item
-        local _, edit = next(action[1].edit.changes)
+        local _, edit = next(actions[1].edit.changes)
         vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
       end
 
