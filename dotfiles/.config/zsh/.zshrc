@@ -62,7 +62,12 @@ alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3
 
 # Tmux
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+  session=$(tmux list-sessions | head -1 | cut -d':' -f1)
+  if [[ -z $session ]]; then
+    exec tmux
+  else
+    exec tmux attach -t $session
+  fi
 fi
 
 # powerline10k settings
