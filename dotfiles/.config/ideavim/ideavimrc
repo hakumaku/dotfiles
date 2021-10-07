@@ -24,3 +24,6 @@ nmap [d <Action>(GotoPreviousError)
 nmap ]b <Action>(NextTab)
 nmap [b <Action>(PreviousTab)
 nmap \f <Action>(ReformatCode)
+
+nmap \gg <Action>(Git.Log)
+nmap \gb <Action>(Git.Branches)
