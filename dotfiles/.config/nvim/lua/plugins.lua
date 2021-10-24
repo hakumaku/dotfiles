@@ -21,8 +21,16 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     config = function() require("config/telescope") end
   }
-  use {'hrsh7th/nvim-compe', config = function() require("config/compe") end}
+
+  -- Completion
+  use {'hrsh7th/nvim-cmp', config = function() require("config/cmp") end}
+  use {'hrsh7th/cmp-buffer'}
+  use {'hrsh7th/cmp-path'}
+  use {'hrsh7th/cmp-nvim-lua'}
+  use {'hrsh7th/cmp-nvim-lsp'}
   use {'SirVer/ultisnips', config = function() require("config/ultisnips") end}
+  use {'quangnguyen30192/cmp-nvim-ultisnips'}
+
   use {
     'lewis6991/gitsigns.nvim',
     config = function() require("config/gitsigns") end

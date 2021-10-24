@@ -124,6 +124,7 @@ nnoremap("<A-h>", ":lua require('dap').toggle_breakpoint()<CR>", {silent = true}
 nnoremap("<A-j>", ":lua require('dap').step_into()<CR>", {silent = true})
 nnoremap("<A-k>", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<A-l>", ":lua require('dap').step_over()<CR>", {silent = true})
+
 -- DAP Telescope
 nnoremap("<leader>df", ":Telescope dap frames<CR>", {silent = true})
 
@@ -151,6 +152,7 @@ nnoremap("<C-w>T", ":TroubleToggle<CR>")
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
+
 -- nvim-toggleterm.lua
 LazyGit = {}
 function LazyGit:toggle()
@@ -163,53 +165,46 @@ end
 nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
 
 -- nvim-compe
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-local check_next_char_is_bracket = function ()
-  local col = vim.fn.col('.')
-  return vim.fn.getline('.'):sub(col, col):match('[%)%]}>]')
-end
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
-end
-
+-- local t = function(str)
+--   return vim.api.nvim_replace_termcodes(str, true, true, true)
+-- end
+-- local check_next_char_is_bracket = function ()
+--   local col = vim.fn.col('.')
+--   return vim.fn.getline('.'):sub(col, col):match('[%)%]}>]')
+-- end
+-- local check_back_space = function()
+--   local col = vim.fn.col('.') - 1
+--   return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+-- end
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-    return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
-  elseif check_next_char_is_bracket() then
-    return t "<esc>:lua utils.jump_right()<CR>a"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-    return t "<C-R>=UltiSnips#JumpBackwards()<CR>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-inoremap("<C-Space>", "compe#complete()", {expr = true})
-inoremap("<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
-inoremap("<C-e>", "compe#close('<C-e>')", {expr = true})
-inoremap("<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true})
-inoremap("<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true})
-inoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
-snoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
-inoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-snoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- _G.tab_complete = function()
+--   if vim.fn.pumvisible() == 1 then
+--     return t "<C-n>"
+--   elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+--     return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
+--   elseif check_next_char_is_bracket() then
+--     return t "<esc>:lua utils.jump_right()<CR>a"
+--   elseif check_back_space() then
+--     return t "<Tab>"
+--   else
+--     return vim.fn['compe#complete']()
+--   end
+-- end
+-- _G.s_tab_complete = function()
+--   if vim.fn.pumvisible() == 1 then
+--     return t "<C-p>"
+--   elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+--     return t "<C-R>=UltiSnips#JumpBackwards()<CR>"
+--   else
+--     return t "<S-Tab>"
+--   end
+-- end
+-- inoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
+-- snoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
+-- inoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- snoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")

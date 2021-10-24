@@ -1,10 +1,5 @@
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
-vim.g.nvim_tree_icons = {
-  folder = {
-    arrow_open = "",
-    arrow_closed = ""
-  }
-}
+vim.g.nvim_tree_icons = {folder = {arrow_open = "", arrow_closed = ""}}
 vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
 vim.g.nvim_tree_special_files = {
   'README.md',
@@ -30,16 +25,16 @@ require'nvim-tree'.setup {
   -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
   open_on_tab = false,
   -- hijacks new directory buffers when they are opened.
-  update_to_buf_dir = {
-    enable = true,
-    auto_open = true
-  },
+  update_to_buf_dir = {enable = true, auto_open = true},
   -- hijack the cursor in the tree to put it at the start of the filename
   hijack_cursor = false,
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
   update_cwd = false,
   -- show lsp diagnostics in the signcolumn
-  lsp_diagnostics = false,
+  diagnostics = {
+    enable = false,
+    icons = {hint = "", info = "", warning = "", error = ""}
+  },
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   update_focused_file = {
     -- enables the feature
@@ -72,118 +67,34 @@ require'nvim-tree'.setup {
       custom_only = false,
       -- list of mappings to set on the tree manually
       list = {
-        {
-          key = "<CR>",
-          cb = tree_cb("edit")
-        },
-        {
-          key = "o",
-          cb = tree_cb("edit")
-        },
-        {
-          key = "<C-[>",
-          cb = tree_cb("dir_up")
-        },
-        {
-          key = "<C-]>",
-          cb = tree_cb("cd")
-        },
-        {
-          key = "<C-v>",
-          cb = tree_cb("vsplit")
-        },
-        {
-          key = "<C-x>",
-          cb = tree_cb("split")
-        },
-        {
-          key = "<C-t>",
-          cb = tree_cb("tabnew")
-        },
-        {
-          key = "<",
-          cb = tree_cb("prev_sibling")
-        },
-        {
-          key = ">",
-          cb = tree_cb("next_sibling")
-        },
-        {
-          key = "x",
-          cb = tree_cb("close_node")
-        },
-        {
-          key = "<S-CR>",
-          cb = tree_cb("close_node")
-        },
-        {
-          key = "<Tab>",
-          cb = tree_cb("preview")
-        },
-        {
-          key = "I",
-          cb = tree_cb("toggle_ignored")
-        },
-        {
-          key = "H",
-          cb = tree_cb("toggle_dotfiles")
-        },
-        {
-          key = "R",
-          cb = tree_cb("refresh")
-        },
-        {
-          key = "a",
-          cb = tree_cb("create")
-        },
-        {
-          key = "d",
-          cb = tree_cb("remove")
-        },
-        {
-          key = "r",
-          cb = tree_cb("rename")
-        },
-        {
-          key = "<C-r>",
-          cb = tree_cb("full_rename")
-        },
-        {
-          key = "-",
-          cb = tree_cb("cut")
-        },
-        {
-          key = "c",
-          cb = tree_cb("copy")
-        },
-        {
-          key = "p",
-          cb = tree_cb("paste")
-        },
-        {
-          key = "y",
-          cb = tree_cb("copy_name")
-        },
-        {
-          key = "Y",
-          cb = tree_cb("copy_path")
-        },
-        {
-          key = "gy",
-          cb = tree_cb("copy_absolute_path")
-        },
-        {
-          key = "[c",
-          cb = tree_cb("prev_git_item")
-        },
-        {
-          key = "]c",
-          cb = tree_cb("next_git_item")
-        },
-        {
-          key = "q",
-          cb = tree_cb("close")
-        }
+        {key = "<CR>", cb = tree_cb("edit")},
+        {key = "o", cb = tree_cb("edit")},
+        {key = "<C-[>", cb = tree_cb("dir_up")},
+        {key = "<C-]>", cb = tree_cb("cd")},
+        {key = "<C-v>", cb = tree_cb("vsplit")},
+        {key = "<C-x>", cb = tree_cb("split")},
+        {key = "<C-t>", cb = tree_cb("tabnew")},
+        {key = "<", cb = tree_cb("prev_sibling")},
+        {key = ">", cb = tree_cb("next_sibling")},
+        {key = "x", cb = tree_cb("close_node")},
+        {key = "<S-CR>", cb = tree_cb("close_node")},
+        {key = "<Tab>", cb = tree_cb("preview")},
+        {key = "I", cb = tree_cb("toggle_ignored")},
+        {key = "H", cb = tree_cb("toggle_dotfiles")},
+        {key = "R", cb = tree_cb("refresh")},
+        {key = "a", cb = tree_cb("create")},
+        {key = "d", cb = tree_cb("remove")},
+        {key = "r", cb = tree_cb("rename")},
+        {key = "<C-r>", cb = tree_cb("full_rename")},
+        {key = "-", cb = tree_cb("cut")},
+        {key = "c", cb = tree_cb("copy")},
+        {key = "p", cb = tree_cb("paste")},
+        {key = "y", cb = tree_cb("copy_name")},
+        {key = "Y", cb = tree_cb("copy_path")},
+        {key = "gy", cb = tree_cb("copy_absolute_path")},
+        {key = "[c", cb = tree_cb("prev_git_item")},
+        {key = "]c", cb = tree_cb("next_git_item")},
+        {key = "q", cb = tree_cb("close")}
       }
     }
   }
