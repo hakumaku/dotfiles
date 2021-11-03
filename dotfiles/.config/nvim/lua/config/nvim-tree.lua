@@ -7,7 +7,6 @@ vim.g.nvim_tree_special_files = {
   'MAKEFILE',
   'CMakeLists.txt'
 }
-vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_width = 25
 
 -- following options are the default
@@ -34,6 +33,10 @@ require'nvim-tree'.setup {
   diagnostics = {
     enable = false,
     icons = {hint = "", info = "", warning = "", error = ""}
+  },
+  filters = {
+    dotfiles = true,
+    custom = {}
   },
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   update_focused_file = {

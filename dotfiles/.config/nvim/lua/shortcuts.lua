@@ -90,6 +90,7 @@ nnoremap("<RightMouse>", ":Break<CR>")
 vnoremap("<leader>r", "y:lua utils.reverse_lines()<CR>")
 -- Jump to the next tab ')'
 inoremap("<C-l>", "<esc>:lua utils.jump_right()<CR>a")
+inoremap("<A-;>", "<esc>:lua utils.append_semi_colon()<CR>a")
 -- External Utilities
 nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 
@@ -163,48 +164,6 @@ function LazyGit:toggle()
   self.__term:toggle()
 end
 nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
-
--- nvim-compe
--- local t = function(str)
---   return vim.api.nvim_replace_termcodes(str, true, true, true)
--- end
--- local check_next_char_is_bracket = function ()
---   local col = vim.fn.col('.')
---   return vim.fn.getline('.'):sub(col, col):match('[%)%]}>]')
--- end
--- local check_back_space = function()
---   local col = vim.fn.col('.') - 1
---   return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
--- end
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
--- _G.tab_complete = function()
---   if vim.fn.pumvisible() == 1 then
---     return t "<C-n>"
---   elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
---     return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
---   elseif check_next_char_is_bracket() then
---     return t "<esc>:lua utils.jump_right()<CR>a"
---   elseif check_back_space() then
---     return t "<Tab>"
---   else
---     return vim.fn['compe#complete']()
---   end
--- end
--- _G.s_tab_complete = function()
---   if vim.fn.pumvisible() == 1 then
---     return t "<C-p>"
---   elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
---     return t "<C-R>=UltiSnips#JumpBackwards()<CR>"
---   else
---     return t "<S-Tab>"
---   end
--- end
--- inoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
--- snoremap("<Tab>", "v:lua.tab_complete()", {expr = true})
--- inoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
--- snoremap("<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")

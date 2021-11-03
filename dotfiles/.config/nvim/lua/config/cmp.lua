@@ -11,7 +11,8 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true
     },
-    ["<C-space>"] = cmp.mapping.complete()
+    ["<C-space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm({select = true})
   },
   sources = {
     {name = "ultisnips"},
@@ -22,8 +23,15 @@ cmp.setup {
     {name = "buffer", keyword_length = 5}
   },
   formatting = {format = lspkind.cmp_format()},
-  experimental = {native_menu = false, ghost_text = true}
+  experimental = {native_menu = false, ghost_text = true},
 }
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})
+})
 
 -- "CmpItemAbbr"
 -- "CmpItemAbbrDeprecated"

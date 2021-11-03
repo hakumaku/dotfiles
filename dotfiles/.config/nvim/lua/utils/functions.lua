@@ -16,23 +16,31 @@ local function get_valid_buffers()
 end
 
 function M.dump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. M.dump(v) .. ','
-      end
-      return s .. '}'
-   else
-      return tostring(o)
-   end
+  if type(o) == 'table' then
+    local s = '{ '
+    for k, v in pairs(o) do
+      if type(k) ~= 'number' then k = '"' .. k .. '"' end
+      s = s .. '[' .. k .. '] = ' .. M.dump(v) .. ','
+    end
+    return s .. '}'
+  else
+    return tostring(o)
+  end
 end
 
 function M.jump_right()
   -- getpos() -> [bufnum, lnum, col, off]
   local pos = vim.fn.getpos('.')
-  pos[3] = string.find(vim.fn.getline('.'), '[%)%]}>]', pos[3] + 1)
-  if pos[3] then vim.fn.setpos('.', pos) end
+  local col = string.find(vim.fn.getline('.'), '[%)%]}>"\']', pos[3] + 1)
+  if col then
+    pos[3] = col
+    vim.fn.setpos('.', pos)
+  end
+end
+
+function M.append_semi_colon()
+  local current_line = vim.fn.getline('.')
+  vim.fn.setline(vim.fn.line('.'), current_line .. ';')
 end
 
 function M.reverse_lines()

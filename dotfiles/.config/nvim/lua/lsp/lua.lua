@@ -16,25 +16,28 @@ local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name ..
                            "/lua-language-server"
 
 local path = {"?.lua", "?/init.lua", "?/?.lua"}
-for _, v in ipairs(vim.split(package.path, ';')) do path[#path + 1] = v end
-
-local plugins = vim.fn.stdpath('data') .. '/plugged/'
-local library = {
-  [plugins .. 'plenary.nvim'] = true,
-  [plugins .. 'popup.nvim'] = true,
-  -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-  -- [vim.fn.expand('$VIMRUNTIME/lua/vim')] = true,
-  [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-  [vim.fn.expand('$VIMRUNTIME/lua/vim/treesitter')] = true
-}
+table.insert(path, "lua/?.lua")
+table.insert(path, "lua/?/init.lua")
 
 return {
-  cmd = {sumneko_binary, '-E', sumneko_root_path .. '/main.lua'},
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {
     Lua = {
-      runtime = {version = 'LuaJIT', path = path},
-      diagnostics = {globals = {'vim', 'describe', 'it'}},
-      workspace = {library = library},
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = path
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim', 'describe', 'it'}
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true)
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {enable = false}
     }
   }
