@@ -9,9 +9,10 @@ install_lua_lsp() {
     # Fresh install
     local url="https://github.com/sumneko/lua-language-server"
     git clone --recurse-submodules $url $dest
+    cd $dest && git submodule update --init --recursive
   else
     # git pull and rebuild
-    git -C $dest pull
+    git -C $dest pull --recurse-submodules
   fi
 
   cd $dest/3rd/luamake
