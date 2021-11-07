@@ -1,0 +1,9 @@
+configuration {
+  font: "MeslosLGS NF 28";
+  show-icons: true;
+  display-drun: " Applications";
+  drun-display-format: "{name}";
+  disable-history: false;
+  sidebar-mode: false;
+}
+/* vim:ft=css
