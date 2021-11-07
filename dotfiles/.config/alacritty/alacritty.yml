@@ -314,7 +314,7 @@ schemes:
       - { index: 17, color: '0xf65866' }
 # }}}
 colors: *one_dark
-background_opacity: 0.8
+background_opacity: 0.9
 cursor:
   style: Block
   # If this is `true`, the cursor will be rendered as a hollow box when the
