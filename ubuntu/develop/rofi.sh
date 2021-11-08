@@ -3,6 +3,7 @@
 install_rofi() {
   local dest="$PREFIX/rofi"
   if [ ! -d "$dest" ]; then
+    local url="https://github.com/DaveDavenport/rofi"
     local dependencies=(
       "libglib2.0-dev" "bison" "flex"
       "libxcb-xkb-dev" "libxcb-randr0-dev" "libxcb-xinerama0-dev"
@@ -11,16 +12,18 @@ install_rofi() {
       "libgdk-pixbuf-2.0-dev"
     )
     sudo apt install ${dependencies[@]}
-    git clone --recursive https://github.com/DaveDavenport/rofi
+    git clone --recurse-submodules $url $dest
+
+    pushd $dest
+    autoreconf -i
+    mkdir build && cd build
+    ../configure --disable-check
+    popd
   else
-    git pull
-    git submodule update --init
+    git -C $dest pull --recurse-submodules
   fi
 
-  autoreconf -i
-  mkdir build
-  pushd build
-  ../configure --disable-check
+  pushd $dest/build
   make
   sudo make install
   popd
