@@ -55,7 +55,7 @@ install_nvim() {
 
     local packer="https://github.com/wbthomason/packer.nvim"
     local packer_dest="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
-    git clone $packer $packer_dest 
+    git clone $packer $packer_dest
 
     nvim +PackerInstall +qall
     nvim +PackerCompile +qall
@@ -70,22 +70,29 @@ install_nvim() {
   fi
 }
 
+install_shfmt() {
+  local url="https://github.com/mvdan/sh"
+  local link=$(curl -Ls $url/releases/latest | grep -wo "download/v.*/shfmt_v.*_linux_amd64")
+  local output="$HOME/.local/bin/shfmt"
+  curl -Lo $output "$url/releases/$link"
+  chmod +x $output
+}
+
 install_external_dependencies() {
   # Python, CMake, Lua, Bash
   local python_packages=("pynvim" "autopep8" "isort" "cmake-language-server" "cmake-format")
   local npm_packages=("pyright" "bash-language-server")
-  local snap_packages=("shfmt")
 
   if ! command -v clang &>/dev/null; then
     pip3 install --upgrade ${python_packages[@]}
     sudo npm install --global ${npm_packages[@]}
-    sudo snap install ${snap_packages}
     install_lua
+    install_shfmt
   else
     pip3 install --upgrade ${python_packages[@]}
     sudo npm update ${npm_packages[@]}
-    sudo snap refresh ${snap_packages}
     install_lua
+    install_shfmt
   fi
 }
 
