@@ -70,10 +70,19 @@ main() {
       "lazygit")
         figlet 'Lazygit'
         local url="https://github.com/jesseduffield/lazygit"
-        local link=$(curl -Ls $url/releases/latest | grep -wo "jesseduffield/.*lazygit_.*_Linux_x86_64\.tar\.gz")
+        local link=$(curl -Ls $url/releases/latest | grep -wo "download/v.*/.*lazygit_.*_Linux_x86_64\.tar\.gz")
+        if command -v lazygit &>/dev/null; then
+          local remote_version=$(echo $link | sed -rn 's/.*\/v(.*)\/.*/\1/p')
+          local local_version=$(lazygit --version | sed -rn 's/.*version=([^,]*).*/\1/p')
+          if [[ "$remote_version" = "$local_version" ]]; then
+            echo "Already up to date ($remote_version)"
+            continue
+          fi
+          echo "Upgrading to $remote_version from $local_version"
+        fi
         local tmpdir=$(dirname $(mktemp -u))
         local output="$tmpdir/lazygit.tar.gz"
-        curl -Lo $output "https://github.com/$link"
+        curl -Lo $output "$url/releases/$link"
         tar -xvzf $output --directory "$HOME/.local/bin"
         rm "$HOME/.local/bin/LICENSE" "$HOME/.local/bin/README.md"
         ;;

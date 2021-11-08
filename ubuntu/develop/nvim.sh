@@ -73,6 +73,16 @@ install_nvim() {
 install_shfmt() {
   local url="https://github.com/mvdan/sh"
   local link=$(curl -Ls $url/releases/latest | grep -wo "download/v.*/shfmt_v.*_linux_amd64")
+  if command -v shfmt &>/dev/null; then
+    local remote_version=$(echo $link | sed -rn 's/.*\/(.*)\/.*/\1/p')
+    local local_version=$(shfmt --version)
+    if [[ "$remote_version" = "$local_version" ]]; then
+      echo "Already up to date ($remote_version)"
+      return
+    fi
+    echo "Upgrading to $remote_version from $local_version"
+  fi
+
   local output="$HOME/.local/bin/shfmt"
   curl -Lo $output "$url/releases/$link"
   chmod +x $output

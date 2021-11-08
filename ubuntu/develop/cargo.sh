@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
 install_cargo_utilities() {
-  local dependencies=(
-    "pkg-config"
-    "libxkbcommon-dev"
-    "libfreetype6-dev"
-    "libfontconfig1-dev"
-    "libxcb-xfixes0-dev"
-  )
-  sudo apt install ${dependencies[@]}
+  if ! command -v alacritty &>/dev/null; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    local dependencies=(
+      "pkg-config"
+      "libxkbcommon-dev"
+      "libfreetype6-dev"
+      "libfontconfig1-dev"
+      "libxcb-xfixes0-dev"
+    )
+    sudo apt install ${dependencies[@]}
+  fi
 
   local packages=(
     "alacritty"
