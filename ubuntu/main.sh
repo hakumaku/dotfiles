@@ -19,7 +19,9 @@ main() {
         if ! command -v fcitx &>/dev/null; then
           # A bit buggy, don't know why yet.
           sudo apt install fcitx-hangul
-          im-config -n fcitx
+          # im-config -n fcitx
+          sed -i "s/run_im (.*)/run_im fcitx/" /etc/X11/xinit/xinputrc
+
           local conf="$HOME/.config/fcitx"
           if [[ ! -d "$conf" ]]; then
             fcitx -d &

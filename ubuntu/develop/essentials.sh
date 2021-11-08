@@ -23,6 +23,8 @@ install_essentials() {
 
   # Specify XDG base directory specification variables
   cat <<EOT >>"$HOME/.pam_environment"
+VISUAL          DEFAULT=/usr/local/bin/nvim
+EDITOR          DEFAULT=/usr/local/bin/nvim
 XDG_CACHE_HOME  DEFAULT=@{HOME}/.cache
 XDG_CONFIG_HOME DEFAULT=@{HOME}/.config
 XDG_DATA_HOME   DEFAULT=@{HOME}/.local/share
