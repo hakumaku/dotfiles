@@ -1,36 +1,29 @@
 #!/usr/bin/env bash
 
-install_meslo() {
+fetch_from_git_fonts() {
+  # TODO: version check?
+  local dir="$HOME/.local/share/fonts"
+  if [[ ! -d $dir ]]; then
+    msg info "mkdir -p $dir"
+    mkdir -p $dir
+  fi
+
   local fonts=(
-    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
-    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
-    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+    "Ubuntu.zip"
+    "SourceCodePro.zip"
+    "Meslo.zip"
   )
-  local font_dir="$HOME/.local/share/fonts/MesloLGS"
-  mkdir -p $font_dir
-  for font in "${fonts[@]}"; do
-    wget -q "$font" -P "$font_dir"
+  for font in ${fonts[@]}; do
+    fetch_from_git "ryanoasis/nerd-fonts" $font $dir
   done
-  fc-cache -fv
+
+  msg info "extracting fonts"
+  for font in ${fonts[@]}; do
+    unzip -qq -d "$dir/${font%.zip}" "$dir/$font"
+    rm "$dir/$font"
+  done
+  msg info "fc-cache -fv"
+  fc-cache -fv >/dev/null
 }
 
-install_fonts() {
-  local fonts=(
-    "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Ubuntu.zip"
-    "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip"
-  )
-  local font_dir="$HOME/.local/share/fonts"
-  mkdir -p $font_dir && {
-    for font in "${fonts[@]}"; do
-      wget -q "$font" -P "$font_dir" && {
-        font=${font##*/}
-        unzip -qq -d "$font_dir/${font%.zip}" "$font_dir/$font"
-        rm "$font_dir/$font"
-      }
-    done
-  } && fc-cache -fv
-}
-
-install_fonts
-install_meslo
+fetch_from_git_fonts

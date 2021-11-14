@@ -4,96 +4,150 @@ export PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh-sites"
 export SCRIPT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh"
 set -euo pipefail
 
+msg() {
+  local type="$1"
+  local msg="$2"
+  case $type in
+    title)
+      printf "\e[1;36m%10s: %s\e[0m\n" "[target]" "${msg}"
+      ;;
+    progress)
+      printf "\e[1;34m%10s: %s\e[0m\n" "[progress]" "${msg}"
+      ;;
+    info)
+      printf "\e[1;32m%10s: %s\e[0m\n" "[info]" "${msg}"
+      ;;
+    warning)
+      printf "\e[1;33m%10s: %s\e[0m\n" "[warning]" "${msg}"
+      ;;
+    error)
+      printf "\e[1;31m%10s: %s\e[0m\n" "[error]" "${msg}"
+      ;;
+    *)
+      echo "Invalid type in msg()"
+      exit 1
+      ;;
+  esac
+}
+
+fetch_from_git() {
+  local url="https://github.com/$1"
+  local repository="${url##*/}"
+  repository="${repository/.git/}"
+  local expr="$2"
+  local dest="$3"
+  local local_version="$4"
+
+  local link="$url/releases/$(curl -Ls "$url/releases/latest" | grep -wo "download/[v]\?.*/$expr")"
+  if [[ ! -z $local_version ]]; then
+    local remote_version=$(echo $link | sed -rn 's/.*\/v?(.*)\/.*/\1/p')
+
+    if [[ $local_version = $remote_version ]] \
+      || [[ $local_version = "v$remote_version" ]]; then
+      msg info "$repository - already up to date ($remote_version)"
+      return
+    else
+      msg info "$repository - upgrading to $remote_version from $local_version"
+    fi
+  fi
+
+  local artifact=${link##*/}
+  msg progress "downloading '$link'"
+  curl --silent --location --output "$dest/$artifact" "$link"
+  msg progress "$dest/$artifact"
+}
+
+install_dependencies() {
+  local dependencies=("$@")
+  msg info "installing dependencies"
+  sudo apt -qq install "${dependencies[@]}"
+}
+
+clone_or_pull() {
+  local url="https://github.com/$1"
+  local repository="${url##*/}"
+  repository="${repository/.git/}"
+
+  local dest=${2:-"$PREFIX/$repository"}
+  local submodule="$3"
+  local args=""
+
+  if [[ -z $dest ]]; then
+    msg warning "directory does not exist"
+    msg warning "$dest"
+    mkdir -p $(dirname $dest)
+  fi
+
+  if [[ $submodule = "true" ]]; then
+    args="--recurse-submodules"
+  fi
+
+  if [ ! -d "$dest" ]; then
+    msg progress "cloning '$repository'"
+    git clone --quiet $args "$url" "$dest"
+  else
+    msg progress "pulling '$repository'"
+    git -C "$dest" pull --quiet $args
+  fi
+
+  # msg progress "entering directory '$dest'"
+  pushd "$dest" >/dev/null
+}
+
+clone_or_pull_done() {
+  # msg progress "leaving directory '$PWD'"
+  popd >/dev/null
+}
+
+export -f msg
+export -f fetch_from_git
+export -f clone_or_pull
+export -f clone_or_pull_done
+export -f install_dependencies
+
 main() {
   while [ $# -gt 0 ]; do
     local opt=$1
     shift
 
+    echo ""
     case $opt in
       "cargo")
-        figlet 'Cargo packages'
+        msg title "cargo packages"
         exec ./develop/cargo.sh
         ;;
       "fcitx")
-        figlet 'Fcitx'
-        if ! command -v fcitx &>/dev/null; then
-          # A bit buggy, don't know why yet.
-          sudo apt install fcitx-hangul
-          # im-config -n fcitx
-          sed -i "s/run_im (.*)/run_im fcitx/" /etc/X11/xinit/xinputrc
-
-          local conf="$HOME/.config/fcitx"
-          if [[ ! -d "$conf" ]]; then
-            fcitx -d &
-            sleep 3
-          fi
-
-          # Set input method
-          local profile="$conf/profile"
-          sed -Ei "s/#(IMName=)/\1Hangul/" "$profile"
-          sed -Ei "s/(hangul:)False/\1True/" "$profile"
-          # Disable some keys and set TriggerKey to 'hangul'
-          local config="$conf/config"
-          sed -Ei "s/#(TriggerKey=).*/\1HANGUL CTRL_SHIFT_SPACE/" "$config"
-          sed -Ei "s/#(SwitchKey=).*/\1Disabled/" "$config"
-          sed -Ei "s/#(IMSwitchKey=).*/\1False/" "$config"
-          # Disable ctrl+5 key (ReloadConfig)
-          sed -Ei "s/#(ReloadConfig=).*/\1/" "$config"
-          # Disable ctrl+; key in fcitx-clipboard.config
-          local clipboard="$conf/conf/fcitx-clipboard.config"
-          sed -Ei "s/#(TriggerKey=).*/\1/" "$clipboard"
-        else
-          echo "Fcitx has already been installed."
-        fi
+        msg title "fcitx"
+        exec ./applications/fcitx.sh
         ;;
       "fonts")
-        figlet 'Fonts'
+        msg title "fonts"
         exec ./develop/fonts.sh
         ;;
       "fresh")
+        # TODO
         # Also performs stow dotfiles
         exec ./develop/essentials.sh
         exec ./develop/cppdev.sh
         ;;
       "fzf")
-        if [ ! -d "$PREFIX/fzf" ]; then
-          git clone --depth 1 https://github.com/junegunn/fzf.git "$PREFIX/fzf"
-        else
-          git -C "$PREFIX/fzf" pull
-        fi
-        $PREFIX/fzf/install
-        rm ~/.fzf.zsh
-        rm ~/.fzf.bash
+        msg title "fzf"
+        exec ./develop/fzf.sh
         ;;
       "icons")
-        figlet 'Change Icons'
+        msg title 'change icons'
         exec ./icons/icons.sh "$@"
         ;;
       "lazygit")
-        figlet 'Lazygit'
-        local url="https://github.com/jesseduffield/lazygit"
-        local link=$(curl -Ls $url/releases/latest | grep -wo "download/v.*/.*lazygit_.*_Linux_x86_64\.tar\.gz")
-        if command -v lazygit &>/dev/null; then
-          local remote_version=$(echo $link | sed -rn 's/.*\/v(.*)\/.*/\1/p')
-          local local_version=$(lazygit --version | sed -rn 's/.*version=([^,]*).*/\1/p')
-          if [[ "$remote_version" = "$local_version" ]]; then
-            echo "Already up to date ($remote_version)"
-            continue
-          fi
-          echo "Upgrading to $remote_version from $local_version"
-        fi
-        local tmpdir=$(dirname $(mktemp -u))
-        local output="$tmpdir/lazygit.tar.gz"
-        curl -Lo $output "$url/releases/$link"
-        tar -xvzf $output --directory "$HOME/.local/bin"
-        rm "$HOME/.local/bin/LICENSE" "$HOME/.local/bin/README.md"
+        msg title 'lazygit'
+        exec ./develop/lazygit.sh
         ;;
       "nvim" | "neovim")
-        figlet 'Neovim'
+        msg title 'neovim'
         exec ./develop/nvim.sh
         ;;
       "plank")
-        figlet 'Plank'
+        msg title "plank"
         if ! command -v plank &>/dev/null; then
           sudo apt remove gnome-shell-extension-ubuntu-dock
           sudo apt install plank
@@ -111,77 +165,38 @@ main() {
         dconf write "$schemas/zoom-percent" 150
         ;;
       "ranger")
-        figlet 'Ranger'
+        msg title 'ranger'
         exec ./develop/ranger.sh
         ;;
       "rofi")
-        figlet 'Rofi'
+        msg title 'rofi'
         exec ./develop/rofi.sh
         ;;
       "shell")
-        figlet 'Pop Shell'
+        # TODO
+        msg title 'Pop Shell'
         exec ./shell/pop-shell.sh
         ;;
       "streamlink")
-        figlet 'Streamlink'
-        if ! command -v streamlink &>/dev/null; then
-          sudo add-apt-repository ppa:nilarimogard/webupd8
-          cp $SCRIPT_HOME/scripts/twitch.desktop ${XDG_DATA_HOME:-$HOME/.local/share}/applications/
-        fi
-        local url="https://github.com/streamlink/streamlink-twitch-gui"
-        local link=$(curl -Ls $url/releases/latest | grep -wo "download.*x86_64.AppImage")
-        local output="${HOME}/.local/bin/streamlink-twitch-gui"
-        curl -Lo $output "$url/releases/$link"
-        chmod +x $output
-        sudo apt install streamlink
+        msg title 'streamlink'
+        exec ./applications/streamlink.sh
         ;;
       "youtube-dl" | "youtube" | "yt")
-        figlet 'Youtube-dl'
-        if ! command -v youtube-dl &>/dev/null; then
-          local bin="/usr/local/bin/youtube-dl"
-          sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o $bin
-          sudo chmod a+rx $bin
-        else
-          sudo youtube-dl -U
-        fi
+        msg title 'youtube-dl'
+        exec ./applications/youtube-dl.sh
         ;;
       "vlc")
-        figlet 'vlc'
-        if ! command -v vlc &>/dev/null; then
-          sudo apt install vlc ffmpeg
-          mkdir -p $HOME/.config/vlc
-        else
-          echo "VLC has already been installed."
-        fi
+        msg title 'vlc'
+        exec ./applications/vlc.sh
         ;;
       "xow")
-        figlet 'xow'
+        # TODO
+        msg title 'xow'
         exec ./applications/xow.sh
         ;;
       "zsh")
-        figlet 'Zsh'
-        local repos=(
-          "https://github.com/romkatv/powerlevel10k.git"
-          "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-          "https://github.com/jeffreytse/zsh-vi-mode.git"
-          "https://github.com/zsh-users/zsh-autosuggestions.git")
-        if ! command -v zsh &>/dev/null; then
-          sudo apt install zsh
-          chsh -s $(which zsh)
-
-          echo 'ZDOTDIR=$HOME/.config/zsh' | sudo tee -a /etc/zsh/zshenv
-          for repo in ${repos[@]}; do
-            repo_name="${repo##*/}"
-            repo_name="${repo_name%.*}"
-            git clone "$repo" "$PREFIX/${repo_name}"
-          done
-        else
-          for repo in ${repos[@]}; do
-            repo_name="${repo##*/}"
-            repo_name="${repo_name%.*}"
-            git -C "$PREFIX/${repo_name}" pull
-          done
-        fi
+        msg title 'zsh'
+        exec ./develop/zsh.sh
         ;;
       *)
         echo "Unrecognized options: $opt"

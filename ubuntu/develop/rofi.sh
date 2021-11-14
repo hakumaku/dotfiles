@@ -1,32 +1,55 @@
 #!/usr/bin/env bash
 
-install_rofi() {
-  local dest="$PREFIX/rofi"
-  if [ ! -d "$dest" ]; then
-    local url="https://github.com/DaveDavenport/rofi"
-    local dependencies=(
-      "libglib2.0-dev" "bison" "flex"
-      "libxcb-xkb-dev" "libxcb-randr0-dev" "libxcb-xinerama0-dev"
-      "libxkbcommon-x11-dev" "libxcb-ewmh-dev" "libxcb-icccm4-dev" "libxcb-cursor-dev"
-      "libxcb-util-dev" "libpango1.0-dev" "libpangocairo-1.0-0" "libstartup-notification0-dev"
-      "libgdk-pixbuf-2.0-dev"
-    )
-    sudo apt install ${dependencies[@]}
-    git clone --recurse-submodules $url $dest
+fetch_from_git_rofi() {
+  local tmpdir=$(dirname $(mktemp -u))
+  if ! command -v rofi &>/dev/null; then
+    install_dependencies \
+      "bison" \
+      "flex" \
+      "libgdk-pixbuf-2.0-dev" \
+      "libglib2.0-dev" \
+      "libpango1.0-dev" \
+      "libpangocairo-1.0-0" \
+      "libstartup-notification0-dev" \
+      "libxcb-cursor-dev" \
+      "libxcb-ewmh-dev" \
+      "libxcb-icccm4-dev" \
+      "libxcb-randr0-dev" \
+      "libxcb-util-dev" \
+      "libxcb-xinerama0-dev" \
+      "libxcb-xkb-dev" \
+      "libxkbcommon-x11-dev"
 
-    pushd $dest
-    autoreconf -i
-    mkdir build && cd build
-    ../configure --disable-check
-    popd
+    fetch_from_git "davatorium/rofi" \
+      "rofi-.*\.tar\.gz" \
+      $tmpdir
   else
-    git -C $dest pull --recurse-submodules
+    local local_version=$(rofi -v | cut -d' ' -f2)
+    fetch_from_git "davatorium/rofi" \
+      "rofi-.*\.tar\.gz" \
+      $tmpdir \
+      $local_version
   fi
 
-  pushd $dest/build
-  make
-  sudo make install
-  popd
+  local output="$(compgen -G $tmpdir/rofi-*)"
+  if [[ -f $output ]]; then
+    msg info "extracting source"
+    tar -xzf $output --directory "$tmpdir"
+    rm $output
+    local src="$(compgen -G $tmpdir/rofi-*)"
+
+    cd $src
+    msg progress "autoreconf"
+    (cd $src && autoreconf --install >/dev/null 2>&1)
+    msg progress "configure"
+    (mkdir $src/build && cd $src/build && ../configure --disable-check >/dev/null 2>&1)
+    msg progress "make"
+    make --directory=$src/build >/dev/null 2>&1
+    msg progress "make install"
+    sudo make --directory=$src/build install >/dev/null 2>&1
+
+    rm -rf $src
+  fi
 }
 
-install_rofi
+fetch_from_git_rofi

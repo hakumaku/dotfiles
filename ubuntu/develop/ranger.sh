@@ -1,55 +1,60 @@
 #!/usr/bin/env bash
 
-install_ranger_devicons() {
-  local url="https://github.com/alexanderjeurissen/ranger_devicons"
-  git clone -q "$url" "$HOME/.config/ranger/plugins/${url##*/}"
+clone_or_pull_ranger_devicons() {
+  msg info "installing ranger devicons"
+  local dest="$HOME/.config/ranger/plugins/ranger_devicons"
+  clone_or_pull "alexanderjeurissen/ranger_devicons" $dest
 }
 
 install_ueberzug() {
-  local dependencies=(
-    "python3" "python-is-python3" "python3-pip"
-    "libjpeg-dev" "zlib1g-dev"
-    "libxcomposite-dev" "libx11-dev"
-    "ffmpegthumbnailer")
-  sudo apt install ${dependencies[@]} \
-    && CC="cc -mavx2" pip3 install -U --force-reinstall pillow-simd \
-    && pip3 install ueberzug
+  install_dependencies \
+    "python3" \
+    "python-is-python3" \
+    "python3-pip" \
+    "libjpeg-dev" \
+    "zlib1g-dev" \
+    "libxcomposite-dev" \
+    "libx11-dev" \
+    "ffmpegthumbnailer"
+
+  msg info "installing pillow-simd"
+  CC="cc -mavx2" pip install --quiet -U --force-reinstall pillow-simd
+
+  msg info "installing ueberzug"
+  pip install --quiet ueberzug
 }
 
 config_ranger() {
-  if [[ ! $(command -v ranger) ]]; then
-    return 1
-  fi
+  msg info "generating default ranger config"
   ranger --copy-config=all
 
   # Enable video preview option.
   # Find 'video/*)' ~ 'exit 1;;' text and uncomment them.
-  local config="$HOME/.config/ranger/scope.sh"
-  if [[ -f "$config" ]]; then
-    sed -in '/video\/\*)/,/exit 1;;/s/# //' $config
+  msg info "enabling video preview option"
+  local scope="$HOME/.config/ranger/scope.sh"
+  if [[ -f "$scope" ]]; then
+    sed -in '/video\/\*)/,/exit 1;;/s/# //' $scope
   fi
 
   # Enable sxiv -a option.
   # Find 'flag f = sxiv' text and append '-a' option.
-  config="$HOME/.config/ranger/rifle.conf"
+  msg info "configuring sxiv options"
+  local config="$HOME/.config/ranger/rifle.conf"
   if [[ -f "$config" ]]; then
     sed -in 's/flag f = sxiv/& -abfsh/' $config
   fi
 }
 
-install_ranger() {
-  local url="https://github.com/ranger/ranger"
-  local dest="${PREFIX}/${url##*/}"
-  if [ ! -d "$dest" ]; then
-    git clone "$url" "$dest"
-    (cd "$dest" && sudo make install)
-    install_ranger_devicons
-    install_ueberzug
+clone_or_pull_ranger() {
+  clone_or_pull "ranger/ranger"
+  if ! command -v ranger &>/dev/null; then
     config_ranger
-  else
-    git -C "$dest" pull
-    (cd "$dest" && sudo make install)
+    clone_or_pull_ranger_devicons
+    install_ueberzug
   fi
+  msg info "make install"
+  sudo make install >/dev/null 2>&1
+  clone_or_pull_done
 }
 
-install_ranger
+clone_or_pull_ranger

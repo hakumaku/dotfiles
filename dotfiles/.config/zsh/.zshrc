@@ -58,7 +58,7 @@ alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keym
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 # alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias nvimg="nvim -c 'Git | wincmd o' ."
-alias luamake=/home/haku/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+alias luamake=$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
 # Tmux
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
@@ -84,14 +84,18 @@ source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-autosuggestions/zsh-autosuggestions
 source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 function zsh_vi_mode_init() {
-  # Setup fzf
-  if [[ ! "$PATH" == */$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/bin* ]]; then
-    export PATH="${PATH:+${PATH}:}$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/bin"
+  if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
+    source $XDG_CONFIG_HOME/fzf/fzf.zsh
+    # FZF (https://github.com/junegunn/fzf)
+    # Use ~~ as the trigger sequence instead of the default **
+    export FZF_COMPLETION_TRIGGER='~~'
+    # Options to fzf command
+    export FZF_COMPLETION_OPTS='+c -x'
+    # Setting fd as the default source for fzf
+    export FZF_DEFAULT_COMMAND='fd --type f'
+    # To apply the command to CTRL-T as well
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   fi
-  # Auto-completion
-  [[ $- == *i* ]] && source "$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/shell/completion.zsh" 2>/dev/null
-  # Key bindings
-  source "$XDG_DATA_HOME/ubuntu-fresh-sites/fzf/shell/key-bindings.zsh"
 
   # Key bindings
   bindkey -v
@@ -104,15 +108,6 @@ function zsh_vi_mode_init() {
 }
 zvm_after_init_commands+=(zsh_vi_mode_init)
 
-# FZF (https://github.com/junegunn/fzf)
-# Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='~~'
-# Options to fzf command
-export FZF_COMPLETION_OPTS='+c -x'
-# Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -139,6 +134,17 @@ fzf_commit() {
       --preview="f() { set -- \$(echo -- \$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \$# -eq 0 ] || git show --color=always \$1 \$filter | delta --line-numbers; }; f {}" \
       --preview-window=right:60%
 }
+
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=($(COMP_WORDS="$words[*]" \
+    COMP_CWORD=$((cword - 1)) \
+    PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null))
+}
+compctl -K _pip_completion /usr/bin/python3 -m pip
+compctl -K _pip_completion pip3
 
 if command -v neofetch &>/dev/null; then
   neofetch

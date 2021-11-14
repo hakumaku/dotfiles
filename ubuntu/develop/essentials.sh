@@ -13,11 +13,6 @@ install_essentials() {
     "python3" "python-is-python3" "python3-pip" "python3-distutils" "npm" "stow")
   sudo apt install ${packages[@]}
 
-  # Install rust
-  export CARGO_HOME=${HOME}/.local/share/cargo
-  export RUSTUP_HOME=${HOME}/.local/share/rustup
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
   # Install nodejs
   sh -c 'curl -sL install-node.now.sh/lts | sudo bash'
 
@@ -29,6 +24,7 @@ XDG_CACHE_HOME  DEFAULT=@{HOME}/.cache
 XDG_CONFIG_HOME DEFAULT=@{HOME}/.config
 XDG_DATA_HOME   DEFAULT=@{HOME}/.local/share
 XDG_STATE_HOME  DEFAULT=@{HOME}/.local/state
+GTK2_RC_FILES   DEFAULT=\${XDG_CONFIG_HOME}/gtk-2.0/gtkrc
 CARGO_HOME      DEFAULT=\${XDG_DATA_HOME}/cargo
 RUSTUP_HOME     DEFAULT=\${XDG_DATA_HOME}/rustup
 PYLINTHOME      DEFAULT=\${XDG_CACHE_HOME}/pylint

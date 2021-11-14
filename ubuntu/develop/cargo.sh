@@ -2,15 +2,19 @@
 
 install_cargo_utilities() {
   if ! command -v alacritty &>/dev/null; then
+    msg info "installing rustup"
+    export CARGO_HOME=${HOME}/.local/share/cargo
+    export RUSTUP_HOME=${HOME}/.local/share/rustup
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    local dependencies=(
-      "pkg-config"
-      "libxkbcommon-dev"
-      "libfreetype6-dev"
-      "libfontconfig1-dev"
+
+    install_dependencies \
+      "pkg-config" \
+      "libxkbcommon-dev" \
+      "libfreetype6-dev" \
+      "libfontconfig1-dev" \
       "libxcb-xfixes0-dev"
-    )
-    sudo apt install ${dependencies[@]}
+  else
+    msg info "update cargo utilities"
   fi
 
   local packages=(
@@ -22,7 +26,9 @@ install_cargo_utilities() {
     "ripgrep"
     "bottom"
   )
-  cargo install ${packages[@]}
+  msg info "${packages[*]}"
+  cargo install --quiet ${packages[@]}
+
   # Place Alacritty.desktop to applications
   cp $SCRIPT_HOME/dotfiles/.config/alacritty/Alacritty.desktop \
     $XDG_DATA_HOME/applications
