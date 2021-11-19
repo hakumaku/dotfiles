@@ -2,6 +2,8 @@
 
 export PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh-sites"
 export SCRIPT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ubuntu-fresh"
+export DISTRO=$(echo $(cat /etc/os-release | sed -rn "s/^NAME=\"(.*)\"/\1/p"))
+
 set -euo pipefail
 
 msg() {
@@ -26,6 +28,19 @@ msg() {
     *)
       echo "Invalid type in msg()"
       exit 1
+      ;;
+  esac
+}
+
+install_dependencies() {
+  local dependencies=("$@")
+  msg info "installing dependencies"
+  case $DISTRO in
+    "Ubuntu")
+      sudo apt -qq install "${dependencies[@]}"
+      ;;
+    "Arch Linux")
+      # TODO
       ;;
   esac
 }
@@ -55,12 +70,6 @@ fetch_from_git() {
   msg progress "downloading '$link'"
   curl --silent --location --output "$dest/$artifact" "$link"
   msg progress "$dest/$artifact"
-}
-
-install_dependencies() {
-  local dependencies=("$@")
-  msg info "installing dependencies"
-  sudo apt -qq install "${dependencies[@]}"
 }
 
 clone_or_pull() {
@@ -112,6 +121,10 @@ main() {
 
     echo ""
     case $opt in
+      "info")
+          msg title "info"
+          echo "DISTRO: $DISTRO"
+          ;;
       "cargo")
         msg title "cargo packages"
         exec ./develop/cargo.sh
@@ -202,6 +215,7 @@ main() {
         echo "Unrecognized options: $opt"
         ;;
     esac
+    msg title "done"
   done
 }
 
