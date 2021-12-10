@@ -21,16 +21,25 @@ set_target_properties(
 endsnippet
 
 snippet exe "add_executable(...)"
-add_executable(
-  ${PROJECT_NAME}
+add_executable(${PROJECT_NAME})
+taget_sources(
+  PRIVATE
   ${0}
 )
 endsnippet
 
 snippet lib "add_library(STATIC)"
-add_library(
-  ${PROJECT_NAME}
-  STATIC
+add_library(${PROJECT_NAME} STATIC)
+taget_sources(
+  PRIVATE
+  ${0}
+)
+endsnippet
+
+snippet objlib "add_library(OBJECT)"
+add_library(${PROJECT_NAME} OBJECT)
+target_sources(
+  PRIVATE
   ${0}
 )
 endsnippet
@@ -39,14 +48,6 @@ snippet intlib "add_library(INTERFACE)"
 add_library(
   ${PROJECT_NAME}
   INTERFACE
-  ${0}
-)
-endsnippet
-
-snippet objlib "add_library(OBJECT)"
-add_library(
-  ${PROJECT_NAME}
-  OBJECT
   ${0}
 )
 endsnippet
