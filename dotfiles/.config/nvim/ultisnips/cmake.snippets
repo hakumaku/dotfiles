@@ -23,6 +23,7 @@ endsnippet
 snippet exe "add_executable(...)"
 add_executable(
   ${PROJECT_NAME}
+  ${0}
 )
 endsnippet
 
@@ -30,6 +31,7 @@ snippet lib "add_library(STATIC)"
 add_library(
   ${PROJECT_NAME}
   STATIC
+  ${0}
 )
 endsnippet
 
@@ -37,6 +39,7 @@ snippet intlib "add_library(INTERFACE)"
 add_library(
   ${PROJECT_NAME}
   INTERFACE
+  ${0}
 )
 endsnippet
 
@@ -44,6 +47,7 @@ snippet objlib "add_library(OBJECT)"
 add_library(
   ${PROJECT_NAME}
   OBJECT
+  ${0}
 )
 endsnippet
 
@@ -72,5 +76,28 @@ snippet tcd "target_compile_definitions(...)"
 target_compile_definitions(
   ${PROJECT_NAME}
   PRIVATE
+  $<$<CXX_COMPILER_ID:GNU>:${0}>
 )
+endsnippet
+
+snippet tco "target_compile_options(...)"
+target_compile_definitions(
+  ${PROJECT_NAME}
+  PRIVATE
+  $<$<CXX_COMPILER_ID:GNU>:${0}>
+)
+endsnippet
+
+snippet test "enable_testing() ... add_test()"
+enable_testing()
+add_executable(
+  ${PROJECT_NAME}
+  ${0}
+)
+target_link_libraries(
+  ${PROJECT_NAME}
+  PRIVATE
+  gtest_main
+)
+add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
 endsnippet
