@@ -23,6 +23,7 @@ endsnippet
 snippet exe "add_executable(...)"
 add_executable(${PROJECT_NAME})
 target_sources(
+  ${PROJECT_NAME}
   PRIVATE
   ${0}
 )
@@ -39,6 +40,7 @@ endsnippet
 snippet objlib "add_library(OBJECT)"
 add_library(${PROJECT_NAME} OBJECT)
 target_sources(
+  ${PROJECT_NAME}
   PRIVATE
   ${0}
 )
