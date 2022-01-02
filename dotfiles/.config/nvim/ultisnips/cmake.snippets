@@ -68,6 +68,10 @@ target_include_directories(
 )
 endsnippet
 
+snippet fp "find_package(...)"
+find_package(${0:name} REQUIRED)
+endsnippet
+
 snippet tll "target_link_libraries(...)"
 target_link_libraries(
   ${PROJECT_NAME}

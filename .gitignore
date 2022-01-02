@@ -1,5 +1,6 @@
 packer_compiled.lua
 vlc-qt-interface.conf
+**/mpv/shaders
 **/lazygit/*
 !**/lazygit/config.yml
 **/zsh/.zcompdump

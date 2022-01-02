@@ -1,0 +1,301 @@
+{
+  "init": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "apt-transport-https",
+        "autoconf",
+        "automake",
+        "build-essential",
+        "ca-certificates",
+        "curl",
+        "git",
+        "gnupg",
+        "jq",
+        "npm",
+        "python-is-python3",
+        "python3",
+        "python3-distutils",
+        "python3-pip",
+        "software-properties-common",
+        "solaar",
+        "stow",
+        "wget",
+        "xclip"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "base-devel",
+        "curl",
+        "git",
+        "jq",
+        "npm",
+        "python",
+        "solaar",
+        "stow",
+        "wget",
+        "xclip"
+      ]
+    }
+  },
+  "alacritty": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "pkg-config",
+        "libxkbcommon-dev",
+        "libfreetype6-dev",
+        "libfontconfig1-dev",
+        "libxcb-xfixes0-dev"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "pkg-config",
+        "freetype2",
+        "fontconfig",
+        "libxcb",
+        "libxkbcommon"
+      ]
+    }
+  },
+  "cmake": {
+    "ubuntu": {
+      "packages": [
+        "cmake"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "cmake"
+      ],
+      "dependencies": []
+    }
+  },
+  "fcitx": {
+    "ubuntu": {
+      "packages": [
+        "fcitx-hangul"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "fcitx-hangul",
+        "fcitx-configtool"
+      ],
+      "dependencies": []
+    }
+  },
+  "fonts": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "adobe-source-han-sans-kr-fonts",
+        "adobe-source-han-serif-kr-fonts",
+        "adobe-source-sans-fonts",
+        "adobe-source-serif-fonts"
+      ],
+      "dependencies": []
+    }
+  },
+  "mpv": {
+    "ubuntu": {
+      "packages": [
+        "mpv"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "mpv"
+      ],
+      "dependencies": []
+    }
+  },
+  "nvidia": {
+    "ubuntu": {
+      "packages": [
+        "nvidia-settings",
+        "nvidia-xconfig"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "nvidia-settings",
+        "nvidia-xconfig"
+      ],
+      "dependencies": []
+    }
+  },
+  "nvim": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "autoconf",
+        "automake",
+        "gettext",
+        "libtool",
+        "libtool-bin",
+        "ninja-build",
+        "pkg-config",
+        "unzip"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "base-devel",
+        "tree-sitter",
+        "curl",
+        "ninja",
+        "unzip"
+      ]
+    }
+  },
+  "ranger": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "exiv2",
+        "ffmpeg",
+        "ffmpegthumbnailer",
+        "sxiv"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "exiv2",
+        "ffmpeg",
+        "ffmpegthumbnailer",
+        "sxiv"
+      ]
+    }
+  },
+  "rofi": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "bison",
+        "flex",
+        "libgdk-pixbuf-2.0-dev",
+        "libglib2.0-dev",
+        "libpango1.0-dev",
+        "libpangocairo-1.0-0",
+        "libstartup-notification0-dev",
+        "libxcb-cursor-dev",
+        "libxcb-ewmh-dev",
+        "libxcb-icccm4-dev",
+        "libxcb-randr0-dev",
+        "libxcb-util-dev",
+        "libxcb-xinerama0-dev",
+        "libxcb-xkb-dev",
+        "libxkbcommon-x11-dev"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "cairo",
+        "gdk-pixbuf2",
+        "glib2",
+        "libxkbcommon-x11",
+        "pango",
+        "startup-notification",
+        "xcb-util-cursor",
+        "xcb-util-wm"
+      ]
+    }
+  },
+  "steam": {
+    "ubuntu": {
+      "packages": [
+        "steam"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "steam"
+      ],
+      "dependencies": [
+        "lib32-fontconfig",
+        "ttf-liberation",
+        "wqy-zenhei",
+        "lib32-systemd",
+        "lib32-nvidia-utils"
+      ]
+    }
+  },
+  "ueberzug": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "python3",
+        "python-is-python3",
+        "python3-pip",
+        "libjpeg-dev",
+        "zlib1g-dev",
+        "libxcomposite-dev",
+        "libx11-dev"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "freetype2",
+        "libimagequant",
+        "libjpeg",
+        "libraqm",
+        "libtiff",
+        "libwebp",
+        "libxcb",
+        "lcms2",
+        "openjpeg2",
+        "tk",
+        "zlib"
+      ]
+    }
+  },
+  "xpadneo": {
+    "ubuntu": {
+      "packages": [],
+      "dependencies": [
+        "dkms",
+        "linux-headers-`uname -r`"
+      ]
+    },
+    "arch": {
+      "packages": [],
+      "dependencies": [
+        "dkms",
+        "linux-headers",
+        "bluez",
+        "bluez-utils"
+      ]
+    }
+  },
+  "zsh": {
+    "ubuntu": {
+      "packages": [
+        "zsh"
+      ],
+      "dependencies": []
+    },
+    "arch": {
+      "packages": [
+        "zsh"
+      ],
+      "dependencies": []
+    }
+  }
+}

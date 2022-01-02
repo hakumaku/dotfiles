@@ -62,7 +62,11 @@ alias luamake=$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server/3rd
 
 # Tmux
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+  if command -v neofetch &>/dev/null; then
+    exec tmux new 'sleep 0.1; neofetch; $SHELL'
+  else
+    exec tmux
+  fi
   # session=$(tmux list-sessions | head -1 | cut -d':' -f1)
   # if [[ -z $session ]]; then
   #   exec tmux
@@ -72,16 +76,16 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
 fi
 
 # powerline10k settings
-source $XDG_DATA_HOME/ubuntu-fresh-sites/powerlevel10k/powerlevel10k.zsh-theme
+source $XDG_DATA_HOME/repositories/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.config/zsh/.p10k.zsh ]] && source ~/.config/zsh/.p10k.zsh
 
 # zsh-syntax-highlighting
-source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
-source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-vi-mode
-source $XDG_DATA_HOME/ubuntu-fresh-sites/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 function zsh_vi_mode_init() {
   if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
@@ -145,7 +149,3 @@ function _pip_completion {
 }
 compctl -K _pip_completion /usr/bin/python3 -m pip
 compctl -K _pip_completion pip3
-
-if command -v neofetch &>/dev/null; then
-  neofetch
-fi

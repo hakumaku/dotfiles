@@ -32,6 +32,15 @@ snippet i" "#include ..." A
 #include "${1}"
 endsnippet
 
+snippet ig "#ifndef ... #endif" A
+#ifndef `!p snip.rv = snip.basename.upper()`_INCLUDED
+#define `!p snip.rv = snip.basename.upper()`_INCLUDED
+
+$0
+
+#endif
+endsnippet
+
 snippet Main "int main(...)"
 int main(int argc, const char* argv[])
 {
@@ -49,7 +58,7 @@ template <typename ${1:T}>
 endsnippet
 
 snippet cl "class ..."
-class ${1:`!p snip.rv = snip.basename or "name"`} {
+class ${1:`!p snip.rv = snip.basename.title() or "name"`} {
   public:
     ${1/(\w+).*/$1/}() = default;
 };
