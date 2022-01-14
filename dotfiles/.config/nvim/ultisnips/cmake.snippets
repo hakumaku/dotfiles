@@ -104,3 +104,10 @@ target_link_libraries(
 )
 add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
 endsnippet
+
+snippet pch "target_precompile_headers(...)"
+target_precompile_headers(
+  ${PROJECT_NAME}
+  PRIVATE
+)
+endsnippet
