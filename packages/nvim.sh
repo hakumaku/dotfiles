@@ -90,6 +90,9 @@ clone_or_pull_nvim() {
   clone_or_pull_done
 
   nvim +PackerSync
+
+  whereis nvim
+  nvim --version
 }
 
 install_extra_packages

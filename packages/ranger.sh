@@ -61,6 +61,9 @@ clone_or_pull_ranger() {
     config_ranger
   fi
   # clone_or_pull_done
+
+  whereis ranger
+  ranger --version
 }
 
 clone_or_pull_ranger

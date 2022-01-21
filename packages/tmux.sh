@@ -12,6 +12,9 @@ clone_or_pull_tmux() {
   msg info "make install"
   sudo make install >/dev/null 2>&1
   clone_or_pull_done
+
+  whereis tmux
+  tmux -V
 }
 
 clone_or_pull_tmux

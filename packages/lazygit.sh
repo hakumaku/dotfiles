@@ -21,6 +21,9 @@ fetch_from_git_lazygit() {
     rm $output
     rm "$HOME/.local/bin/LICENSE" "$HOME/.local/bin/README.md"
   fi
+
+  whereis lazygit
+  lazygit --version
 }
 
 fetch_from_git_lazygit

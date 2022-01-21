@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 fetch_from_git_rofi() {
   local tmpdir=$(dirname $(mktemp -u))
   if ! command -v rofi &>/dev/null; then
@@ -34,6 +36,9 @@ fetch_from_git_rofi() {
 
     rm -rf $src
   fi
+
+  whereis rofi
+  rofi -V
 }
 
 fetch_from_git_rofi

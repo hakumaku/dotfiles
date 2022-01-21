@@ -42,13 +42,13 @@ install_dependencies() {
 
   local -a deps
   case $DISTRO in
-    "Ubuntu")
+    "ubuntu")
       read_dependencies deps ${pkg} "ubuntu"
       if [[ ${#deps} -gt 0 ]]; then
         sudo apt -qq install "${deps[@]}"
       fi
       ;;
-    "Arch Linux")
+    "arch")
       read_dependencies deps ${pkg} "arch"
       if [[ ${#deps} -gt 0 ]]; then
         sudo pacman -Syq "${deps[@]}"
@@ -71,13 +71,13 @@ install_package() {
 
   local -a packages
   case $DISTRO in
-    "Ubuntu")
+    "ubuntu")
       read_packages packages ${pkg} "ubuntu"
       if [[ ${#deps} -gt 0 ]]; then
         sudo apt -qq install "${packages[@]}"
       fi
       ;;
-    "Arch Linux")
+    "arch")
       read_packages packages ${pkg} "arch"
       if [[ ${#deps} -gt 0 ]]; then
         sudo pacman -Syq "${packages[@]}"

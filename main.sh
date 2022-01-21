@@ -50,7 +50,7 @@ main() {
         exec ./packages/fonts.sh
         ;;
       "cmake")
-        exec ./$DISTRO/cmake.sh
+        exec ./packages/cmake.sh
         ;;
       "clang")
         exec ./$DISTRO/clang.sh

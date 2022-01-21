@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 install_cargo_utilities() {
   if ! command -v rustup &>/dev/null; then
     msg info "installing rustup"
@@ -27,6 +29,9 @@ install_cargo_utilities() {
   # Place Alacritty.desktop to applications
   cp $SCRIPT_HOME/dotfiles/.config/alacritty/Alacritty.desktop \
     $XDG_DATA_HOME/applications
+
+  whereis cargo
+  cargo --version
 }
 
 # TODO: remove all functions below.

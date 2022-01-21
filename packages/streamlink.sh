@@ -23,6 +23,9 @@ pip_install_streamlink() {
   if ! command -v streamlink-twitch-gui &>/dev/null; then
     fetch_from_git_streamlink_twitch_gui
   fi
+
+  whereis streamlink
+  streamlink --version
 }
 
 pip_install_streamlink
