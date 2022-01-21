@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 repo="jesseduffield/lazygit"
 expr="lazygit_.*_Linux_x86_64.tar.gz"
 

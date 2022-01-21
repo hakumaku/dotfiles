@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 repo="bloc97/Anime4K"
 expr="Anime4K_v.*.zip"
 

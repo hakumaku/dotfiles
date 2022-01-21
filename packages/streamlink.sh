@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 fetch_from_git_streamlink_twitch_gui() {
   msg info "installing streamlink-twitch-gui"
   local dir="$HOME/.local/bin"

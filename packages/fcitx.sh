@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 config_fcitx() {
   if command -v fcitx &>/dev/null; then
     msg info "everything is up to date"

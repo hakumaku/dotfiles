@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 clone_or_pull_tmux() {
   msg info "installing tmux"
   clone_or_pull "tmux/tmux"

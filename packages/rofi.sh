@@ -2,19 +2,17 @@
 
 set -euo pipefail
 
+repo="davatorium/rofi"
+expr="rofi-.*\.tar\.gz"
+
 fetch_from_git_rofi() {
   local tmpdir=$(dirname $(mktemp -u))
   if ! command -v rofi &>/dev/null; then
     install_dependencies rofi
-    fetch_from_git "davatorium/rofi" \
-      "rofi-.*\.tar\.gz" \
-      $tmpdir
+    fetch_from_git "$repo" "$expr" $tmpdir
   else
     local local_version=$(rofi -v | cut -d' ' -f2)
-    fetch_from_git "davatorium/rofi" \
-      "rofi-.*\.tar\.gz" \
-      $tmpdir \
-      $local_version
+    fetch_from_git "$repo" "$expr" $tmpdir $local_version
   fi
 
   local output="$(compgen -G $tmpdir/rofi-*)"

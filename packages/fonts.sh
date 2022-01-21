@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 fetch_from_git_fonts() {
   # TODO: version check?
   local dir="$HOME/.local/share/fonts"

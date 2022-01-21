@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 clone_or_pull_zsh_plugins() {
   local repos=(
     "romkatv/powerlevel10k.git"

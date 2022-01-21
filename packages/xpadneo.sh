@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 install_xpadneo() {
   msg info "xpadneo"
   clone_or_pull "atar-axis/xpadneo"

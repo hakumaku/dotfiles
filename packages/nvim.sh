@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 install_extra_packages() {
   local python_packages=(
     "autopep8"

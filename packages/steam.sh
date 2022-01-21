@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 install_steam() {
   install_dependencies steam
   install_package steam

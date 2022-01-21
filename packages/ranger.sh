@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 clone_or_pull_ranger_devicons() {
   msg info "installing ranger devicons"
   local dest="$HOME/.config/ranger/plugins/ranger_devicons"
