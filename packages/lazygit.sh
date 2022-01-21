@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
+repo="jesseduffield/lazygit"
+expr="lazygit_.*_Linux_x86_64.tar.gz"
+
 fetch_from_git_lazygit() {
   local tmpdir=$(dirname $(mktemp -u))
   if command -v lazygit &>/dev/null; then
     local local_version=$(lazygit --version | sed -rn 's/.*version=([^,]*).*/\1/p')
-    fetch_from_git "jesseduffield/lazygit" \
-      "lazygit_.*_Linux_x86_64.tar.gz" \
-      $tmpdir \
-      $local_version
+    fetch_from_git "$repo" "$expr" $tmpdir $local_version
   else
-    fetch_from_git "jesseduffield/lazygit" \
-      "lazygit_.*_Linux_x86_64.tar.gz" \
-      $tmpdir
+    fetch_from_git "$repo" "$expr" $tmpdir
   fi
 
   local output="$(compgen -G $tmpdir/lazygit_*)"

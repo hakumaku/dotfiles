@@ -212,5 +212,7 @@ export -f clone_or_pull_aur
 export -f clone_or_pull
 export -f clone_or_pull_done
 export -f checkout_latest
+export -f read_dependencies
+export -f read_packages
 export -f install_dependencies
 export -f install_package
