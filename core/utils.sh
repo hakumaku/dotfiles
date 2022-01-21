@@ -54,6 +54,9 @@ install_dependencies() {
         sudo pacman -Syq "${deps[@]}"
       fi
       ;;
+    *)
+      msg error "unrecognized DISTRO: '$DISTRO'"
+      ;;
   esac
 }
 
@@ -82,6 +85,9 @@ install_package() {
       if [[ ${#deps} -gt 0 ]]; then
         sudo pacman -Syq "${packages[@]}"
       fi
+      ;;
+    *)
+      msg error "unrecognized DISTRO: '$DISTRO'"
       ;;
   esac
 }
