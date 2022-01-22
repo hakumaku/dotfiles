@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
 config_fcitx() {
   if command -v fcitx &>/dev/null; then
@@ -10,10 +10,6 @@ config_fcitx() {
 
   sudo locale-gen kr, en
   install_package fcitx
-
-  # im-config -n fcitx
-  msg info "configuring input method"
-  sudo sed -i "s/run_im (.*)/run_im fcitx/" /etc/X11/xinit/xinputrc
 
   msg info "executing fcitx to generate config"
   local conf="$HOME/.config/fcitx"
@@ -38,6 +34,10 @@ config_fcitx() {
   # Disable ctrl+; key in fcitx-clipboard.config
   local clipboard="$conf/conf/fcitx-clipboard.config"
   sed -Ei "s/#(TriggerKey=).*/\1/" "$clipboard"
+
+  # im-config -n fcitx
+  msg info "configuring input method"
+  sudo sed -i "s/run_im (.*)/run_im fcitx/" /etc/X11/xinit/xinputrc
 }
 
 config_fcitx

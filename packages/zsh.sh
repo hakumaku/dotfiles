@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eo pipefail
 
 clone_or_pull_zsh_plugins() {
   local repos=(

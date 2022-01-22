@@ -44,14 +44,14 @@ install_dependencies() {
   case $DISTRO in
     "ubuntu")
       read_dependencies deps ${pkg} "ubuntu"
-      if [[ ${#deps} -gt 0 ]]; then
-        sudo apt -qq install "${deps[@]}"
+      if [[ ${#deps[@]} -gt 0 ]]; then
+        sudo apt -qq install ${deps[@]}
       fi
       ;;
     "arch")
       read_dependencies deps ${pkg} "arch"
-      if [[ ${#deps} -gt 0 ]]; then
-        sudo pacman -Syq "${deps[@]}"
+      if [[ ${#deps[@]} -gt 0 ]]; then
+        sudo pacman -Syq --needed ${deps[@]}
       fi
       ;;
     *)
@@ -64,7 +64,7 @@ read_packages() {
   local -n _packages=$1
   local name="$2"
   local distro="$3"
-  readarray -t _deps < <(jq -r ".${name}.${distro}.packages" $PKGINFO | tr -d '[]," ')
+  readarray -t _packages < <(jq -r ".${name}.${distro}.packages" $PKGINFO | tr -d '[]," ')
 }
 
 install_package() {
@@ -76,14 +76,14 @@ install_package() {
   case $DISTRO in
     "ubuntu")
       read_packages packages ${pkg} "ubuntu"
-      if [[ ${#deps} -gt 0 ]]; then
-        sudo apt -qq install "${packages[@]}"
+      if [[ ${#packages[@]} -gt 0 ]]; then
+        sudo apt -qq install ${packages[@]}
       fi
       ;;
     "arch")
       read_packages packages ${pkg} "arch"
-      if [[ ${#deps} -gt 0 ]]; then
-        sudo pacman -Syq "${packages[@]}"
+      if [[ ${#packages[@]} -gt 0 ]]; then
+        sudo pacman -Syq ${packages[@]}
       fi
       ;;
     *)

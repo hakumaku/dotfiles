@@ -130,8 +130,7 @@
     },
     "arch": {
       "packages": [
-        "nvidia-settings",
-        "nvidia-xconfig"
+        "nvidia-settings"
       ],
       "dependencies": []
     }
