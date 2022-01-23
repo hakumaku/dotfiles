@@ -8,7 +8,7 @@ install_aur_packages() {
 
   # Spotify gpg key issue
   if ! command -v spotify &>/dev/null; then
-    curl -sS "https://download.spotify.com/debian/pubkey_0D811D58.gpg" | gpg --import -
+    curl -sS "https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg" | gpg --import -
   fi
 
   for pkg in ${packages[@]}; do
@@ -23,8 +23,8 @@ install_aur_packages() {
     local resolution=$(xrandr | grep ' connected' | awk '{ print $4 }')
     resolution=${resolution%%x*}
     if [[ $(($resolution - 1980)) -gt 0 ]]; then
-      sudo sed -ir \
-        's/(Exec=spotify) .*/\1 --force-device-scale-factor=1.5 %U/p' \
+      sudo sed -i -r \
+        's/(Exec=spotify) .*/\1 --force-device-scale-factor=1.5 %U/' \
         "/usr/share/applications/spotify.desktop"
     fi
   fi

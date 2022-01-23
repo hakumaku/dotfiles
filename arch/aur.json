@@ -16,5 +16,8 @@
   },
   "numix-circle-icon-theme": {
     "url": "numix-circle-icon-theme-git.git"
+  },
+  "spotify": {
+    "url": "spotify.git"
   }
 }
