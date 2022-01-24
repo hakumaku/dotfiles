@@ -17,6 +17,9 @@
   "numix-circle-icon-theme": {
     "url": "numix-circle-icon-theme-git.git"
   },
+  "slack": {
+    "url": "slack-desktop.git"
+  },
   "spotify": {
     "url": "spotify.git"
   }
