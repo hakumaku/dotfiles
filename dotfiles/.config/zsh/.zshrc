@@ -50,6 +50,7 @@ alias gd='cd $HOME/Downloads'
 alias gv='cd $HOME/Videos'
 alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias bashrc="nvim ~/.bashrc -c 'normal zt'"
+alias dotfiles="cd $HOME/.local/share/dotfiles"
 alias vimrc="nvim $HOME/.vimrc"
 alias nvimrc="nvim $HOME/.config/nvim/init.vim"
 alias sxiv='sxiv -a -f'
