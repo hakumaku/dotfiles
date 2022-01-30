@@ -2,6 +2,9 @@
   "chrome-gnome-shell": {
     "url": "chrome-gnome-shell.git"
   },
+  "chrome-remote-desktop": {
+    "url": "chrome-remote-desktop.git"
+  },
   "gitkraken": {
     "url": "gitkraken.git"
   },
