@@ -10,7 +10,9 @@ set incsearch
 set hlsearch
 
 nmap <C-s>s <Action>(GotoSymbol)
+nmap <C-s>c <Action>(GotoClass)
 nmap <C-s>f <Action>(GotoFile)
+nmap <C-w>f <Action>(ActivateTerminalToolWindow)
 nmap <C-l> <ESC>:nohl<CR>
 
 nmap <C-w>o <Action>(ActivateProjectToolWindow)
