@@ -22,7 +22,7 @@
     },
     {
       "name": "Launch Rofi",
-      "command": "rofi -show run",
+      "command": "rofi -show drun",
       "binding": "<Super>R"
     },
     {
