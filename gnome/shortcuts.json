@@ -1,0 +1,39 @@
+{
+  "shortcuts": [
+    {
+      "name": "Shutdown",
+      "command": "gnome-session-quit --power-off",
+      "binding": "<Super>Escape"
+    },
+    {
+      "name": "Gnome-Tweaks",
+      "command": "gnome-tweaks",
+      "binding": "<Super>U"
+    },
+    {
+      "name": "Run Terminal",
+      "command": "alacritty",
+      "binding": "<Super>Return"
+    },
+    {
+      "name": "Launch Bottom",
+      "command": "alacritty -e btm",
+      "binding": "<Super>X"
+    },
+    {
+      "name": "Launch Rofi",
+      "command": "rofi -show run",
+      "binding": "<Super>R"
+    },
+    {
+      "name": "Web Browser",
+      "command": "firefox",
+      "binding": "<Super>W"
+    },
+    {
+      "name": "Steam",
+      "command": "steam",
+      "binding": "<Super>G"
+    }
+  ]
+}
