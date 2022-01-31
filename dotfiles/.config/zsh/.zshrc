@@ -28,7 +28,7 @@ fi
 export EDITOR=nvim
 export VISUAL="$EDITOR"
 
-alias python='/usr/bin/python3'
+#alias python='/usr/bin/python3'
 if command -v exa &>/dev/null; then
   alias ls="exa --group-directories-first -s extension"
   alias l.="exa -d .*"
@@ -150,3 +150,15 @@ function _pip_completion {
 }
 compctl -K _pip_completion /usr/bin/python3 -m pip
 compctl -K _pip_completion pip3
+
+# fg-bg toggle via c-z
+function fg-bg {
+    if [[ $#BUFFER -eq 0 ]]; then
+        BUFFER=fg
+        zle accept-line
+    else
+        zle push-input
+    fi
+}
+zle -N fg-bg
+bindkey '^z' f
