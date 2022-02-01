@@ -23,6 +23,11 @@ vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
 imap <C-j> <CR>
 
+nmap <A-h> <Action>(RunToCursor)
+nmap <A-j> <Action>(StepInto)
+nmap <A-k> <Action>(StepOut)
+nmap <A-l> <Action>(StepOver)
+
 nmap <BS> <Action>(CloseEditor)
 
 nmap ]d <Action>(GotoNextError)
@@ -33,8 +38,11 @@ nmap \f <Action>(ReformatCode)
 nmap \u <Action>(FindUsages)
 nmap \r <Action>(RenameElement)
 
-nmap \e <Action>(Run)
+nmap \r <Action>(Run)
 nmap \d <Action>(Debug)
+nmap \R <Action>(RunClass)
+nmap \D <Action>(DebugClass)
+nmap \q <Action>(Stop)
 nmap \b <Action>(ToggleLineBreakpoint)
 
 nmap \gg <Action>(Git.Branches)
