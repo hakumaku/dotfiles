@@ -9,12 +9,13 @@ set smartcase
 set incsearch
 set hlsearch
 
-nmap <C-s>s <Action>(GotoSymbol)
-nmap <C-s>c <Action>(GotoClass)
+nmap <C-s>s <Action>(FindInPath)
 nmap <C-s>f <Action>(GotoFile)
-nmap <C-w>f <Action>(ActivateTerminalToolWindow)
+nmap <C-s>t <Action>(GotoSymbol)
+nmap <C-s>c <Action>(GotoClass)
 nmap <C-l> <ESC>:nohl<CR>
 
+nmap <C-w>f <Action>(ActivateTerminalToolWindow)
 nmap <C-w>o <Action>(ActivateProjectToolWindow)
 nmap <C-w>t <Action>(ActivateStructureToolWindow)
 
@@ -22,11 +23,18 @@ vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
 imap <C-j> <CR>
 
+nmap <BS> <Action>(CloseEditor)
+
 nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
 nmap ]b <Action>(NextTab)
 nmap [b <Action>(PreviousTab)
 nmap \f <Action>(ReformatCode)
+nmap \u <Action>(FindUsages)
+nmap \r <Action>(RenameElement)
 
-nmap \gg <Action>(Git.Log)
-nmap \gb <Action>(Git.Branches)
+nmap \e <Action>(Run)
+nmap \d <Action>(Debug)
+nmap \b <Action>(ToggleLineBreakpoint)
+
+nmap \gg <Action>(Git.Branches)

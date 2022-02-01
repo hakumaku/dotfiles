@@ -110,8 +110,8 @@ nnoremap("<C-]>", ":lua vim.lsp.buf.definition()<CR>", {silent = true})
 nnoremap("K", ":lua vim.lsp.buf.hover()<CR>", {silent = true})
 nnoremap("<C-Space>", ":lua vim.lsp.buf.code_action()<CR>", {silent = true})
 nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
-nnoremap("<leader>r", ":lua vim.lsp.buf.references()<CR>", {silent = true})
-nnoremap("<leader>c", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
+nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
+nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
 -- DAP
 nnoremap("<leader>dc", ":lua require('dap').continue()<CR>", {silent = true})
