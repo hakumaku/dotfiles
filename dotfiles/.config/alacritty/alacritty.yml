@@ -15,6 +15,8 @@ shell:
 
 # {{{ Window config
 window:
+  opacity: 0.8
+
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -105,7 +107,7 @@ font:
     style: italic
 
   # Point size
-  size: 16.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -314,7 +316,6 @@ schemes:
       - { index: 17, color: '0xf65866' }
 # }}}
 colors: *one_dark
-background_opacity: 0.9
 cursor:
   style: Block
   # If this is `true`, the cursor will be rendered as a hollow box when the
