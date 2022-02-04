@@ -23,7 +23,7 @@ install_mpv() {
     unzip -q "$output" -d "$shaders"
     rm $output
     # Log version to file.
-    local ver=$(curl -Ls -o /dev/null -w %{url_effective} "https://github.com/bloc97/Anime4K/releases/latest")
+    local ver=$(curl -Ls -o /dev/null -w %{url_effective} "https://github.com/$repo/releases/latest")
     ver=${ver##*/}
     echo $ver >"$shaders/version.txt"
   fi
