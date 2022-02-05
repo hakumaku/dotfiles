@@ -10,12 +10,6 @@ local on_attach = function(_, bufnr)
   --   vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
   -- end
 
-  -- vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  --     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  --       underline = {severity_limit = "Warning"},
-  --       virtual_text = {prefix = "●", spacing = 2},
-  --       signs = {severity_limit = "Warning"}
-  --     })
   -- vim.lsp.handlers["textDocument/definition"] =
   --     function(_, locations, ctx, _)
   --       -- local bufnr = ctx.bufnr
@@ -29,17 +23,6 @@ local on_attach = function(_, bufnr)
   --         vim.cmd "normal! zz"
   --       end
   --     end
-
-  -- Set autocommands conditional on server_capabilities
-  -- if client.resolved_capabilities.document_highlight then
-  --   vim.api.nvim_exec([[
-  --     augroup lsp_document_highlight
-  --       autocmd! * <buffer>
-  --       autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-  --       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-  --     augroup END
-  --   ]], false)
-  -- end
 end
 
 local servers = {
