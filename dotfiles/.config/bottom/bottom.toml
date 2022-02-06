@@ -54,7 +54,7 @@
 # Built-in themes.  Valid values are "default", "default-light", "gruvbox", "gruvbox-light", "nord", "nord-light"
 #color = "default"
 # Show memory values in the processes widget as values by default
-#mem_as_value = false
+mem_as_value = true
 # Show tree mode by default in the processes widget.
 #tree = false
 # Shows an indicator in table widgets tracking where in the list you are.
@@ -116,7 +116,7 @@
 # All layout components have a ratio value - if this is not set, then it defaults to 1. 
 # The default widget layout:
 [[row]]
-  ratio=30
+  ratio=2
   [[row.child]]
     ratio=4
     type="cpu"
@@ -124,13 +124,15 @@
     ratio=1
     type="temp"
 [[row]]
-  ratio=40
+  ratio=3
   [[row.child]]
+    ratio=3
     [[row.child.child]]
       type="mem"
     [[row.child.child]]
       type="net"
   [[row.child]]
+    ratio=2
     type="proc"
     default=true
 
