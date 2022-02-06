@@ -9,6 +9,8 @@ local on_attach = function(_, bufnr)
   --   local _, edit = next(actions[1].edit.changes)
   --   vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
   -- end
+  -- TODO: Change to some kinda this...
+  -- vim.diagnostic.config({...})
 
   -- vim.lsp.handlers["textDocument/definition"] =
   --     function(_, locations, ctx, _)

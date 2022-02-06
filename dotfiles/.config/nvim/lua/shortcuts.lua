@@ -40,7 +40,6 @@ end
 -- Move cursor by virtual lines.
 -- nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 -- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-nnoremap("Y", "y$")
 nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("J", "mzJ`z")
@@ -73,9 +72,6 @@ vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
 -- Toggle displaying whitespaces. Mapped to 'ctrl + /'
 nnoremap("<C-_>", ":set nolist!<Bar>echo 'Show whitespaces'<CR>")
 
--- Removes any search highlighting.
-nnoremap("<C-l>",
-         ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>")
 -- Copy & Paste
 vnoremap("<C-c>", '"+y:echo ' .. "'Yanked to clipboard'<CR>")
 inoremap("<C-v>", '<ESC>"+pa')
@@ -102,8 +98,8 @@ nnoremap("]q", ":cnext<CR>")
 nnoremap("[q", ":cprevious<CR>")
 nnoremap("[g", ":lnext<CR>")
 nnoremap("]g", ":lprev<CR>")
-nnoremap("]d", ":lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true})
-nnoremap("[d", ":lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true})
+nnoremap("]d", ":lua vim.diagnostic.goto_next()<CR>", {silent = true})
+nnoremap("[d", ":lua vim.diagnostic.goto_prev()<CR>", {silent = true})
 
 -- LSP config
 nnoremap("<C-]>", ":lua vim.lsp.buf.definition()<CR>", {silent = true})
