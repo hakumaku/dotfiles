@@ -1,6 +1,28 @@
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+local install_path = vim.fn.stdpath('data') ..
+                         '/site/pack/packer/start/packer.nvim'
+local is_packer_not_installed = vim.fn.empty(vim.fn.glob(install_path)) > 0
+if is_packer_not_installed then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path
+  })
+end
 
-return require('packer').startup(function(use)
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+local packer = require('packer')
+packer.init({max_jobs = 4})
+
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Vim basic utility
   use {'tpope/vim-surround'}
@@ -82,5 +104,7 @@ return require('packer').startup(function(use)
 
   -- Post-install/update hook with call of vimscript function with argument
   use {'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end}
+
+  if is_packer_not_installed then require('packer').sync() end
 end)
 
