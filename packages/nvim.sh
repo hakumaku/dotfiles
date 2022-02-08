@@ -15,6 +15,7 @@ install_extra_packages() {
   local npm_packages=(
     "bash-language-server"
     "pyright"
+    "prettier"
   )
 
   msg info "installing extra packages for nvim"

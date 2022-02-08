@@ -34,6 +34,21 @@
       "name": "Steam",
       "command": "steam",
       "binding": "<Super>G"
+    },
+    {
+      "name": "Spotify - Next",
+      "command": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+      "binding": "<Super>bracketright"
+    },
+    {
+      "name": "Spotify - Previous",
+      "command": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+      "binding": "<Super>bracketleft"
+    },
+    {
+      "name": "Spotify - Play/Stop",
+      "command": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+      "binding": "<Super>space"
     }
   ]
 }
