@@ -110,14 +110,11 @@ nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
 nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
 -- DAP
-nnoremap("<leader>dc", ":lua require('dap').continue()<CR>", {silent = true})
-nnoremap("<leader>db", ":lua require('dap').toggle_breakpoint()<CR>",
+nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
+nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
+nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>",
          {silent = true})
-nnoremap("<leader>di", ":lua require('dap').step_into()<CR>", {silent = true})
-nnoremap("<leader>do", ":lua require('dap').step_out()<CR>", {silent = true})
-nnoremap("<leader>dn", ":lua require('dap').step_over()<CR>", {silent = true})
-nnoremap("<leader>dq", ":lua utils.dap_quit()<CR>", {silent = true})
-nnoremap("<A-h>", ":lua require('dap').toggle_breakpoint()<CR>", {silent = true})
+nnoremap("<A-h>", ":lua require('dap').continue()<CR>", {silent = true})
 nnoremap("<A-j>", ":lua require('dap').step_into()<CR>", {silent = true})
 nnoremap("<A-k>", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<A-l>", ":lua require('dap').step_over()<CR>", {silent = true})

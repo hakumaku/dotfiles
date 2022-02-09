@@ -92,7 +92,7 @@ end
 function M.dap_quit()
   local dap = require("dap")
   dap.disconnect()
-  dap.stop()
+  dap.close()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.fn.bufname(buf) == "[dap-repl]" then
       vim.api.nvim_buf_delete(buf, {force = true, unload = false})

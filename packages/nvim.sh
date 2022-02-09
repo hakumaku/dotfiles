@@ -17,6 +17,7 @@ install_extra_packages() {
     "pyright"
     "prettier"
   )
+  # TODO: gdb, clang, lldb
 
   msg info "installing extra packages for nvim"
   if ! command -v clang &>/dev/null; then
