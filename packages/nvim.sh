@@ -22,7 +22,7 @@ install_extra_packages() {
   msg info "installing extra packages for nvim"
   if ! command -v clang &>/dev/null; then
     pip install --quiet --user --upgrade ${python_packages[@]}
-    sudo npm install --silent --global ${npm_packages[@]}
+    sudo npm install --silent --save-dev --save-exact --global ${npm_packages[@]}
   else
     pip install --quiet --user --upgrade ${python_packages[@]}
     sudo npm update --silent ${npm_packages[@]}
