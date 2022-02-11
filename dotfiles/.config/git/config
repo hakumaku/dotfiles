@@ -1,13 +1,13 @@
 [user]
-	email = gentlebuuny@gmail.com
-	name = haku
+    email = gentlebuuny@gmail.com
+    name = haku
 [core]
     editor = nvim
     pager = delta
 [pull]
-	rebase = true
+    rebase = true
 [rebase]
-  autoStash = true
+    autoStash = true
 [commit]
     verbose = true
 [interactive]
@@ -16,18 +16,24 @@
     features = side-by-side line-numbers decorations
     whitespace-error-style = 22 reverse
     inspect-raw-lines = false
+    navigate = true  # use n and N to move between diff sections
 [delta "decorations"]
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
 [merge]
-	tool = fugitive
+    tool = fugitive
+    # git-delta
+    conflictstyle = diff3
 [mergetool "fugitive"]
-	cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
 [alias]
     fzf = !zsh -c 'source $HOME/.zshrc && fzf_commit'
+[diff]
+    # git-delta
+    colorMoved = default
