@@ -34,10 +34,7 @@ require'nvim-tree'.setup {
     enable = false,
     icons = {hint = "", info = "", warning = "", error = ""}
   },
-  filters = {
-    dotfiles = true,
-    custom = {}
-  },
+  filters = {dotfiles = true, custom = {}},
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   update_focused_file = {
     -- enables the feature

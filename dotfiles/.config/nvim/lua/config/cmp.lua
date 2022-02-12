@@ -2,7 +2,11 @@ local lspkind = require('lspkind')
 local cmp = require('cmp')
 
 cmp.setup {
-  snippet = {expand = function(args) vim.fn["UltiSnips#Anon"](args.body) end},
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end
+  },
   mapping = {
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -23,7 +27,7 @@ cmp.setup {
     {name = "buffer", keyword_length = 5}
   },
   formatting = {format = lspkind.cmp_format()},
-  experimental = {native_menu = false, ghost_text = true},
+  experimental = {native_menu = false, ghost_text = true}
 }
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})

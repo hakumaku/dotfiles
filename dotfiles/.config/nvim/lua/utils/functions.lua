@@ -19,7 +19,9 @@ function M.dump(o)
   if type(o) == 'table' then
     local s = '{ '
     for k, v in pairs(o) do
-      if type(k) ~= 'number' then k = '"' .. k .. '"' end
+      if type(k) ~= 'number' then
+        k = '"' .. k .. '"'
+      end
       s = s .. '[' .. k .. '] = ' .. M.dump(v) .. ','
     end
     return s .. '}'
@@ -56,7 +58,9 @@ end
 
 function M.delete_buffer()
   local curbuf = vim.api.nvim_get_current_buf()
-  if not is_valid_buffer(curbuf) then return end
+  if not is_valid_buffer(curbuf) then
+    return
+  end
   local name = vim.fn.expand("%:t")
 
   local buffers = get_valid_buffers()
@@ -87,6 +91,14 @@ function M.grep_prompt()
     path_display = true,
     search = vim.fn.input "Grep String > "
   }
+end
+
+function M.get_project_path()
+  -- TODO:
+end
+
+function M.dap_start()
+  -- TODO:
 end
 
 function M.dap_quit()

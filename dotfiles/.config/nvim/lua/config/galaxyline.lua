@@ -15,7 +15,9 @@ gl.short_line_list = {
 
 gls.left[1] = {
   RainbowRed = {
-    provider = function() return '▊ ' end,
+    provider = function()
+      return '▊ '
+    end,
     highlight = {colors.blue, colors.bg}
   }
 }
@@ -100,7 +102,9 @@ gls.left[5] = {
 
 gls.left[6] = {
   GitIcon = {
-    provider = function() return '  ' end,
+    provider = function()
+      return '  '
+    end,
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'NONE', colors.bg},
@@ -182,7 +186,9 @@ gls.right[1] = {
     provider = 'GetLspClient',
     condition = function()
       local tbl = {['dashboard'] = true, [''] = true}
-      if tbl[vim.bo.filetype] then return false end
+      if tbl[vim.bo.filetype] then
+        return false
+      end
       return true
     end,
     icon = ' LSP:',
@@ -229,7 +235,9 @@ gls.right[5] = {
 
 gls.right[6] = {
   RainbowBlue = {
-    provider = function() return '  ▊' end,
+    provider = function()
+      return '  ▊'
+    end,
     highlight = {colors.blue, colors.bg}
   }
 }

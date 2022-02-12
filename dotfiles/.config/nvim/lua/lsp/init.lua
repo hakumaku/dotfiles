@@ -2,7 +2,9 @@ local lspconfig = require('lspconfig')
 
 -- function(client, bufnr)
 local on_attach = function(_, bufnr)
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   -- vim.lsp.handlers['textDocument/codeAction'] = function(responses)
   --   -- Select the first item

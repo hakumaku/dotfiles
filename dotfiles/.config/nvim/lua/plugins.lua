@@ -37,74 +37,138 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
-    config = function() require("config/tree-sitter") end
+    config = function()
+      require("config/tree-sitter")
+    end
   }
   use {
     'nvim-telescope/telescope.nvim',
-    config = function() require("config/telescope") end
+    config = function()
+      require("config/telescope")
+    end
   }
   use {
     'lewis6991/gitsigns.nvim',
-    config = function() require("config/gitsigns") end
+    config = function()
+      require("config/gitsigns")
+    end
   }
-  use {'sbdchd/neoformat', config = function() require("config/neoformat") end}
+  use {
+    'sbdchd/neoformat',
+    config = function()
+      require("config/neoformat")
+    end
+  }
   use {
     'kyazdani42/nvim-tree.lua',
-    config = function() require("config/nvim-tree") end
+    config = function()
+      require("config/nvim-tree")
+    end
   }
-  use {'liuchengxu/vista.vim', config = function() require("config/vista") end}
+  use {
+    'liuchengxu/vista.vim',
+    config = function()
+      require("config/vista")
+    end
+  }
   use {
     'akinsho/nvim-toggleterm.lua',
-    config = function() require("config/toggleterm") end
+    config = function()
+      require("config/toggleterm")
+    end
   }
   use {
     'numToStr/Comment.nvim',
-    config = function() require("Comment").setup() end
+    config = function()
+      require("Comment").setup()
+    end
   }
 
   -- Completion
-  use {'hrsh7th/nvim-cmp', config = function() require("config/cmp") end}
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      require("config/cmp")
+    end
+  }
   use {'hrsh7th/cmp-buffer'}
   use {'hrsh7th/cmp-cmdline'}
   use {'hrsh7th/cmp-path'}
   use {'hrsh7th/cmp-nvim-lua'}
   use {'hrsh7th/cmp-nvim-lsp'}
-  use {'SirVer/ultisnips', config = function() require("config/ultisnips") end}
+  use {
+    'SirVer/ultisnips',
+    config = function()
+      require("config/ultisnips")
+    end
+  }
   use {'quangnguyen30192/cmp-nvim-ultisnips'}
 
   -- DAP
-  use {'mfussenegger/nvim-dap', config = function() require("config/dap") end}
+  use {
+    'mfussenegger/nvim-dap',
+    config = function()
+      require("config/dap")
+    end
+  }
   use {
     'mfussenegger/nvim-dap-python',
-    config = function() require('dap-python').setup('python3') end
+    config = function()
+      require('dap-python').setup('python3')
+    end
   }
-  use {'rcarriga/nvim-dap-ui', config = function() require('config.dapui') end}
+  use {
+    'rcarriga/nvim-dap-ui',
+    config = function()
+      require('config.dapui')
+    end
+  }
   use {'nvim-telescope/telescope-dap.nvim'}
   -- Look & Feel
   use {'kyazdani42/nvim-web-devicons'}
   use {'folke/lsp-colors.nvim'}
   use {
     'onsails/lspkind-nvim',
-    config = function() require("config/lspkind") end
+    config = function()
+      require("config/lspkind")
+    end
   }
   use {
     'akinsho/nvim-bufferline.lua',
-    config = function() require("config/bufferline") end
+    config = function()
+      require("config/bufferline")
+    end
   }
   use {
     'glepnir/galaxyline.nvim',
     branch = 'main',
-    config = function() require("config/galaxyline") end
+    config = function()
+      require("config/galaxyline")
+    end
   }
   use {
     'monsonjeremy/onedark.nvim',
-    config = function() require("config/onedark") end
+    config = function()
+      require("config/onedark")
+    end
   }
-  use {'mhinz/vim-startify', config = function() require("config/startify") end}
+  use {
+    'mhinz/vim-startify',
+    config = function()
+      require("config/startify")
+    end
+  }
 
   -- Post-install/update hook with call of vimscript function with argument
-  use {'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end}
+  use {
+    'glacambre/firenvim',
+    run = function()
+      vim.fn['firenvim#install'](0)
+    end
+  }
 
-  if is_packer_not_installed then require('packer').sync() end
+  if is_packer_not_installed then
+    require('packer').sync()
+  end
 end)
 
