@@ -1,4 +1,4 @@
-.PHONY: aur cargo fcitx fonts cmake clang fzf icons lazygit \
+.PHONY: list aur cargo fcitx fonts cmake clang fzf icons lazygit \
 	mpv numix nvim neovim steam ranger rofi streamlink tmux \
 	youtube-dl youtube yt xpadneo xbox zsh
 
@@ -61,3 +61,6 @@ xpadneo xbox:
 
 zsh:
 	@./main.sh zsh
+
+list:
+	@LC_ALL=C $(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
