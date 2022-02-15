@@ -104,6 +104,9 @@ return packer.startup(function(use)
   }
   use {'quangnguyen30192/cmp-nvim-ultisnips'}
 
+  -- clangd extension
+  use {'p00f/clangd_extensions.nvim'}
+
   -- DAP
   use {
     'mfussenegger/nvim-dap',

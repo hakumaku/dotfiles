@@ -30,7 +30,8 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
-  ['clangd'] = require('lsp.clangd'),
+  -- clangd-extensions invoke this statement automatically.
+  -- ['clangd'] = require('lsp.clangd'),
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
   ['pylsp'] = require('lsp.pylsp'),
@@ -44,6 +45,7 @@ for lsp, setup in pairs(servers) do
   setup.capabilities = capabilities
   lspconfig[lsp].setup(setup)
 end
+require('lsp.clangd-extensions')
 
 -- https://github.com/neovim/neovim/blob/master/runtime/plugin/diagnostic.vim
 vim.fn.sign_define('DiagnosticSignError', {
