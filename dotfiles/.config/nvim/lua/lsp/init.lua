@@ -33,7 +33,7 @@ local servers = {
   ['clangd'] = require('lsp.clangd'),
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
-  ['pyright'] = require('lsp.pyright'),
+  ['pylsp'] = require('lsp.pylsp'),
   ['sumneko_lua'] = require('lsp.lua')
 }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp

@@ -4,17 +4,26 @@ set -eo pipefail
 
 install_extra_packages() {
   local python_packages=(
-    "autopep8"
-    "black"
+    # mandatory
+    "pynvim"
+
+    # cmake
     "cmake-format"
     "cmake-language-server"
+
+    # python-lsp
+    "autopep8"
+    "black"
     "flake8"
     "isort"
-    "pynvim"
+    "pyls-flake8"
+    "pyls-isort"
+    "pylsp-rope"
+    "python-lsp-black"
+    "pythonpython-lsp-server[all]"
   )
   local npm_packages=(
     "bash-language-server"
-    "pyright"
     "prettier"
   )
   # TODO: gdb, clang, lldb
