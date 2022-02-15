@@ -117,6 +117,9 @@ else
   vim.opt.pumblend = 15
   vim.g.termdebug_wide = 1
 
+  -- python3 on Arch Linux
+  vim.g.python3_host_prog = '/usr/bin/python'
+
   -- Common typos
   vim.cmd([[
 iabbrev sturct struct
