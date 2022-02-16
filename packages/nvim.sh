@@ -20,7 +20,7 @@ install_extra_packages() {
     "pyls-isort"
     "pylsp-rope"
     "python-lsp-black"
-    "pythonpython-lsp-server[all]"
+    "\"python-lsp-server[all]\""
   )
   local npm_packages=(
     "bash-language-server"
