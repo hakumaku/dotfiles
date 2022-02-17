@@ -97,7 +97,7 @@ change_icons() {
         icon="jetbrains-$input"
         search_app application "$input" "jetbrains-$input"
         ;;
-      "clion" | "datagrip")
+      "clion" | "datagrip" | "webstorm")
         icon="$input"
         search_app application "$input" "jetbrains-$input"
         ;;
