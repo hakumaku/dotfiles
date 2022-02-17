@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -euo pipefail
 
 repo="streamlink/streamlink-twitch-gui"
 expr="streamlink-twitch-gui-v.*-x86_64.AppImage"

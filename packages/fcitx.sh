@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -euo pipefail
 
 config_fcitx() {
   if command -v fcitx &>/dev/null; then

@@ -104,7 +104,7 @@ fetch_from_git() {
   repository="${repository/.git/}"
   local expr="$2"
   local dest="$3"
-  local local_version="$4"
+  local local_version="${4:-}"
 
   local link="$url/releases/$(curl -Ls "$url/releases/latest" | grep -wo "download/[v]\?.*/$expr")"
   if [[ ! -z $local_version ]]; then
@@ -135,7 +135,7 @@ do_clone_or_pull() {
   repository="${repository/.git/}"
 
   local dest=${2:-"$PREFIX/$repository"}
-  local submodule="$3"
+  local submodule="${3:-}"
   local args=""
 
   if [[ -z $dest ]]; then
