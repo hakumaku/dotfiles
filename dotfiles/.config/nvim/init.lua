@@ -9,12 +9,9 @@ else
   if vim.g.termguicolors then
     vim.opt.termguicolors = true
   end
-  -- Enable folding
-  -- Soft wrapping text
-  -- vim.opt.cursorline		" Show cursor line
-  -- vim.opt.spell
+
+  vim.opt.cursorline = true
   -- vim.opt.wrap linebreak nolist
-  -- vim.opt.signcolumn=number
 
   -- When a file has been changed outside of Vim, automatically read it againautoread
   vim.opt.autoread = true

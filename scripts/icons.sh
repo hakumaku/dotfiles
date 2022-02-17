@@ -62,6 +62,10 @@ change_icons() {
         icon="atom"
         search_app application "atom"
         ;;
+      "nvidia")
+        icon="nvidia-settings"
+        search_app application "nvidia-settings"
+        ;;
       "gitkraken" | "kraken")
         icon="gitkraken"
         search_app application "gitkraken"
