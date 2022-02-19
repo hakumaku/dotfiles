@@ -90,7 +90,8 @@
     "arch": {
       "packages": [
         "fcitx-hangul",
-        "fcitx-configtool"
+        "fcitx-configtool",
+        "fcitx-qt5"
       ],
       "dependencies": []
     }
