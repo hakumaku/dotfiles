@@ -9,9 +9,11 @@ config.bind(
     "spawn --verbose --detach mpv {url}",
 )
 config.bind(r"\t", "config-cycle tabs.show always never")
+config.bind("<Ctrl-[>", "mode-enter passthrough")
 config.bind(
     "<Ctrl-[>", "mode-leave;; jseval -q document.activeElement.blur()", mode="insert"
 )
+config.bind("<Ctrl-[>", "mode-leave", mode="passthrough")
 
 c.qt.highdpi = True
 c.url.start_pages = ["https://gitlab.com/"]
