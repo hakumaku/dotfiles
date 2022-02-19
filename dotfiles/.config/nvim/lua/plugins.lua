@@ -127,6 +127,15 @@ return packer.startup(function(use)
     end
   }
   use {'nvim-telescope/telescope-dap.nvim'}
+
+  -- js/css
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('config.nvim-colorizer')
+    end
+  }
+
   -- Look & Feel
   use {'kyazdani42/nvim-web-devicons'}
   use {'folke/lsp-colors.nvim'}

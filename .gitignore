@@ -16,4 +16,8 @@ vlc-qt-interface.conf
 **/ranger/rifle.conf
 **/ranger/scope.sh
 
+**/qutebrowser/*
+!**/qutebrowser/themes
+!**/qutebrowser/config.py
+
 **/zsh/.zcompdump
