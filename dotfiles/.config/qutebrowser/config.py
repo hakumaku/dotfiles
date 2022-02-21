@@ -9,7 +9,7 @@ config.bind(
     "spawn --verbose --detach mpv {url}",
 )
 config.bind(r"\t", "config-cycle tabs.show always never")
-config.bind("<Ctrl-[>", "mode-enter passthrough")
+config.bind("<Ctrl-[>", "mode-enter passthrough", mode="normal")
 config.bind(
     "<Ctrl-[>", "mode-leave;; jseval -q document.activeElement.blur()", mode="insert"
 )
@@ -20,9 +20,11 @@ c.url.start_pages = ["https://gitlab.com/"]
 c.url.searchengines = {
     "DEFAULT": "https://google.com/search?hl=en&q={}",
 }
+c.content.autoplay = False
 c.content.blocking.enabled = True
 c.content.blocking.method = "both"
 c.scrolling.smooth = True
+c.colors.webpage.preferred_color_scheme = "dark"
 
 # When to show the statusbar.
 # Type: String
