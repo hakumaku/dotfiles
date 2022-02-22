@@ -17,6 +17,7 @@ vlc-qt-interface.conf
 **/ranger/scope.sh
 
 **/qutebrowser/*
+!**/qutebrowser/greasemonkey
 !**/qutebrowser/themes
 !**/qutebrowser/config.py
 
