@@ -1,3 +1,4 @@
+local keymap = "<C-w>f"
 require("toggleterm").setup({
   -- size can be a number or function which is passed the current terminal
   size = 30,
@@ -8,7 +9,7 @@ require("toggleterm").setup({
   --     return 40
   --   end
   -- end,
-  open_mapping = [[<C-w>f]],
+  open_mapping = keymap,
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
   shade_terminals = true,
@@ -32,3 +33,5 @@ require("toggleterm").setup({
     highlights = {border = "Normal", background = "Normal"}
   }
 })
+
+vim.api.nvim_del_keymap("i", keymap)

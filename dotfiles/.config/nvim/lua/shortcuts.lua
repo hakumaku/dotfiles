@@ -47,7 +47,7 @@ nnoremap("k", "(v:count > 5 ? \"m'\".v:count : \"\").'k'", {expr = true})
 nnoremap("j", "(v:count > 5 ? \"m'\".v:count : \"\").'j'", {expr = true})
 
 inoremap("<C-u>", "<C-g>u<C-u>")
-inoremap("<C-w> ", "<C-g>u<C-w>")
+inoremap("<C-w>", "<C-g>u<C-w>")
 
 -- cmdline-editing
 cnoremap("<C-a>", "<Home>")
