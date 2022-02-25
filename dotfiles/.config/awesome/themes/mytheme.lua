@@ -11,24 +11,48 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Ubuntu Mono 14"
+-- Onedark color palatte
+-- #282C34
+-- #E06C75
+-- #98C379
+-- #E5C07B
+-- #61AFEF
+-- #C678DD
+-- #56B6C2
+-- #ABB2BF
+theme.font          = "Ubuntu Mono 12"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = "#282C34"
+theme.bg_focus      = "#ABB2BF"
+theme.bg_urgent     = "#E06C75"
+theme.bg_minimize   = "#ABB2BF"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal     = "#ABB2BF"
+theme.fg_focus      = "#ABB2BF"
+theme.fg_urgent     = "#ABB2BF"
+theme.fg_minimize   = "#ABB2BF"
 
 theme.useless_gap   = dpi(5)
-theme.border_width  = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_width  = dpi(2)
+theme.border_normal = "#282C34"
+theme.border_focus  = "#61AFEF"
+theme.border_marked = "#C678DD"
+
+-- Generate taglist squares:
+local taglist_square_size = dpi(4)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+    taglist_square_size, theme.fg_normal
+)
+theme.taglist_fg_focus    = "#61AFEF"
+theme.taglist_fg_occupied = "#C678DD"
+theme.taglist_fg_urgent   = "#E06C75"
+theme.taglist_fg_empty    = "#ABB2BF"
+theme.taglist_spacing     = 2
+theme.taglist_font = "awesomewm-font 13"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -42,21 +66,6 @@ theme.border_marked = "#91231c"
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
-
--- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_fg_focus    = "#3992af"
-theme.taglist_fg_occupied = "#164b5d"
-theme.taglist_fg_urgent   = "#ED7572"
-theme.taglist_fg_empty    = "#828282"
-theme.taglist_spacing     = 2
-theme.taglist_font = "awesomewm-font 13"
 
 -- Variables set for theming notifications:
 -- notification_font

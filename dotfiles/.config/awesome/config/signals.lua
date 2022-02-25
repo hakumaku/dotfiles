@@ -2,22 +2,33 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local wibox = require("wibox")
-
--- Show title bar only if floating.
--- client.connect_signal("property::floating", function(c)
---     if c.floating then
---         awful.titlebar.show(c)
---     else
---         awful.titlebar.hide(c)
---     end
--- end)
+-- local menubar = require("menubar")
 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
+    -- local icon = menubar.utils.lookup_icon(c.instance)
+    -- local lower_icon = menubar.utils.lookup_icon(c.instance:lower())
+
+    -- -- Check if the icon exists
+    -- if icon ~= nil then
+    --     local new_icon = gears.surface(icon)
+    --     c.icon = new_icon._native
+
+    --     -- Check if the icon exists in the lowercase variety
+    -- elseif lower_icon ~= nil then
+    --     local new_icon = gears.surface(lower_icon)
+    --     c.icon = new_icon._native
+
+    --     -- Check if the client already has an icon. If not, give it a default.
+    -- elseif c.icon == nil then
+    --     local new_icon = gears.surface(menubar.utils.lookup_icon(
+    --                                        "application-default-icon"))
+    --     c.icon = new_icon._native
+    -- end
+
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
     if awesome.startup and not c.size_hints.user_position and
         not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
@@ -67,7 +78,9 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus",
-                      function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus",
-                      function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+end)
+client.connect_signal("unfocus", function(c)
+    c.border_color = beautiful.border_normal
+end)

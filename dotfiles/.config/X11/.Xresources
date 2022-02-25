@@ -1,3 +1,8 @@
+# using integer multiples of 96 usually works best
+# 96, 144, 192
+Xft.dpi: 192
+
 Sxiv.background: #000000
 Sxiv.foreground: #E95420
-! Xft.dpi: 192
+Nsxiv.window.background: #000000
+Nsxiv.window.foreground: #E95420

@@ -18,10 +18,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Load Debian menu entries
-local debian = require("debian.menu")
-local has_fdo, freedesktop = pcall(require, "freedesktop")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -73,20 +69,6 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.spiral,
     awful.layout.suit.floating
-    -- awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.corner.nw
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -105,21 +87,6 @@ myawesomemenu = {
 
 local menu_awesome = {"awesome", myawesomemenu, beautiful.awesome_icon}
 local menu_terminal = {"open terminal", terminal}
-
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = {menu_awesome},
-        after = {menu_terminal}
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-            menu_awesome,
-            {"Debian", debian.menu.Debian_menu.Debian},
-            menu_terminal
-        }
-    })
-end
 
 mylauncher = awful.widget.launcher({
     image = beautiful.awesome_icon,
