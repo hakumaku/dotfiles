@@ -6,6 +6,7 @@ repo="davatorium/rofi"
 expr="rofi-.*\.tar\.gz"
 
 fetch_from_git_rofi() {
+  # TODO: version check
   local tmpdir=$(dirname $(mktemp -u))
   if ! command -v rofi &>/dev/null; then
     install_dependencies rofi
