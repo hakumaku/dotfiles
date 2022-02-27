@@ -5,7 +5,7 @@ if vim.g.vscode then
 elseif vim.g.started_by_firenvim then
 else
   vim.opt.syntax = "on"
-  -- vim.opt.spell = true
+  vim.opt.spell = true
   if vim.g.termguicolors then
     vim.opt.termguicolors = true
   end

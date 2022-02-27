@@ -139,18 +139,6 @@ ins_left {
   padding = {right = 1}
 }
 
-ins_left {
-  -- filesize component
-  'filesize',
-  cond = conditions.buffer_not_empty
-}
-
-ins_left {
-  'filename',
-  cond = conditions.buffer_not_empty,
-  color = {fg = colors.magenta, gui = 'bold'}
-}
-
 ins_left {'branch', icon = '', color = {fg = colors.violet, gui = 'bold'}}
 
 ins_left {
@@ -163,6 +151,12 @@ ins_left {
     removed = {fg = colors.red}
   },
   cond = conditions.hide_in_width
+}
+
+ins_left {
+  'filename',
+  cond = conditions.buffer_not_empty,
+  color = {fg = colors.magenta, gui = 'bold'}
 }
 
 ins_left {
@@ -185,6 +179,17 @@ ins_left {
 }
 
 -- Add components to right sections
+ins_right {
+  function()
+    return "chars: " .. tostring(vim.fn.wordcount().visual_chars)
+  end,
+  cond = function()
+    local mode = vim.fn.mode()
+    return mode == 'v' or mode == '' or mode == 'V'
+  end,
+  color = {fg = colors.blue}
+}
+
 ins_right {
   -- Lsp server name .
   function()
@@ -210,17 +215,12 @@ ins_right {'location'}
 
 ins_right {'progress', color = {fg = colors.fg, gui = 'bold'}}
 
+ins_right {'filesize', cond = conditions.buffer_not_empty}
+
 ins_right {
   'o:encoding', -- option component same as &encoding in viml
   fmt = string.upper, -- I'm not sure why it's upper case either ;)
   cond = conditions.hide_in_width,
-  color = {fg = colors.green, gui = 'bold'}
-}
-
-ins_right {
-  'fileformat',
-  fmt = string.upper,
-  icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
   color = {fg = colors.green, gui = 'bold'}
 }
 
