@@ -148,15 +148,19 @@ nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 -- nvim-toggleterm.lua
-LazyGit = {}
-function LazyGit:toggle()
+ToggleTerm = {}
+
+---@param cmd string
+function ToggleTerm:toggle(cmd)
   if not self.__term then
     local Terminal = require('toggleterm.terminal').Terminal
-    self.__term = Terminal:new({cmd = "lazygit", hidden = true})
+    self.__term = Terminal:new({cmd = cmd, hidden = true})
   end
   self.__term:toggle()
 end
-nnoremap("<leader>gg", ":lua LazyGit:toggle()<CR>")
+nnoremap("<leader>gg", ":lua ToggleTerm:toggle('lazygit')<CR>")
+nnoremap("<leader>c", ":lua ToggleTerm:toggle('lazydocker')<CR>")
+nnoremap("<leader>v", ":lua ToggleTerm:toggle('btm')<CR>")
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")

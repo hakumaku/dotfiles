@@ -1,4 +1,5 @@
-.PHONY: list aur cargo fcitx fonts cmake clang fzf icons lazygit \
+.PHONY: list aur cargo fcitx fonts cmake clang fzf icons \
+	lazygit lazydocker \
 	mpv numix nvim neovim steam ranger rofi streamlink tmux \
 	youtube-dl youtube yt xpadneo xbox zsh
 
@@ -25,6 +26,9 @@ fzf:
 
 icons:
 	@./main.sh icons
+
+lazydocker:
+	@./main.sh lazydocker
 
 lazygit:
 	@./main.sh lazygit

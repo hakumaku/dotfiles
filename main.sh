@@ -62,6 +62,9 @@ main() {
         # TODO
         exec ./packages/icons.sh "$@"
         ;;
+      "lazydocker")
+        exec ./packages/lazydocker.sh
+        ;;
       "lazygit")
         exec ./packages/lazygit.sh
         ;;
