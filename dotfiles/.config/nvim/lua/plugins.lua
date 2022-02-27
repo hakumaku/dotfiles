@@ -152,10 +152,10 @@ return packer.startup(function(use)
     end
   }
   use {
-    'glepnir/galaxyline.nvim',
-    branch = 'main',
+    'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      require("config/galaxyline")
+      require("config/lualine")
     end
   }
   use {
