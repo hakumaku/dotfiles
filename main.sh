@@ -68,6 +68,9 @@ main() {
       "lazygit")
         exec ./packages/lazygit.sh
         ;;
+      "lua")
+        exec ./packages/lua.sh
+        ;;
       "mpv")
         exec ./packages/mpv.sh
         ;;

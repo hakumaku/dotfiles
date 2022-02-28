@@ -38,19 +38,6 @@ install_extra_packages() {
   fi
 }
 
-clone_or_pull_sumneko_lua() {
-  local dest="$HOME/.cache/nvim/lspconfig/sumneko_lua/lua-language-server"
-  clone_or_pull "sumneko/lua-language-server" "$dest" true
-  local cwd="$PWD"
-  msg info "./compile/install.sh"
-  cd $cwd/3rd/luamake
-  ./compile/install.sh >/dev/null 2>&1
-  cd $cwd
-  msg info "./3rd/luamake/luamake"
-  ./3rd/luamake/luamake rebuild >/dev/null 2>&1
-  clone_or_pull_done
-}
-
 clone_or_pull_lua_formatter() {
   clone_or_pull "Koihik/LuaFormatter.git" "" true
   local cwd="$PWD"
@@ -61,29 +48,6 @@ clone_or_pull_lua_formatter() {
   msg info "cmake --install"
   sudo cmake --install "$cwd/build" >/dev/null 2>&1
   clone_or_pull_done
-}
-
-fetch_from_git_shfmt() {
-  local tmpdir=$(dirname $(mktemp -u))
-  if command -v shfmt &>/dev/null; then
-    local local_version=$(shfmt --version)
-    fetch_from_git "mvdan/sh" \
-      "shfmt_v.*_linux_amd64" \
-      $tmpdir \
-      $local_version
-  else
-    fetch_from_git "mvdan/sh" \
-      "shfmt_v.*_linux_amd64" \
-      $tmpdir
-  fi
-
-  local output="$(compgen -G $tmpdir/shfmt_*)"
-  if [[ -f $output ]]; then
-    local dir="$HOME/.local/bin"
-    msg info "copying binary file to $dir"
-    mv $output $dir/shfmt
-    chmod +x $dir/shfmt
-  fi
 }
 
 clone_or_pull_nvim() {
@@ -109,7 +73,5 @@ clone_or_pull_nvim() {
 }
 
 install_extra_packages
-fetch_from_git_shfmt
-clone_or_pull_sumneko_lua
 clone_or_pull_lua_formatter
 clone_or_pull_nvim

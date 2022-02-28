@@ -1,5 +1,5 @@
 .PHONY: list aur cargo fcitx fonts cmake clang fzf icons \
-	lazygit lazydocker \
+	lazygit lazydocker lua \
 	mpv numix nvim neovim steam ranger rofi streamlink tmux \
 	youtube-dl youtube yt xpadneo xbox zsh
 
@@ -32,6 +32,9 @@ lazydocker:
 
 lazygit:
 	@./main.sh lazygit
+
+lua:
+	@./main.sh lua
 
 mpv:
 	@./main.sh mpv
