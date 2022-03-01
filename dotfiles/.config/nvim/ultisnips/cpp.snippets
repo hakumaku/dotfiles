@@ -120,7 +120,7 @@ for (const auto& ${1:item} : ${2:col}) {
 }
 endsnippet
 
-snippet "(\w+).fore" "for (auto ... : ...)" r
+snippet "([.\w]+).fore" "for (auto ... : ...)" r
 for (const auto& ${1:item} : `!p snip.rv = match.group(1)`) {
   ${2}
 }
@@ -225,79 +225,79 @@ snippet strv "std::string_view ..." i
 std::string_view ${1}{"${2}"}
 endsnippet
 
-snippet "(\w+).sca" "static_cast<...>(...)" r
+snippet "([.\w]+).sca" "static_cast<...>(...)" r
 static_cast<$1>(`!p snip.rv = match.group(1)`)$2
 endsnippet
 
-snippet "(\w+).dca" "dynamic_cast<...>(...)" r
+snippet "([.\w]+).dca" "dynamic_cast<...>(...)" r
 dynamic_cast<$1>(`!p snip.rv = match.group(1)`)$2
 endsnippet
+snippet "([.\w]+).rca" "reinterpret_cast<...>(...)" r
 
-snippet "(\w+).rca" "reinterpret_cast<...>(...)" r
 reinterpret_cast<$1>(`!p snip.rv = match.group(1)`)$2
 endsnippet
 
-snippet "(\w+).cca" "const_cast<...>(...)" r
+snippet "([.\w]+).cca" "const_cast<...>(...)" r
 const_cast<$1>(`!p snip.rv = match.group(1)`)$2
 endsnippet
 
-snippet "(\w+).vec" "std::vector<...>" r
+snippet "([.\w]+).vec" "std::vector<...>" r
 std::vector<`!p snip.rv = match.group(1)`>$1
 endsnippet
 
-snippet "(\w+).arr" "std::array<..., ...>" r
+snippet "([.\w]+).arr" "std::array<..., ...>" r
 std::array<`!p snip.rv = match.group(1)`, $1>
 endsnippet
 
-snippet "(\w+).umap" "std::unordered_map<..., ...>" r
+snippet "([.\w]+).umap" "std::unordered_map<..., ...>" r
 std::unordered_map<`!p snip.rv = match.group(1)`, ${1}>$2
 endsnippet
 
-snippet "(\w+).map" "std::map<..., ...> ..." r
+snippet "([.\w]+).map" "std::map<..., ...> ..." r
 std::map<`!p snip.rv = match.group(1)`, ${1}>$2
 endsnippet
 
-snippet "(\w+).uset" "std::unordered_set<...> ..." r
+snippet "([.\w]+).uset" "std::unordered_set<...> ..." r
 std::unordered_set<`!p snip.rv = match.group(1)`>$1
 endsnippet
 
-snippet "(\w+).set" "std::set<...> ..." r
+snippet "([.\w]+).set" "std::set<...> ..." r
 std::set<`!p snip.rv = match.group(1)`>$1
 endsnippet
 
-snippet "(\w+).beg" "std::begin(...)" r
+snippet "([.\w]+).beg" "std::begin(...)" r
 std::begin(`!p snip.rv = match.group(1)`)$1
 endsnippet
 
-snippet "(\w+).end" "std::end(...)" r
+snippet "([.\w]+).end" "std::end(...)" r
 std::end(`!p snip.rv = match.group(1)`)$1
 endsnippet
 
-snippet "(\w+).range" "std::begin(...), std::end(...)" r
+snippet "([.\w]+).range" "std::begin(...), std::end(...)" r
 std::begin(`!p snip.rv = match.group(1)`), std::end(`!p snip.rv = match.group(1)`)$1
 endsnippet
 
-snippet "(\w+).up" "std::unique_ptr<...>" r
+snippet "([.\w]+).up" "std::unique_ptr<...>" r
 std::unique_ptr<`!p snip.rv = match.group(1)`>$1
 endsnippet
 
-snippet "(\w+).mup" "std::make_unique<...>(...)" r
+snippet "([.\w]+).mup" "std::make_unique<...>(...)" r
 std::make_unique<`!p snip.rv = match.group(1)`>($1)
 endsnippet
 
-snippet "(\w+).sp" "std::shared_ptr<...>" r
+snippet "([.\w]+).sp" "std::shared_ptr<...>" r
 std::shared_ptr<`!p snip.rv = match.group(1)`>$1
 endsnippet
 
-snippet "(\w+).msp" "std::make_shared<...>(...)" r
+snippet "([.\w]+).msp" "std::make_shared<...>(...)" r
 std::make_shared<`!p snip.rv = match.group(1)`>($1)
 endsnippet
 
-snippet "(\w+).fw" "std::forward<...>(...)" r
+snippet "([.\w]+).fw" "std::forward<...>(...)" r
 std::forward<`!p snip.rv = match.group(1)`>($1)
 endsnippet
 
-snippet "(\w+).mv" "std::move(...)" r
+snippet "([.\w]+).mv" "std::move(...)" r
 std::move(`!p snip.rv = match.group(1)`)$1
 endsnippet
 

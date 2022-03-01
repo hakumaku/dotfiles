@@ -37,6 +37,8 @@ config_ranger() {
   if [[ -f "$config" ]]; then
     sed -in 's/flag f = sxiv/& -abfsh/' $config
   fi
+
+  # TODO: deploy rifle files
 }
 
 clone_or_pull_ranger() {
