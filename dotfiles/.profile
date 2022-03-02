@@ -18,5 +18,11 @@ set_env_if_not_set DESKTOP_SESSION "gnome"
 set_env_if_not_set XDG_CURRENT_DESKTOP "GNOME" 
 set_env_if_not_set GTK_THEME "Adwaita:dark" 
 
+resolution=$(xrandr --query | grep " connected" | awk '{print $4}')
+if [[ "$resolution" == "3840x2160"* ]]; then
+  export GDK_SCALE=2.0
+  export GDK_DPI_SCALE=0.5
+fi
+
 # dotfiles
 [[ -d $HOME/.config/X11 ]] && xrdb -merge $HOME/.config/X11/.Xresources

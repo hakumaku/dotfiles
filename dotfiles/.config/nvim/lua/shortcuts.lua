@@ -148,15 +148,15 @@ nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 
 -- nvim-toggleterm.lua
-ToggleTerm = {}
+ToggleTerm = {__term = {}}
 
 ---@param cmd string
 function ToggleTerm:toggle(cmd)
-  if not self.__term then
+  if not self.__term[cmd] then
     local Terminal = require('toggleterm.terminal').Terminal
-    self.__term = Terminal:new({cmd = cmd, hidden = true})
+    self.__term[cmd] = Terminal:new({cmd = cmd, hidden = true})
   end
-  self.__term:toggle()
+  self.__term[cmd]:toggle()
 end
 nnoremap("<leader>gg", ":lua ToggleTerm:toggle('lazygit')<CR>")
 nnoremap("<leader>c", ":lua ToggleTerm:toggle('lazydocker')<CR>")
