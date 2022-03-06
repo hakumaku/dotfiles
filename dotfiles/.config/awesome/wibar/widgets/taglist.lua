@@ -85,20 +85,28 @@ function M.create(s)
     return awful.widget.taglist {
         screen = s,
         filter = awful.widget.taglist.filter.all,
-        buttons = gears.table.join(taglist_buttons),
+        buttons = gears.table.join(table.unpack(taglist_buttons)),
         layout = {layout = wibox.layout.fixed.horizontal},
         widget_template = {
             {
                 {
-                    {id = 'text_role', widget = wibox.widget.textbox},
-                    {id = 'icon_role', widget = wibox.widget.imagebox},
+                    {
+                        {id = 'text_role', widget = wibox.widget.textbox},
+                        -- text margins should be larger than that of icon.
+                        -- TODO: these two values could be calculated from the height of wibar.
+                        margins = 12,
+                        widget = wibox.container.margin
+                    },
+                    {
+                        {id = 'icon_role', widget = wibox.widget.imagebox},
+                        -- adjust margins to resize icon.
+                        margins = 8,
+                        widget = wibox.container.margin
+                    },
                     layout = wibox.layout.stack
                 },
-                left = 10,
-                right = 10,
-                -- adjust top/bottom fields to control the size fo icon
-                top = 8,
-                bottom = 8,
+                left = 1,
+                right = 1,
                 widget = wibox.container.margin
             },
             id = 'background_role',
