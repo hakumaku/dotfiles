@@ -38,43 +38,43 @@ return packer.startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ":TSUpdate",
     config = function()
-      require("config/tree-sitter")
+      require("config.tree-sitter")
     end
   }
   use {
     'nvim-telescope/telescope.nvim',
     config = function()
-      require("config/telescope")
+      require("config.telescope")
     end
   }
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require("config/gitsigns")
+      require("config.gitsigns")
     end
   }
   use {
     'sbdchd/neoformat',
     config = function()
-      require("config/neoformat")
+      require("config.neoformat")
     end
   }
   use {
     'kyazdani42/nvim-tree.lua',
     config = function()
-      require("config/nvim-tree")
+      require("config.nvim-tree")
     end
   }
   use {
     'liuchengxu/vista.vim',
     config = function()
-      require("config/vista")
+      require("config.vista")
     end
   }
   use {
     'akinsho/nvim-toggleterm.lua',
     config = function()
-      require("config/toggleterm")
+      require("config.toggleterm")
     end
   }
   use {
@@ -88,7 +88,7 @@ return packer.startup(function(use)
   use {
     'hrsh7th/nvim-cmp',
     config = function()
-      require("config/cmp")
+      require("config.cmp")
     end
   }
   use {'hrsh7th/cmp-buffer'}
@@ -96,10 +96,20 @@ return packer.startup(function(use)
   use {'hrsh7th/cmp-path'}
   use {'hrsh7th/cmp-nvim-lua'}
   use {'hrsh7th/cmp-nvim-lsp'}
+  --- luasnip
+  -- use {'saadparwaiz1/cmp_luasnip'}
+  -- use {
+  --   'L3MON4D3/LuaSnip',
+  --   after = 'nvim-cmp',
+  --   config = function()
+  --     require('config.luasnip')
+  --   end
+  -- }
+  ---
   use {
     'SirVer/ultisnips',
     config = function()
-      require("config/ultisnips")
+      require("config.ultisnips")
     end
   }
   use {'quangnguyen30192/cmp-nvim-ultisnips'}
@@ -111,7 +121,7 @@ return packer.startup(function(use)
   use {
     'mfussenegger/nvim-dap',
     config = function()
-      require("config/dap")
+      require("config.dap")
     end
   }
   use {
@@ -142,32 +152,32 @@ return packer.startup(function(use)
   use {
     'onsails/lspkind-nvim',
     config = function()
-      require("config/lspkind")
+      require("config.lspkind")
     end
   }
   use {
     'akinsho/nvim-bufferline.lua',
     config = function()
-      require("config/bufferline")
+      require("config.bufferline")
     end
   }
   use {
     'nvim-lualine/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      require("config/lualine")
+      require("config.lualine")
     end
   }
   use {
     'monsonjeremy/onedark.nvim',
     config = function()
-      require("config/onedark")
+      require("config.onedark")
     end
   }
   use {
     'mhinz/vim-startify',
     config = function()
-      require("config/startify")
+      require("config.startify")
     end
   }
 

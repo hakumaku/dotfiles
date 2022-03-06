@@ -1,6 +1,8 @@
 packer_compiled.lua
 vlc-qt-interface.conf
 
+**/awesome/awesome-wm-widgets
+
 **/lazygit/*
 !**/lazygit/config.yml
 

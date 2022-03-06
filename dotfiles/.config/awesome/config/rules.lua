@@ -1,7 +1,6 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
-local clientkeys = require("binding.clientkeys").get()
-local clientbuttons = require("buttons.clientbuttosn").get()
+local keys = require("config.keys")
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -13,8 +12,8 @@ awful.rules.rules = {
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
             raise = true,
-            keys = clientkeys,
-            buttons = clientbuttons,
+            keys = keys.clientkeys,
+            buttons = keys.clientbuttons,
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap +
                 awful.placement.no_offscreen
@@ -66,6 +65,21 @@ awful.rules.rules = {
             ontop = false,
             focusable = false,
             below = true
+        }
+    }, -- Jetbrains
+    {
+        rule = {
+            class = "jetbrains-.*",
+            instance = "sun-awt-X11-XWindowPeer",
+            name = "win.*"
+        },
+        properties = {
+            floating = true,
+            focus = true,
+            focusable = false,
+            ontop = true,
+            placement = awful.placement.restore,
+            buttons = {}
         }
     }
 
