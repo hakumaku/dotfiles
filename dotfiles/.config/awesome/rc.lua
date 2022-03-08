@@ -87,3 +87,11 @@ end
 
 awful.screen.set_auto_dpi_enabled(true)
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+-- Run garbage collector regularly to prevent memory leaks
+gears.timer {
+    timeout = 300,
+    autostart = true,
+    callback = function()
+        collectgarbage()
+    end
+}

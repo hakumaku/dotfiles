@@ -29,7 +29,7 @@ local function left_widget(s, wibar_height)
     return {
         layout = wibox.layout.fixed.horizontal,
         mylauncher.create(),
-        taglist.create(s),
+        s.taglist,
         mypromptbox.create()
     }
 end
@@ -55,14 +55,14 @@ local function right_widget(s, wibar_height)
         layout = wibox.layout.fixed.horizontal,
         expand = true,
         wibox.widget.systray(),
-        volume({bar_height = wibar_height}),
-        volume_widget({
-            step = 5,
-            width = 100,
-            margins = 15,
-            widget_type = "horizontal_bar",
-            with_icon = true
-        }),
+        -- volume({bar_height = wibar_height}),
+        -- volume_widget({
+        --     step = 5,
+        --     width = 100,
+        --     margins = 15,
+        --     widget_type = "horizontal_bar",
+        --     with_icon = true
+        -- }),
         mylayoutbox.create(s)
     }
 end
@@ -71,10 +71,15 @@ end
 ---@param height integer
 ---@return awful.wibar
 function M.create(s)
-    wallpaper.set(s)
+    -- wallpaper has memory leak?
+    -- wallpaper.set(s)
 
     local height = get_height()
     local wibar = awful.wibar({height = height, position = "top", screen = s})
+
+    -- TODO: hmm...
+    s.taglist = taglist.create(s)
+
     wibar:setup({
         layout = wibox.layout.align.horizontal,
         left_widget(s, height),

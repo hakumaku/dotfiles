@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-# bspc monitor HDMI-1   -d "1" "2" "3" "4" "5" "6" "7"
-bspc monitor HDMI-1-1 -d "1" "2" "3" "4" "5" "6" "7"
-# bspc monitor eDP-1    -d "1" "2" "3" "4" "5" "6" "7"
-bspc monitor eDP-1-1  -d "1" "2" "3" "4" "5" "6" "7"
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d "1" "2" "3" "4" "5" "6" "7"
 
 bspc config border_width			  2
 bspc config normal_border_color       "#484848"
@@ -68,3 +67,4 @@ bspc subscribe desktop_focus | while read -a msg ; do
 	bspc node -f north
 done &
 
+$XDG_CONFIG_HOME/bspwm/autostart.sh &!
