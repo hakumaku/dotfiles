@@ -3,7 +3,7 @@ local beautiful = require("beautiful")
 local keys = require("config.keys")
 
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
+local rules = {
     -- All clients will match this rule.
     {
         rule = {},
@@ -87,3 +87,7 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 }
+
+local M = {rules = rules}
+
+return M

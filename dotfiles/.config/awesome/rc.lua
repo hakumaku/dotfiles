@@ -14,10 +14,6 @@ local naughty = require("naughty")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
-local keys = require("config.keys")
-local mywibar = require("wibar.wibar")
-local mymainmenu = require("wibar.widgets.mymainmenu")
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -49,35 +45,34 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init(string.format("%s/.config/awesome/themes/%s", os.getenv("HOME"),
-                             "mytheme.lua"))
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {awful.layout.suit.spiral, awful.layout.suit.floating}
--- }}}
+-- ##################
+-- Customized configs
+-- ##################
 
--- {{{ Wibar
+-- Set basic configs
+local keys = require("config.keys")
+local mywibar = require("wibar.wibar")
+local mymainmenu = require("wibar.widgets.mymainmenu")
+
+beautiful.init(string.format("%s/awesome/themes/%s",
+                             os.getenv("XDG_CONFIG_HOME"), "mytheme.lua"))
+awful.rules.rules = require("config.rules").rules
+awful.layout.layouts = {awful.layout.suit.spiral, awful.layout.suit.floating}
+-- TODO: manage shortcuts
+root.buttons(gears.table.join(awful.button({}, 3, function()
+    mymainmenu.create():toggle()
+end)))
+root.keys(keys.globalkeys)
+
+-- Draw wibar on each screen
 awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibar = mywibar.create(s)
 end)
--- }}}
-
--- {{{ Mouse bindings
-root.buttons(gears.table.join(awful.button({}, 3, function()
-    mymainmenu.create():toggle()
-end), awful.button({}, 4, awful.tag.viewnext),
-                              awful.button({}, 5, awful.tag.viewprev)))
--- }}}
-
--- TODO: manage shortcuts
-root.keys(keys.globalkeys)
-require("config.rules")
 
 -- Set signals
 local signals = require("wibar.signals")
+
 for event, callback in pairs(signals.client) do
     client.connect_signal(event, callback)
 end
@@ -85,6 +80,7 @@ for event, callback in pairs(signals.screen) do
     screen.connect_signal(event, callback)
 end
 
+-- Miscellaneous settings
 awful.screen.set_auto_dpi_enabled(true)
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 -- Run garbage collector regularly to prevent memory leaks
