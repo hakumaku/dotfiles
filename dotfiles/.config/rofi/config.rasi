@@ -3,7 +3,7 @@ configuration {
 	width: 50;
 	lines: 10;
 	columns: 1;
-	font: "UbuntuMono Nerd Font bold 34";
+	font: "MesloLGS NF 28";
 	bw: 1;
 	location: 0;
 	padding: 5;
@@ -136,5 +136,5 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 }
 @import "~/.config/rofi/theme_config.rasi"
-@theme "~/.config/rofi/theme.rasi"
+@theme "~/.config/rofi/theme2.rasi"
 /* vim:ft=css
