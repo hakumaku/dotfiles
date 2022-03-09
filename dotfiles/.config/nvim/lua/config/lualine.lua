@@ -7,16 +7,16 @@ local lualine = require('lualine')
 -- stylua: ignore
 local colors = {
   bg = '#202328',
-  fg = '#bbc2cf',
+  fg = '#ABB2BF',
   yellow = '#ECBE7B',
-  cyan = '#008080',
+  cyan = '#56B6C2',
   darkblue = '#081633',
-  green = '#98be65',
-  orange = '#FF8800',
+  green = '#98C379',
+  orange = '#D19A66',
   violet = '#a9a1e1',
-  magenta = '#c678dd',
-  blue = '#51afef',
-  red = '#ec5f67'
+  magenta = '#C678DD',
+  blue = '#61AFEF',
+  red = '#E06C75'
 }
 
 local conditions = {
@@ -139,7 +139,7 @@ ins_left {
   padding = {right = 1}
 }
 
-ins_left {'branch', icon = '', color = {fg = colors.violet, gui = 'bold'}}
+ins_left {'branch', icon = '', color = {fg = colors.blue, gui = 'bold'}}
 
 ins_left {
   'diff',
@@ -156,7 +156,7 @@ ins_left {
 ins_left {
   'filename',
   cond = conditions.buffer_not_empty,
-  color = {fg = colors.magenta, gui = 'bold'}
+  color = {fg = colors.fg, gui = 'bold'}
 }
 
 ins_left {
@@ -207,8 +207,8 @@ ins_right {
     end
     return msg
   end,
-  icon = ' LSP:',
-  color = {gui = 'bold'}
+  icon = '',
+  color = {fg = colors.magenta, gui = 'bold'}
 }
 
 ins_right {'location'}
