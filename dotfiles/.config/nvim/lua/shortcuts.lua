@@ -146,6 +146,7 @@ nnoremap("<C-w>T", ":TroubleToggle<CR>")
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
+nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 
 -- nvim-toggleterm.lua
 ToggleTerm = {__term = {}}
