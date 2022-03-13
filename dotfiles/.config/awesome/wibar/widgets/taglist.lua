@@ -49,7 +49,16 @@ local function do_set_icon(c)
     end
 end
 
-local taglist_names = {"A", "W", "E", "S", "O", "M", "E"}
+local taglist_names = {
+    "\u{2160}",
+    "\u{2161}",
+    "\u{2162}",
+    "\u{2163}",
+    "\u{2164}",
+    "\u{2165}",
+    "\u{2166}",
+    "\u{2167}"
+}
 local taglist_buttons = {
     awful.button({}, 1, function(t)
         t:view_only()
@@ -94,7 +103,8 @@ function M.create(s)
                         {id = 'text_role', widget = wibox.widget.textbox},
                         -- text margins should be larger than that of icon.
                         -- TODO: these two values could be calculated from the height of wibar.
-                        margins = 12,
+                        left = 18,
+                        right = 18,
                         widget = wibox.container.margin
                     },
                     {

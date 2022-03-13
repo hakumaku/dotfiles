@@ -48,7 +48,7 @@ theme.taglist_fg_occupied = "#C678DD"
 theme.taglist_fg_urgent   = "#E06C75"
 theme.taglist_fg_empty    = "#ABB2BF"
 theme.taglist_spacing     = 2
-theme.taglist_font = "awesomewm-font 13"
+theme.taglist_font = "MesloLGS Nerd Font Mono 13"
 
 -- There are other variable sets
 -- overriding the default one when
