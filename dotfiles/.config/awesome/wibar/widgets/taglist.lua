@@ -103,8 +103,8 @@ function M.create(s)
                         {id = 'text_role', widget = wibox.widget.textbox},
                         -- text margins should be larger than that of icon.
                         -- TODO: these two values could be calculated from the height of wibar.
-                        left = 18,
-                        right = 18,
+                        left = 12,
+                        right = 12,
                         widget = wibox.container.margin
                     },
                     {

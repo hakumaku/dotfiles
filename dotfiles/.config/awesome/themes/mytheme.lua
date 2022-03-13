@@ -16,7 +16,7 @@ local theme = {}
 -- #C678DD
 -- #56B6C2
 -- #ABB2BF
-theme.font          = "Ubuntu Mono 11"
+theme.font          = "MesloLGS Nerd Font Mono 12"
 
 -- colors
 theme.bg_normal     = "#282C34"
@@ -48,7 +48,7 @@ theme.taglist_fg_occupied = "#C678DD"
 theme.taglist_fg_urgent   = "#E06C75"
 theme.taglist_fg_empty    = "#ABB2BF"
 theme.taglist_spacing     = 2
-theme.taglist_font = "MesloLGS Nerd Font Mono 13"
+theme.taglist_font = "Monospace 12"
 
 -- There are other variable sets
 -- overriding the default one when

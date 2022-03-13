@@ -88,7 +88,7 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: "MesloLGS Nerd Font Mono"
+    family: "MesloLGS Nerd Font"
   # family: "SauceCodePro Nerd Font"
   # family: "Ubuntu Nerd Font"
   # family: "Fira Code Nerd Font"
