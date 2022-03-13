@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export PKGINFO="./packages/data.json"
+export PKGINFO="$XDG_DATA_HOME/dotfiles/packages/data.json"
 
 msg() {
   local type="$1"
