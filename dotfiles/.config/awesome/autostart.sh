@@ -10,8 +10,8 @@ function run {
 run fcitx
 run xcompmgr -c -C
 run tranmission-gtk
-run plank
 run redshift
+# run plank
 
 # List idempotent commands here
 

@@ -51,24 +51,30 @@ end
 
 -- Set basic configs
 local keys = require("config.keys")
-local mywibar = require("wibar.wibar")
+local MyWibar = require("wibar.wibar")
 local mymainmenu = require("wibar.widgets.mymainmenu")
 
 beautiful.init(string.format("%s/awesome/themes/%s",
                              os.getenv("XDG_CONFIG_HOME"), "mytheme.lua"))
 awful.rules.rules = require("config.rules").rules
 awful.layout.layouts = {awful.layout.suit.spiral, awful.layout.suit.floating}
--- TODO: manage shortcuts
-root.buttons(gears.table.join(awful.button({}, 3, function()
-    mymainmenu.create():toggle()
-end)))
-root.keys(keys.globalkeys)
 
+local is_keymap_set = false
 -- Draw wibar on each screen
 awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
-    s.mywibar = mywibar.create(s)
+    s.mywibar = MyWibar(s)
+
+    -- Because some shortcuts depend on widget instances,
+    -- it has to set keymaps after wibar is created.
+    if not is_keymap_set then
+        is_keymap_set = true
+        root.keys(keys.get(s.mywibar))
+    end
 end)
+root.buttons(gears.table.join(awful.button({}, 3, function()
+    mymainmenu.create():toggle()
+end)))
 
 -- Set signals
 local signals = require("wibar.signals")
