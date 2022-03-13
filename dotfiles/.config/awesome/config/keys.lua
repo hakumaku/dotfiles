@@ -302,27 +302,28 @@ local clientbuttons = {
     end)
 }
 
-local M = {clientbuttons = gears.table.join(table.unpack(clientbuttons))}
-
 local join = function(t1, t2)
     for _, v in ipairs(t2) do
         t1[#t1 + 1] = v
     end
 end
 
----@param wibar MyWibar
-function M.get(wibar)
-    local keys = {}
+local M = {
+    clientkeys = gears.table.join(table.unpack(client_keys("client"))),
+    clientbuttons = gears.table.join(table.unpack(clientbuttons)),
+    ---@param wibar MyWibar
+    globalkeys = function(wibar)
+        local keys = {}
 
-    join(keys, awesome_keys("awesome"))
-    join(keys, tag_keys("tag"))
-    join(keys, client_keys("client"))
-    join(keys, screen_keys("screen"))
-    join(keys, layout_keys("layout"))
-    join(keys, launcher_keys("launcher"))
-    join(keys, volume_keys(wibar:get_volume_widget(), "volume"))
+        join(keys, awesome_keys("awesome"))
+        join(keys, tag_keys("tag"))
+        join(keys, screen_keys("screen"))
+        join(keys, layout_keys("layout"))
+        join(keys, launcher_keys("launcher"))
+        join(keys, volume_keys(wibar:get_volume_widget(), "volume"))
 
-    return gears.table.join(table.unpack(keys))
-end
+        return gears.table.join(table.unpack(keys))
+    end
+}
 
 return M

@@ -69,7 +69,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- it has to set keymaps after wibar is created.
     if not is_keymap_set then
         is_keymap_set = true
-        root.keys(keys.get(s.mywibar))
+        root.keys(keys.globalkeys(s.mywibar))
     end
 end)
 root.buttons(gears.table.join(awful.button({}, 3, function()
