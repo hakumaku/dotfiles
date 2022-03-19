@@ -53,38 +53,41 @@ end
 local keys = require("config.keys")
 local MyWibar = require("wibar.wibar")
 local mymainmenu = require("wibar.widgets.mymainmenu")
+local MyRules = require("config.rules")
+local MySignals = require("wibar.signals")
 
 beautiful.init(string.format("%s/awesome/themes/%s",
                              os.getenv("XDG_CONFIG_HOME"), "mytheme.lua"))
-awful.rules.rules = require("config.rules").rules
 awful.layout.layouts = {awful.layout.suit.spiral, awful.layout.suit.floating}
 
-local is_keymap_set = false
+local invoked = false
 -- Draw wibar on each screen
 awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
-    s.mywibar = MyWibar(s)
+    local mywibar = MyWibar(s)
+    s.mywibar = mywibar
 
     -- Because some shortcuts depend on widget instances,
     -- it has to set keymaps after wibar is created.
-    if not is_keymap_set then
-        is_keymap_set = true
-        root.keys(keys.globalkeys(s.mywibar))
+    if not invoked then
+        invoked = true
+        root.keys(keys.globalkeys(mywibar))
+        awful.rules.rules = MyRules(mywibar.widgets)
+        local mysignals = MySignals(mywibar.widgets)
+
+        -- Set signals
+        for event, callback in pairs(mysignals.client) do
+            client.connect_signal(event, callback)
+        end
+        for event, callback in pairs(mysignals.screen) do
+            screen.connect_signal(event, callback)
+        end
     end
 end)
+
 root.buttons(gears.table.join(awful.button({}, 3, function()
     mymainmenu.create():toggle()
 end)))
-
--- Set signals
-local signals = require("wibar.signals")
-
-for event, callback in pairs(signals.client) do
-    client.connect_signal(event, callback)
-end
-for event, callback in pairs(signals.screen) do
-    screen.connect_signal(event, callback)
-end
 
 -- Miscellaneous settings
 awful.screen.set_auto_dpi_enabled(true)

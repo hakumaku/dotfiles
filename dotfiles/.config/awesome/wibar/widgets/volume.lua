@@ -5,7 +5,7 @@ local gears = require("gears")
 
 local svg = require("wibar.widgets.svg")
 
-local volume = {}
+local M = {}
 
 local list_devices_command = [[sh -c "pacmd list-sinks; pacmd list-sources"]]
 
@@ -44,11 +44,11 @@ function VolumeWidget:new(args)
         -- Widget instance
         widget = wibox.widget({
             {
-                {id = "icon", resize = false, widget = wibox.widget.imagebox},
+                {id = "icon_role", resize = false, widget = wibox.widget.imagebox},
                 layout = wibox.container.place
             },
             {
-                id = 'bar',
+                id = 'bar_role',
                 max_value = 100,
                 forced_width = 100,
                 color = beautiful.fg_normal,
@@ -63,8 +63,8 @@ function VolumeWidget:new(args)
             spacing = 8,
             layout = wibox.layout.fixed.horizontal,
             set_volume_level = function(w, value, icon)
-                w:get_children_by_id('bar')[1]:set_value(value)
-                w:get_children_by_id('icon')[1]:set_image(icon)
+                w:get_children_by_id('bar_role')[1]:set_value(value)
+                w:get_children_by_id('icon_role')[1]:set_image(icon)
             end
         })
     }
@@ -136,7 +136,8 @@ function VolumeWidget:toggle_mute()
     end)
 end
 
-return setmetatable(volume, {
+return setmetatable(M, {
+    ---@return VolumeWidget
     __call = function(_, ...)
         return VolumeWidget:new(...)
     end

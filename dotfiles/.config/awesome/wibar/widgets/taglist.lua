@@ -49,16 +49,6 @@ local function do_set_icon(c)
     end
 end
 
-local taglist_names = {
-    "\u{2160}",
-    "\u{2161}",
-    "\u{2162}",
-    "\u{2163}",
-    "\u{2164}",
-    "\u{2165}",
-    "\u{2166}",
-    "\u{2167}"
-}
 local taglist_buttons = {
     awful.button({}, 1, function(t)
         t:view_only()
@@ -87,11 +77,31 @@ local taglist_buttons = {
     end)
 }
 
+---@class TaglistWidget
+---@field widget wibox.widget
+---@field names string[]
+TaglistWidget = {}
+TaglistWidget.__index = TaglistWidget
+
 ---@param s screen
----@return awful.widget.taglist
-function M.create(s)
-    awful.tag(taglist_names, s, awful.layout.layouts[1])
-    return awful.widget.taglist {
+---@return TaglistWidget
+function TaglistWidget:new(s)
+    local names = {
+        "\u{2160}",
+        "\u{2161}",
+        "\u{2162}",
+        "\u{2163}",
+        "\u{2164}",
+        "\u{2165}",
+        "\u{2166}",
+        "\u{2167}"
+    }
+
+    awful.tag(names, s, awful.layout.layouts[1])
+    -- TODO: these two values could be calculated from the height of wibar.
+    local width = 60
+    local margins = 6
+    local widget = awful.widget.taglist({
         screen = s,
         filter = awful.widget.taglist.filter.all,
         buttons = gears.table.join(table.unpack(taglist_buttons)),
@@ -100,37 +110,45 @@ function M.create(s)
             {
                 {
                     {
-                        {id = 'text_role', widget = wibox.widget.textbox},
+                        {
+                            id = 'text_role',
+                            align = 'center',
+                            valign = 'center',
+                            forced_width = width,
+                            widget = wibox.widget.textbox
+                        },
                         -- text margins should be larger than that of icon.
-                        -- TODO: these two values could be calculated from the height of wibar.
-                        -- TODO: force width height?
-                        left = 12,
-                        right = 12,
                         widget = wibox.container.margin
                     },
                     {
                         {id = 'icon_role', widget = wibox.widget.imagebox},
                         -- adjust margins to resize icon.
-                        margins = 8,
+                        margins = margins,
                         widget = wibox.container.margin
                     },
                     layout = wibox.layout.stack
                 },
-                left = 1,
-                right = 1,
+                forced_width = width,
+                layout = wibox.layout.fixed.horizontal,
                 widget = wibox.container.margin
             },
             id = 'background_role',
             widget = wibox.container.background
+            -- create_callback
+            -- update_callback
         }
-    }
+    })
+
+    local o = {widget = widget, names = names}
+
+    return setmetatable(o, TaglistWidget)
 end
 
-function M.set_icon(c)
+function TaglistWidget:set_icon(c)
     if c.class == nil then
         -- This is a special case such as 'spotify' where it sets properties at runtime.
         -- It is definitely an abnormal behavior.
-        -- It seems it is setting 'class', 'instance' in order,
+        -- It seems it is setting 'class' and 'instance' in order,
         -- so we will connect signal to 'instance', not 'class'.
         c:connect_signal("property::instance", function()
             do_set_icon(c)
@@ -140,8 +158,11 @@ function M.set_icon(c)
     end
 end
 
-function M.reset_icon(c)
+function TaglistWidget:reset_icon(c)
     local tag = load_tag(c)
+
+    -- There are some clients not having tags.
+    -- e.g, steam loading screen.
     if not tag then
         return
     end
@@ -158,7 +179,7 @@ function M.reset_icon(c)
         -- Create a new tag and swap that with the current tag.
         -- See a full list of properties:
         -- https://awesomewm.org/doc/api/classes/tag.html#Object_properties
-        local tag_name = taglist_names[tag.index]
+        local tag_name = self.names[tag.index]
         local new_tag = awful.tag.add(tag_name, {
             layout = tag.layout,
             selected = tag.selected,
@@ -176,5 +197,9 @@ function M.reset_icon(c)
     end
 end
 
-return M
-
+return setmetatable(M, {
+    ---@return TaglistWidget
+    __call = function(_, ...)
+        return TaglistWidget:new(...)
+    end
+})

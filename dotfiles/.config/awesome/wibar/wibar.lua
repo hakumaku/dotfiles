@@ -2,8 +2,8 @@ local wibox = require("wibox")
 local awful = require("awful")
 
 -- local mytasklist = require("widgets.mytasklist")
-local taglist = require("wibar.widgets.taglist")
 local wallpaper = require("wibar.widgets.wallpaper")
+local MyTaglist = require("wibar.widgets.taglist")
 local MyVolume = require("wibar.widgets.volume")
 
 local myclock = require("wibar.widgets.clock")
@@ -23,6 +23,19 @@ end
 MyWibar = {}
 MyWibar.__index = MyWibar
 
+---@class MyWidget
+---@field taglist TaglistWidget
+---@field volume VolumeWidget
+MyWidget = {}
+MyWidget.__index = MyWidget
+
+---@param args table
+---@return MyWidget
+function MyWidget:new(args)
+    local o = args
+    return setmetatable(o, MyWidget)
+end
+
 ---@param s screen
 ---@return MyWibar
 function MyWibar:new(s)
@@ -32,12 +45,12 @@ function MyWibar:new(s)
 
     local o = {
         -- Create widgets
-        widgets = {
-            taglist = taglist.create(s),
+        widgets = MyWidget:new({
+            taglist = MyTaglist(s),
             clock = myclock.create(),
             volume = MyVolume({bar_height = height}),
             layoutbox = mylayoutbox.create(s)
-        },
+        }),
         -- Create wibar
         wibar = awful.wibar({height = height, position = "top", screen = s})
     }
@@ -47,7 +60,7 @@ function MyWibar:new(s)
         layout = wibox.layout.align.horizontal,
         { -- left widget
             layout = wibox.layout.fixed.horizontal,
-            o.widgets.taglist
+            o.widgets.taglist.widget
         },
         { -- center widget
             o.widgets.clock,
@@ -82,6 +95,7 @@ function MyWibar:get_volume_widget()
 end
 
 return setmetatable(M, {
+    ---@return MyWibar
     __call = function(_, ...)
         return MyWibar:new(...)
     end

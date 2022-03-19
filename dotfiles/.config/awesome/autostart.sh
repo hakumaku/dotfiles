@@ -10,6 +10,7 @@ function run {
 run fcitx
 run xcompmgr -c -C
 run tranmission-gtk
+# run thunderbird
 run redshift
 # run plank
 
