@@ -77,32 +77,29 @@ local taglist_buttons = {
     end)
 }
 
+---@class VolumeArgs
+---@field screen screen
+---@field wibar_height integer
+---@field names string[]
+--
 ---@class TaglistWidget
 ---@field widget wibox.widget
 ---@field names string[]
 TaglistWidget = {}
 TaglistWidget.__index = TaglistWidget
 
----@param s screen
+---@param args VolumeArgs
 ---@return TaglistWidget
-function TaglistWidget:new(s)
-    local names = {
-        "\u{2160}",
-        "\u{2161}",
-        "\u{2162}",
-        "\u{2163}",
-        "\u{2164}",
-        "\u{2165}",
-        "\u{2166}",
-        "\u{2167}"
-    }
-
-    awful.tag(names, s, awful.layout.layouts[1])
+function TaglistWidget:new(args)
+    local screen = args.screen
+    local width = args.wibar_height
     -- TODO: these two values could be calculated from the height of wibar.
-    local width = 60
+    local names = args.names
     local margins = 6
+
+    awful.tag(names, screen, awful.layout.layouts[1])
     local widget = awful.widget.taglist({
-        screen = s,
+        screen = screen,
         filter = awful.widget.taglist.filter.all,
         buttons = gears.table.join(table.unpack(taglist_buttons)),
         layout = {layout = wibox.layout.fixed.horizontal},
@@ -121,7 +118,11 @@ function TaglistWidget:new(s)
                         widget = wibox.container.margin
                     },
                     {
-                        {id = 'icon_role', widget = wibox.widget.imagebox},
+                        {
+                            id = 'icon_role',
+                            forced_width = width,
+                            widget = wibox.widget.imagebox
+                        },
                         -- adjust margins to resize icon.
                         margins = margins,
                         widget = wibox.container.margin

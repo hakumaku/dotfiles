@@ -10,12 +10,10 @@ function run {
 run fcitx
 run xcompmgr -c -C
 run tranmission-gtk
-# run thunderbird
+run thunderbird
 run redshift
-# run plank
 
 # List idempotent commands here
-
 # background wallpaper
 ~/.fehbg
 # 'capslock' to 'ctrl'

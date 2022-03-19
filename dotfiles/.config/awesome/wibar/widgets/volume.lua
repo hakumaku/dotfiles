@@ -15,7 +15,7 @@ local function get_volume_command(device)
 end
 
 ---@class VolumeArgs
----@field bar_height integer
+---@field wibar_height integer
 
 ---@class VolumeWidget
 ---@field widget wibox.widget
@@ -24,9 +24,10 @@ end
 VolumeWidget = {}
 VolumeWidget.__index = VolumeWidget
 
+---@param args VolumeArgs
 ---@return VolumeWidget
 function VolumeWidget:new(args)
-    local height = args.bar_height
+    local height = args.wibar_height
     local size = height * 0.5
     local margin = (height - size) / 2
 

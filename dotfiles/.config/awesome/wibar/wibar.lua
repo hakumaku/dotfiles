@@ -46,9 +46,22 @@ function MyWibar:new(s)
     local o = {
         -- Create widgets
         widgets = MyWidget:new({
-            taglist = MyTaglist(s),
+            taglist = MyTaglist({
+                screen = s,
+                wibar_height = height,
+                names = {
+                    "\u{2160}",
+                    "\u{2161}",
+                    "\u{2162}",
+                    "\u{2163}",
+                    "\u{2164}",
+                    "\u{2165}",
+                    "\u{2166}",
+                    "\u{2167}"
+                }
+            }),
             clock = myclock.create(),
-            volume = MyVolume({bar_height = height}),
+            volume = MyVolume({wibar_height = height}),
             layoutbox = mylayoutbox.create(s)
         }),
         -- Create wibar
