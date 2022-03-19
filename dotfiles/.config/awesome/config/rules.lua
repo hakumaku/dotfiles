@@ -33,6 +33,7 @@ local rules = {
                 "Kruler",
                 "MessageWin", -- kalarm.
                 "Sxiv",
+                "Nsxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
                 "veromix",
@@ -55,8 +56,8 @@ local rules = {
     {
         rule_any = {type = {"normal", "dialog"}},
         properties = {titlebars_enabled = false}
-    }, -- Plank
-    {
+    },
+    { -- Plank
         rule = {class = "Plank"},
         properties = {
             border_width = 0,
@@ -66,8 +67,8 @@ local rules = {
             focusable = false,
             below = true
         }
-    }, -- Jetbrains
-    {
+    },
+    { -- Jetbrains
         rule = {
             class = "jetbrains-.*",
             instance = "sun-awt-X11-XWindowPeer",
@@ -81,11 +82,19 @@ local rules = {
             placement = awful.placement.restore,
             buttons = {}
         }
+    },
+    { -- Tag 2: Thunderbird
+        rule = {class = "Thunderbird"},
+        properties = {screen = 1, tag = "2"}
+    },
+    { -- Tag 3: Firefox
+        rule = {class = "Firefox"},
+        properties = {screen = 1, tag = "3"}
+    },
+    { -- Tag 8: Steam
+        rule = {class = "Steam"},
+        properties = {screen = 1, tag = "8", floating = true}
     }
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
 }
 
 local M = {rules = rules}

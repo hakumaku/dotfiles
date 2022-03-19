@@ -127,11 +127,12 @@ nnoremap("<leader>f", ":Neoformat<CR>")
 
 -- Telescope
 nnoremap("<C-s>f", ":Telescope find_files<CR>")
-nnoremap("<C-s>s", ":Telescope live_grep<CR>")
 nnoremap("<C-s>b", ":Telescope buffers<CR>")
-nnoremap("<C-s>u", ":Telescope git_status<CR>")
-nnoremap("<C-s>g", ":lua utils.grep_prompt()<CR>")
+nnoremap("<C-s>s", ":Telescope live_grep<CR>")
 nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
+nnoremap("<C-s>g", ":Telescope grep_string<CR>")
+nnoremap("<C-s>t", ":Telescope lsp_workspace_symbols<CR>")
+nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
 
 -- NvimTree
 nnoremap("<C-w>o", ":NvimTreeToggle<CR>")

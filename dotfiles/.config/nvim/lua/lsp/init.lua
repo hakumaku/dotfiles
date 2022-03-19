@@ -49,6 +49,7 @@ require('lsp.clangd-extensions')
 
 -- https://github.com/neovim/neovim/blob/master/runtime/plugin/diagnostic.vim
 vim.fn.sign_define('DiagnosticSignError', {
+  -- TODO: bitmap icon
   text = '',
   texthl = 'LspDiagnosticsDefaultError',
   linehl = '',

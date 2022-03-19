@@ -16,7 +16,7 @@ run redshift
 # List idempotent commands here
 
 # background wallpaper
-# ~/.fehbg
+~/.fehbg
 # 'capslock' to 'ctrl'
 # 'r_alt' to 'hangul'
 setxkbmap -layout us -option ctrl:nocaps -option korean:ralt_rctrl

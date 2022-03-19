@@ -103,6 +103,7 @@ function M.create(s)
                         {id = 'text_role', widget = wibox.widget.textbox},
                         -- text margins should be larger than that of icon.
                         -- TODO: these two values could be calculated from the height of wibar.
+                        -- TODO: force width height?
                         left = 12,
                         right = 12,
                         widget = wibox.container.margin
@@ -141,6 +142,10 @@ end
 
 function M.reset_icon(c)
     local tag = load_tag(c)
+    if not tag then
+        return
+    end
+
     local clients = tag:clients()
 
     if #clients > 0 then

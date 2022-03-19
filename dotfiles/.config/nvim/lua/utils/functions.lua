@@ -86,13 +86,6 @@ function M.delete_buffer()
   print('Closed ' .. name)
 end
 
-function M.grep_prompt()
-  require("telescope.builtin").grep_string {
-    path_display = true,
-    search = vim.fn.input "Grep String > "
-  }
-end
-
 function M.get_project_path()
   -- TODO:
 end

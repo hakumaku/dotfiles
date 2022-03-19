@@ -113,6 +113,9 @@ else
   vim.opt.pumblend = 15
   vim.g.termdebug_wide = 1
 
+  -- One status line only.
+  vim.opt.laststatus = 3
+
   -- python3 on Arch Linux
   vim.g.python3_host_prog = '/usr/bin/python'
 

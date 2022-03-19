@@ -45,7 +45,8 @@ local config = {
       -- are just setting default looks o statusline
       normal = {c = {fg = colors.fg, bg = colors.bg}},
       inactive = {c = {fg = colors.fg, bg = colors.bg}}
-    }
+    },
+    globalstatus = true,
   },
   sections = {
     -- these are to remove the defaults
