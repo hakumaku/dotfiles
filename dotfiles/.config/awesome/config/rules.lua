@@ -69,18 +69,21 @@ local rules = {
         }
     },
     { -- Jetbrains
-        rule = {
-            class = "jetbrains-.*",
-            instance = "sun-awt-X11-XWindowPeer",
-            name = "win.*"
-        },
+        rule = {class = "jetbrains-.*"},
+        properties = {focus = true}
+    },
+    { -- Jetbrains loading screen
+        rule = {class = "jetbrains-.*", name = " "},
         properties = {
             floating = true,
-            focus = true,
-            focusable = false,
-            ontop = true,
-            placement = awful.placement.restore,
-            buttons = {}
+            placement = awful.placement.centered + awful.placement.no_overlap
+        }
+    },
+    { -- Jetbrains Welcome menu (it must be come AFTER loading screen rule.)
+        rule = {class = "jetbrains-.*", name = "Welcome .*"},
+        properties = {
+            floating = true,
+            placement = awful.placement.centered + awful.placement.no_overlap
         }
     },
     { -- Tag 2: Thunderbird
