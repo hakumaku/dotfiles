@@ -75,9 +75,9 @@ local function create(widgets)
                 below = true
             }
         },
-        { -- Jetbrains
+        { -- Tag 2: Jetbrains
             rule = {class = "jetbrains-.*"},
-            properties = {focus = true}
+            properties = {focus = true, tag = taglist.names[2]}
         },
         { -- Jetbrains loading screen
             rule = {class = "jetbrains-.*", name = " "},
@@ -95,13 +95,25 @@ local function create(widgets)
                     awful.placement.no_overlap
             }
         },
-        { -- Tag 2: Thunderbird
-            rule = {class = "Thunderbird"},
-            properties = {screen = 1, tag = taglist.names[2]}
+        { -- Tag 1: Firefox
+            rule = {class = "Alacritty"},
+            properties = {screen = 1, tag = taglist.names[1]}
         },
         { -- Tag 3: Firefox
             rule = {class = "Firefox"},
             properties = {screen = 1, tag = taglist.names[3]}
+        },
+        { -- Tag 5: Thunderbird
+            rule = {class = "Thunderbird"},
+            properties = {screen = 1, tag = taglist.names[5]}
+        },
+        { -- Tag 6: Twitch
+            rule = {class = "streamlink-twitch-gui"},
+            properties = {screen = 1, tag = taglist.names[6]}
+        },
+        { -- Tag 7: Spotify
+            rule = {class = "Spotify"},
+            properties = {screen = 1, tag = taglist.names[7]}
         },
         { -- Tag 8: Steam
             rule = {class = "Steam"},
