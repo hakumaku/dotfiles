@@ -11,8 +11,10 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 autoload -Uz compinit promptinit
 zmodload zsh/complist
+autoload bashcompinit
 compinit
 promptinit
+bashcompinit
 # Enable the auto-correction of the commands typed.
 setopt correctall
 
@@ -151,14 +153,33 @@ function _pip_completion {
 compctl -K _pip_completion /usr/bin/python3 -m pip
 compctl -K _pip_completion pip3
 
+# aws completion
+complete -C "$(which aws_completer)" aws
+
 # fg-bg toggle via c-z
 function fg-bg {
-    if [[ $#BUFFER -eq 0 ]]; then
-        BUFFER=fg
-        zle accept-line
-    else
-        zle push-input
-    fi
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER=fg
+    zle accept-line
+  else
+    zle push-input
+  fi
 }
 zle -N fg-bg
 bindkey '^z' f
+
+function fzf_cd {
+  fd --type d \
+    --hidden \
+    --exclude .git \
+    --exclude .java \
+    --exclude .gnupg \
+    --exclude .pki \
+    --exclude node_module \
+    --exclude .cache \
+    --exclude .npm \
+    --exclude .mozilla \
+    --exclude .meteor \
+    --exclude .nv | fzf
+}
+alias f='cd $(fzf_cd)'
