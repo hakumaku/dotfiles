@@ -133,6 +133,7 @@ nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
 nnoremap("<C-s>g", ":Telescope grep_string<CR>")
 nnoremap("<C-s>t", ":Telescope lsp_workspace_symbols<CR>")
 nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
+nnoremap("<C-s>c", ":Telescope git_branches<CR>")
 
 -- NvimTree
 nnoremap("<C-w>o", ":NvimTreeToggle<CR>")
@@ -143,8 +144,14 @@ nnoremap("<C-w>t", ":Vista!!<CR>")
 -- trouble.nvim
 nnoremap("<C-w>T", ":TroubleToggle<CR>")
 
--- vim-fugitive
+-- vim-fugitive & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
+nnoremap("<leader>gj", ":diffget //2<CR>")
+nnoremap("<leader>gk", ":diffget //3<CR>")
+nnoremap("<leader>gl", ":vertical G log<CR>")
+nnoremap("<leader>gp", ":Git pull<CR>")
+nnoremap("<leader>gP", ":Git push<CR>")
+
 nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")

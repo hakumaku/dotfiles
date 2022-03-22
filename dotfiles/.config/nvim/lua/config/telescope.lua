@@ -15,6 +15,7 @@ require('telescope').setup {
     live_grep = {theme = "ivy"},
     current_buffer_fuzzy_find = {theme = "dropdown", previewer = false},
     grep_string = {theme = "ivy"},
+    git_branches = {theme = "dropdown", previewer = false},
     lsp_workspace_symbols = {theme = "dropdown", previewer = false},
     lsp_references = {theme = "ivy"}
   }
