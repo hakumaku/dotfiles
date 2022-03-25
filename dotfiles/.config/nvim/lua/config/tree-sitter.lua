@@ -7,6 +7,7 @@ require('nvim-treesitter.configs').setup {
     "comment",
     "json",
     "regex",
+    "hcl",
     "bash",
     "html",
     "css",

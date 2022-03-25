@@ -154,7 +154,24 @@ compctl -K _pip_completion /usr/bin/python3 -m pip
 compctl -K _pip_completion pip3
 
 # aws completion
-complete -C "$(which aws_completer)" aws
+if command -v aws &>/dev/null; then
+  complete -C "$(which aws_completer)" aws
+fi
+
+# terraform completion
+if command -v terraform &>/dev/null; then
+  complete -o nospace -C "$(which terraform)" terraform
+fi
+
+# packer completion
+if command -v packer &>/dev/null; then
+  complete -o nospace -C "$(which packer)" packer
+fi
+
+# kubectl
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
+fi
 
 # fg-bg toggle via c-z
 function fg-bg {

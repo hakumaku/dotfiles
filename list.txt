@@ -1,0 +1,10 @@
+iwd
+os-prober
+keychain
+pipewire
+alsa
+alsa-utils
+pipewire-alsa
+pipewire-pulse
+pavucontrol
+dnsutils
