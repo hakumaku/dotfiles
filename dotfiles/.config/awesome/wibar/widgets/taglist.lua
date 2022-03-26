@@ -160,6 +160,7 @@ function TaglistWidget:set_icon(c)
 end
 
 function TaglistWidget:reset_icon(c)
+    -- TODO: I dont need set_tag, load_tag anymore...
     local tag = load_tag(c)
 
     -- There are some clients not having tags.

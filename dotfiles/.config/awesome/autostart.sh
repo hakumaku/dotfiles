@@ -9,8 +9,9 @@ function run {
 # List autostart applications here
 run fcitx
 run xcompmgr -c -C
-run tranmission-gtk
+run tranmission-gtk -m
 run thunderbird
+run slack
 run redshift
 
 # List idempotent commands here

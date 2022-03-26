@@ -23,4 +23,6 @@ vlc-qt-interface.conf
 !**/qutebrowser/themes
 !**/qutebrowser/config.py
 
+**/qtile/__pycache__
+
 **/zsh/.zcompdump
