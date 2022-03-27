@@ -1,5 +1,5 @@
-# using integer multiples of 96 usually works best
-# 96, 144, 192
+! using integer multiples of 96 usually works best
+! 96, 144, 192
 Xft.dpi: 192
 
 Sxiv.background: #000000
