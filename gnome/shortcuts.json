@@ -6,34 +6,14 @@
       "binding": "<Super>Escape"
     },
     {
-      "name": "Gnome-Tweaks",
-      "command": "gnome-tweaks",
-      "binding": "<Super>U"
-    },
-    {
       "name": "Run Terminal",
       "command": "alacritty",
       "binding": "<Super>Return"
     },
     {
-      "name": "Launch Bottom",
-      "command": "alacritty -e btm",
-      "binding": "<Super>X"
-    },
-    {
       "name": "Launch Rofi",
       "command": "rofi -show drun",
       "binding": "<Super>R"
-    },
-    {
-      "name": "Web Browser",
-      "command": "firefox",
-      "binding": "<Super>W"
-    },
-    {
-      "name": "Steam",
-      "command": "steam",
-      "binding": "<Super>G"
     },
     {
       "name": "Spotify - Next",

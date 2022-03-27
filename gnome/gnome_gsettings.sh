@@ -20,32 +20,22 @@ set_gsettings() {
 
   # Keyboard shortcuts
   gsettings set org.gnome.desktop.input-sources xkb-options "['korean:ralt_rctrl', 'caps:ctrl_modifier']"
-  gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>E']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>w']"
 
   # Disable default bindings.
-  # <Super>: overlay key
   gsettings set org.gnome.mutter overlay-key ""
-  # <Super>A: application view
-  gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
-  # <Super>N: focus-active-notification
-  gsettings set org.gnome.shell.keybindings focus-active-notification "[]"
-  # <Super>H: Hide window
-  gsettings set org.gnome.shell.keybindings toggle-message-tray "[]"
-  # <Super>L: Screensaver
   gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "[]"
-  # <Super>P: switch-monitor
   gsettings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
-  # <Super>Above_Tab: switch-group
-  gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
-  gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
-  gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
-  # <Super>S: toggle-overview
-  gsettings set org.gnome.shell.keybindings toggle-overview "[]"
-  # <Super>Escape: Restore the keyboard shortcuts
+
+  # Gnome-shell
+  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>M']"
+  gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>comma']"
+  gsettings set org.gnome.shell.keybindings focus-active-notification "['<Super>period']"
+  gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+
   gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
-  # <Super>space: switch-input-source
   gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
-  # <Alt>space: window menu
   gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[]"
   # Gnome-shell debug
   gsettings set org.gnome.desktop.wm.keybindings panel-run-dialog "['<Super>slash']"
@@ -53,9 +43,13 @@ set_gsettings() {
   # Window tiling keybindings
   gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super>H']"
   gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Super>L']"
+  gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"
   gsettings set org.gnome.desktop.wm.keybindings maximize "['<Super>K']"
   gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>J']"
-  gsettings set org.gnome.desktop.wm.keybindings minimize "['<Super>,']"
+  gsettings set org.gnome.desktop.wm.keybindings minimize "['']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
 
   # Switching workspaces
   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>N']"
@@ -105,24 +99,13 @@ set_gsettings() {
   gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-6 "['<Super><Ctrl>6']"
   gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-7 "['<Super><Ctrl>7']"
   gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-8 "['<Super><Ctrl>8']"
-  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Super><Ctrl>9']"
+  # gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-9 "['<Super><Ctrl>9']"
 
   # Mouse settings
   gsettings set org.gnome.desktop.peripherals.mouse speed 1.0
   gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
 
   # Sound control
-  # Unlike 'wm', media-keys does not support
-  # list of multiple keys, but string only.
-  # Thus, the audio keys, such as 'XF86AudioRaiseVolume',
-  # which some keyboards have will be disabled.
-  # I have tried to bind these keys to custom-keybindings to run 'amixer',
-  # but it did not go well. The commands were:
-  # 'amixer set Master 3%+'
-  # 'amixer -q sset Master 3%+'
-  # 'amixer -q -D pulse sset Master 10%+'
-  # 'amixer -M get Master'
-  # 'pactl set-sink-volume 0 +15%'
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['<Super>equal']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "['<Super>minus']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['<Super>0']"

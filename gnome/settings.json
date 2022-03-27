@@ -11,7 +11,7 @@
     "show-delay": 0.25,
     "show-apps-at-top": false,
     "shortcut-timeout": 2,
-    "shortcut-text": "",
+    "shortcut-text": "''",
     "shift-middle-click-action": "launch",
     "shift-click-action": "minimize",
     "scroll-to-focused-application": true,
