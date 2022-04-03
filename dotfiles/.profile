@@ -7,15 +7,21 @@ append_path() {
   esac
 }
 append_path "$HOME/.local/bin"
-append_path "$HOME/.local/share/cargo/bin"
+append_path "$XDG_DATA_HOME/cargo/bin"
 
-# If it is not gnome-shell, set GDK env variables.
-if ! [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
-  resolution=$(xrandr --query | grep " connected" | awk '{print $4}')
-  if [[ "$resolution" == "3840x2160"* ]]; then
+# Get dpi for Xresources.
+resolution=$(xrandr --query | grep " connected" | awk '{print $4}')
+if [[ "$resolution" == "3840x2160"* ]]; then
+  dpi="192"
+  if ! [[ "$XDG_CURRENT_DESKTOP" == *"GNOME"* ]]; then
+    # If it is not gnome-shell, set GDK env variables.
     export GDK_SCALE=2.0
     export GDK_DPI_SCALE=0.5
   fi
+elif [[ "$resolution" == "2560x1440"* ]]; then
+  dpi="144"
+else # 1920x1080
+  dpi="96"
 fi
 
 set_env_if_not_set() {
@@ -28,4 +34,4 @@ set_env_if_not_set XDG_CURRENT_DESKTOP "GNOME"
 set_env_if_not_set GTK_THEME "Adwaita:dark"
 
 # dotfiles
-[[ -d $HOME/.config/X11 ]] && xrdb -merge $HOME/.config/X11/.Xresources
+[[ -d $XDG_CONFIG_HOME/X11 ]] && xrdb -DXFT_DPI=$dpi -merge $XDG_CONFIG_HOME/X11/.Xresources

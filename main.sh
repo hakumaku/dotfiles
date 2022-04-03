@@ -83,6 +83,9 @@ main() {
       "nvim" | "neovim")
         exec ./packages/nvim.sh
         ;;
+      "shfmt")
+        exec ./packages/shfmt.sh
+        ;;
       "steam")
         exec ./packages/steam.sh
         ;;

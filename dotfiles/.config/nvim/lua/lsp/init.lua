@@ -35,6 +35,7 @@ local servers = {
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
   ['pylsp'] = require('lsp.pylsp'),
+  ['tsserver'] = require('lsp.tsserver'),
   ['sumneko_lua'] = require('lsp.lua'),
   ['terraformls'] = require('lsp.terraform')
 }

@@ -95,7 +95,7 @@ local function create(widgets)
                     awful.placement.no_overlap
             }
         },
-        { -- Tag 1: Firefox
+        { -- Tag 1: Alacritty
             rule = {class = "Alacritty"},
             properties = {screen = 1, tag = taglist.names[1]}
         },

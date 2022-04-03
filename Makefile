@@ -1,6 +1,7 @@
 .PHONY: list aur cargo fcitx fonts cmake clang fzf icons \
 	lazygit lazydocker lua \
-	mpv numix nvim neovim steam ranger rofi streamlink tmux \
+	mpv numix nvim neovim shfmt sh steam \
+	ranger rofi streamlink tmux \
 	youtube-dl youtube yt xpadneo xbox zsh
 
 aur:
@@ -44,6 +45,9 @@ numix:
 
 nvim neovim:
 	@./main.sh nvim
+
+shfmt sh:
+	@./main.sh shfmt
 
 steam:
 	@./main.sh steam

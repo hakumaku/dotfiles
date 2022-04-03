@@ -1,6 +1,20 @@
 ! using integer multiples of 96 usually works best
 ! 96, 144, 192
-Xft.dpi: 192
+#ifndef XFT_DPI
+#  define XFT_DPI 96
+#endif
+Xft.dpi: XFT_DPI
+
+#if (XFT_DPI >= 192)
+#  define POLYBAR_HEIGHT 48
+#elif (XFT_DPI >= 144)
+#  define POLYBAR_HEIGHT 32
+#else
+#  define POLYBAR_HEIGHT 20
+#endif
+
+Polybar.height: POLYBAR_HEIGHT
+Polybar.font: POLYBAR_FONT
 
 Sxiv.background: #000000
 Sxiv.foreground: #E95420
