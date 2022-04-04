@@ -6,10 +6,12 @@ for_window [class="^.*"] border pixel 2
 
 # {{{ i3-gaps
 # The order matters, and the 'gaps top' must match the height of polybar.
-gaps inner 12
-gaps outer 0
-gaps top 24
+# 48, 32, or 20
+gaps inner 5
+gaps outer 5
+gaps top 32
 smart_borders on
+
 set $color_bg #282C34
 set $color_fg #ABB2BF
 set $color_1 #61AFEF
@@ -70,14 +72,14 @@ bindsym $mod+z layout tabbed
 bindsym $mod+Tab focus mode_toggle
 
 # define workspaces
-set $ws1 "1:1"
-set $ws2 "2:2"
-set $ws3 "3:3"
-set $ws4 "4:4"
-set $ws5 "5:5"
-set $ws6 "6:6"
-set $ws7 "7:7"
-set $ws8 "8:8"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
