@@ -21,7 +21,7 @@ set $color_4 #E5C07B
 set $color_5 #C678DD
 set $color_6 #56B6C2
 # class                 border  backgr.  text    indicator child_border
-client.focused          $bg     #285577  #ffffff #2e9ef4   $color_primary
+client.focused          $bg     #285577  #ffffff #2e9ef4   $color_1
 client.focused_inactive $bg     #5f676a  #ffffff #484e50   $color_fg
 client.unfocused        $bg     #222222  #888888 #292d2e   $color_fg
 client.urgent           $bg     $color_2 #ffffff $color_2  $color_2
@@ -159,7 +159,8 @@ assign [class="Firefox"] $ws3
 assign [class="Slack"] $ws4
 assign [class="Thunderbird"] $ws5
 assign [class="stream-twitch-gui"] $ws6
-assign [class="Spority"] $ws7
+assign [class="Spotify"] $ws7
+for_window [class="Spotify"] move window to workspace 7
 assign [class="Steam"] $ws8
 # }}}
 
