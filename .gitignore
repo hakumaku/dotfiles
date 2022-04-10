@@ -16,7 +16,9 @@ vlc-qt-interface.conf
 **/ranger/commands.py
 **/ranger/commands_full.py
 **/ranger/rifle.conf
+**/ranger/rifle.confn
 **/ranger/scope.sh
+**/ranger/scope.shn
 
 **/qutebrowser/*
 !**/qutebrowser/greasemonkey

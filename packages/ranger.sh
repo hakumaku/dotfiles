@@ -35,7 +35,8 @@ config_ranger() {
   msg info "configuring sxiv options"
   local config="$HOME/.config/ranger/rifle.conf"
   if [[ -f "$config" ]]; then
-    sed -in 's/flag f = sxiv/& -abfsh/' $config
+    local rifle="$XDG_CONFIG_HOME/nsxiv/nsxiv-rifle"
+    sed -in "s#\(flag f = \)sxiv#\1$rifle#" $config
   fi
 
   # TODO: deploy rifle files
