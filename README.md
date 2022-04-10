@@ -43,6 +43,28 @@ $ xrandr --output HDMI-0 --mode 3840x2160 --rate 60 --left-of HDMI-1
 $ xrandr --output HDMI-0 --mode 3840x2160 --rate 60 --right-of HDMI-1
 ```
 
+## `udisksctl`
+Mounting external hard drives.
+```shell
+$ lsblk
+$ udisksctl mount -b /dev/sda
+```
+Alternatively,
+```shell
+$ lsblk
+$ mkdir -p /media/your-label-1
+$ mount -t auto /dev/sda /media/your-label-1
+$ umount /media/your-label-1
+$ rmdir /media/your-label-1
+```
+
+## `e2label`
+Change the device label.
+```shell
+$ lsblk
+$ e2label /dev/sda "my-label"
+```
+
 ## `xprop`
 Useful to figure out get properties of windows.
 ```shell
