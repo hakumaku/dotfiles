@@ -198,9 +198,9 @@ assert_config() {
   if [[ -f $HOME/.profile ]]; then
     mv $HOME/.profile $HOME/.profile.orig
   fi
-  if [[ -f $HOME/.pam_environment ]]; then
-    mv $HOME/.pam_environment $HOME/.pam_environment.orig
-  fi
+  # if [[ -f $HOME/.pam_environment ]]; then
+  #   mv $HOME/.pam_environment $HOME/.pam_environment.orig
+  # fi
   stow --target=$HOME dotfiles
   popd
 }
