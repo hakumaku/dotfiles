@@ -72,7 +72,7 @@ return packer.startup(function(use)
     end
   }
   use {
-    'akinsho/nvim-toggleterm.lua',
+    'akinsho/toggleterm.nvim',
     config = function()
       require("config.toggleterm")
     end
@@ -156,7 +156,7 @@ return packer.startup(function(use)
     end
   }
   use {
-    'akinsho/nvim-bufferline.lua',
+    'akinsho/bufferline.nvim',
     config = function()
       require("config.bufferline")
     end
