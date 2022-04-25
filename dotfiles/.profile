@@ -1,14 +1,3 @@
-append_path() {
-  case ":$PATH:" in
-    *:"$1":*) ;;
-    *)
-      PATH="${PATH:+$PATH:}$1"
-      ;;
-  esac
-}
-append_path "$HOME/.local/bin"
-append_path "$XDG_DATA_HOME/cargo/bin"
-
 # Get dpi for Xresources.
 resolution=$(xrandr --query | grep " connected" | awk '{print $4}')
 if [[ "$resolution" == "3840x2160"* ]]; then
@@ -34,4 +23,9 @@ set_env_if_not_set XDG_CURRENT_DESKTOP "GNOME"
 set_env_if_not_set GTK_THEME "Adwaita:dark"
 
 # dotfiles
-[[ -d $XDG_CONFIG_HOME/X11 ]] && xrdb -DXFT_DPI=$dpi -merge $XDG_CONFIG_HOME/X11/.Xresources
+if [[ $XDG_SESSION_TYPE != "wayland" ]]; then
+  # Xorg
+  [[ -d $XDG_CONFIG_HOME/X11 ]] && xrdb -DXFT_DPI=$dpi -merge $XDG_CONFIG_HOME/X11/.Xresources
+else
+  # wayland
+fi

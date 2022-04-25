@@ -1,6 +1,13 @@
 local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = {
+      "node_modules/",
+      "build/",
+      ".git/",
+      "venv/",
+      ".venv/"
+    },
     mappings = {
       i = {
         ['<esc>'] = actions.close,
@@ -10,7 +17,7 @@ require('telescope').setup {
     }
   },
   pickers = {
-    find_files = {theme = "dropdown", previewer = false},
+    find_files = {theme = "dropdown", previewer = false, hidden = true},
     buffers = {theme = "dropdown", previewer = false},
     live_grep = {theme = "ivy"},
     current_buffer_fuzzy_find = {theme = "dropdown", previewer = false},

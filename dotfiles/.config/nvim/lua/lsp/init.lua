@@ -6,6 +6,12 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Disable diagnostic if it is helm file.
+  -- if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+  --   vim.diagnostic.disable()
+  -- end
+
   -- vim.lsp.handlers['textDocument/codeAction'] = function(responses)
   --   -- Select the first item
   --   local _, edit = next(actions[1].edit.changes)
@@ -37,7 +43,8 @@ local servers = {
   ['pylsp'] = require('lsp.pylsp'),
   ['tsserver'] = require('lsp.tsserver'),
   ['sumneko_lua'] = require('lsp.lua'),
-  ['terraformls'] = require('lsp.terraform')
+  ['terraformls'] = require('lsp.terraform'),
+  ['yamlls'] = require('lsp.yamlls')
 }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
                                                                      .protocol

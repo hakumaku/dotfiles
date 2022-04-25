@@ -20,7 +20,7 @@ install_aur_packages() {
   done
 
   if [[ -f "/usr/share/applications/spotify.desktop" ]]; then
-    local resolution=$(xrandr | grep ' connected' | awk '{ print $4 }')
+    local resolution=$(xrandr | grep ' connected primary' | awk '{ print $4 }')
     resolution=${resolution%%x*}
     if [[ $(($resolution - 1980)) -gt 0 ]]; then
       sudo sed -i -r \
