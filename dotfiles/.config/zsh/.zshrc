@@ -90,6 +90,10 @@ source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-vi-mode
 source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
+# nvm (https://github.com/nvm-sh/nvm)
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 function zsh_vi_mode_init() {
   if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
     source $XDG_CONFIG_HOME/fzf/fzf.zsh
@@ -166,11 +170,6 @@ fi
 # packer completion
 if command -v packer &>/dev/null; then
   complete -o nospace -C "$(which packer)" packer
-fi
-
-# kubectl
-if command -v kubectl &>/dev/null; then
-  source <(kubectl completion zsh)
 fi
 
 # fg-bg toggle via c-z
