@@ -143,7 +143,20 @@ fzf_commit() {
     --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
     | fzf --ansi --no-sort --layout=reverse --tiebreak=index \
       --preview="f() { set -- \$(echo -- \$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \$# -eq 0 ] || git show --color=always \$1 \$filter | delta --line-numbers; }; f {}" \
-      --preview-window=right:60%
+      --preview-window=right:50%
+}
+
+fzf_commit_wo_view() {
+  local filter
+  if [ -n $@ ] && [ -e $@ ]; then
+    filter="-- $@"
+  fi
+  export LESS='-R'
+  export BAT_PAGER='less -S -R -M -i'
+  git log \
+    --graph --color=always --abbrev=7 \
+    --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
+    | fzf --ansi --no-sort --layout=reverse --tiebreak=index
 }
 
 function _pip_completion {

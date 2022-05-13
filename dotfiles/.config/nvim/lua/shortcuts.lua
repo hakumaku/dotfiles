@@ -160,14 +160,22 @@ nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 ToggleTerm = {__term = {}}
 
 ---@param cmd string
-function ToggleTerm:toggle(cmd)
+---@param direction string
+function ToggleTerm:toggle(cmd, direction)
+  direction = direction or "float"
+
   if not self.__term[cmd] then
     local Terminal = require('toggleterm.terminal').Terminal
-    self.__term[cmd] = Terminal:new({cmd = cmd, hidden = true})
+    self.__term[cmd] = Terminal:new({
+      cmd = cmd,
+      hidden = true,
+      direction = direction
+    })
   end
   self.__term[cmd]:toggle()
 end
 nnoremap("<leader>gg", ":lua ToggleTerm:toggle('lazygit')<CR>")
+nnoremap("<leader>gv", ":lua ToggleTerm:toggle('git view', 'tab')<CR>")
 nnoremap("<leader>c", ":lua ToggleTerm:toggle('lazydocker')<CR>")
 nnoremap("<leader>v", ":lua ToggleTerm:toggle('btm')<CR>")
 
