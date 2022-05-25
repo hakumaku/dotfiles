@@ -29,54 +29,14 @@ if command -v bat &>/dev/null; then
 fi
 export EDITOR=nvim
 export VISUAL="$EDITOR"
+# nvm (https://github.com/nvm-sh/nvm)
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-#alias python='/usr/bin/python3'
-if command -v exa &>/dev/null; then
-  alias ls="exa --group-directories-first -s extension"
-  alias l.="exa -d .*"
-  alias la="exa -lahF"
-else
-  alias ls='ls --color -h --group-directories-first'
-  alias l.='ls -d .* --color=auto'
-  alias la="ls -lahF"
-fi
-alias grep='grep --color=auto'
-alias mnt='udisksctl mount -b'
-alias umnt='udisksctl unmount -b'
-alias rm='rm -i'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias gm='cd $HOME/Music'
-alias gd='cd $HOME/Downloads'
-alias gv='cd $HOME/Videos'
-alias zshrc='nvim $ZDOTDIR/.zshrc'
-alias bashrc="nvim ~/.bashrc -c 'normal zt'"
-alias dotfiles="cd $HOME/.local/share/dotfiles"
-alias vimrc="nvim $HOME/.vimrc"
-alias nvimrc="nvim $HOME/.config/nvim/init.vim"
-alias sxiv='sxiv -a -f'
-alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
-# Move to the directory when exiting.
-# alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
-# alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias nvimg="nvim -c 'Git | wincmd o' ."
-alias luamake=$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
-
-# Tmux
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  if command -v neofetch &>/dev/null; then
-    exec tmux new 'sleep 0.1; neofetch; $SHELL'
-  else
-    exec tmux
-  fi
-  # session=$(tmux list-sessions | head -1 | cut -d':' -f1)
-  # if [[ -z $session ]]; then
-  #   exec tmux
-  # else
-  #   exec tmux attach -t $session
-  # fi
-fi
+source "$ZDOTDIR/alias.zsh"
+source "$ZDOTDIR/functions.zsh"
+source "$ZDOTDIR/dotfiles.zsh"
+source "$ZDOTDIR/completions.zsh"
 
 # powerline10k settings
 source $XDG_DATA_HOME/repositories/powerlevel10k/powerlevel10k.zsh-theme
@@ -90,11 +50,7 @@ source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-vi-mode
 source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-# nvm (https://github.com/nvm-sh/nvm)
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-function zsh_vi_mode_init() {
+function _zsh_vi_mode_init() {
   if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
     source $XDG_CONFIG_HOME/fzf/fzf.zsh
     # FZF (https://github.com/junegunn/fzf)
@@ -117,98 +73,14 @@ function zsh_vi_mode_init() {
   bindkey -M menuselect 'l' vi-forward-char
   bindkey -M menuselect 'j' vi-down-line-or-history
 }
-zvm_after_init_commands+=(zsh_vi_mode_init)
+zvm_after_init_commands+=(_zsh_vi_mode_init)
 
-# Use fd (https://github.com/sharkdp/fd) instead of the default find
-# command for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-
-fzf_commit() {
-  local filter
-  if [ -n $@ ] && [ -e $@ ]; then
-    filter="-- $@"
-  fi
-  export LESS='-R'
-  export BAT_PAGER='less -S -R -M -i'
-  git log \
-    --graph --color=always --abbrev=7 \
-    --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
-    | fzf --ansi --no-sort --layout=reverse --tiebreak=index \
-      --preview="f() { set -- \$(echo -- \$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \$# -eq 0 ] || git show --color=always \$1 \$filter | delta --line-numbers; }; f {}" \
-      --preview-window=right:50%
-}
-
-fzf_commit_wo_view() {
-  local filter
-  if [ -n $@ ] && [ -e $@ ]; then
-    filter="-- $@"
-  fi
-  export LESS='-R'
-  export BAT_PAGER='less -S -R -M -i'
-  git log \
-    --graph --color=always --abbrev=7 \
-    --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
-    | fzf --ansi --no-sort --layout=reverse --tiebreak=index
-}
-
-function _pip_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=($(COMP_WORDS="$words[*]" \
-    COMP_CWORD=$((cword - 1)) \
-    PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null))
-}
-compctl -K _pip_completion /usr/bin/python3 -m pip
-compctl -K _pip_completion pip3
-
-# aws completion
-if command -v aws &>/dev/null; then
-  complete -C "$(which aws_completer)" aws
-fi
-
-# terraform completion
-if command -v terraform &>/dev/null; then
-  complete -o nospace -C "$(which terraform)" terraform
-fi
-
-# packer completion
-if command -v packer &>/dev/null; then
-  complete -o nospace -C "$(which packer)" packer
-fi
-
-# fg-bg toggle via c-z
-function fg-bg {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER=fg
-    zle accept-line
+# Tmux
+if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  if command -v neofetch &>/dev/null; then
+    exec tmux new 'sleep 0.1; neofetch; $SHELL'
   else
-    zle push-input
+    exec tmux
   fi
-}
-zle -N fg-bg
-bindkey '^z' f
+fi
 
-function fzf_cd {
-  fd --type d \
-    --hidden \
-    --exclude .git \
-    --exclude .java \
-    --exclude .gnupg \
-    --exclude .pki \
-    --exclude node_module \
-    --exclude .cache \
-    --exclude .npm \
-    --exclude .mozilla \
-    --exclude .meteor \
-    --exclude .nv | fzf
-}
-alias f='cd $(fzf_cd)'
