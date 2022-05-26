@@ -39,7 +39,7 @@ install_extra_packages() {
     npm install --silent --save-dev --save-exact --global ${npm_packages[@]}
   else
     pip install --quiet --user --upgrade ${python_packages[@]}
-    npm update --silent ${npm_packages[@]}
+    npm update --silent --global ${npm_packages[@]}
   fi
 }
 
