@@ -28,6 +28,11 @@ install_extra_packages() {
   )
   # TODO: gdb, clang, lldb
 
+  msg info "upgrading pip"
+  pip install --quiet --user --upgrade pip
+  msg info "upgrading nvm"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
   msg info "installing extra packages for nvim"
   if ! command -v clang &>/dev/null; then
     pip install --quiet --user --upgrade ${python_packages[@]}
