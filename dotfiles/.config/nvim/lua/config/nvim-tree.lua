@@ -1,12 +1,5 @@
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
-vim.g.nvim_tree_icons = {folder = {arrow_open = "", arrow_closed = ""}}
 vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
-vim.g.nvim_tree_special_files = {
-  'README.md',
-  'Makefile',
-  'MAKEFILE',
-  'CMakeLists.txt'
-}
 vim.g.nvim_tree_width = 25
 
 -- following options are the default
@@ -51,6 +44,39 @@ require'nvim-tree'.setup {
     cmd = nil,
     -- the command arguments as a list
     args = {}
+  },
+  renderer = {
+    highlight_git = true,
+    highlight_opened_files = "none",
+    indent_markers = {
+      enable = false,
+      icons = {corner = "└ ", edge = "│ ", none = "  "}
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = "before",
+      padding = " ",
+      symlink_arrow = " ➛ ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        folder = {
+          arrow_closed = "",
+          arrow_open = "",
+        },
+      },
+    },
+    special_files = {
+      "Cargo.toml",
+      "Makefile",
+      "README.md",
+      "readme.md",
+      "CMakeLists.txt"
+    }
   },
 
   view = {

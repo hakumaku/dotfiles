@@ -30,16 +30,21 @@ install_extra_packages() {
 
   msg info "upgrading pip"
   pip install --quiet --user --upgrade pip
-  msg info "upgrading nvm"
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  if ! commnd -v nvm &>/dev/null; then
+    msg info "installing nvm"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    nvm install node
+  fi
+  msg info "upgrading npm"
+  npm install --silent --location=global npm@latest
 
   msg info "installing extra packages for nvim"
   if ! command -v clang &>/dev/null; then
     pip install --quiet --user --upgrade ${python_packages[@]}
-    npm install --silent --save-dev --save-exact --global ${npm_packages[@]}
+    npm install --silent --save-dev --save-exact --location=global ${npm_packages[@]}
   else
     pip install --quiet --user --upgrade ${python_packages[@]}
-    npm update --silent --global ${npm_packages[@]}
+    npm update --silent --location=global ${npm_packages[@]}
   fi
 }
 

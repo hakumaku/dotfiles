@@ -38,8 +38,6 @@ config_ranger() {
     local rifle="$XDG_CONFIG_HOME/nsxiv/nsxiv-rifle"
     sed -in "s#\(flag f = \)sxiv#\1$rifle#" $config
   fi
-
-  # TODO: deploy rifle files
 }
 
 clone_or_pull_ranger() {
