@@ -29,3 +29,5 @@ vlc-qt-interface.conf
 **/qtile/.idea/
 
 **/zsh/.zcompdump
+
+package.json
