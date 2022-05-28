@@ -1,0 +1,26 @@
+{
+  "cargo": [
+    "alacritty",
+    "git-delta",
+    "exa",
+    "bat",
+    "fd-find",
+    "ripgrep",
+    "bottom"
+  ],
+  "pip": [
+    "pynvim",
+    "cmake-format",
+    "cmake-language-server",
+    "autopep8",
+    "black",
+    "flake8",
+    "isort",
+    "pyls-flake8",
+    "pyls-isort",
+    "pylsp-rope",
+    "python-lsp-black",
+    "python-lsp-server[all]"
+  ],
+  "npm": ["bash-language-server", "prettier"]
+}

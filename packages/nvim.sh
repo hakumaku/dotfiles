@@ -3,29 +3,11 @@
 set -euo pipefail
 
 install_extra_packages() {
-  local python_packages=(
-    # mandatory
-    "pynvim"
+  local python_packages=()
+  get_packge_list pip python_packages
+  local npm_packages=()
+  get_packge_list npm npm_packages
 
-    # cmake
-    "cmake-format"
-    "cmake-language-server"
-
-    # python-lsp
-    "autopep8"
-    "black"
-    "flake8"
-    "isort"
-    "pyls-flake8"
-    "pyls-isort"
-    "pylsp-rope"
-    "python-lsp-black"
-    "python-lsp-server[all]"
-  )
-  local npm_packages=(
-    "bash-language-server"
-    "prettier"
-  )
   # TODO: gdb, clang, lldb
 
   msg info "upgrading pip"
@@ -39,6 +21,8 @@ install_extra_packages() {
   npm install --silent --location=global npm@latest
 
   msg info "installing extra packages for nvim"
+  msg info "pip: ${python_packages[*]}"
+  msg info "npm: ${npm_packages[*]}"
   if ! command -v clang &>/dev/null; then
     pip install --quiet --user --upgrade ${python_packages[@]}
     npm install --silent --save-dev --save-exact --location=global ${npm_packages[@]}

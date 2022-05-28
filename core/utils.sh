@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export PKGINFO="$XDG_DATA_HOME/dotfiles/packages/data.json"
+export PKG="$XDG_DATA_HOME/dotfiles/packages/packages.json"
 
 msg() {
   local type="$1"
@@ -32,7 +33,7 @@ read_dependencies() {
   local -n _deps=$1
   local name="$2"
   local distro="$3"
-  readarray -t _deps < <(jq -r ".${name}.${distro}.dependencies" $PKGINFO | tr -d '[]," ')
+  readarray -t _deps < <(jq -r ".${name}.${distro}.dependencies" $PKGINFO | tr -d '[]," ' | sed '/^$/d')
 }
 
 install_dependencies() {
@@ -64,7 +65,7 @@ read_packages() {
   local -n _packages=$1
   local name="$2"
   local distro="$3"
-  readarray -t _packages < <(jq -r ".${name}.${distro}.packages" $PKGINFO | tr -d '[]," ')
+  readarray -t _packages < <(jq -r ".${name}.${distro}.packages" $PKGINFO | tr -d '[]," ' | sed '/^$/d')
 }
 
 install_package() {
@@ -90,6 +91,12 @@ install_package() {
       msg error "unrecognized DISTRO: '$DISTRO'"
       ;;
   esac
+}
+
+get_packge_list() {
+  local package_name=$1
+  local -n _packages=$2
+  readarray -t _packages < <(jq -r ".${package_name}" "$PKG" | tr -d '[]," ' | sed '/^$/d')
 }
 
 # $1: url
@@ -195,9 +202,9 @@ assert_config() {
 
   # Move config files to XDG_CONFIG_HOME.
   pushd $SCRIPT_HOME
-  if [[ -f $HOME/.profile ]]; then
-    mv $HOME/.profile $HOME/.profile.orig
-  fi
+  # if [[ -f $HOME/.profile ]]; then
+  #   mv $HOME/.profile $HOME/.profile.orig
+  # fi
   # if [[ -f $HOME/.pam_environment ]]; then
   #   mv $HOME/.pam_environment $HOME/.pam_environment.orig
   # fi
@@ -216,3 +223,4 @@ export -f read_dependencies
 export -f read_packages
 export -f install_dependencies
 export -f install_package
+export -f get_packge_list

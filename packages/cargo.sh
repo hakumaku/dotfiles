@@ -14,15 +14,9 @@ install_cargo_utilities() {
     install_dependencies alacritty
   fi
 
-  local packages=(
-    "alacritty"
-    "git-delta"
-    "exa"
-    "bat"
-    "fd-find"
-    "ripgrep"
-    "bottom"
-  )
+  local packages=()
+  get_packge_list cargo packages
+
   msg info "${packages[*]}"
   cargo install --quiet ${packages[@]}
 
