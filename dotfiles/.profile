@@ -1,6 +1,3 @@
-# TODO
-return
-
 # Get dpi for Xresources.
 resolution=$(xrandr --query | grep " connected" | awk '{print $4}')
 if [[ "$resolution" == "3840x2160"* ]]; then
