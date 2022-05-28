@@ -43,10 +43,10 @@ source $XDG_DATA_HOME/repositories/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.config/zsh/.p10k.zsh ]] && source ~/.config/zsh/.p10k.zsh
 
-# zsh-syntax-highlighting
-source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions
 source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-syntax-highlighting
+source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-vi-mode
 source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
