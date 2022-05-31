@@ -23,5 +23,9 @@
     "python-lsp-server[all]",
     "jedi-language-server"
   ],
-  "npm": ["bash-language-server", "prettier"]
+  "npm": [
+    "bash-language-server",
+    "yaml-language-server",
+    "prettier"
+  ]
 }
