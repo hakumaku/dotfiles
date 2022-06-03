@@ -1,6 +1,22 @@
 local lspkind = require('lspkind')
 local cmp = require('cmp')
 
+local select_next_item = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    fallback()
+  end
+end
+
+local select_prev_item = function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  else
+    fallback()
+  end
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -17,20 +33,10 @@ cmp.setup {
     },
     ["<C-space>"] = cmp.mapping.complete(),
     ["<CR>"] = cmp.mapping.confirm({select = true}),
-    ["<C-n>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end,
-    ["<C-p>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end
+    ["<Tab>"] = select_next_item,
+    ["<S-Tab>"] = select_prev_item,
+    ["<C-n>"] = select_next_item,
+    ["<C-p>"] = select_prev_item
   },
   sources = {
     {name = "ultisnips"},
@@ -45,10 +51,14 @@ cmp.setup {
   experimental = {ghost_text = true}
 }
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {{name = 'buffer'}}
+})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})
 })
 
