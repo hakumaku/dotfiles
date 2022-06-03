@@ -16,7 +16,21 @@ cmp.setup {
       select = true
     },
     ["<C-space>"] = cmp.mapping.complete(),
-    ["<CR>"] = cmp.mapping.confirm({select = true})
+    ["<CR>"] = cmp.mapping.confirm({select = true}),
+    ["<C-n>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ["<C-p>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end
   },
   sources = {
     {name = "ultisnips"},
@@ -27,7 +41,8 @@ cmp.setup {
     {name = "buffer", keyword_length = 5}
   },
   formatting = {format = lspkind.cmp_format()},
-  experimental = {native_menu = false, ghost_text = true}
+  -- view = {entries = 'native'},
+  experimental = {ghost_text = true}
 }
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})

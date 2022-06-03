@@ -96,16 +96,6 @@ return packer.startup(function(use)
   use {'hrsh7th/cmp-path'}
   use {'hrsh7th/cmp-nvim-lua'}
   use {'hrsh7th/cmp-nvim-lsp'}
-  --- luasnip
-  -- use {'saadparwaiz1/cmp_luasnip'}
-  -- use {
-  --   'L3MON4D3/LuaSnip',
-  --   after = 'nvim-cmp',
-  --   config = function()
-  --     require('config.luasnip')
-  --   end
-  -- }
-  ---
   use {
     'SirVer/ultisnips',
     config = function()
