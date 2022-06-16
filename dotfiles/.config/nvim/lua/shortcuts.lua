@@ -109,6 +109,9 @@ nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
 nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
 nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
+-- vim-test
+nnoremap("<leader>t", ":TestNearest<CR>", {silent = true})
+
 -- DAP
 nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
 nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})

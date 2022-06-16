@@ -16,7 +16,7 @@ else
   vim.opt.autoread = true
 
   vim.opt.backspace = {"indent", "eol", "start"}
-  vim.opt.cmdheight = 1
+  vim.opt.cmdheight = 0
   vim.opt.colorcolumn = "101"
   vim.opt.encoding = "utf-8"
   vim.opt.fileencoding = "utf-8"

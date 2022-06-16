@@ -16,11 +16,6 @@
     "black",
     "flake8",
     "isort",
-    "pyls-flake8",
-    "pyls-isort",
-    "pylsp-rope",
-    "python-lsp-black",
-    "python-lsp-server[all]",
     "jedi-language-server"
   ],
   "npm": [

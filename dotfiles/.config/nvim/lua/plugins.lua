@@ -83,6 +83,7 @@ return packer.startup(function(use)
       require("Comment").setup()
     end
   }
+  use 'vim-test/vim-test'
 
   -- Completion
   use {
