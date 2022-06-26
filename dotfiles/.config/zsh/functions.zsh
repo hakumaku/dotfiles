@@ -26,6 +26,11 @@ function _fzf_cd {
 }
 alias f='cd $(_fzf_cd)'
 
+function webp {
+  magick mogrify -format jpg *.webp \
+    && rm -rf *.webp
+}
+
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -65,4 +70,3 @@ fzf_commit_wo_view() {
     --format=format:"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)" $@ \
     | fzf --ansi --no-sort --layout=reverse --tiebreak=index
 }
-

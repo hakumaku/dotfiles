@@ -12,10 +12,10 @@ install_extra_packages() {
 
   msg info "upgrading pip"
   pip install --quiet --user --upgrade pip
-  if ! commnd -v nvm &>/dev/null; then
+  if ! command -v nvm &>/dev/null; then
     msg info "installing nvm"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    nvm install node
+    # nvm install node
   fi
   msg info "upgrading npm"
   npm install --silent --location=global npm@latest

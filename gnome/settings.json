@@ -120,9 +120,11 @@
       "jetbrains-clion.desktop:2",
       "jetbrains-pycharm.desktop:2",
       "jetbrains-webstorm.desktop:2",
+      "jetbrains-datagrip.desktop:2",
       "firefox.desktop:3",
       "slack.desktop:4",
-      "thunderbird.desktop:5",
+      "Mailspring.desktop:5",
+      "todoist.desktop:6",
       "spotify.desktop:7",
       "steam.desktop:8"
     ]

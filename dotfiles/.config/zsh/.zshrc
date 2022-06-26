@@ -45,10 +45,10 @@ source $XDG_DATA_HOME/repositories/powerlevel10k/powerlevel10k.zsh-theme
 
 # zsh-autosuggestions
 source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh-syntax-highlighting
-source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-vi-mode
 source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# zsh-syntax-highlighting
+source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 function _zsh_vi_mode_init() {
   if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
