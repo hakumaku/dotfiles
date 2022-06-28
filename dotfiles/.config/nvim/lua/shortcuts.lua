@@ -152,12 +152,13 @@ nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gj", ":diffget //2<CR>")
 nnoremap("<leader>gk", ":diffget //3<CR>")
 nnoremap("<leader>gl", ":vertical G log<CR>")
-nnoremap("<leader>gp", ":echo 'Git pull'<bar>:Git pull<CR>")
-nnoremap("<leader>gP", ":echo 'Git push'<bar>:Git push<CR>")
 
 nnoremap("<leader>gs", ":vertical Git<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
+nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
+nnoremap("]c", ":Gitsigns next_hunk<CR>")
+nnoremap("[c", ":Gitsigns prev_hunk<CR>")
 
 -- nvim-toggleterm.lua
 ToggleTerm = {__term = {}}
