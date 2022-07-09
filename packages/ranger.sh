@@ -15,7 +15,7 @@ install_ueberzug() {
   CC="cc -mavx2" pip install --quiet -U --force-reinstall pillow-simd
 
   msg info "installing ueberzug"
-  pip install --quiet ueberzug
+  pip install --quiet --user ueberzug
 }
 
 config_ranger() {
