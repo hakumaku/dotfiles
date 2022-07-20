@@ -2,6 +2,8 @@
 HISTFILE=$HOME/.cache/.zsh_histfile
 HISTSIZE=500
 SAVEHIST=500
+# Auto completions path
+fpath+=${XDG_DATA_HOME}/zsh/site-functions
 # zsh basic settings
 # compinit: advanced tab-completion
 # promptinit: advanced prompt support
