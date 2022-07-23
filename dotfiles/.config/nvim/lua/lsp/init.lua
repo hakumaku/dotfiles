@@ -38,6 +38,7 @@ end
 local servers = {
   -- clangd-extensions invoke this statement automatically.
   -- ['clangd'] = require('lsp.clangd'),
+  ['rust_analyzer'] = require('lsp.rust_analyzer'),
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
   -- ['pylsp'] = require('lsp.pylsp'),
@@ -56,6 +57,7 @@ for lsp, setup in pairs(servers) do
   lspconfig[lsp].setup(setup)
 end
 require('lsp.clangd-extensions')
+require('rust-tools').setup({})
 
 -- https://github.com/neovim/neovim/blob/master/runtime/plugin/diagnostic.vim
 vim.fn.sign_define('DiagnosticSignError', {

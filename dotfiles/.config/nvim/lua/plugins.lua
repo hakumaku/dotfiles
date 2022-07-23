@@ -108,6 +108,9 @@ return packer.startup(function(use)
   -- clangd extension
   use {'p00f/clangd_extensions.nvim'}
 
+  -- rust extension
+  use {'simrat39/rust-tools.nvim'}
+
   -- DAP
   use {
     'mfussenegger/nvim-dap',
@@ -146,6 +149,12 @@ return packer.startup(function(use)
       require("config.lspkind")
     end
   }
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end
+  })
   use {
     'akinsho/bufferline.nvim',
     config = function()
