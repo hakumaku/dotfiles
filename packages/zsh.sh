@@ -8,6 +8,7 @@ clone_or_pull_zsh_plugins() {
     "zsh-users/zsh-syntax-highlighting.git"
     "jeffreytse/zsh-vi-mode.git"
     "zsh-users/zsh-autosuggestions.git"
+    "Aloxaf/fzf-tab"
   )
 
   for repo in ${repos[@]}; do

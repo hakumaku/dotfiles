@@ -6,7 +6,10 @@
     "bat",
     "fd-find",
     "ripgrep",
-    "bottom"
+    "bottom",
+    "du-dust",
+    "difftastic",
+    "onefetch"
   ],
   "pip": [
     "pynvim",

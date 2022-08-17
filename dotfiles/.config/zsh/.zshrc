@@ -51,6 +51,8 @@ source $XDG_DATA_HOME/repositories/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $XDG_DATA_HOME/repositories/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # zsh-syntax-highlighting
 source $XDG_DATA_HOME/repositories/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# fzf-tab
+source $XDG_DATA_HOME/repositories/fzf-tab/fzf-tab.plugin.zsh
 
 function _zsh_vi_mode_init() {
   if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
