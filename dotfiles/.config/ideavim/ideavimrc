@@ -70,6 +70,7 @@ nmap [c <Action>(VcsShowPrevChangeMarker)
 nmap \f <Action>(ReformatCode)
 nmap \u <Action>(FindUsages)
 nmap \r <Action>(RenameElement)
+nmap \R <Action>(Refactorings.QuickListPopupAction)
 
 nmap \e <Action>(Run)
 nmap \d <Action>(Debug)
