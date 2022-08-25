@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 change_config() {
-  local path="$(find ~/.mozilla/firefox -name *.default-release -type d)"
+  local path="$(find ~/.mozilla/firefox -name *.default-release -type d)/prefs.js"
 
   local configs=(
     "toolkit.legacyUserProfileCustomizations.stylesheets"
