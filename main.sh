@@ -55,6 +55,9 @@ main() {
       "clang")
         exec ./$DISTRO/clang.sh
         ;;
+      "firefox")
+        exec ./packages/firefox.sh
+        ;;
       "fzf")
         exec ./packages/fzf.sh
         ;;

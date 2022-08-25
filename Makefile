@@ -1,4 +1,5 @@
-.PHONY: list aur cargo fcitx fonts cmake clang fzf icons \
+.PHONY: list aur cargo fcitx fonts cmake clang \
+	firefox fzf icons \
 	lazygit lazydocker lua \
 	mpv numix nvim neovim shfmt sh steam \
 	ranger rofi streamlink tmux \
@@ -21,6 +22,9 @@ cmake:
 
 clang:
 	@./main.sh clang
+
+firefox:
+	@./main.sh firefox
 
 fzf:
 	@./main.sh fzf
