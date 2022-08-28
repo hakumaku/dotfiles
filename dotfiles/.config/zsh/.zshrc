@@ -35,6 +35,12 @@ export VISUAL="$EDITOR"
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+# pyenv (https://github.com/pyenv/pyenv)
+export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+if command -v pyenv >/dev/null; then
+  eval "$(pyenv init -)"
+fi
+
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
 source "$ZDOTDIR/dotfiles.zsh"
