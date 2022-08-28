@@ -299,8 +299,15 @@ window,
   background: #5c6370 !important;
 }
 
+/* show only icons */
 .tabbrowser-tab[fadein]:not([selected]):not([pinned]) {
-  max-width: var(--uc-inactive-tab-width) !important;
+  /* max-width: var(--uc-inactive-tab-width) !important; */
+  max-width: 0px !important;
+  min-width: 32px !important;
+}
+
+.tabbrowser-tab[fadein]:not([selected]):not([pinned]) .tab-text.tab-label {
+  display: none;
 }
 
 /* container tabs indicator */
