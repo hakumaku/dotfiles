@@ -149,12 +149,6 @@ return packer.startup(function(use)
       require("config.lspkind")
     end
   }
-  use({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end
-  })
   use {
     'akinsho/bufferline.nvim',
     config = function()
