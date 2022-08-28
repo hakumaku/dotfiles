@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 change_config() {
+  # TODO: intially lines are empty
   local path="$(find ~/.mozilla/firefox -name *.default-release -type d)/prefs.js"
 
   local configs=(
@@ -16,16 +17,15 @@ change_config() {
 
 }
 
-download_cascade() {
+copy_userchrome() {
   local path="$(find ~/.mozilla/firefox -name *.default-release -type d)"
 
   if [[ ! -d $path/chrome ]]; then
       mkdir -p $path/chrome
   fi
 
-  curl -L https://raw.githubusercontent.com/andreasgrafen/cascade/main/userChrome.css \
-      -o $path/chrome/userChrome.css
+  ln -s "$RESOURCE/userChrome.css" "$path/chrome"
 }
 
 change_config
-download_cascade
+copy_userchrome

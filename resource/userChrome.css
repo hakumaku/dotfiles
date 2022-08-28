@@ -296,7 +296,9 @@ window,
 /* adaptive tab width */
 .tabbrowser-tab[selected][fadein]:not([pinned]) {
   max-width: var(--uc-active-tab-width) !important;
+  background: #5c6370 !important;
 }
+
 .tabbrowser-tab[fadein]:not([selected]):not([pinned]) {
   max-width: var(--uc-inactive-tab-width) !important;
 }
