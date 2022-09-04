@@ -18,6 +18,7 @@ install_cargo_utilities() {
   get_packge_list cargo packages
 
   msg info "${packages[*]}"
+  rustup update
   cargo install --quiet ${packages[@]}
 
   # Place Alacritty.desktop to applications
