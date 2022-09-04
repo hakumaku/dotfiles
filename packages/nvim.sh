@@ -6,6 +6,7 @@ install_extra_packages() {
   msg info "installing extra packages for nvim"
   install_python_dev
   install_typescript_dev
+  install_devops_dev
 }
 
 clone_or_pull_lua_formatter() {
@@ -53,6 +54,29 @@ install_typescript_dev() {
     cmd="update"
   fi
   npm ${cmd} --silent --location=global npm@latest ${npm_packages[@]}
+}
+
+install_devops_dev() {
+  local packages=(
+    "terraform"
+    "kubectl"
+    "k9s"
+  )
+  local aur_packages=(
+    "terraform-docs-bin.git"
+    "terraform-lsp.git"
+  )
+
+  for pkg in ${aur_packages[@]}; do
+    msg info "installing $pkg"
+    clone_or_pull_aur $pkg
+    makepkg --syncdeps --install --log --noprogressbar --noconfirm
+    clone_or_pull_done
+  done
+
+  sudo pacman -Syq ${packages[@]}
+
+  pip install --quiet --user awscliv2
 }
 
 install_cpp_dev() {
