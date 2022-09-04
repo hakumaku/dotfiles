@@ -3,33 +3,9 @@
 set -euo pipefail
 
 install_extra_packages() {
-  local python_packages=()
-  get_packge_list pip python_packages
-  local npm_packages=()
-  get_packge_list npm npm_packages
-
-  # TODO: gdb, clang, lldb
-
-  msg info "upgrading pip"
-  pip install --quiet --user --upgrade pip
-  if [[ ! -f "${XDG_CONFIG_HOME}/nvm/nvm.sh" ]]; then
-    msg info "installing nvm"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    nvm install node
-  fi
-  msg info "upgrading npm"
-  npm install --silent --location=global npm@latest
-
   msg info "installing extra packages for nvim"
-  msg info "pip: ${python_packages[*]}"
-  msg info "npm: ${npm_packages[*]}"
-  if ! command -v clang &>/dev/null; then
-    pip install --quiet --user --upgrade ${python_packages[@]}
-    npm install --silent --save-dev --save-exact --location=global ${npm_packages[@]}
-  else
-    pip install --quiet --user --upgrade ${python_packages[@]}
-    npm update --silent --location=global ${npm_packages[@]}
-  fi
+  install_python_dev
+  install_typescript_dev
 }
 
 clone_or_pull_lua_formatter() {
@@ -42,6 +18,46 @@ clone_or_pull_lua_formatter() {
   msg info "cmake --install"
   sudo cmake --install "$cwd/build" >/dev/null 2>&1
   clone_or_pull_done
+}
+
+install_python_dev() {
+  local python_packages=()
+  get_packge_list pip python_packages
+  msg info "pip: ${python_packages[*]}"
+  msg info "updating pip"
+  pip install --quiet --user --upgrade pip ${python_packages[@]}
+}
+
+install_typescript_dev() {
+  if [[ ! -f "${XDG_CONFIG_HOME}/nvm/nvm.sh" ]]; then
+    msg info "installing nvm"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    nvm install node
+  fi
+
+  local npm_packages=()
+  get_packge_list npm npm_packages
+  msg info "npm: ${npm_packages[*]}"
+  msg info "updating npm"
+  export NVM_DIR=$(printf %s "${XDG_CONFIG_HOME}/nvm")
+  if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+    PREFIX= . "$NVM_DIR/nvm.sh"
+  else
+    msg error "cannot load nvm.sh"
+  fi
+
+  local cmd=""
+  if ! command -v prettier &>/dev/null; then
+    cmd="install"
+  else
+    cmd="update"
+  fi
+  npm ${cmd} --silent --location=global npm@latest ${npm_packages[@]}
+}
+
+install_cpp_dev() {
+  # TODO: gdb, clang, lldb
+  echo "TODO!"
 }
 
 clone_or_pull_nvim() {

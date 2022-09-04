@@ -1,7 +1,7 @@
 .PHONY: list aur cargo fcitx fonts cmake clang \
 	firefox fzf icons \
 	lazygit lazydocker lua \
-	mpv numix nvim shfmt sh steam \
+	mpv numix nvim shfmt steam \
 	ranger rofi streamlink tmux \
 	youtube xbox zsh
 
