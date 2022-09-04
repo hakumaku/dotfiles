@@ -173,15 +173,6 @@ schemes:
       magenta: '0xd33682' # magenta
       cyan:    '0x2aa198' # cyan
       white:   '0xeee8d5' # base2
-# bright:
-#   black:   '#002b36' # base03
-#   red:     '#cb4b16' # orange
-#   green:   '#586e75' # base01
-#   yellow:  '#657b83' # base00
-#   blue:    '#839496' # base0
-#   magenta: '#6c71c4' # violet
-#   cyan:    '#93a1a1' # base1
-#   white:   '#fdf6e3' # base3
 
   gruvbox_light: &gruvbox_light
     # Bright colors
@@ -212,23 +203,6 @@ schemes:
       magenta: '0xb16286'
       cyan:    '0x689d6a'
       white:   '0x7c6f64'
-
-    # Bright colors
-    bright:
-      black:   '0x928374'
-      red:     '0x9d0006'
-      green:   '0x79740e'
-      yellow:  '0xb57614'
-      blue:    '0x076678'
-      magenta: '0x8f3f71'
-      cyan:    '0x427b58'
-      white:   '0x3c3836'
-    # Default colors
-    primary:
-      # hard contrast: background = '0x1d2021'
-      background: '0x282828'
-      # soft contrast: background = '0x32302f'
-      foreground: '0xebdbb2'
 
   gruvbox_dark: &gruvbox_dark
     # Normal colors
@@ -314,6 +288,56 @@ schemes:
     indexed_colors:
       - { index: 16, color: '0xd19a66' }
       - { index: 17, color: '0xf65866' }
+  
+  nord: &nord
+    colors:
+      primary:
+        background: '#2e3440'
+        foreground: '#d8dee9'
+        dim_foreground: '#a5abb6'
+      cursor:
+        text: '#2e3440'
+        cursor: '#d8dee9'
+      vi_mode_cursor:
+        text: '#2e3440'
+        cursor: '#d8dee9'
+      selection:
+        text: CellForeground
+        background: '#4c566a'
+      search:
+        matches:
+          foreground: CellBackground
+          background: '#88c0d0'
+        bar:
+          background: '#434c5e'
+          foreground: '#d8dee9'
+      normal:
+        black: '#3b4252'
+        red: '#bf616a'
+        green: '#a3be8c'
+        yellow: '#ebcb8b'
+        blue: '#81a1c1'
+        magenta: '#b48ead'
+        cyan: '#88c0d0'
+        white: '#e5e9f0'
+      bright:
+        black: '#4c566a'
+        red: '#bf616a'
+        green: '#a3be8c'
+        yellow: '#ebcb8b'
+        blue: '#81a1c1'
+        magenta: '#b48ead'
+        cyan: '#8fbcbb'
+        white: '#eceff4'
+      dim:
+        black: '#373e4d'
+        red: '#94545d'
+        green: '#809575'
+        yellow: '#b29e75'
+        blue: '#68809a'
+        magenta: '#8c738c'
+        cyan: '#6d96a5'
+        white: '#aeb3bb'
 # }}}
 colors: *one_dark
 cursor:

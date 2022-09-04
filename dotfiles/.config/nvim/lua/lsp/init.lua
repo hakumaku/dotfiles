@@ -45,7 +45,7 @@ local servers = {
   ['jedi_language_server'] = require('lsp.jedi'),
   ['tsserver'] = require('lsp.tsserver'),
   ['sumneko_lua'] = require('lsp.lua'),
-  ['terraformls'] = require('lsp.terraform'),
+  ['terraform_lsp'] = require('lsp.terraform'),
   ['yamlls'] = require('lsp.yamlls')
 }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
