@@ -28,4 +28,5 @@ if [[ $XDG_SESSION_TYPE != "wayland" ]]; then
   [[ -d $XDG_CONFIG_HOME/X11 ]] && xrdb -DXFT_DPI=$dpi -merge $XDG_CONFIG_HOME/X11/.Xresources
 else
   # wayland
+  echo "foo"
 fi
