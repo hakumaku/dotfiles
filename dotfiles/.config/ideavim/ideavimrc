@@ -72,6 +72,8 @@ nmap \u <Action>(FindUsages)
 nmap \r <Action>(RenameElement)
 nmap \R <Action>(Refactorings.QuickListPopupAction)
 
+vmap \v "_dP
+
 nmap \e <Action>(Run)
 nmap \d <Action>(Debug)
 nmap \E <Action>(RunClass)

@@ -75,6 +75,7 @@ nnoremap("<C-_>", ":set nolist!<Bar>echo 'Show whitespaces'<CR>")
 -- Copy & Paste
 vnoremap("<C-c>", '"+y:echo ' .. "'Yanked to clipboard'<CR>")
 inoremap("<C-v>", '<ESC>"+pa')
+vnoremap("<leader>v", '"_dP')
 
 -- Escape terminal mode
 vim.g.termdebug_useFloatingHover = 0
@@ -180,8 +181,8 @@ function ToggleTerm:toggle(cmd, direction)
 end
 nnoremap("<leader>gg", ":lua ToggleTerm:toggle('lazygit')<CR>")
 nnoremap("<leader>gv", ":lua ToggleTerm:toggle('git view', 'tab')<CR>")
-nnoremap("<leader>c", ":lua ToggleTerm:toggle('lazydocker')<CR>")
-nnoremap("<leader>v", ":lua ToggleTerm:toggle('btm')<CR>")
+nnoremap("<leader>x", ":lua ToggleTerm:toggle('lazydocker')<CR>")
+nnoremap("<leader>z", ":lua ToggleTerm:toggle('btm')<CR>")
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")
