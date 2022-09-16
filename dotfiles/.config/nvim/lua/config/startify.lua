@@ -4,6 +4,7 @@ vim.g.startify_bookmarks = {
   {n = "~/.config/nvim/init.lua"},
   {t = "~/.config/tmux/tmux.conf"},
   {a = "~/.config/alacritty/alacritty.yml"},
+  {k = "~/.config/kitty/kitty.conf"},
   {w = "~/workspace/test"},
   {u = "~/.local/share/ubuntu-fresh/ubuntu/main.sh"},
   {m = "~/.config/awesome/rc.lua"},
