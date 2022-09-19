@@ -106,14 +106,14 @@ get_packge_list() {
 # $3: destination
 # $4: local version
 fetch_from_git() {
-  local url="https://github.com/$1"
+  local url="https://api.github.com/repos/$1/releases/latest"
   local repository="${url##*/}"
   repository="${repository/.git/}"
   local expr="$2"
   local dest="$3"
   local local_version="${4:-}"
 
-  local link="$url/releases/$(curl -Ls "$url/releases/latest" | grep -wo "download/[v]\?.*/$expr")"
+  local link=$(curl -s $url | jq -r ".assets[].browser_download_url | select(match(\"$expr\"))")
   if [[ ! -z $local_version ]]; then
     local remote_version=$(echo $link | sed -rn 's/.*\/v?(.*)\/.*/\1/p')
 
