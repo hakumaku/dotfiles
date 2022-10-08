@@ -8,7 +8,7 @@ config_fcitx() {
     return
   fi
 
-  sudo locale-gen kr, en
+  sudo locale-gen en_US.utf8 ko_KR.utf8
   install_package fcitx
 
   msg info "executing fcitx to generate config"
