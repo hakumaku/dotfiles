@@ -6,7 +6,7 @@ install_extra_packages() {
   msg info "installing extra packages for nvim"
   install_python_dev
   install_typescript_dev
-  install_devops_dev
+  # install_devops_dev
 }
 
 clone_or_pull_lua_formatter() {
@@ -17,7 +17,7 @@ clone_or_pull_lua_formatter() {
   msg info "cmake --build"
   cmake --build "$cwd/build" -j 8 >/dev/null 2>&1
   msg info "cmake --install"
-  sudo cmake --install "$cwd/build" >/dev/null 2>&1
+  sudo -E env "PATH=$PATH" cmake --install "$cwd/build"
   clone_or_pull_done
 }
 
@@ -97,7 +97,7 @@ clone_or_pull_nvim() {
   msg info "make"
   make MIN_LOG_LEVEL=1 CMAKE_BUILD_TYPE=Release >/dev/null 2>&1
   msg info "make install"
-  sudo make install >/dev/null 2>&1
+  sudo -E env "PATH=$PATH" make install >/dev/null 2>&1
   clone_or_pull_done
 
   nvim +PackerSync
