@@ -18,6 +18,9 @@ install_cargo_utilities() {
   get_packge_list cargo packages
 
   msg info "${packages[*]}"
+  if ! command -v rustup &>/dev/null; then
+    source "$CARGO_HOME/env"
+  fi
   rustup update
   cargo install --quiet ${packages[@]}
 
