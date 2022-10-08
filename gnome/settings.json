@@ -117,6 +117,7 @@
   "auto-move-windows": {
     "application-list": [
       "Alacritty.desktop:1",
+      "kitty.desktop:1",
       "jetbrains-clion.desktop:2",
       "jetbrains-pycharm.desktop:2",
       "jetbrains-webstorm.desktop:2",
