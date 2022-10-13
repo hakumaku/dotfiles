@@ -30,6 +30,7 @@ alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keym
 # alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias nvimg="nvim -c 'Git | wincmd o' ."
 alias luamake=$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
+alias kitty_ssh="kitty +kitten ssh"
 
 [ "$TERM" = "xterm-kitty" ] && alias terminfo="echo kitty +kitten ssh"
 [ "$TERM" = "alacritty" ] && alias terminfo="echo curl -sSL https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info | tic -x -"
