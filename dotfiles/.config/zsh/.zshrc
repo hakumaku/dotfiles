@@ -4,6 +4,7 @@ HISTSIZE=500
 SAVEHIST=500
 # Auto completions path
 fpath+=${XDG_DATA_HOME}/zsh/site-functions
+[[ -d $XDG_DATA_HOME/repositories/zsh-completions ]] && fpath+=$XDG_DATA_HOME/repositories/zsh-completions/src
 # zsh basic settings
 # compinit: advanced tab-completion
 # promptinit: advanced prompt support
