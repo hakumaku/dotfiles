@@ -7,7 +7,7 @@
     },
     {
       "name": "Run Terminal",
-      "command": "alacritty",
+      "command": "env GLFW_IM_MODULE=ibus kitty --single-instance",
       "binding": "<Super>Return"
     },
     {
