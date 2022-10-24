@@ -12,7 +12,12 @@ config_fcitx() {
   install_package fcitx
 
   msg info "executing fcitx to generate config"
-  local conf="$HOME/.config/fcitx"
+  if [[ -d "$HOME/.config/fcitx5" ]]; then
+    local conf="$HOME/.config/fcitx5"
+  else
+    local conf="$HOME/.config/fcitx"
+  fi
+
   if [[ ! -d "$conf" ]]; then
     fcitx -d &
     sleep 3
