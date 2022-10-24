@@ -48,9 +48,9 @@ local servers = {
   ['terraform_lsp'] = require('lsp.terraform'),
   ['yamlls'] = require('lsp.yamlls')
 }
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
-                                                                     .protocol
-                                                                     .make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
+                                                                      .protocol
+                                                                      .make_client_capabilities())
 for lsp, setup in pairs(servers) do
   setup.on_attach = on_attach
   setup.capabilities = capabilities
