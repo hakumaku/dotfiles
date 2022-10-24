@@ -155,11 +155,13 @@ augroup file_vim
 	au FileType vim setlocal foldmethod=marker
 	au FileType vim setlocal foldmarker={{{,}}}
 augroup END
-
-augroup file_terraform
-    autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
-augroup END
 ]])
+
+  -- Terraform
+  vim.api.nvim_create_autocmd({"BufWritePre"}, {
+    pattern = {"*.tf", "*.tfvars"},
+    callback = vim.lsp.buf.format
+  })
 
   utils = require("utils.functions")
   require("plugins")
