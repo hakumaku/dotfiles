@@ -29,6 +29,9 @@
   "spotify": {
     "url": "spotify.git"
   },
+  "appimagelauncher": {
+    "url": "appimagelauncher.git"
+  },
   "todoist": {
     "url": "todoist-appimage.git"
   }
