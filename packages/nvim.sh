@@ -29,10 +29,20 @@ install_python_dev() {
   pip install --quiet --user --upgrade pip ${python_packages[@]}
 }
 
+load_nvm_scripts() {
+  export NVM_DIR=$(printf %s "${XDG_CONFIG_HOME}/nvm")
+  if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+    PREFIX= . "$NVM_DIR/nvm.sh"
+  else
+    msg error "cannot load nvm.sh"
+  fi
+}
+
 install_typescript_dev() {
   if [[ ! -f "${XDG_CONFIG_HOME}/nvm/nvm.sh" ]]; then
     msg info "installing nvm"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    load_nvm_scripts
     nvm install node
   fi
 
@@ -40,12 +50,7 @@ install_typescript_dev() {
   get_packge_list npm npm_packages
   msg info "npm: ${npm_packages[*]}"
   msg info "updating npm"
-  export NVM_DIR=$(printf %s "${XDG_CONFIG_HOME}/nvm")
-  if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-    PREFIX= . "$NVM_DIR/nvm.sh"
-  else
-    msg error "cannot load nvm.sh"
-  fi
+  load_nvm_scripts
 
   local cmd=""
   if ! command -v prettier &>/dev/null; then
