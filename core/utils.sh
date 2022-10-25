@@ -198,6 +198,9 @@ assert_config() {
     return
   fi
 
+  mkdir -p ~/.local/bin
+  mkdir ~p ~/.local/share/gnupg
+
   install_dependencies init
 
   # Move config files to XDG_CONFIG_HOME.
