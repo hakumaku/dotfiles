@@ -98,7 +98,7 @@ fi
 bindkey -s '^w9' "cd $XDG_DATA_HOME/dotfiles^M"
 bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"
 
-bindkey -s '^wa' "lazygit^M"
-bindkey -s '^wb' "lazydocker^M"
-bindkey -s '^wc' "btm^M"
-bindkey -s '^o' "ranger^M"
+bindkey -s '^wa' "^Ulazygit^M"
+bindkey -s '^wb' "^Ulazydocker^M"
+bindkey -s '^wc' "^Ubtm^M"
+bindkey -s '^o' "^Uranger^M"
