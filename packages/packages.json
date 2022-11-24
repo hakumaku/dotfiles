@@ -17,14 +17,18 @@
     "cmake-language-server",
     "autopep8",
     "black",
-    "flake8",
     "isort",
+    "flake8",
+    "mypy",
     "jedi-language-server"
   ],
   "npm": [
     "neovim",
     "bash-language-server",
     "yaml-language-server",
-    "prettier"
+    "prettier",
+    "eslint",
+    "typescript",
+    "typescript-language-server"
   ]
 }

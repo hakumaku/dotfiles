@@ -105,6 +105,12 @@ return packer.startup(function(use)
   }
   use {'quangnguyen30192/cmp-nvim-ultisnips'}
 
+  -- non-LSP sources to hook into its LSP client
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+  }
+
   -- clangd extension
   use {'p00f/clangd_extensions.nvim'}
 
