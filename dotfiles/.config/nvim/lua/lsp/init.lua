@@ -41,7 +41,6 @@ local servers = {
   ['rust_analyzer'] = require('lsp.rust_analyzer'),
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
-  -- ['pylsp'] = require('lsp.pylsp'),
   ['jedi_language_server'] = require('lsp.jedi'),
   ['tsserver'] = require('lsp.tsserver'),
   ['eslint'] = require('lsp.eslint'),
