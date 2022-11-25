@@ -32,6 +32,13 @@ return packer.startup(function(use)
   use {'mbbill/undotree'}
   -- Development Utilities (Neovim 5.0+)
   use {'neovim/nvim-lspconfig'}
+  -- non-LSP sources to hook into its LSP client
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require("config.null-ls")
+    end
+  }
   use {'nvim-lua/plenary.nvim'}
   use {'nvim-lua/popup.nvim'}
   use {
@@ -43,6 +50,7 @@ return packer.startup(function(use)
   }
   use {
     'nvim-telescope/telescope.nvim',
+    requires = {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
     config = function()
       require("config.telescope")
     end
@@ -88,29 +96,22 @@ return packer.startup(function(use)
   -- Completion
   use {
     'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp'
+    },
     config = function()
       require("config.cmp")
     end
   }
-  use {'hrsh7th/cmp-buffer'}
-  use {'hrsh7th/cmp-cmdline'}
-  use {'hrsh7th/cmp-path'}
-  use {'hrsh7th/cmp-nvim-lua'}
-  use {'hrsh7th/cmp-nvim-lsp'}
   use {
     'SirVer/ultisnips',
+    requires = {'quangnguyen30192/cmp-nvim-ultisnips'},
     config = function()
       require("config.ultisnips")
-    end
-  }
-  use {'quangnguyen30192/cmp-nvim-ultisnips'}
-
-  -- non-LSP sources to hook into its LSP client
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require("config.null-ls")
     end
   }
 
@@ -152,6 +153,12 @@ return packer.startup(function(use)
   -- Look & Feel
   use {'kyazdani42/nvim-web-devicons'}
   use {'folke/lsp-colors.nvim'}
+  use {
+    'folke/todo-comments.nvim',
+    config = function()
+      require("config.todo")
+    end
+  }
   use {
     'onsails/lspkind-nvim',
     config = function()
