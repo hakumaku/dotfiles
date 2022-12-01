@@ -1,6 +1,8 @@
 [user]
     email = gentlebuuny@gmail.com
     name = haku
+[includeIf "gitdir:~/workspace/gitlab/"]
+    path = ~/.config/git/gitlab/config
 [core]
     editor = nvim
     pager = delta
