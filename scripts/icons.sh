@@ -45,6 +45,22 @@ change_icons() {
         icon="visual-studio-code"
         search_app application "code"
         ;;
+      "mailspring")
+        icon="mailspring"
+        search_app application "mailspring"
+        ;;
+      "todoist")
+        icon="com.todoist.Todoist"
+        search_app application "todoist"
+        ;;
+      "discord")
+        icon="discord"
+        search_app application "discord"
+        ;;
+      "spotify")
+        icon="spotify"
+        search_app application "spotify"
+        ;;
       "zenkit")
         icon="zenkit"
         search_app application "zenkit"
