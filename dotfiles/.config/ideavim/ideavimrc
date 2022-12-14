@@ -1,5 +1,7 @@
 set surround
 set ideajoin
+set ideamarks
+set ideaput
 
 set number
 set scrolloff=5
@@ -8,6 +10,9 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
+
+Plug 'preservim/nerdtree'
+set NERDTree
 
 sethandler <C-A> a:vim i:vim
 sethandler <C-B> a:vim i:vim
