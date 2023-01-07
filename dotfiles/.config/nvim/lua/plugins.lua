@@ -91,7 +91,6 @@ return packer.startup(function(use)
       require("Comment").setup()
     end
   }
-  use 'vim-test/vim-test'
 
   -- Completion
   use {
@@ -101,7 +100,8 @@ return packer.startup(function(use)
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp'
+      'hrsh7th/cmp-nvim-lsp',
+      'rcarriga/cmp-dap'
     },
     config = function()
       require("config.cmp")
@@ -121,6 +121,26 @@ return packer.startup(function(use)
   -- rust extension
   use {'simrat39/rust-tools.nvim'}
 
+  -- python extension
+  use {'numirias/semshi'}
+
+  -- nvim api
+  use {"folke/neodev.nvim"}
+
+  -- test adopter
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-python"
+      -- "antoinemadec/FixCursorHold.nvim"
+    },
+    config = function()
+      require("config.neotest")
+    end
+  }
+
   -- DAP
   use {
     'mfussenegger/nvim-dap',
@@ -131,7 +151,10 @@ return packer.startup(function(use)
   use {
     'mfussenegger/nvim-dap-python',
     config = function()
-      require('dap-python').setup('python3')
+      require('dap-python').setup('python')
+      -- require('dap-python').resolve_python = function()
+      --   return '/absolute/path/to/python'
+      -- end
     end
   }
   use {

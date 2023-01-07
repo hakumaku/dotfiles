@@ -110,8 +110,13 @@ nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
 nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
 nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
--- vim-test
-nnoremap("<leader>t", ":TestNearest<CR>", {silent = true})
+-- neotest
+nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>", {silent = true})
+nnoremap("<leader>E", ":lua require('neotest').run.run()<CR>", {silent = true})
+nnoremap("<leader>d", ":lua require('neotest').run.run_last({strategy = 'dap'})<CR>", {silent = true})
+nnoremap("<leader>D", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {silent = true})
+nnoremap("<C-w>m", ":lua require('neotest').output.open({enter = true})<CR>", {silent = true})
+nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>", {silent = true})
 
 -- DAP
 nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})

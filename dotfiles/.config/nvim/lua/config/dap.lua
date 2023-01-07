@@ -14,6 +14,14 @@ dap.adapters.lldb = {
   command = '/usr/bin/lldb-vscode',
   name = "lldb"
 }
+
+-- python
+dap.adapters.python = {
+    type = 'executable';
+    command = 'python';
+    args = { '-m', 'debugpy.adapter' };
+}
+
 dap.configurations.cpp = {
   {
     name = "Launch",
