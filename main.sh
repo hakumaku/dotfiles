@@ -71,6 +71,9 @@ main() {
       "kitty")
         exec ./packages/kitty.sh
         ;;
+      "kubeseal")
+        exec ./packages/kubeseal.sh
+        ;;
       "lazydocker")
         exec ./packages/lazydocker.sh
         ;;

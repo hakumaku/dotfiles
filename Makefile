@@ -38,6 +38,9 @@ k9s:
 kitty:
 	@./main.sh kitty
 
+kubeseal:
+	@./main.sh kubeseal
+
 lazydocker:
 	@./main.sh lazydocker
 
