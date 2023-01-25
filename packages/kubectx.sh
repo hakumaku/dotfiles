@@ -2,19 +2,19 @@
 
 set -euo pipefail
 
-repo="bitnami-labs/sealed-secrets"
-expr="kubeseal-.*-linux-amd64.tar.gz$"
+repo="ahmetb/kubectx"
+expr="kubectx_v.*_linux_x86_64.tar.gz"
 
-fetch_from_git_kubeseal() {
+fetch_from_git_kubectx() {
   local tmpdir=$(dirname $(mktemp -u))
-  if command -v kubeseal &>/dev/null; then
-    local local_version=$(kubeseal --version | sed -rn 's/^kubeseal version: ([^,]*).*/\1/p')
+  if command -v kubectx &>/dev/null; then
+    local local_version=$(kubectx --version | sed -rn 's/^([^,]*).*/\1/p')
     fetch_from_git "$repo" "$expr" $tmpdir $local_version
   else
     fetch_from_git "$repo" "$expr" $tmpdir
   fi
 
-  local output="$(compgen -G $tmpdir/kubeseal*)"
+  local output="$(compgen -G $tmpdir/kubectx*)"
   if [[ -f $output ]]; then
     msg info "extracting binary"
     tar -xzf $output --directory "$HOME/.local/bin"
@@ -22,9 +22,9 @@ fetch_from_git_kubeseal() {
     rm "$HOME/.local/bin/LICENSE" "$HOME/.local/bin/README.md"
   fi
 
-  whereis kubeseal
-  kubeseal --version
+  whereis kubectx
+  kubectx --version
 }
 
-fetch_from_git_kubeseal
+fetch_from_git_kubectx
 

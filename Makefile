@@ -38,6 +38,9 @@ k9s:
 kitty:
 	@./main.sh kitty
 
+kubectx:
+	@./main.sh kubectx
+
 kubeseal:
 	@./main.sh kubeseal
 

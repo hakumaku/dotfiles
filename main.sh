@@ -71,6 +71,9 @@ main() {
       "kitty")
         exec ./packages/kitty.sh
         ;;
+      "kubectx")
+        exec ./packages/kubectx.sh
+        ;;
       "kubeseal")
         exec ./packages/kubeseal.sh
         ;;
