@@ -3,7 +3,7 @@
 set -euo pipefail
 
 repo="derailed/k9s"
-expr="k9s_Linux_x86_64.tar.gz"
+expr="k9s_Linux_amd64.tar.gz"
 
 fetch_from_git_k9s() {
   local tmpdir=$(dirname $(mktemp -u))
