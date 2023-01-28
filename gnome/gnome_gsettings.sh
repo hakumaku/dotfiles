@@ -32,7 +32,7 @@ set_gsettings() {
   gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>M']"
   gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>comma']"
   gsettings set org.gnome.shell.keybindings focus-active-notification "['<Super>period']"
-  gsettings set org.gnome.shell.keybindings toggle-application-view "[]"
+  gsettings set org.gnome.shell.keybindings toggle-application-view "['<Super>semicolon']"
 
   gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
   gsettings set org.gnome.desktop.wm.keybindings switch-input-source "[]"
