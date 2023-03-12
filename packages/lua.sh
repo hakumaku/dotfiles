@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-repo="sumneko/lua-language-server"
+repo="luals/lua-language-server"
 expr="lua-language-server-.*-linux-x64.tar.gz"
 
 default_dir="$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server"

@@ -82,6 +82,10 @@ change_icons() {
         icon="nvidia-settings"
         search_app application "nvidia-settings"
         ;;
+      "obsidian")
+        icon="obsidian"
+        search_app application "obsidian"
+        ;;
       "gimp")
         icon="gimp"
         search_app application "gimp"
