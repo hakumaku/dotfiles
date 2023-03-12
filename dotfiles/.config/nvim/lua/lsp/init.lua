@@ -50,7 +50,7 @@ local servers = {
   ['jedi_language_server'] = require('lsp.jedi'),
   ['tsserver'] = require('lsp.tsserver'),
   ['eslint'] = require('lsp.eslint'),
-  ['lua_lsp'] = require('lsp.lua'),
+  ['lua_ls'] = require('lsp.lua'),
   ['terraformls'] = require('lsp.terraform'),
   ['yamlls'] = require('lsp.yamlls')
 }
