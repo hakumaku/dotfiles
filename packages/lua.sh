@@ -30,7 +30,7 @@ fetch_from_git_lua_language_server() {
 
   if [[ ! -f $install_path ]]; then
     msg info "creating binary script to execute lua-language-server"
-    cp "${SCRIPT_HOME}/lua-language-server" $install_path
+    cp "${SCRIPT_HOME}/scripts/lua-language-server" $install_path
     chmod +x $install_path
   fi
 
