@@ -95,8 +95,8 @@ if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && 
   fi
 fi
 
-zle -N fzf_cd_gitlab
-bindkey '^]' fzf_cd_gitlab
+zle -N _fzf_cd_gitlab
+bindkey '^]' _fzf_cd_gitlab
 
 zle -N _fg_bg
 bindkey '^z' _fg_bg

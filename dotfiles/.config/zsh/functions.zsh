@@ -51,7 +51,7 @@ function _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-function fzf_commit() {
+function _fzf_commit() {
   local filter
   if [ -n $@ ] && [ -e $@ ]; then
     filter="-- $@"
@@ -66,7 +66,7 @@ function fzf_commit() {
       --preview-window=right:50%
 }
 
-function fzf_commit_wo_view() {
+function _fzf_commit_wo_view() {
   local filter
   if [ -n $@ ] && [ -e $@ ]; then
     filter="-- $@"
@@ -79,7 +79,7 @@ function fzf_commit_wo_view() {
     | fzf --ansi --no-sort --layout=reverse --tiebreak=index
 }
 
-function fzf_cd_gitlab() {
+function _fzf_cd_gitlab() {
   cd $(find $HOME/workspace/gitlab -maxdepth 1 -type d | fzf)
   zle accept-line
 }
