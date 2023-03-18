@@ -8,7 +8,7 @@ expr="k9s_Linux_amd64.tar.gz"
 fetch_from_git_k9s() {
   local tmpdir=$(dirname $(mktemp -u))
   if command -v k9s &>/dev/null; then
-    local local_version=$(k9s version | sed -rn 's/^Version: ([^,]*).*/\1/p')
+    local local_version=$(k9s version | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | sed -rn 's/^Version:\s*(.*)/\1/p')
     fetch_from_git "$repo" "$expr" $tmpdir $local_version
   else
     fetch_from_git "$repo" "$expr" $tmpdir
@@ -27,4 +27,3 @@ fetch_from_git_k9s() {
 }
 
 fetch_from_git_k9s
-
