@@ -80,6 +80,6 @@ function _fzf_commit_wo_view() {
 }
 
 function _fzf_cd_gitlab() {
-  cd $(find $HOME/workspace/gitlab -maxdepth 1 -type d | fzf)
+  cd $(find $HOME/workspace/gitlab -maxdepth 1 -type d | fzf --layout=reverse)
   zle accept-line
 }
