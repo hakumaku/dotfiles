@@ -80,6 +80,13 @@ return packer.startup(function(use)
     end
   }
   use {
+    'stevearc/aerial.nvim',
+    config = function()
+      require("config.aerial")
+    end
+  }
+
+  use {
     'akinsho/toggleterm.nvim',
     config = function()
       require("config.toggleterm")

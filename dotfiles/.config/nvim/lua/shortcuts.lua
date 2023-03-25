@@ -148,8 +148,10 @@ nnoremap("<C-s>c", ":Telescope git_branches<CR>")
 -- NvimTree
 nnoremap("<C-w>o", ":NvimTreeToggle<CR>")
 
--- Vista
-nnoremap("<C-w>t", ":Vista!!<CR>")
+-- Aerial
+nnoremap("<C-w>t", ":AerialToggle!<CR>")
+nnoremap("]t", "<cmd>AerialNext<CR>")
+nnoremap("[t", "<cmd>AerialPrev<CR>")
 
 -- trouble.nvim
 nnoremap("<C-w>T", ":TroubleToggle<CR>")

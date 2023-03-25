@@ -46,7 +46,7 @@ local config = {
       normal = {c = {fg = colors.fg, bg = colors.bg}},
       inactive = {c = {fg = colors.fg, bg = colors.bg}}
     },
-    globalstatus = true,
+    globalstatus = true
   },
   sections = {
     -- these are to remove the defaults
@@ -56,7 +56,7 @@ local config = {
     lualine_z = {},
     -- These will be filled later
     lualine_c = {},
-    lualine_x = {}
+    lualine_x = {"aerial"}
   },
   inactive_sections = {
     -- these are to remove the defaults
