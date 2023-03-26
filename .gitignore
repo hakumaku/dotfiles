@@ -31,3 +31,4 @@ vlc-qt-interface.conf
 **/zsh/.zcompdump
 
 package.json
+.luarc.json
