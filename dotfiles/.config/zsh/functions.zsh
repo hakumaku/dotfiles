@@ -1,7 +1,12 @@
 # Run 'ls -a' command everytime after working directory changes
 function chpwd() {
   emulate -L zsh
-  ls -a
+  echo ""
+  COLUMNS=80 exa \
+      --all \
+      --all \
+      --icons \
+      --group-directories-first
 }
 
 # fg-bg toggle via c-z
