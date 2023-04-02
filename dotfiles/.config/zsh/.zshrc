@@ -1,6 +1,9 @@
 if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then
-  if [ -f "${HOME}/.config/environment.d/path.conf" ]; then
-    source "${HOME}/.config/environment.d/path.conf"
+  if [ -d "${HOME}/.config/environment.d" ]; then
+    env_configs=($(ls "$HOME/.config/environment.d"))
+    for env_config in ${env_configs[@]}; do
+        source "$HOME/.config/environment.d/${env_config}"
+    done
   else
     export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
   fi
