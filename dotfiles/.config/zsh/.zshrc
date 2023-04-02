@@ -1,3 +1,10 @@
+if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then
+  if [ -f "${HOME}/.config/environment.d/path.conf" ]; then
+    source "${HOME}/.config/environment.d/path.conf"
+  else
+    export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
+  fi
+fi
 # History settings
 HISTFILE=$HOME/.cache/.zsh_histfile
 HISTSIZE=500
