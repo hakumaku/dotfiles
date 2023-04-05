@@ -5,10 +5,9 @@ vim.g.startify_bookmarks = {
   {t = "~/.config/tmux/tmux.conf"},
   {a = "~/.config/alacritty/alacritty.yml"},
   {k = "~/.config/kitty/kitty.conf"},
-  {w = "~/workspace/test"},
-  {u = "~/.local/share/ubuntu-fresh/ubuntu/main.sh"},
-  {m = "~/.config/awesome/rc.lua"},
-  {c = "~/.config/compton/compton.conf"}
+  {d = "~/.config/dunst/dunstrc"},
+  {w = "~/.config/waybar/config"},
+  {h = "~/.config/hypr/hyprland.conf"},
 }
 vim.g.startify_lists = {
   {header = {'  Bookmarks'}, type = 'bookmarks'},
