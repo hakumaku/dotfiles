@@ -1,0 +1,17 @@
+font="MeslosLGS NF 28"
+prompt="Applications"
+insensitive=true
+mode=drun
+
+allow_images=true
+allow_markup=true
+
+image_size=32
+
+key_up=Control_L-p
+key_down=Control_L-n
+
+orientation=vertical
+halign=fill
+content_halign=fill
+
