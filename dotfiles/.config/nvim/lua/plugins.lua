@@ -209,9 +209,9 @@ return packer.startup(function(use)
     end
   }
   use {
-    'monsonjeremy/onedark.nvim',
+    'olimorris/onedarkpro.nvim',
     config = function()
-      require("config.onedark")
+      require("config.onedarkpro")
     end
   }
   use {
