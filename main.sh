@@ -107,9 +107,6 @@ main() {
       "ranger")
         exec ./packages/ranger.sh
         ;;
-      "rofi")
-        exec ./packages/rofi.sh
-        ;;
       "streamlink")
         exec ./packages/streamlink.sh
         ;;
