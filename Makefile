@@ -2,8 +2,8 @@
 	firefox fzf icons \
 	lazygit lazydocker k9s kitty lua \
 	mpv numix nvim shfmt steam \
-	ranger rofi streamlink tmux \
-	youtube xbox zsh
+	ranger streamlink tmux \
+	youtube xbox zsh git-packages
 
 aur:
 	@./main.sh aur
@@ -71,9 +71,6 @@ steam:
 ranger:
 	@./main.sh ranger
 
-rofi:
-	@./main.sh rofi
-
 streamlink:
 	@./main.sh streamlink
 
@@ -88,6 +85,13 @@ xbox:
 
 zsh:
 	@./main.sh zsh
+
+git-packages:
+	k9s
+	kubectx
+	kubeseal
+	lazygit
+	lazydocker
 
 list:
 	@LC_ALL=C $(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | grep -E -v -e '^[^[:alnum:]]' -e '^$@$$'
