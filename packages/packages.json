@@ -1,20 +1,6 @@
 {
-  "cargo": [
-    "ripgrep",
-    "bottom",
-    "du-dust",
-    "difftastic"
-  ],
   "pip": [
-    "pynvim",
-    "cmake-format",
-    "cmake-language-server",
-    "autopep8",
-    "black",
-    "isort",
-    "flake8",
-    "mypy",
-    "jedi-language-server"
+    "pynvim"
   ],
   "npm": [
     "neovim",
