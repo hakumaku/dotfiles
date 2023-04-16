@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Enable /usr/local/lib/
-#     echo '/usr/local/lib' > /etc/ld.so.conf.d/usrlocal.conf
-#     ldconfig
 export PREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/repositories"
 export SCRIPT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/$(basename $(git rev-parse --show-toplevel))"
 export RESOURCE="$SCRIPT_HOME/resource"
@@ -49,9 +46,6 @@ main() {
       "fonts")
         exec ./packages/fonts.sh
         ;;
-      "cmake")
-        exec ./packages/cmake.sh
-        ;;
       "clang")
         exec ./$DISTRO/clang.sh
         ;;
@@ -65,56 +59,17 @@ main() {
         # TODO
         exec ./packages/icons.sh "$@"
         ;;
-      "k9s")
-        exec ./packages/k9s.sh
-        ;;
       "kitty")
         exec ./packages/kitty.sh
-        ;;
-      "kubectx")
-        exec ./packages/kubectx.sh
-        ;;
-      "kubeseal")
-        exec ./packages/kubeseal.sh
-        ;;
-      "lazydocker")
-        exec ./packages/lazydocker.sh
-        ;;
-      "lazygit")
-        exec ./packages/lazygit.sh
         ;;
       "lua")
         exec ./packages/lua.sh
         ;;
-      "mpv")
-        exec ./packages/mpv.sh
-        ;;
       "numix")
         exec ./$DISTRO/numix.sh
         ;;
-      "nvidia")
-        exec ./packages/nvidia.sh
-        ;;
       "nvim" | "neovim")
         exec ./packages/nvim.sh
-        ;;
-      "shfmt")
-        exec ./packages/shfmt.sh
-        ;;
-      "steam")
-        exec ./packages/steam.sh
-        ;;
-      "ranger")
-        exec ./packages/ranger.sh
-        ;;
-      "streamlink")
-        exec ./packages/streamlink.sh
-        ;;
-      "tmux")
-        exec ./packages/tmux.sh
-        ;;
-      "youtube-dl" | "youtube" | "yt")
-        exec ./packages/youtube-dl.sh
         ;;
       "xpadneo" | "xbox")
         exec ./packages/xpadneo.sh

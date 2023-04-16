@@ -2,9 +2,6 @@
   "chrome-gnome-shell": {
     "url": "chrome-gnome-shell.git"
   },
-  "gitkraken": {
-    "url": "gitkraken.git"
-  },
   "google-chrome": {
     "url": "google-chrome.git"
   },
@@ -14,25 +11,10 @@
   "jetbrains-toolbox": {
     "url": "jetbrains-toolbox.git"
   },
-  "mailspring": {
-    "url": "mailspring.git"
-  },
   "numix-icon-theme": {
     "url": "numix-icon-theme-git.git"
   },
   "numix-circle-icon-theme": {
     "url": "numix-circle-icon-theme-git.git"
-  },
-  "slack": {
-    "url": "slack-desktop.git"
-  },
-  "spotify": {
-    "url": "spotify.git"
-  },
-  "appimagelauncher": {
-    "url": "appimagelauncher.git"
-  },
-  "todoist": {
-    "url": "todoist-appimage.git"
   }
 }

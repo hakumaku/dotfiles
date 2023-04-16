@@ -1,0 +1,169 @@
+{
+  "data": [
+    {
+      "bin": "k9s",
+      "repo": "derailed/k9s",
+      "package_pattern": "k9s_Linux_amd64.tar.gz",
+      "version_command": [
+        "k9s",
+        "version"
+      ],
+      "version_pattern": "Version:\\s*(.*)",
+      "version_strip_pattern": "\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]"
+    },
+    {
+      "bin": "kubectx",
+      "repo": "ahmetb/kubectx",
+      "package_pattern": "kubectx_v.*_linux_x86_64.tar.gz",
+      "version_command": [
+        "kubectx",
+        "--version"
+      ],
+      "version_pattern": "([^,]*).*",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "kubeseal",
+      "repo": "bitnami-labs/sealed-secrets",
+      "package_pattern": "kubeseal-.*-linux-amd64.tar.gz$",
+      "version_command": [
+        "kubeseal",
+        "--version"
+      ],
+      "version_pattern": "kubeseal version: ([^,]*).*",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "shfmt",
+      "repo": "mvdan/sh",
+      "package_pattern": "shfmt_v.*_linux_amd64",
+      "version_command": [
+        "shfmt",
+        "--version"
+      ],
+      "version_pattern": "(.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "onefetch",
+      "repo": "o2sh/onefetch",
+      "package_pattern": "onefetch-linux.tar.gz",
+      "version_command": [
+        "onefetch",
+        "--version"
+      ],
+      "version_pattern": "onefetch (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "lazygit",
+      "repo": "jesseduffield/lazygit",
+      "package_pattern": "lazygit_.*_Linux_x86_64.tar.gz",
+      "version_command": [
+        "lazygit",
+        "--version"
+      ],
+      "version_pattern": "version=([^,]*),.*",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "lazydocker",
+      "repo": "jesseduffield/lazydocker",
+      "package_pattern": "lazydocker_.*_Linux_x86_64.tar.gz",
+      "version_command": [
+        "lazydocker",
+        "--version"
+      ],
+      "version_pattern": "Version: ([^,]*).*",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "exa",
+      "repo": "ogham/exa",
+      "package_pattern": "exa-linux-x86_64-v.*.zip",
+      "version_command": [
+        "exa",
+        "--version"
+      ],
+      "version_pattern": "^(v[\\.\\d]*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "bat",
+      "repo": "sharkdp/bat",
+      "package_pattern": "bat-v.*-x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "bat",
+        "--version"
+      ],
+      "version_pattern": "bat ([\\.\\d]*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "fd",
+      "repo": "sharkdp/fd",
+      "package_pattern": "fd-v.*-x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "fd",
+        "--version"
+      ],
+      "version_pattern": "fd (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "rg",
+      "repo": "BurntSushi/ripgrep",
+      "package_pattern": "ripgrep-.*-x86_64-unknown-linux-musl.tar.gz",
+      "version_command": [
+        "rg",
+        "--version"
+      ],
+      "version_pattern": "ripgrep (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "btm",
+      "repo": "ClementTsang/bottom",
+      "package_pattern": "bottom_x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "btm",
+        "--version"
+      ],
+      "version_pattern": "btm (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "dust",
+      "repo": "bootandy/dust",
+      "package_pattern": "dust-v.*-x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "dust",
+        "--version"
+      ],
+      "version_pattern": "Dust (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "difft",
+      "repo": "Wilfred/difftastic",
+      "package_pattern": "difft-x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "difft",
+        "--version"
+      ],
+      "version_pattern": "Difftastic (.*)",
+      "version_strip_pattern": null
+    },
+    {
+      "bin": "delta",
+      "repo": "dandavison/delta",
+      "package_pattern": "delta-.*-x86_64-unknown-linux-gnu.tar.gz",
+      "version_command": [
+        "delta",
+        "--version"
+      ],
+      "version_pattern": "delta (.*)",
+      "version_strip_pattern": null
+    }
+  ]
+}

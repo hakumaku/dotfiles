@@ -6,11 +6,6 @@ install_aur_packages() {
   local packages=()
   readarray -t packages < <(jq -r 'keys' $AUR_PKGINFO | tr -d '[]," ')
 
-  # Spotify gpg key issue
-  if ! command -v spotify &>/dev/null; then
-    curl -sS "https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg" | gpg --import -
-  fi
-
   for pkg in ${packages[@]}; do
     msg info "installing $pkg"
     local url=$(jq -r '.["'"${pkg}"'"].url' $AUR_PKGINFO)

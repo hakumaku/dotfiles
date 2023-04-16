@@ -32,3 +32,5 @@ vlc-qt-interface.conf
 
 package.json
 .luarc.json
+
+**/__pycache__

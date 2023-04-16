@@ -1,15 +1,9 @@
 {
   "cargo": [
-    "alacritty",
-    "git-delta",
-    "exa",
-    "bat",
-    "fd-find",
     "ripgrep",
     "bottom",
     "du-dust",
-    "difftastic",
-    "onefetch"
+    "difftastic"
   ],
   "pip": [
     "pynvim",

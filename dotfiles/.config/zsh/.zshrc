@@ -2,7 +2,7 @@ if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; the
   if [ -d "${HOME}/.config/environment.d" ]; then
     env_configs=($(ls "$HOME/.config/environment.d"))
     for env_config in ${env_configs[@]}; do
-        source "$HOME/.config/environment.d/${env_config}"
+      source "$HOME/.config/environment.d/${env_config}"
     done
   else
     export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
@@ -97,13 +97,9 @@ function _zsh_vi_mode_init() {
 zvm_after_init_commands+=(_zsh_vi_mode_init)
 
 # Tmux
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  if command -v neofetch &>/dev/null; then
-    exec tmux new 'sleep 0.1; neofetch; $SHELL'
-  else
-    exec tmux
-  fi
-fi
+# if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   exec tmux
+# fi
 
 zle -N _fzf_cd_gitlab
 bindkey '^]' _fzf_cd_gitlab
