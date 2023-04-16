@@ -65,7 +65,6 @@ install_devops_dev() {
   local packages=(
     "terraform"
     "kubectl"
-    "k9s"
   )
   local aur_packages=(
     "terraform-docs-bin.git"
