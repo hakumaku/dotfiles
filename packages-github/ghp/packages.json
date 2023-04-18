@@ -118,7 +118,7 @@
         "rg",
         "--version"
       ],
-      "version_pattern": "ripgrep (.*)",
+      "version_pattern": "ripgrep ([\\.\\d]*)",
       "version_strip_pattern": null
     },
     {
