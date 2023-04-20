@@ -13,10 +13,12 @@ telescope.setup {
     file_ignore_patterns = {
       "node_modules/",
       ".yarn/",
+      "yarn.lock/",
       "build/",
       ".git/",
       "venv/",
-      ".venv/"
+      ".venv/",
+      "poetry.lock/"
     },
     mappings = {
       i = {
