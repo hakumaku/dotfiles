@@ -21,7 +21,7 @@
         "disable-scroll": false,
         "on-scroll-up": "hyprctl dispatch e+1",
         "on-scroll-down": "hyprctl dispatch e-1",
-        "all-outputs": true,
+        "all-outputs": false,
         "format": "{name}: {icon}",
         "format-icons": {
             "1": "",
