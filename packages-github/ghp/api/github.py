@@ -1,8 +1,6 @@
 import re
 import shutil
 import stat
-import tarfile
-import zipfile
 import tempfile
 from functools import cached_property, lru_cache
 from pathlib import Path
@@ -78,6 +76,7 @@ class GithubPackgeInfo:
 
     def download_and_install(self):
         with tempfile.TemporaryDirectory() as tempdir:
+            Path(tempdir).chmod(0o0777)
             with requests.get(self.download_url, stream=True) as response:
                 content_disposition = response.headers["content-disposition"]
                 filename = re.findall("filename=(.+)", content_disposition)[0]
@@ -85,7 +84,10 @@ class GithubPackgeInfo:
                 with open(output, "wb") as f:
                     shutil.copyfileobj(response.raw, f)
 
-            shutil.unpack_archive(output, extract_dir=tempdir)
+            try:
+                shutil.unpack_archive(output, extract_dir=tempdir)
+            except shutil.ReadError:
+                output = output.rename(output.with_name(self.bin))
 
             binary = [
                 binary
