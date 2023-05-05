@@ -73,18 +73,14 @@ return packer.startup(function(use)
       require("config.neoformat")
     end
   }
+  -- File Navigation
   use {
     'kyazdani42/nvim-tree.lua',
     config = function()
       require("config.nvim-tree")
     end
   }
-  use {
-    'liuchengxu/vista.vim',
-    config = function()
-      require("config.vista")
-    end
-  }
+  -- Symbols Navigation
   use {
     'stevearc/aerial.nvim',
     config = function()
