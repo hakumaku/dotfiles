@@ -25,8 +25,14 @@ packer.init({max_jobs = 4})
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Vim basic utility
-  use {'tpope/vim-surround'}
   use {'tpope/vim-repeat'}
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("config.nvim-surround")
+    end
+  })
   use {'tpope/vim-fugitive'}
   use {'raimondi/delimitmate'}
   use {'mbbill/undotree'}
