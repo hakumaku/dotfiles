@@ -2,8 +2,31 @@ local tree_cb = require('nvim-tree.config').nvim_tree_callback
 vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
 vim.g.nvim_tree_width = 25
 
+local function my_on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return {
+      desc = 'nvim-tree: ' .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true
+    }
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+  -- Remove default keymaps
+  vim.keymap.del('n', '<BS>', {buffer = bufnr})
+  vim.keymap.del('n', 'x', {buffer = bufnr})
+  -- Set keymaps
+  vim.keymap.set('n', 'x', api.node.navigate.parent_close,
+                 opts('Close Directory'))
+end
+
 -- following options are the default
 require'nvim-tree'.setup {
+  on_attach = my_on_attach,
   auto_reload_on_write = true,
   -- disables netrw completely
   disable_netrw = true,
@@ -77,3 +100,4 @@ require'nvim-tree'.setup {
     }
   }
 }
+
