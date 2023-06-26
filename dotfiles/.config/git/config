@@ -40,3 +40,6 @@
 [diff]
     # git-delta
     colorMoved = default
+[safe]
+	directory = /opt/fluttera
+	directory = /opt/flutter
