@@ -3,7 +3,7 @@ require('bufferline').setup {
     indicator = {icon = '▊ '},
     separator_style = 'thick',
     show_close_icon = false,
-    diagnostics = 'false',
+    diagnostics = false,
     offsets = {
       {
         filetype = 'NvimTree',
