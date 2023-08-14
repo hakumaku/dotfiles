@@ -94,6 +94,8 @@ nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 -- Cycle through buffers
 nnoremap("]b", ":bn<CR>")
 nnoremap("[b", ":bp<CR>")
+nnoremap("]B", ":BufferLineMoveNext<CR>")
+nnoremap("[B", ":BufferLineMovePrev<CR>")
 nnoremap("<BS>", ":lua utils.delete_buffer()<CR>", {silent = true})
 nnoremap("]q", ":cnext<CR>")
 nnoremap("[q", ":cprevious<CR>")
