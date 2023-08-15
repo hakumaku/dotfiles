@@ -71,6 +71,8 @@ nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
 nmap ]b <Action>(NextTab)
 nmap [b <Action>(PreviousTab)
+nmap ]B <ESC>:tabm+1<CR>
+nmap [B <ESC>:tabm-1<CR>
 nmap ]c <Action>(VcsShowNextChangeMarker)
 nmap [c <Action>(VcsShowPrevChangeMarker)
 nmap \f <Action>(ReformatCode)
