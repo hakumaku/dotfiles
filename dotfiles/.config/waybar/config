@@ -10,11 +10,10 @@
     "modules-right": [
         "tray",
         "idle_inhibitor",
-        "pulseaudio",
         "network",
         "backlight",
+        "pulseaudio",
         "battery",
-        "battery#bat2"
     ],
     // Modules configuration
     "wlr/workspaces": {
@@ -22,18 +21,26 @@
         "on-scroll-up": "hyprctl dispatch e+1",
         "on-scroll-down": "hyprctl dispatch e-1",
         "all-outputs": false,
-        "format": "{name}: {icon}",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+        },
+        "format": "{icon}",
         "format-icons": {
             "1": "",
             "2": "",
             "3": "",
             "4": "",
             "5": "",
-            "6": "6",
+            "6": "",
             "7": "",
             "8": "",
-            "9": "9",
-            "0": "0",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -47,32 +54,6 @@
             "locked": "",
             "unlocked": ""
         }
-    },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -126,9 +107,6 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -157,17 +135,6 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
 }
 
+// vim: ft=json
