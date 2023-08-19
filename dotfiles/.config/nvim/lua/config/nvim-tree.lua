@@ -1,4 +1,3 @@
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
 vim.g.nvim_tree_auto_ignore_ft = {'startify', 'dashboard'}
 vim.g.nvim_tree_width = 25
 
