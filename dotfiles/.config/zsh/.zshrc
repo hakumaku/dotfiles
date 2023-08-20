@@ -48,6 +48,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # pyenv (https://github.com/pyenv/pyenv)
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv >/dev/null; then
   eval "$(pyenv init -)"
 fi
