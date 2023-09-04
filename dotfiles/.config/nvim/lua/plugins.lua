@@ -138,7 +138,6 @@ return packer.startup(function(use)
 
   -- database
   use {'tpope/vim-dadbod'}
-  use {'kristijanhusak/vim-dadbod-ui'}
   use {
     "kndndrj/nvim-dbee",
     requires = {"MunifTanjim/nui.nvim"},
@@ -149,7 +148,7 @@ return packer.startup(function(use)
       require("dbee").install()
     end,
     config = function()
-      require("dbee").setup( --[[optional config]] )
+      -- require("dbee").setup( --[[optional config]] )
     end
   }
 
