@@ -133,6 +133,26 @@ return packer.startup(function(use)
   -- python extension
   use {'numirias/semshi'}
 
+  -- json schemas
+  use {"b0o/schemastore.nvim"}
+
+  -- database
+  use {'tpope/vim-dadbod'}
+  use {'kristijanhusak/vim-dadbod-ui'}
+  use {
+    "kndndrj/nvim-dbee",
+    requires = {"MunifTanjim/nui.nvim"},
+    run = function()
+      -- Install tries to automatically detect the install method.
+      -- if it fails, try calling it with one of these parameters:
+      --    "curl", "wget", "bitsadmin", "go"
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup( --[[optional config]] )
+    end
+  }
+
   -- nvim api
   use {"folke/neodev.nvim"}
 

@@ -52,7 +52,8 @@ local servers = {
   ['eslint'] = require('lsp.eslint'),
   ['lua_ls'] = require('lsp.lua'),
   ['terraformls'] = require('lsp.terraform'),
-  ['yamlls'] = require('lsp.yamlls')
+  ['yamlls'] = require('lsp.yamlls'),
+  ['jsonls'] = require('lsp.jsonls'),
 }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
                                                                       .protocol
