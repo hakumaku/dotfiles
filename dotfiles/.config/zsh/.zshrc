@@ -38,7 +38,8 @@ stty -ixon
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 if command -v bat &>/dev/null; then
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export MANROFFOPT="-c" 
+  export MANPAGER="sh -c 'col -bx | bat -pl man'"
 fi
 export EDITOR=nvim
 export VISUAL="$EDITOR"
@@ -107,6 +108,8 @@ bindkey '^]' _fzf_cd_gitlab
 
 zle -N _fg_bg
 bindkey '^z' _fg_bg
+
+alias pubip="curl 'https://api.ipify.org?format=txt'"
 
 bindkey -s '^w9' "cd $XDG_DATA_HOME/dotfiles^M"
 bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"

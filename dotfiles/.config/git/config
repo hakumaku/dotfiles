@@ -35,8 +35,8 @@
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
 [alias]
-    fzf = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && fzf_commit'
-    view = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && fzf_commit_wo_view'
+    fzf = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && _fzf_commit'
+    view = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && _fzf_commit_wo_view'
 [diff]
     # git-delta
     colorMoved = default

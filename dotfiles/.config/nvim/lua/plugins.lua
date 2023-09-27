@@ -155,6 +155,15 @@ return packer.startup(function(use)
   -- nvim api
   use {"folke/neodev.nvim"}
 
+  -- obsidian
+  use({
+    "epwalsh/obsidian.nvim",
+    requires = {"nvim-lua/plenary.nvim"},
+    config = function()
+      require("obsidian").setup({dir = "~/workspace/github/obsidian/diary"})
+    end
+  })
+
   -- test adopter
   use {
     "nvim-neotest/neotest",
