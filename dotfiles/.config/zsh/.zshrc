@@ -38,7 +38,7 @@ stty -ixon
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 if command -v bat &>/dev/null; then
-  export MANROFFOPT="-c" 
+  export MANROFFOPT="-c"
   export MANPAGER="sh -c 'col -bx | bat -pl man'"
 fi
 export EDITOR=nvim
@@ -95,6 +95,15 @@ function _zsh_vi_mode_init() {
   bindkey -M menuselect 'k' vi-up-line-or-history
   bindkey -M menuselect 'l' vi-forward-char
   bindkey -M menuselect 'j' vi-down-line-or-history
+
+  # mcfly
+  if command -v mcfly &>/dev/null; then
+    export MCFLY_KEY_SCHEME=vim
+    export MCFLY_FUZZY=2
+    export MCFLY_RESULTS=10
+    eval "$(mcfly init zsh)"
+    # bindkey "^r" mcfly-history-widget
+  fi
 }
 zvm_after_init_commands+=(_zsh_vi_mode_init)
 
@@ -118,3 +127,8 @@ bindkey -s '^wa' "^Ulazygit^M"
 bindkey -s '^wb' "^Ulazydocker^M"
 bindkey -s '^wc' "^Ubtm^M"
 bindkey -s '^o' "^Uranger^M"
+
+# broot
+if [[ -f $XDG_CONFIG_HOME/broot/launcher/bash/br ]]; then
+  source $XDG_CONFIG_HOME/broot/launcher/bash/br
+fi
