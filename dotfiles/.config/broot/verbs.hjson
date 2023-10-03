@@ -36,6 +36,7 @@ verbs: [
     {
         invocation: edit
         shortcut: e
+        key: ctrl-e
         execution: "$EDITOR {file}"
         leave_broot: false
     }
@@ -88,12 +89,30 @@ verbs: [
     # A popular set of shortcuts for going up and down:
     
     {
-        key: ctrl-k
-        execution: ":line_up"
+        key: ctrl-h
+        execution: ":toggle_hidden"
     }
     {
         key: ctrl-j
         execution: ":line_down"
+    }
+    {
+        key: ctrl-k
+        execution: ":line_up"
+    }
+    {
+        apply_to: directory
+        key: ctrl-l
+        external: "cd {file}"
+        from_shell: true
+    }
+    {
+        key: ctrl-n
+        execution: ":focus"
+    }
+    {
+        key: ctrl-p
+        execution: ":back"
     }
     {
         key: ctrl-u
@@ -111,17 +130,31 @@ verbs: [
         execution: ":toggle_git_status"
     }
 
-    # You can reproduce the bindings of Norton Commander
-    # on copying or moving to the other panel:
-    # {
-    #     key: F5
-    #     external: "cp -r {file} {other-panel-directory}"
-    #     leave_broot: false
-    # }
-    # {
-    #     key: F6
-    #     external: "mv {file} {other-panel-directory}"
-    #     leave_broot: false
-    # }
+    {
+        key: alt-b
+        internal: ":input_go_word_left"
+    }
+    {
+        key: alt-f
+        internal: ":input_go_word_right"
+    }
+    {
+        key: alt-l
+        internal: ":input_del_word_left"
+    }
+    {
+        key: alt-r
+        internal: ":input_del_word_right"
+    }
+
+    # Copy, Cut, Paste, in input
+    {
+        key: ctrl-c
+        internal: ":input_selection_copy"
+    }
+    {
+        key: ctrl-x
+        internal: ":input_selection_cut"
+    }
 ]
 
