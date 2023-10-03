@@ -1,4 +1,3 @@
-#alias python='/usr/bin/python3'
 if command -v exa &>/dev/null; then
   alias ls="exa --group-directories-first -s extension"
   alias ll="exa -alF"
@@ -23,7 +22,6 @@ alias gv='cd $HOME/Videos'
 alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias bashrc="nvim ~/.bashrc -c 'normal zt'"
 alias dotfiles="cd $HOME/.local/share/dotfiles"
-alias mocp='mocp --theme green_theme --sound-driver pulseaudio --set-option Keymap=keymap'
 # Move to the directory when exiting.
 # alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
 # alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
