@@ -73,6 +73,16 @@ function _zsh_vi_mode_init() {
     export FZF_DEFAULT_COMMAND='fd --type f'
     # To apply the command to CTRL-T as well
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    # CTRL-/ to toggle small preview window to see the full command
+    # CTRL-Y to copy the command into clipboard using pbcopy
+    export FZF_CTRL_R_OPTS="\
+        --preview 'echo {}' \
+        --preview-window up:3:hidden:wrap \
+        --layout=reverse \
+        --bind 'ctrl-/:toggle-preview' \
+        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
+        --color header:italic \
+        --header 'Press CTRL-Y to copy command into clipboard'"
   fi
 
   # Key bindings for zsh-vi-mode
