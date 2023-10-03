@@ -5,7 +5,6 @@
 ###############################################################
 
 verbs: [
-
     # Example 1: launching `tail -n` on the selected file (leaving broot)
     # {
     #     name: tail_lines
@@ -14,12 +13,12 @@ verbs: [
     # }
 
     # Example 2: creating a new file without leaving broot
-    # {
-    #     name: touch
-    #     invocation: touch {new_file}
-    #     execution: "touch {directory}/{new_file}"
-    #     leave_broot: false
-    # }
+    {
+        name: touch
+        invocation: touch {new_file}
+        execution: "touch {directory}/{new_file}"
+        leave_broot: false
+    }
 
     # A standard recommended command for editing files, that you
     # can customize.
@@ -80,37 +79,37 @@ verbs: [
     }
 
     # Here's an example of a shortcut bringing you to your home directory
-    # {
-    #     invocation: home
-    #     key: ctrl-home
-    #     execution: ":focus ~"
-    # }
+    {
+        invocation: home
+        key: ctrl-home
+        execution: ":focus ~"
+    }
 
     # A popular set of shortcuts for going up and down:
-    #
-    # {
-    #     key: ctrl-k
-    #     execution: ":line_up"
-    # }
-    # {
-    #     key: ctrl-j
-    #     execution: ":line_down"
-    # }
-    # {
-    #     key: ctrl-u
-    #     execution: ":page_up"
-    # }
-    # {
-    #     key: ctrl-d
-    #     execution: ":page_down"
-    # }
+    
+    {
+        key: ctrl-k
+        execution: ":line_up"
+    }
+    {
+        key: ctrl-j
+        execution: ":line_down"
+    }
+    {
+        key: ctrl-u
+        execution: ":page_up"
+    }
+    {
+        key: ctrl-d
+        execution: ":page_down"
+    }
 
     # If you develop using git, you might like to often switch
     # to the git status filter:
-    # {
-    #     key: ctrl-g
-    #     execution: ":toggle_git_status"
-    # }
+    {
+        key: ctrl-g
+        execution: ":toggle_git_status"
+    }
 
     # You can reproduce the bindings of Norton Commander
     # on copying or moving to the other panel:

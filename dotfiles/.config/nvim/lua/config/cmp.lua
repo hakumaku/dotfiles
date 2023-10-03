@@ -54,6 +54,15 @@ cmp.setup {
   -- view = {entries = 'native'},
   experimental = {ghost_text = true}
 }
+
+vim.api.nvim_create_autocmd("BufRead", {
+  group = vim.api.nvim_create_augroup("CmpSourceCargo", {clear = true}),
+  pattern = "Cargo.toml",
+  callback = function()
+    cmp.setup.buffer({sources = {{name = "crates"}}})
+  end
+})
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
