@@ -111,7 +111,6 @@ bindkey -s '^o' "^Uranger^M"
 # source some files
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
-source "$ZDOTDIR/dotfiles.zsh"
 source "$ZDOTDIR/completions.zsh"
 
 # broot (https://github.com/Canop/broot)
