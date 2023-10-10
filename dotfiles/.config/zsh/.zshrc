@@ -116,7 +116,7 @@ bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"
 bindkey -s '^wa' "^Ulazygit^M"
 bindkey -s '^wb' "^Ulazydocker^M"
 bindkey -s '^wc' "^Ubtm^M"
-bindkey -s '^o' "^Uranger^M"
+bindkey -s '^o' "^Uyazi^M"
 
 # source some files
 source "$ZDOTDIR/alias.zsh"
