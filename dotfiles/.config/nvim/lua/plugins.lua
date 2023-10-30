@@ -246,10 +246,16 @@ return packer.startup(function(use)
       require("config.lualine")
     end
   }
+  -- use {
+  --   'olimorris/onedarkpro.nvim',
+  --   config = function()
+  --     require("config.onedarkpro")
+  --   end
+  -- }
   use {
-    'olimorris/onedarkpro.nvim',
+    'EdenEast/nightfox.nvim',
     config = function()
-      require("config.onedarkpro")
+      require("config.nightfox")
     end
   }
   use {
