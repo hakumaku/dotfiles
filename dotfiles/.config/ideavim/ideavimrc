@@ -61,10 +61,10 @@ vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
 imap <C-j> <CR>
 
-nmap <A-h> <Action>(RunToCursor)
-nmap <A-j> <Action>(StepInto)
-nmap <A-k> <Action>(StepOut)
-nmap <A-l> <Action>(StepOver)
+nmap \h <Action>(RunToCursor)
+nmap \j <Action>(StepInto)
+nmap \k <Action>(StepOut)
+nmap \l <Action>(StepOver)
 
 nmap <BS> <Action>(CloseEditor)
 
