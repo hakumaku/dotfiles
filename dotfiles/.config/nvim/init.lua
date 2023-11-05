@@ -6,7 +6,7 @@ elseif vim.g.started_by_firenvim then
 else
   vim.opt.syntax = "on"
   vim.opt.termguicolors = true
-  vim.opt.cursorline = true
+  vim.opt.cursorline = false
   -- vim.opt.wrap linebreak nolist
 
   -- When a file has been changed outside of Vim, automatically read it againautoread
