@@ -27,8 +27,8 @@ return packer.startup(function(use)
   -- Vim basic utility
   use {"tpope/vim-repeat"}
   use {"tpope/vim-fugitive"}
-  use {"mbbill/vim-undotree"}
-  use {"Raimondi/delimitate"}
+  use {"mbbill/undotree"}
+  use {"Raimondi/delimitMate"}
   use {
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
