@@ -47,9 +47,14 @@ local servers = {
   ['rust_analyzer'] = require('lsp.rust_analyzer'),
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
-  ['jedi_language_server'] = require('lsp.jedi'),
+  -- python
+  -- ['jedi_language_server'] = require('lsp.jedi'),
+  ['pyright'] = require('lsp.pyright'),
+  ['ruff_lsp'] = require('lsp.ruff-lsp'),
+  -- typescript
   ['tsserver'] = require('lsp.tsserver'),
   ['eslint'] = require('lsp.eslint'),
+  -- etc
   ['lua_ls'] = require('lsp.lua'),
   ['terraformls'] = require('lsp.terraform'),
   ['yamlls'] = require('lsp.yamlls'),
