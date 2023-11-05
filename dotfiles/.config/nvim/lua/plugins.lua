@@ -23,32 +23,42 @@ local packer = require('packer')
 packer.init({max_jobs = 4})
 
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
+  use "wbthomason/packer.nvim"
   -- Vim basic utility
-  use {'tpope/vim-repeat'}
-  use({
+  use {"tpope/vim-repeat"}
+  use {
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
       require("config.nvim-surround")
     end
-  })
-  use {'tpope/vim-fugitive'}
-  use {'raimondi/delimitmate'}
-  use {'mbbill/undotree'}
+  }
   -- Development Utilities (Neovim 5.0+)
-  use {'neovim/nvim-lspconfig'}
+  -- manage external editor tooling
+  use {
+    "williamboman/mason.nvim",
+    config = function()
+      require("config.mason")
+    end
+  }
+  use {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("config.mason")
+    end
+  }
+  use {"neovim/nvim-lspconfig"}
   -- non-LSP sources to hook into its LSP client
   use {
-    'jose-elias-alvarez/null-ls.nvim',
+    "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("config.null-ls")
     end
   }
-  use {'nvim-lua/plenary.nvim'}
-  use {'nvim-lua/popup.nvim'}
+  use {"nvim-lua/plenary.nvim"}
+  use {"nvim-lua/popup.nvim"}
   use {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
     config = function()
       require("config.tree-sitter")
@@ -131,8 +141,8 @@ return packer.startup(function(use)
   use {'simrat39/rust-tools.nvim'}
   use {
     tag = 'v0.3.0',
-    event = { "BufRead Cargo.toml" },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    event = {"BufRead Cargo.toml"},
+    dependencies = {'nvim-lua/plenary.nvim'},
     config = function()
       require('crates').setup()
     end
