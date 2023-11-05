@@ -5,10 +5,7 @@ if vim.g.vscode then
 elseif vim.g.started_by_firenvim then
 else
   vim.opt.syntax = "on"
-  if vim.g.termguicolors then
-    vim.opt.termguicolors = true
-  end
-
+  vim.opt.termguicolors = true
   vim.opt.cursorline = true
   -- vim.opt.wrap linebreak nolist
 

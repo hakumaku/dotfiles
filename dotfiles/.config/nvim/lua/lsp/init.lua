@@ -48,12 +48,13 @@ local servers = {
   ['cmake'] = require('lsp.cmake'),
   ['bashls'] = require('lsp.bashls'),
   -- python
-  -- ['jedi_language_server'] = require('lsp.jedi'),
   ['pyright'] = require('lsp.pyright'),
   ['ruff_lsp'] = require('lsp.ruff-lsp'),
-  -- typescript
+  -- fontend (html, css, js/ts)
   ['tsserver'] = require('lsp.tsserver'),
   ['eslint'] = require('lsp.eslint'),
+  ['cssls'] = require('lsp.cssls'),
+  ['cssmodules_ls'] = require('lsp.cssmodule-ls'),
   -- etc
   ['lua_ls'] = require('lsp.lua'),
   ['terraformls'] = require('lsp.terraform'),

@@ -36,6 +36,8 @@ return packer.startup(function(use)
       require("config.nvim-surround")
     end
   }
+  use {'windwp/nvim-ts-autotag'}
+
   -- Development Utilities (Neovim 5.0+)
   -- manage external editor tooling
   use {

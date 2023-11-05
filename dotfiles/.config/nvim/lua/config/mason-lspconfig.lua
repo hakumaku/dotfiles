@@ -1,4 +1,5 @@
 require("mason-lspconfig").setup({
+  automatic_installation = true,
   ensure_installed = {
     "bashls",
     "clangd",
@@ -17,6 +18,7 @@ require("mason-lspconfig").setup({
     "lua_ls",
     "pyright",
     "ruff",
+    "ruff-lsp",
     "mypy",
     "rust_analyzer"
   }
