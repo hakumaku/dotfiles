@@ -122,7 +122,7 @@ nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>", {silent = tru
 
 -- DAP
 nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
-nnoremap("<C-w>r", ":lua require('dap').repl.open({ vsplit = true })", {silent = true})
+nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>", {silent = true})
 nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
 nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>",
          {silent = true})
