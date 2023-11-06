@@ -143,9 +143,10 @@ return packer.startup(function(use)
   use {'p00f/clangd_extensions.nvim'}
 
   -- rust extension
-  use {'simrat39/rust-tools.nvim'}
+  use {"simrat39/rust-tools.nvim"}
   use {
-    tag = 'v0.3.0',
+    "saecki/crates.nvim",
+    tag = 'v0.4.0',
     event = {"BufRead Cargo.toml"},
     dependencies = {'nvim-lua/plenary.nvim'},
     config = function()
