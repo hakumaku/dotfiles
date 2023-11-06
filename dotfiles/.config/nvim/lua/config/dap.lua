@@ -8,13 +8,6 @@ local environ = function()
   return variables
 end
 
--- C/Cpp
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode',
-  name = "lldb"
-}
-
 -- python
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
 dap.adapters.python = {
@@ -36,8 +29,8 @@ dap.configurations.cpp = {
     stopOnEntry = false,
     args = {},
 
-    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
     --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
     --
     -- Otherwise you might get the following error:
     --    Error on launch: Failed to attach to the target process
@@ -49,7 +42,46 @@ dap.configurations.cpp = {
   }
 }
 dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+
+-- C/Cpp
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode',
+  name = "lldb"
+}
+
+-- rust
+dap.configurations.rust = {
+    {
+        name = 'Debug with codelldb',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+            return vim.fn.input({
+                prompt = 'Path to executable: ',
+                default = vim.fn.getcwd() .. '/',
+                completion = 'file',
+            })
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+    },
+    {
+        name = 'Debug with rust-tools',
+        type = 'rt_lldb',
+        request = 'launch',
+        program = function()
+            return vim.fn.input({
+                prompt = 'Path to executable: ',
+                default = vim.fn.getcwd() .. '/',
+                completion = 'file',
+            })
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+    },
+}
 
 -- Config sign columns
 vim.fn.sign_define('DapBreakpoint',
