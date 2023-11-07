@@ -1,5 +1,13 @@
 local lspkind = require('lspkind')
 local cmp = require('cmp')
+local types = require('cmp.types')
+
+local fields = {
+  [types.lsp.CompletionItemKind.EnumMember] = 100,
+  [types.lsp.CompletionItemKind.Property] = 90,
+  [types.lsp.CompletionItemKind.Variable] = 80,
+  [types.lsp.CompletionItemKind.Field] = 70
+}
 
 local select_next_item = function(fallback)
   if cmp.visible() then
@@ -58,7 +66,6 @@ cmp.setup {
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
-
       -- copied from cmp-under, but I don't think I need the plugin for this.
       -- I might add some more of my own.
       function(entry1, entry2)
@@ -72,9 +79,17 @@ cmp.setup {
           return true
         end
       end,
-
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
+      -- cmp.config.compare.kind,
+      function(entry1, entry2)
+        print(entry1)
+        local kind1 = fields[entry1:get_kind()] or 0
+        local kind2 = fields[entry2:get_kind()] or 0
+        if kind1 > kind2 then
+          return true
+        elseif kind1 < kind2 then
+          return false
+        end
+      end,
       cmp.config.compare.length,
       cmp.config.compare.order
     }
