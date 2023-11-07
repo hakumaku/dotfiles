@@ -12,5 +12,6 @@
     "autoSearchPaths": true,
     "useLibraryCodeForTypes": true,
     "diagnosticMode": "workspace"
-  }
+  },
+  "reportUndefinedVariable": false
 }
