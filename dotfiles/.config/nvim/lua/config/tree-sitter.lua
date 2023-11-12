@@ -12,10 +12,13 @@ require('nvim-treesitter.configs').setup {
     "html",
     "css",
     "yaml",
-    "javascript"
+    "javascript",
+    "markdown",
+    "markdown_inline"
   },
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = {"markdown"},
     disable = {
       "java",
       "kotlin",

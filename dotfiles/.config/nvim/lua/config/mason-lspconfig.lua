@@ -19,7 +19,6 @@ require("mason-lspconfig").setup({
     "pyright",
     "ruff",
     "ruff-lsp",
-    "mypy",
     "rust_analyzer"
   }
 })

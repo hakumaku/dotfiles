@@ -26,18 +26,14 @@ require("lazy").setup({
   },
   'windwp/nvim-ts-autotag',
 
-  -- Development Utilities (Neovim 5.0+)
+  -- Development Utilities
   -- manage external editor tooling
-  {
-    "williamboman/mason.nvim",
-    config = function()
-      require("config.mason")
-    end
-  },
+  "williamboman/mason.nvim",
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("config.mason")
+      require("mason").setup()
+      require("config.mason-lspconfig")
     end
   },
   "neovim/nvim-lspconfig",
@@ -100,23 +96,19 @@ require("lazy").setup({
       require("config.toggleterm")
     end
   },
-  {
-    'numToStr/Comment.nvim',
-    config = function()
-      require("Comment").setup()
-    end
-  },
+  'numToStr/Comment.nvim',
 
   -- Completion
   {
     'hrsh7th/nvim-cmp',
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     dependencies = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'rcarriga/cmp-dap'
     },
     config = function()
@@ -172,9 +164,37 @@ require("lazy").setup({
   {
     "epwalsh/obsidian.nvim",
     dependencies = {"nvim-lua/plenary.nvim"},
-    config = function()
-      require("obsidian").setup({dir = "~/workspace/github/obsidian/diary"})
-    end
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      "BufReadPre " .. vim.fn.expand "~" .. "/workspace/github/diary/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/workspace/github/diary/**.md"
+    },
+    opts = {
+      -- Optional, if you keep notes in a specific subdirectory of your vault.
+      daily_notes = {
+        -- Optional, if you keep daily notes in a separate directory.
+        folder = "diary",
+        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+        template = "Daily template.md"
+      },
+      notes_subdir = "diary",
+      workspaces = {{name = "diary", path = "~/workspace/github/diary"}},
+      -- Optional, for templates (see below).
+      templates = {
+        subdir = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+        -- A map for custom variables, the key should be the variable and the value a function
+        substitutions = {
+          date = function()
+            return os.date("%Y-%m-%d", os.time())
+          end
+        }
+      }
+    }
   },
 
   -- test adopter
@@ -258,6 +278,6 @@ require("lazy").setup({
     config = function()
       require("config.startify")
     end
-  },
+  }
 })
 
