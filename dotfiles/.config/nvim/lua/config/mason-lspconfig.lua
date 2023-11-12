@@ -7,7 +7,6 @@ require("mason-lspconfig").setup({
     "cssls",
     "jsonls",
     "html",
-    "tssserver",
     "jqls",
     "marksman",
     "yamlls",
@@ -17,7 +16,6 @@ require("mason-lspconfig").setup({
     "eslint",
     "lua_ls",
     "pyright",
-    "ruff",
     "ruff_lsp",
     "rust_analyzer"
   }
