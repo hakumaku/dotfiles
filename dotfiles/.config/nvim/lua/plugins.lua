@@ -259,13 +259,5 @@ require("lazy").setup({
       require("config.startify")
     end
   },
-
-  -- Post-install/update hook with call of vimscript function with argument
-  {
-    'glacambre/firenvim',
-    build = function()
-      vim.fn['firenvim#install'](0)
-    end
-  }
 })
 
