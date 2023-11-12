@@ -117,7 +117,7 @@ nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>", {silent = tr
 nnoremap("<leader>E", ":lua require('neotest').run.run()<CR>", {silent = true})
 nnoremap("<leader>d", ":lua require('neotest').run.run_last({strategy = 'dap'})<CR>", {silent = true})
 nnoremap("<leader>D", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {silent = true})
-nnoremap("<C-w>m", ":lua require('neotest').output_panel.open({enter = true})<CR>", {silent = true})
+nnoremap("<C-w>m", ":lua require('neotest').output_panel.toggle()<CR>", {silent = true})
 nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>", {silent = true})
 
 -- DAP
