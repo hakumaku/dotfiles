@@ -8,6 +8,10 @@ local fzf_options = {
   -- the default case_mode is "smart_case"
 }
 
+telescope.load_extension('dap')
+telescope.load_extension('fzf')
+telescope.load_extension("aerial")
+
 telescope.setup {
   defaults = {
     file_ignore_patterns = {
@@ -28,7 +32,17 @@ telescope.setup {
       }
     }
   },
-  extensions = {fzf = fzf_options},
+  extensions = {
+    fzf = fzf_options,
+    aerial = {
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ["_"] = false, -- This key will be the default
+        json = true, -- You can set the option for specific filetypes
+        yaml = true
+      }
+    }
+  },
   pickers = {
     find_files = {theme = "dropdown", previewer = false, hidden = true},
     buffers = {theme = "dropdown", previewer = false},
@@ -52,6 +66,3 @@ telescope.setup {
     lsp_references = {theme = "ivy"}
   }
 }
-
-telescope.load_extension('dap')
-telescope.load_extension('fzf')
