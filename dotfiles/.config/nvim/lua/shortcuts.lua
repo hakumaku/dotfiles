@@ -113,16 +113,23 @@ nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
 nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
 
 -- neotest
-nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>", {silent = true})
+nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>",
+         {silent = true})
 nnoremap("<leader>E", ":lua require('neotest').run.run()<CR>", {silent = true})
-nnoremap("<leader>d", ":lua require('neotest').run.run_last({strategy = 'dap'})<CR>", {silent = true})
-nnoremap("<leader>D", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", {silent = true})
-nnoremap("<C-w>m", ":lua require('neotest').output_panel.toggle()<CR>", {silent = true})
-nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>", {silent = true})
+nnoremap("<leader>d",
+         ":lua require('neotest').run.run_last({strategy = 'dap'})<CR>",
+         {silent = true})
+nnoremap("<leader>D", ":lua require('neotest').run.run({strategy = 'dap'})<CR>",
+         {silent = true})
+nnoremap("<C-w>m", ":lua require('neotest').output_panel.toggle()<CR>",
+         {silent = true})
+nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>",
+         {silent = true})
 
 -- DAP
 nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
-nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>", {silent = true})
+nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
+         {silent = true})
 nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
 nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>",
          {silent = true})
@@ -144,7 +151,10 @@ nnoremap("<C-s>s", ":Telescope live_grep<CR>")
 nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
 nnoremap("<C-s>g", ":Telescope grep_string<CR>")
 nnoremap("<C-s>t", ":Telescope aerial<CR>")
-nnoremap("<C-s>T", ":Telescope lsp_dynamic_workspace_symbols<CR>")
+local ignore_symbols = "ignore_symbols=" .. table.concat({"variable"}, ",")
+nnoremap("<C-s>T",
+         ":Telescope lsp_dynamic_workspace_symbols(" .. ignore_symbols ..
+             ")<CR>")
 nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
 nnoremap("<C-s>c", ":Telescope git_branches<CR>")
 
