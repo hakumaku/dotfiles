@@ -153,8 +153,7 @@ nnoremap("<C-s>g", ":Telescope grep_string<CR>")
 nnoremap("<C-s>t", ":Telescope aerial<CR>")
 local ignore_symbols = "ignore_symbols=" .. table.concat({"variable"}, ",")
 nnoremap("<C-s>T",
-         ":Telescope lsp_dynamic_workspace_symbols(" .. ignore_symbols ..
-             ")<CR>")
+         ":Telescope lsp_dynamic_workspace_symbols " .. ignore_symbols .. "<CR>")
 nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
 nnoremap("<C-s>c", ":Telescope git_branches<CR>")
 
