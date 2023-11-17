@@ -29,6 +29,17 @@ function webp {
     && rm -rf *.webp
 }
 
+function unzip_each() {
+  # zsh equivalent of bash
+  # readarray -t files < <(find "$1" -maxdepth 1 -type f -name "*.zip")
+  local files=("${(@f)$(find "$1" -maxdepth 1 -type f -name "*.zip")}")
+  echo "${files[@]}"
+  for file in "${files[@]}"; do
+    unzip -q "$file" -d "${file%.*}"
+  done
+}
+alias untar="unzip_each ."
+
 function compress {
   mogrify -compress JPEG -quality 70 *.jpg
 }

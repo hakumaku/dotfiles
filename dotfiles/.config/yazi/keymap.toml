@@ -125,7 +125,8 @@ keymap = [
 	{ on = [ "g", "<Space>" ], exec = "cd --interactive", desc = "Go to a directory interactively" },
 
     # External Tools
-    { on = [ "e", "u" ], exec = "shell --confirm 'unzip $@'", desc = "Unzip file" },
+    { on = [ "e", "u" ], exec = "shell --confirm '~/.config/yazi/unzip.sh'", desc = "Unzip file" },
+    { on = [ "e", "w" ], exec = "shell --confirm '~/.config/yazi/webp.sh'", desc = "Unzip file" },
 
 	# Help
 	{ on = [ "~" ], exec = "help", desc = "Open help" },
