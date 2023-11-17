@@ -96,7 +96,13 @@ require("lazy").setup({
       require("config.toggleterm")
     end
   },
-  'numToStr/Comment.nvim',
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    lazy = false
+  },
 
   -- Completion
   {
@@ -204,8 +210,9 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-python"
-      -- "antoinemadec/FixCursorHold.nvim"
     },
+    lazy = true,
+    event = {"BufRead test_*.py"},
     config = function()
       require("config.neotest")
     end
