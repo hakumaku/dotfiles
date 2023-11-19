@@ -5,7 +5,7 @@ def __enter__(self) -> Self:
 def __exit__(
 	self, exc_type: Type[BaseException] | None, exc_val: BaseException | None, exc_tb: TracebackType | None
 ) -> None:
-	return None
+    pass
 endsnippet
 
 snippet aenter "__aenter__(self)" A
@@ -15,6 +15,6 @@ async def __aenter__(self) -> Self:
 async def __aexit__(
 	self, exc_type: Type[BaseException] | None, exc_val: BaseException | None, exc_tb: TracebackType | None
 ) -> None:
-	return None
+    pass
 endsnippet
 
