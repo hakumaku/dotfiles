@@ -1,0 +1,20 @@
+snippet enter "__enter__(self)" A
+def __enter__(self) -> Self:
+	return self
+
+def __exit__(
+	self, exc_type: Type[BaseException] | None, exc_val: BaseException | None, exc_tb: TracebackType | None
+) -> None:
+	return None
+endsnippet
+
+snippet aenter "__aenter__(self)" A
+async def __aenter__(self) -> Self:
+	return self
+
+async def __aexit__(
+	self, exc_type: Type[BaseException] | None, exc_val: BaseException | None, exc_tb: TracebackType | None
+) -> None:
+	return None
+endsnippet
+
