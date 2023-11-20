@@ -1,4 +1,4 @@
-snippet enter "__enter__(self)" A
+snippet enter "__enter__(self)"
 def __enter__(self) -> Self:
 	return self
 
@@ -8,7 +8,7 @@ def __exit__(
     pass
 endsnippet
 
-snippet aenter "__aenter__(self)" A
+snippet aenter "__aenter__(self)"
 async def __aenter__(self) -> Self:
 	return self
 
@@ -18,7 +18,7 @@ async def __aexit__(
     pass
 endsnippet
 
-snippet Main "if __name__ == '__main__'" A
+snippet Main "if __name__ == '__main__'"
 def main() -> None:
     pass
 

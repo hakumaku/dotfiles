@@ -123,10 +123,9 @@ require("lazy").setup({
   },
   {
     'SirVer/ultisnips',
+    lazy = true,
+    event = {'InsertEnter'},
     dependencies = {'quangnguyen30192/cmp-nvim-ultisnips'},
-    config = function()
-      require("config.ultisnips")
-    end
   },
 
   -- clangd extension

@@ -1,6 +1,7 @@
 local lspkind = require('lspkind')
 local cmp = require('cmp')
 local types = require('cmp.types')
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 local fields = {
   [types.lsp.CompletionItemKind.EnumMember] = 100,
@@ -11,7 +12,7 @@ local fields = {
 
 local select_next_item = function(fallback)
   if cmp.visible() then
-    cmp.select_next_item()
+    cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
   else
     fallback()
   end
@@ -19,7 +20,7 @@ end
 
 local select_prev_item = function(fallback)
   if cmp.visible() then
-    cmp.select_prev_item()
+    cmp_ultisnips_mappings.jump_backwards(fallback)
   else
     fallback()
   end
@@ -45,17 +46,15 @@ cmp.setup {
     },
     ["<C-space>"] = cmp.mapping.complete(),
     ["<CR>"] = cmp.mapping.confirm({select = true}),
-    ["<Tab>"] = select_next_item,
-    ["<S-Tab>"] = select_prev_item,
-    ["<C-n>"] = select_next_item,
-    ["<C-p>"] = select_prev_item
+    ["<C-n>"] = cmp.mapping(select_next_item, {"i", "s", "c"}),
+    ["<C-p>"] = cmp.mapping(select_prev_item, {"i", "s", "c"})
   },
   sources = {
     {name = "ultisnips"},
     {name = "nvim_lua"},
     {name = "nvim_lsp"},
     {name = "path"},
-    {name = "luasnip"},
+    -- {name = "luasnip"},
     {name = "buffer", keyword_length = 5}
   },
   formatting = {format = lspkind.cmp_format()},

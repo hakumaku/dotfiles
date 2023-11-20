@@ -161,6 +161,11 @@ augroup END
   })
 
   utils = require("utils.functions")
+  -- Disable all shortcuts (ultisnips)
+  vim.g.UltiSnipsExpandTrigger = "<C-y>"
+  vim.g.UltiSnipsSnippetDirectories = {"ultisnips"}
+  vim.g.UltiSnipsJumpForwardTrigger = "<C-j>"
+  vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
   require("plugins")
   require("shortcuts")
   require("lsp")
