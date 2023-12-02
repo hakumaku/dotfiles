@@ -56,6 +56,7 @@ nmap <C-w>f <Action>(ActivateTerminalToolWindow)
 nmap <C-w>o <Action>(ActivateProjectToolWindow)
 nmap <C-w>t <Action>(ActivateStructureToolWindow)
 nmap <C-w>d <Action>(com.jetbrains.python.console.RunPythonOrDebugConsoleAction)
+nmap <C-w>b <Action>(Switcher)
 
 vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
