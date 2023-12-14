@@ -1,3 +1,8 @@
+snippet new "__new__(self)"
+def __new__(mcs, name: str, bases: tuple[type, ...], namespace: dict[str, Any]):
+    return super().__new__(mcs, name, bases, namespace)
+endsnippet
+
 snippet enter "__enter__(self)"
 def __enter__(self) -> Self:
 	return self
@@ -25,4 +30,9 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+endsnippet
+
+snippet ift "if TYPE_CHECKING"
+if TYPE_CHECKING:
+    pass
 endsnippet
