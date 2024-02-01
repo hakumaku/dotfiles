@@ -1,5 +1,9 @@
 snippet sb "#!/usr/bin/env bash"
 #!/usr/bin/env bash
+
+set -x
+set -eo pipefail
+
 endsnippet
 
 snippet array "readarray -t ... < <()"

@@ -125,14 +125,18 @@ require("lazy").setup({
     'SirVer/ultisnips',
     lazy = true,
     event = {'InsertEnter'},
-    dependencies = {'quangnguyen30192/cmp-nvim-ultisnips'},
+    dependencies = {'quangnguyen30192/cmp-nvim-ultisnips'}
   },
 
   -- clangd extension
   'p00f/clangd_extensions.nvim',
 
   -- rust extension
-  "simrat39/rust-tools.nvim",
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = {'rust'}
+  },
   {
     "saecki/crates.nvim",
     version = 'v0.4.0',
