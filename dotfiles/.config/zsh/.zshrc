@@ -138,3 +138,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv >/dev/null; then
   eval "$(pyenv init -)"
 fi
+
+# zoxide (https://github.com/ajeetdsouza/zoxide)
+eval "$(zoxide init zsh)"

@@ -175,35 +175,16 @@ require("lazy").setup({
     dependencies = {"nvim-lua/plenary.nvim"},
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
+    ft = "markdown",
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre " .. vim.fn.expand "~" .. "/workspace/github/diary/**.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/workspace/github/diary/**.md"
+      "BufReadPre " .. vim.fn.expand "~" .. "/workspace/github/obsidian/**.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/workspace/github/obsidian/**.md"
     },
-    opts = {
-      -- Optional, if you keep notes in a specific subdirectory of your vault.
-      daily_notes = {
-        -- Optional, if you keep daily notes in a separate directory.
-        folder = "diary",
-        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-        template = "Daily template.md"
-      },
-      notes_subdir = "diary",
-      workspaces = {{name = "diary", path = "~/workspace/github/diary"}},
-      -- Optional, for templates (see below).
-      templates = {
-        subdir = "templates",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
-        -- A map for custom variables, the key should be the variable and the value a function
-        substitutions = {
-          date = function()
-            return os.date("%Y-%m-%d", os.time())
-          end
-        }
-      }
-    }
+    config = function()
+      require("config.obsidian")
+    end
   },
 
   -- test adopter

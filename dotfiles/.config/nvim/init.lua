@@ -18,6 +18,9 @@ else
   vim.opt.encoding = "utf-8"
   vim.opt.fileencoding = "utf-8"
 
+  -- :help conceal
+  vim.opt.conceallevel = 2
+
   -- Replace - with ' '
   vim.opt.fillchars = {fold = " "}
 

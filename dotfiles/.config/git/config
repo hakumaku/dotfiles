@@ -6,14 +6,19 @@
 [core]
     editor = nvim
     pager = delta
+[init]
+    defaultBranch = main
 [push]
     autoSetupRemote = true
 [pull]
     rebase = true
 [rebase]
     autoStash = true
+    autoSquash = true
 [commit]
     verbose = true
+[help]
+    autoCorrect = 10
 [interactive]
     diffFilter = delta --color-only
 [delta]
@@ -42,6 +47,7 @@
 [diff]
     # git-delta
     colorMoved = default
+    algorithm = histogram
 [safe]
 	directory = /opt/fluttera
 	directory = /opt/flutter
