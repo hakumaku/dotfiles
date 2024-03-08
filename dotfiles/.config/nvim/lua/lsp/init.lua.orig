@@ -4,15 +4,58 @@ require("neodev").setup({
   -- add any options here, or leave empty to use the default settings
 })
 
+<<<<<<< Updated upstream
+local lspconfig = require('lspconfig')
+
+-- function(client, bufnr)
+local on_attach = function(_, bufnr)
+end
+||||||| constructed merge base
+local lspconfig = require('lspconfig')
+
+-- function(client, bufnr)
+local on_attach = function(_, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Disable diagnostic if it is helm file.
+  -- if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+  --   vim.diagnostic.disable()
+  -- end
+
+  -- vim.lsp.handlers['textDocument/codeAction'] = function(responses)
+  --   -- Select the first item
+  --   local _, edit = next(actions[1].edit.changes)
+  --   vim.lsp.util.apply_text_edits(edit, vim.api.nvim_get_current_buf())
+  -- end
+  -- TODO: Change to some kinda this...
+  -- vim.diagnostic.config({...})
+
+  -- vim.lsp.handlers["textDocument/definition"] =
+  --     function(_, locations, ctx, _)
+  --       -- local bufnr = ctx.bufnr
+  --       if locations == nil or vim.tbl_isempty(locations) then return end
+  --       if #locations > 1 then
+  --         -- Returns items
+  --         vim.lsp.util.locations_to_items(locations)
+  --       else
+  --         -- Returns boolean value
+  --         vim.lsp.util.jump_to_location(locations[1])
+  --         vim.cmd "normal! zz"
+  --       end
+  --     end
+end
+=======
 local util = require("vim.lsp.util")
 local find_root_dir = function(fname)
   local dir = util.root_pattern(".git", "setup.py", "setup.cfg",
                                 "pyproject.toml", "requirements.txt")(fname) or
                   util.path.dirname(fname)
+  print(dir)
   return dir
 end
-
-local lspconfig = require('lspconfig')
 
 -- https://www.reddit.com/r/neovim/comments/vfc7hc/lsp_definition_in_tsserver/
 local tsserver_handler = {
@@ -52,7 +95,49 @@ local tsserver_handler = {
     end
   end
 }
+>>>>>>> Stashed changes
 
+<<<<<<< Updated upstream
+local servers = {
+  -- clangd-extensions invoke this statement automatically.
+  -- ['clangd'] = require('lsp.clangd'),
+  ['rust_analyzer'] = require('lsp.rust_analyzer'),
+  ['cmake'] = require('lsp.cmake'),
+  ['bashls'] = require('lsp.bashls'),
+  -- python
+  ['pyright'] = require('lsp.pyright'),
+  ['ruff_lsp'] = require('lsp.ruff-lsp'),
+  -- fontend (html, css, js/ts)
+  ['tsserver'] = require('lsp.tsserver'),
+  ['eslint'] = require('lsp.eslint'),
+  ['cssls'] = require('lsp.cssls'),
+  ['cssmodules_ls'] = require('lsp.cssmodule-ls'),
+  -- etc
+  ['lua_ls'] = require('lsp.lua'),
+  ['terraformls'] = require('lsp.terraform'),
+  ['yamlls'] = require('lsp.yamlls'),
+  ['jsonls'] = require('lsp.jsonls')
+||||||| constructed merge base
+local servers = {
+  -- clangd-extensions invoke this statement automatically.
+  -- ['clangd'] = require('lsp.clangd'),
+  ['rust_analyzer'] = require('lsp.rust_analyzer'),
+  ['cmake'] = require('lsp.cmake'),
+  ['bashls'] = require('lsp.bashls'),
+  -- python
+  ['pyright'] = require('lsp.pyright'),
+  ['ruff_lsp'] = require('lsp.ruff-lsp'),
+  -- fontend (html, css, js/ts)
+  ['tsserver'] = require('lsp.tsserver'),
+  ['eslint'] = require('lsp.eslint'),
+  ['cssls'] = require('lsp.cssls'),
+  ['cssmodules_ls'] = require('lsp.cssmodule-ls'),
+  -- etc
+  ['lua_ls'] = require('lsp.lua'),
+  ['terraformls'] = require('lsp.terraform'),
+  ['yamlls'] = require('lsp.yamlls'),
+  ['jsonls'] = require('lsp.jsonls'),
+=======
 local lspconfig = require('lspconfig')
 -- Bash
 lspconfig.bashls.setup {}
@@ -74,6 +159,7 @@ lspconfig.cssmodules_ls.setup {
     client.server_capabilities.definitionProvider = false
     -- custom_on_attach(client)
   end
+>>>>>>> Stashed changes
 }
 -- Python
 lspconfig.pyright.setup {}

@@ -48,6 +48,7 @@
     # git-delta
     colorMoved = default
     algorithm = histogram
+	tool = nvimdiff
 [safe]
 	directory = /opt/fluttera
 	directory = /opt/flutter
