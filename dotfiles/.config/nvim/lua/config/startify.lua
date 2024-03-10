@@ -8,6 +8,7 @@ vim.g.startify_bookmarks = {
   {d = "~/.config/dunst/dunstrc"},
   {w = "~/.config/waybar/config"},
   {h = "~/.config/hypr/hyprland.conf"},
+  {y = "~/.config/yazi/yazi.toml"},
 }
 vim.g.startify_lists = {
   {header = {'  Bookmarks'}, type = 'bookmarks'},

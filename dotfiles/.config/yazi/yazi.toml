@@ -1,5 +1,6 @@
 [manager]
-layout         = [ 1, 3, 4 ]
+ratio          = [ 1, 3, 4 ]
+linemode       = "size"
 sort_by        = "natural"
 sort_sensitive = true
 sort_reverse   = false
@@ -12,6 +13,9 @@ tab_size   = 2
 max_width  = 1920
 max_height = 1080
 cache_dir  = "~/.cache/yazi"
+
+image_filter = "nearest"
+image_quality= 50
 
 [opener]
 folder = [
