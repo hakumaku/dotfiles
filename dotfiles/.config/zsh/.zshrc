@@ -97,9 +97,14 @@ function _zsh_vi_mode_init() {
 zvm_after_init_commands+=(_zsh_vi_mode_init)
 
 # Tmux
-# if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#   exec tmux
-# fi
+if command -v tmux &>/dev/null \
+    && [ -n "$PS1" ] \
+    && [[ ! "$TERM" =~ screen ]] \
+    && [[ ! "$TERM" =~ tmux ]] \
+    && [ -z "$TMUX" ] \
+    && [[ ! "$TERM" =~ xterm-kitty ]]; then
+  exec tmux
+fi
 
 # Bindings
 zle -N _fzf_cd_gitlab
