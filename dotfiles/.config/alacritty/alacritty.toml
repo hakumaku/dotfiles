@@ -59,7 +59,7 @@ style = "bold"
 
 [font.offset]
 x = 0
-y = 8
+y = 0
 
 [font.glyph_offset]
 x = 0
