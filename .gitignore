@@ -20,6 +20,8 @@ vlc-qt-interface.conf
 **/ranger/scope.sh
 **/ranger/scope.shn
 
+**/tmux/plugins/*
+
 **/qutebrowser/*
 !**/qutebrowser/greasemonkey
 !**/qutebrowser/themes
