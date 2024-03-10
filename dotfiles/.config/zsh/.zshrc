@@ -83,6 +83,8 @@ function _zsh_vi_mode_init() {
         --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
         --color header:italic \
         --header 'Press CTRL-Y to copy command into clipboard'"
+    # zoxide
+    export _ZO_FZF_OPTS="$FZF_CTRL_R_OPTS"
   fi
 
   # Key bindings for zsh-vi-mode
