@@ -103,14 +103,10 @@ if command -v tmux &>/dev/null \
     && [ -n "$PS1" ] \
     && [[ ! "$TERM" =~ screen ]] \
     && [[ ! "$TERM" =~ tmux ]] \
-    && [ -z "$TMUX" ] \
-    && [[ ! "$TERM" =~ xterm-kitty ]]; then
+    && [ -z "$TMUX" ]; then
+    # && [[ ! "$TERM" =~ xterm-kitty ]]; then
   exec tmux
 fi
-
-# Bindings
-zle -N _fzf_cd_gitlab
-bindkey '^]' _fzf_cd_gitlab
 
 zle -N _fg_bg
 bindkey '^z' _fg_bg
