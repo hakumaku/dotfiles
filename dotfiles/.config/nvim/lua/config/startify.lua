@@ -9,6 +9,7 @@ vim.g.startify_bookmarks = {
   {w = "~/.config/waybar/config"},
   {h = "~/.config/hypr/hyprland.conf"},
   {y = "~/.config/yazi/yazi.toml"},
+  {f = "~/.config/foot/foot.ini"},
 }
 vim.g.startify_lists = {
   {header = {'  Bookmarks'}, type = 'bookmarks'},
