@@ -101,6 +101,10 @@ verbs: [
         execution: ":line_up"
     }
     {
+        key: ctrl-o
+        execution: ":preview_image"
+    }
+    {
         apply_to: directory
         key: ctrl-l
         external: "cd {file}"

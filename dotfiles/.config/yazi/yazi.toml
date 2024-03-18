@@ -9,9 +9,9 @@ show_hidden    = false
 show_symlink   = true
 
 [preview]
-tab_size   = 2
-max_width  = 1920
-max_height = 1080
+# tab_size   = 2
+max_width  = 1280
+max_height = 720
 cache_dir  = "~/.cache/yazi"
 
 image_filter = "nearest"
@@ -29,7 +29,7 @@ text = [
 	{ run = '$EDITOR "$@"', block = true },
 ]
 image = [
-	{ run = 'open "$@"', desc = "Open" },
+	{ run = 'imv "$@"', desc = "Open" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 video = [
