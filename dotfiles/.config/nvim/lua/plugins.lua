@@ -81,7 +81,9 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
     },
-    config = true
+    config = function()
+      require("config.neogit")
+    end
   },
   -- File Navigation
   {
