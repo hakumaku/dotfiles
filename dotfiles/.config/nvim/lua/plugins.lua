@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- Vim basic utility
   "tpope/vim-repeat",
-  "tpope/vim-fugitive",
   "mbbill/undotree",
   "Raimondi/delimitMate",
   {
@@ -64,16 +63,25 @@ require("lazy").setup({
     end
   },
   {
+    'sbdchd/neoformat',
+    config = function()
+      require("config.neoformat")
+    end
+  },
+  -- Git Integration
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
       require("config.gitsigns")
     end
   },
   {
-    'sbdchd/neoformat',
-    config = function()
-      require("config.neoformat")
-    end
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
+    config = true
   },
   -- File Navigation
   {
@@ -209,7 +217,8 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-python"
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio"
     },
     lazy = true,
     event = {"BufRead test_*.py"},
