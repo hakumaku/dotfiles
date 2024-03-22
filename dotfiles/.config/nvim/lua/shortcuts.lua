@@ -168,13 +168,14 @@ nnoremap("[t", "<cmd>AerialPrev<CR>")
 -- trouble.nvim
 nnoremap("<C-w>T", ":TroubleToggle<CR>")
 
--- neogit & gitsigns
+-- neogit & diffview & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gj", ":diffget //2<CR>")
 nnoremap("<leader>gk", ":diffget //3<CR>")
 nnoremap("<leader>gl", ":vertical G log<CR>")
 
 nnoremap("<leader>gs", ":Neogit<CR>")
+nnoremap("<leader>gh", ":DiffviewFileHistory %<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
