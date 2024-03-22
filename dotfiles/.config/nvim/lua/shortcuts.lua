@@ -165,14 +165,11 @@ nnoremap("<C-w>t", ":AerialToggle!<CR>")
 nnoremap("]t", "<cmd>AerialNext<CR>")
 nnoremap("[t", "<cmd>AerialPrev<CR>")
 
--- trouble.nvim
-nnoremap("<C-w>T", ":TroubleToggle<CR>")
-
 -- neogit & diffview & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gj", ":diffget //2<CR>")
 nnoremap("<leader>gk", ":diffget //3<CR>")
-nnoremap("<leader>gl", ":vertical G log<CR>")
+nnoremap("<leader>gl", ":lua require('neogit').open({'log'})<CR>")
 
 nnoremap("<leader>gs", ":Neogit<CR>")
 nnoremap("<leader>gh", ":DiffviewFileHistory %<CR>")
