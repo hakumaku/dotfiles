@@ -93,10 +93,10 @@ lspconfig.clangd.setup {
   init_option = {fallbackFlags = {"--std=c++20"}}
 }
 -- Rust
-lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
-  settings = {['rust-analyzer'] = {}}
-}
+-- lspconfig.rust_analyzer.setup {
+--   -- Server-specific settings. See `:help lspconfig-setup`
+--   settings = {['rust-analyzer'] = {}}
+-- }
 lspconfig.terraformls.setup {}
 -- Misc
 lspconfig.jsonls.setup {}

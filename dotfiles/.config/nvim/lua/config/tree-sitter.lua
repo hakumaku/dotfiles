@@ -2,6 +2,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "c",
     "cpp",
+    "rust",
     "python",
     "lua",
     "comment",
@@ -39,7 +40,6 @@ require('nvim-treesitter.configs').setup {
       "tsx",
       "julia",
       "typescript",
-      "rust",
       "gdscript",
       "ledger",
       "sparql",
