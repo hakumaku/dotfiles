@@ -4,3 +4,31 @@ fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 }
 endsnippet
 
+snippet impl "impl ... { ... }"
+impl $1 {
+    $2
+}
+endsnippet
+
+snippet #test "#[cfg(test)] { ... }"
+#[cfg(test)]
+mod tests {
+    $0
+}
+endsnippet
+
+snippet r# "r#'...'#"
+r#"$1"#
+endsnippet
+
+snippet der "#[derive(...)]"
+#[derive($1)]
+endsnippet
+
+snippet match "match ... { ... }"
+match ${1:value} {
+    Ok(${1/(\w+).*/$1/}) => {${2}},
+    Err(_) => panic!("unexpected"),
+}
+endsnippet
+
