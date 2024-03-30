@@ -10,9 +10,16 @@ impl $1 {
 }
 endsnippet
 
-snippet #test "#[cfg(test)] { ... }"
+snippet #ctest "#[cfg(test)] { ... }"
 #[cfg(test)]
 mod tests {
+    $0
+}
+endsnippet
+
+snippet #test "#[test] { ... }"
+#[test]
+fn $1 {
     $0
 }
 endsnippet
