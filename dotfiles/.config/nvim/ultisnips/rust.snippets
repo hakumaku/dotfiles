@@ -1,7 +1,21 @@
-snippet fmt "fn fmt(...) -> fmt::Result"
-fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-	write(f, "{}")!
-}
+snippet a "assert!(...)"
+assert!($1);
+endsnippet
+
+snippet ae "assert_eq!(...)"
+assert_eq!($1);
+endsnippet
+
+snippet p "println!(...)"
+println!("$1");
+endsnippet
+
+snippet fmt "format!(...)"
+format!("$1");
+endsnippet
+
+snippet wrt "write!(...)"
+write!("$1");
 endsnippet
 
 snippet impl "impl ... { ... }"
@@ -10,17 +24,59 @@ impl $1 {
 }
 endsnippet
 
-snippet #ctest "#[cfg(test)] { ... }"
+snippet implt "impl ... for ... { ... }"
+impl $1 for $2 {
+    $3
+}
+endsnippet
+
+snippet tmod "#[cfg(test)] { ... }"
 #[cfg(test)]
 mod tests {
     $0
 }
 endsnippet
 
-snippet #test "#[test] { ... }"
+snippet tfn "#[test] { ... }"
 #[test]
 fn $1 {
     $0
+}
+endsnippet
+
+snippet for "iterate (for ... in ...)"
+for $1 in $2 {
+    $3
+}
+endsnippet
+
+snippet fori "iterate over range (for ... in range)"
+for $1 in $2..$3 {
+    $4
+}
+endsnippet
+
+snippet ifl "if let ... statement"
+if let $1 = $2 {
+    $3
+}
+endsnippet
+
+snippet ifls "if let Some(...) statement"
+if let Some($1) = $2 {
+    $3
+}
+endsnippet
+
+snippet whilel "while let ... loop"
+while let $1 = $2 {
+    $3
+}
+endsnippet
+
+snippet whilels "while let Some(...) loop"
+while let Some($1) = $2 {
+    $3
 }
 endsnippet
 
