@@ -50,6 +50,9 @@ else
   -- Enable mouse scrolling
   vim.opt.mouse = "a"
 
+  -- Enable spelling
+  vim.opt.spell = true
+
   -- No backup files
   vim.opt.backup = false
   -- No backup
