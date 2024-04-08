@@ -58,6 +58,7 @@ nmap <C-w>t <Action>(ActivateStructureToolWindow)
 nmap <C-w>d <Action>(com.jetbrains.python.console.RunPythonOrDebugConsoleAction)
 nmap <C-w>b <Action>(Switcher)
 nmap <C-w>g <Action>(Git.Branches)
+nmap <C-w>. <Action>(HideAllWindows)
 
 vmap <C-c> <Action>(EditorCopy)
 imap <C-v> <ESC>:action EditorPaste<CR>a
