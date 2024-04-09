@@ -101,6 +101,13 @@ fn $1 {
 }
 endsnippet
 
+snippet atfn "#[tokio::test] { ... }"
+#[tokio::test]
+async fn $1 {
+    $0
+}
+endsnippet
+
 snippet for "iterate (for ... in ...)"
 for $1 in $2 {
     $3
