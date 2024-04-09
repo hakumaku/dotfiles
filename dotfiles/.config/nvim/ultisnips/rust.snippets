@@ -87,21 +87,21 @@ impl $1 for $2 {
 }
 endsnippet
 
-snippet tmod "#[cfg(test)] { ... }"
+snippet tmod "#[cfg(test)] { ... }" A
 #[cfg(test)]
 mod tests {
     $0
 }
 endsnippet
 
-snippet tfn "#[test] { ... }"
+snippet tfn "#[test] { ... }" A
 #[test]
 fn $1 {
     $0
 }
 endsnippet
 
-snippet atfn "#[tokio::test] { ... }"
+snippet atfn "#[tokio::test] { ... }" A
 #[tokio::test]
 async fn $1 {
     $0
@@ -144,7 +144,7 @@ while let Some($1) = $2 {
 }
 endsnippet
 
-snippet r# "r#'...'#"
+snippet r# "r#'...'#" A
 r#"$1"#
 endsnippet
 
