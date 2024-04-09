@@ -62,7 +62,43 @@ require("lazy").setup({
       require("config.telescope")
     end
   },
-  'folke/flash.nvim',
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      {
+        "s",
+        mode = {"n", "x", "o"},
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash"
+      },
+      {
+        "S",
+        mode = {"n", "x", "o"},
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter"
+      },
+      {
+        "N",
+        mode = {"n"},
+        function()
+          require("flash").jump({
+            search = {mode = "search", max_length = 0},
+            label = {after = {0, 0}},
+            pattern = "^"
+          })
+        end,
+        desc = "Jump to a line"
+      }
+    }
+  },
   {
     'sbdchd/neoformat',
     config = function()
@@ -78,10 +114,7 @@ require("lazy").setup({
   },
   {
     "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-    },
+    dependencies = {"nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
     config = function()
       require("config.neogit")
     end
