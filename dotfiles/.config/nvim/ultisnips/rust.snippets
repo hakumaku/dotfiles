@@ -163,3 +163,15 @@ match ${1:value} {
 }
 endsnippet
 
+snippet "(\w+).ok" "Ok(...)" r
+Ok(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+snippet "(\w+).some" "Some(...)" r
+Some(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+snippet "(\w+).err" "Err(...)" r
+Err(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
