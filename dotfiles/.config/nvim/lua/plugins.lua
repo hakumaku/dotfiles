@@ -299,7 +299,6 @@ require("lazy").setup({
   'folke/lsp-colors.nvim',
   'folke/zen-mode.nvim',
   'folke/todo-comments.nvim',
-  'nvim-treesitter/nvim-treesitter-context',
   {
     'onsails/lspkind-nvim',
     config = function()

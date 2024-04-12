@@ -28,7 +28,7 @@ end
 
 cmp.setup {
   enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or
+    return vim.api.nvim_get_option_value("buftype", {}) ~= "prompt" or
                require("cmp_dap").is_dap_buffer()
   end,
   snippet = {
@@ -50,18 +50,40 @@ cmp.setup {
     ["<C-p>"] = cmp.mapping(select_prev_item, {"i", "s", "c"})
   },
   sources = {
-    {name = "ultisnips"},
-    {name = "nvim_lua"},
-    {name = "nvim_lsp"},
-    {name = "path"},
-    -- {name = "luasnip"},
-    {name = "buffer", keyword_length = 5}
+    {name = "nvim_lsp", priority = 10},
+    {name = "buffer", priority = 9, keyword_length = 5},
+    {name = "ultisnips", priority = 6},
+    {name = "path", priority = 4},
+    {name = "nvim_lua", priority = 3}
   },
-  formatting = {format = lspkind.cmp_format()},
+  -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
+  window = {
+    completion = {
+      -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      col_offset = -3,
+      side_padding = 0
+    }
+  },
+  formatting = {
+    fields = {"kind", "abbr", "menu"},
+    format = function(entry, vim_item)
+      local kind = lspkind.cmp_format({mode = "symbol_text", maxwidth = 50})(
+                       entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", {trimempty = true})
+      kind.kind = " " .. (strings[1] or "") .. " "
+      kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+      return kind
+    end,
+    expandable_indicator = false
+  },
   -- view = {entries = 'native'},
   experimental = {ghost_text = true},
   sorting = {
+    priority_weight = 1.0,
     comparators = {
+      cmp.config.compare.locality,
+      cmp.config.compare.recently_used,
       cmp.config.compare.offset,
       cmp.config.compare.exact,
       cmp.config.compare.score,
