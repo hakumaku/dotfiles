@@ -86,8 +86,14 @@ nnoremap("<RightMouse>", ":Break<CR>")
 -- Reverse selected lines.
 vnoremap("<leader>r", "y:lua utils.reverse_lines()<CR>")
 -- Jump to the next tab ')'
-inoremap("<C-l>", "<esc>:lua utils.jump_right()<CR>a")
-inoremap("<A-;>", "<esc>:lua utils.append_semi_colon()<CR>a")
+inoremap("<C-l>", "<C-o>:lua utils.jump_right()<CR>")
+-- ctrl + comma     => <A-a>
+-- ctrl + period    => <A-b>
+-- ctrl + slash     => <A-c>
+-- ctrl + semicolon => <A-d>
+inoremap("<A-d>", "<C-o>:lua utils.append_semi_colon()<CR>")
+inoremap("<A-b>", "<C-o>:lua utils.toggle_eol_await()<CR>")
+inoremap("<A-c>", "<C-o>:lua utils.toggle_eol_option()<CR>")
 -- External Utilities
 nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 

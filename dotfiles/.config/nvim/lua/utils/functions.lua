@@ -33,16 +33,68 @@ end
 function M.jump_right()
   -- getpos() -> [bufnum, lnum, col, off]
   local pos = vim.fn.getpos('.')
-  local col = string.find(vim.fn.getline('.'), '[%)%]}>"\']', pos[3] + 1)
+  local col = string.find(vim.fn.getline('.'), '[%)%]}>"\']', pos[3])
   if col then
-    pos[3] = col
+    pos[3] = col + 1
     vim.fn.setpos('.', pos)
   end
 end
 
+-- Rust stuff
+
 function M.append_semi_colon()
-  local current_line = vim.fn.getline('.')
-  vim.fn.setline(vim.fn.line('.'), current_line .. ';')
+  local line = vim.fn.getline('.')
+  if line:sub(-1, -1) ~= ';' then
+    vim.fn.setline(vim.fn.line('.'), line .. ';')
+  end
+end
+
+function M.toggle_eol_await()
+  local line = vim.fn.getline('.')
+  if line:sub(-1, -1) ~= ';' then
+    local col = line:find('.await')
+    if col == nil then
+      -- let a = expr
+      vim.fn.setline(vim.fn.line('.'), line .. '.await;')
+    else
+      -- let a = expr.await
+      vim.fn.setline(vim.fn.line('.'), line .. ';')
+    end
+  else
+    local col = line:find('.await;')
+    if col == nil then
+      -- let a = expr;
+      vim.fn.setline(vim.fn.line('.'), line:sub(1, -2) .. '.await;')
+    else
+      -- let a = expr.await;
+      vim.fn.setline(vim.fn.line('.'), line:sub(1, -8) .. ';')
+    end
+  end
+end
+
+function M.toggle_eol_option()
+  local line = vim.fn.getline('.')
+  if line:sub(-1, -1) ~= ';' then
+    local col = line:find('?')
+    if col == nil then
+      -- let a = expr
+      vim.fn.setline(vim.fn.line('.'), line .. '?;')
+    else
+      -- let a = expr?
+      vim.fn.setline(vim.fn.line('.'), line .. ';')
+    end
+  else
+    local col = line:find('?;')
+    if col == nil then
+      -- let a = expr;
+      print("none, ;")
+      vim.fn.setline(vim.fn.line('.'), line:sub(1, -2) .. '?;')
+    else
+      -- let a = expr?;
+      print("await, ;")
+      vim.fn.setline(vim.fn.line('.'), line:sub(1, -3) .. ';')
+    end
+  end
 end
 
 function M.reverse_lines()

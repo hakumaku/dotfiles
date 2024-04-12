@@ -66,7 +66,14 @@ require("lazy").setup({
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        char = {
+          -- set to `false` to use the current line only
+          multi_line = false
+        }
+      }
+    },
     -- stylua: ignore
     keys = {
       {

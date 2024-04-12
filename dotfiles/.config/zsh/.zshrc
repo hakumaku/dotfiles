@@ -116,9 +116,10 @@ alias pubip="curl 'https://api.ipify.org?format=txt'"
 bindkey -s '^w9' "cd $XDG_DATA_HOME/dotfiles^M"
 bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"
 
-bindkey -s '^wa' "^Ulazygit^M"
-bindkey -s '^wb' "^Ulazydocker^M"
-bindkey -s '^wc' "^Ubtm^M"
+# bindkey -s '^wa' "^Ulazygit^M"
+# bindkey -s '^wb' "^Ulazydocker^M"
+# bindkey -s '^wc' "^Ubtm^M"
+# bindkey -s '^[[1;c' "^Ubtm^M"
 bindkey -s '^o' "^Uyazi^M"
 
 # source some files

@@ -173,18 +173,23 @@ key = "Key9"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u0017a"
-key = "Period"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u0017b"
+chars = "\u001Ba"
 key = "Comma"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u0017c"
+chars = "\u001Bb"
+key = "Period"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001Bc"
 key = "Slash"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001Bd"
+key = "Semicolon"
 mods = "Control"
 
 [[keyboard.bindings]]
