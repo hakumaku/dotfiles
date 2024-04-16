@@ -100,11 +100,11 @@ zvm_after_init_commands+=(_zsh_vi_mode_init)
 
 # Tmux
 if command -v tmux &>/dev/null \
-    && [ -n "$PS1" ] \
-    && [[ ! "$TERM" =~ screen ]] \
-    && [[ ! "$TERM" =~ tmux ]] \
-    && [ -z "$TMUX" ]; then
-    # && [[ ! "$TERM" =~ xterm-kitty ]]; then
+  && [ -n "$PS1" ] \
+  && [[ ! "$TERM" =~ screen ]] \
+  && [[ ! "$TERM" =~ tmux ]] \
+  && [ -z "$TMUX" ]; then
+  # && [[ ! "$TERM" =~ xterm-kitty ]]; then
   exec tmux
 fi
 
@@ -116,10 +116,13 @@ alias pubip="curl 'https://api.ipify.org?format=txt'"
 bindkey -s '^w9' "cd $XDG_DATA_HOME/dotfiles^M"
 bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"
 
-# bindkey -s '^wa' "^Ulazygit^M"
-# bindkey -s '^wb' "^Ulazydocker^M"
-# bindkey -s '^wc' "^Ubtm^M"
-# bindkey -s '^[[1;c' "^Ubtm^M"
+# <C-,> = <C-q>a
+# <C-.> = <C-q>b
+# <C-/> = <C-q>c
+# <C-;> = <C-q>d
+bindkey -s '^qa' "^Ulazydocker^M"
+bindkey -s '^qb' "^Ulazygit^M"
+bindkey -s '^qc' "^Ubtm^M"
 bindkey -s '^o' "^Uyazi^M"
 
 # source some files
@@ -145,3 +148,8 @@ fi
 
 # zoxide (https://github.com/ajeetdsouza/zoxide)
 eval "$(zoxide init zsh)"
+
+# foot (https://codeberg.org/dnkl/foot#jumping-between-prompts)
+precmd() {
+  print -Pn "\e]133;A\e\\"
+}
