@@ -2,7 +2,7 @@ require("obsidian").setup({
   -- A list of workspace names, paths, and configuration overrides.
   -- If you use the Obsidian app, the 'path' of a workspace should generally be
   -- your vault root (where the `.obsidian` folder is located).
-  workspaces = {{name = "personal", path = "~/workspace/github/diary"}},
+  workspaces = {{name = "personal", path = "~/workspace/github/obsidian"}},
 
   -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
   -- 'workspaces'. For example:
@@ -14,17 +14,6 @@ require("obsidian").setup({
   -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
   -- levels defined by "vim.log.levels.*".
   log_level = vim.log.levels.INFO,
-
-  daily_notes = {
-    -- Optional, if you keep daily notes in a separate directory.
-    folder = "notes/dailies",
-    -- Optional, if you want to change the date format for the ID of daily notes.
-    date_format = "%Y-%m-%d",
-    -- Optional, if you want to change the date format of the default alias of daily notes.
-    alias_format = "%B %-d, %Y",
-    -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-    template = nil
-  },
 
   -- Either 'wiki' or 'markdown'.
   preferred_link_style = "wiki",
