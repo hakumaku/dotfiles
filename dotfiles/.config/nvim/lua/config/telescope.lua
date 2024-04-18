@@ -7,6 +7,53 @@ local fzf_options = {
   case_mode = "ignore_case" -- or "ignore_case" or "respect_case"
   -- the default case_mode is "smart_case"
 }
+local utils = require("telescope.utils")
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "TelescopeResults",
+  callback = function(ctx)
+    vim.api.nvim_buf_call(ctx.buf, function()
+      vim.fn.matchadd("TelescopeParent", "\t(.*)$")
+      vim.api.nvim_set_hl(0, "TelescopeParent", {link = "Comment"})
+    end)
+  end
+})
+
+local filename_first = function()
+  local project_path = require("plenary.job"):new({
+    command = "git",
+    args = {"rev-parse", "--show-toplevel"}
+  }):sync()[1]
+
+  if project_path == nil then
+    return function(_, path)
+      local tail = vim.fs.basename(path)
+      local parent = vim.fs.dirname(path)
+      if parent == "." then
+        return tail
+      end
+      return string.format("%s\t(%s)", tail, parent)
+    end
+  end
+
+  return function(_, path)
+    if string.sub(path, 1, 1) == '/' then
+      local tail = utils.path_tail(path)
+      local parent = string.sub(path, #project_path + 2, -#tail - 2)
+      if #parent == 0 then
+        return tail
+      end
+      return string.format("%s\t(%s)", tail, parent)
+    else
+      local tail = vim.fs.basename(path)
+      local parent = vim.fs.dirname(path)
+      if parent == "." then
+        return tail
+      end
+      return string.format("%s\t(%s)", tail, parent)
+    end
+  end
+end
 
 telescope.load_extension('dap')
 telescope.load_extension('fzf')
@@ -44,24 +91,35 @@ telescope.setup {
     }
   },
   pickers = {
-    find_files = {theme = "dropdown", previewer = false, hidden = true},
+    find_files = {
+      theme = "dropdown",
+      previewer = false,
+      hidden = true,
+      path_display = filename_first()
+    },
     buffers = {theme = "dropdown", previewer = false},
     live_grep = {theme = "ivy"},
     current_buffer_fuzzy_find = {theme = "dropdown", previewer = false},
     grep_string = {theme = "ivy"},
     git_branches = {theme = "dropdown", previewer = false},
     lsp_workspace_symbols = {
-      path_display = "hidden",
+      path_display = filename_first(),
       theme = "dropdown",
       previewer = false,
-      sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_options)
+      sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_options),
+      color_devicons = true,
+      disable_devicons = false,
+      case_mode = "smart_case"
     },
     -- Manually set sorter, for some reason not picked up automatically
     lsp_dynamic_workspace_symbols = {
-      path_display = "hidden",
+      path_display = filename_first(),
       theme = "dropdown",
       previewer = false,
-      sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_options)
+      sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_options),
+      color_devicons = true,
+      disable_devicons = false,
+      case_mode = "smart_case"
     },
     lsp_references = {theme = "ivy"}
   }
