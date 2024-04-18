@@ -1,4 +1,8 @@
 local telescope = require("telescope")
+telescope.load_extension('dap')
+telescope.load_extension('fzf')
+telescope.load_extension("aerial")
+
 local actions = require("telescope.actions")
 local fzf_options = {
   fuzzy = true, -- false will only do exact matching
@@ -54,10 +58,6 @@ local filename_first = function()
     end
   end
 end
-
-telescope.load_extension('dap')
-telescope.load_extension('fzf')
-telescope.load_extension("aerial")
 
 telescope.setup {
   defaults = {
@@ -119,7 +119,7 @@ telescope.setup {
       sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_options),
       color_devicons = true,
       disable_devicons = false,
-      case_mode = "smart_case"
+      case_mode = "smart_case",
     },
     lsp_references = {theme = "ivy"}
   }
