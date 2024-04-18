@@ -2,14 +2,7 @@ require("obsidian").setup({
   -- A list of workspace names, paths, and configuration overrides.
   -- If you use the Obsidian app, the 'path' of a workspace should generally be
   -- your vault root (where the `.obsidian` folder is located).
-  workspaces = {{name = "personal", path = "~/workspace/github/obsidian"}},
-
-  -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
-  -- 'workspaces'. For example:
-  -- dir = "~/vaults/work",
-
-  -- Optional, if you keep notes in a specific subdirectory of your vault.
-  notes_subdir = "notes",
+  workspaces = {{name = "personal", path = "~/workspace/github/obsidian/journey/"}},
 
   -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
   -- levels defined by "vim.log.levels.*".

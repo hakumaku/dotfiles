@@ -1,9 +1,0 @@
-[Desktop Entry]
-Categories=Utility;
-Type=Application
-Name=Feh Wallpaper
-Exec=$XDG_DATA_HOME/ubuntu-fresh/scripts/gnome_wallpaper.sh
-Icon=wallpaper
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=false
