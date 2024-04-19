@@ -31,6 +31,7 @@ cmp.setup {
     return vim.api.nvim_get_option_value("buftype", {}) ~= "prompt" or
                require("cmp_dap").is_dap_buffer()
   end,
+  completion = {completeopt = 'menu,menuone,noinsert'},
   snippet = {
     expand = function(args)
       vim.fn["UltiSnips#Anon"](args.body)
