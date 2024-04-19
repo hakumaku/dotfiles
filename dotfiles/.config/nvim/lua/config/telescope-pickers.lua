@@ -196,7 +196,7 @@ function M.pretty_lsp_document_symbols(opts)
     local entry_table = gen_from_lsp_symbols(line)
     local displayer = entry_display.create({
       separator = ' ',
-      items = {{width = icon_width}, {width = 20}, {remaining = true}}
+      items = {{width = icon_width}, {remaining = true}}
     })
 
     entry_table.display = function(entry)
