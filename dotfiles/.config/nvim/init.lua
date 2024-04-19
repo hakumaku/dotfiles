@@ -132,6 +132,8 @@ iabbrev mian main
 iabbrev lenght length
 iabbrev wheil while
 iabbrev whiel while
+iabbrev todo TODO:
+iabbrev fixme FIXME:
 ]])
 
   -- autocmd
