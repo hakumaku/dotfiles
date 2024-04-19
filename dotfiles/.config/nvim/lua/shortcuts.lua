@@ -151,16 +151,16 @@ nnoremap("<leader>df", ":Telescope dap frames<CR>", {silent = true})
 nnoremap("<leader>f", ":Neoformat<CR>")
 
 -- Telescope
-nnoremap("<C-s>f", ":Telescope find_files<CR>")
+nnoremap("<C-s>f",
+         ":lua require('config.telescope-pickers').pretty_find_files()<CR>")
 nnoremap("<C-s>b", ":Telescope buffers<CR>")
 nnoremap("<C-s>s", ":Telescope live_grep<CR>")
 nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
 nnoremap("<C-s>g", ":Telescope grep_string<CR>")
--- nnoremap("<C-s>t", ":Telescope aerial<CR>")
-nnoremap("<C-s>t", ":lua require('config.telescope-pickers').pretty_lsp_dynamic_workspace_symbols()<CR>")
-local ignore_symbols = "ignore_symbols=" .. table.concat({"variable"}, ",")
+nnoremap("<C-s>t",
+         ":lua require('config.telescope-pickers').pretty_lsp_document_symbols()<CR>")
 nnoremap("<C-s>T",
-         ":Telescope lsp_dynamic_workspace_symbols " .. ignore_symbols .. "<CR>")
+         ":lua require('config.telescope-pickers').pretty_lsp_dynamic_workspace_symbols()<CR>")
 nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
 nnoremap("<C-s>c", ":Telescope git_branches<CR>")
 
