@@ -103,7 +103,6 @@ cmp.setup {
       end,
       -- cmp.config.compare.kind,
       function(entry1, entry2)
-        print(entry1)
         local kind1 = fields[entry1:get_kind()] or 0
         local kind2 = fields[entry2:get_kind()] or 0
         if kind1 > kind2 then
