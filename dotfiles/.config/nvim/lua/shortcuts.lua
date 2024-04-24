@@ -111,7 +111,7 @@ nnoremap("]d", ":lua vim.diagnostic.goto_next()<CR>", {silent = true})
 nnoremap("[d", ":lua vim.diagnostic.goto_prev()<CR>", {silent = true})
 
 -- LSP config
-nnoremap("<C-]>", ":lua vim.lsp.buf.definition()<CR>", {silent = true})
+nnoremap("gd", ":lua vim.lsp.buf.definition()<CR>", {silent = true})
 nnoremap("K", ":lua vim.lsp.buf.hover()<CR>", {silent = true})
 nnoremap("<C-Space>", ":lua vim.lsp.buf.code_action()<CR>", {silent = true})
 nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
