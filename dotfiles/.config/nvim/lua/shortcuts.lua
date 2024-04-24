@@ -1,40 +1,31 @@
 local function nnoremap(combo, mapping, opts)
-  if not opts then
-    vim.api.nvim_set_keymap("n", combo, mapping, {noremap = true})
-  else
-    opts.noremap = true
-    vim.api.nvim_set_keymap("n", combo, mapping, opts)
-  end
+  opts = opts or {noremap = true}
+  opts.noremap = true
+  vim.keymap.set({"n"}, combo, mapping, opts)
 end
 
 local function inoremap(combo, mapping, opts)
-  if not opts then
-    vim.api.nvim_set_keymap("i", combo, mapping, {noremap = true})
-  else
-    opts.noremap = true
-    vim.api.nvim_set_keymap("i", combo, mapping, opts)
-  end
+  opts = opts or {noremap = true}
+  opts.noremap = true
+  vim.keymap.set("i", combo, mapping, {noremap = true})
 end
 
 local function vnoremap(combo, mapping)
-  vim.api.nvim_set_keymap("v", combo, mapping, {noremap = true})
+  vim.keymap.set("v", combo, mapping, {noremap = true})
 end
 
 local function cnoremap(combo, mapping)
-  vim.api.nvim_set_keymap("c", combo, mapping, {noremap = true})
+  vim.keymap.set("c", combo, mapping, {noremap = true})
 end
 
 local function tnoremap(combo, mapping)
-  vim.api.nvim_set_keymap("t", combo, mapping, {noremap = true})
+  vim.keymap.set("t", combo, mapping, {noremap = true})
 end
 
 local function snoremap(combo, mapping, opts)
-  if not opts then
-    vim.api.nvim_set_keymap("s", combo, mapping, {noremap = true})
-  else
-    opts.noremap = true
-    vim.api.nvim_set_keymap("s", combo, mapping, opts)
-  end
+  opts = opts or {noremap = true}
+  opts.noremap = true
+  vim.keymap.set("s", combo, mapping, {noremap = true})
 end
 
 -- Move cursor by virtual lines.
@@ -107,16 +98,18 @@ nnoremap("]q", ":cnext<CR>")
 nnoremap("[q", ":cprevious<CR>")
 nnoremap("]g", ":lnext<CR>")
 nnoremap("[g", ":lprev<CR>")
-nnoremap("]d", ":lua vim.diagnostic.goto_next()<CR>", {silent = true})
-nnoremap("[d", ":lua vim.diagnostic.goto_prev()<CR>", {silent = true})
+nnoremap("]d", vim.diagnostic.goto_next, {silent = true})
+nnoremap("[d", vim.diagnostic.goto_prev, {silent = true})
 
 -- LSP config
-nnoremap("gd", ":lua vim.lsp.buf.definition()<CR>", {silent = true})
-nnoremap("K", ":lua vim.lsp.buf.hover()<CR>", {silent = true})
-nnoremap("<C-Space>", ":lua vim.lsp.buf.code_action()<CR>", {silent = true})
+nnoremap("gd", vim.lsp.buf.declaration, {silent = true})
+nnoremap("gD", vim.lsp.buf.definition, {silent = true})
+nnoremap("gi", vim.lsp.buf.implementation, {silent = true})
+nnoremap("K", vim.lsp.buf.hover, {silent = true})
+nnoremap("<C-Space>", vim.lsp.buf.code_action, {silent = true})
 nnoremap("<leader>s", ":ClangdSwitchSourceHeader<CR>", {silent = true})
-nnoremap("<leader>u", ":lua vim.lsp.buf.references()<CR>", {silent = true})
-nnoremap("<leader>r", ":lua vim.lsp.buf.rename()<CR>", {silent = true})
+nnoremap("<leader>u", vim.lsp.buf.references, {silent = true})
+nnoremap("<leader>r", vim.lsp.buf.rename, {silent = true})
 
 -- neotest
 nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>",

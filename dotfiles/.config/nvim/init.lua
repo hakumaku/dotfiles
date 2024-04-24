@@ -175,6 +175,6 @@ augroup END
   vim.g.UltiSnipsJumpForwardTrigger = "<C-j>"
   vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
   require("plugins")
-  require("shortcuts")
   require("lsp")
+  require("shortcuts")
 end

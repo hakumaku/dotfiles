@@ -134,6 +134,7 @@ require("lazy").setup({
     event = {'InsertEnter'},
     dependencies = {'quangnguyen30192/cmp-nvim-ultisnips'}
   },
+  'nvim-telescope/telescope-ui-select.nvim',
 
   -- clangd extension
   'p00f/clangd_extensions.nvim',

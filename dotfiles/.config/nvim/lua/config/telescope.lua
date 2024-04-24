@@ -1,8 +1,4 @@
 local telescope = require("telescope")
-telescope.load_extension('dap')
-telescope.load_extension('fzf')
-telescope.load_extension("aerial")
-
 local actions = require("telescope.actions")
 local fzf_options = {
   fuzzy = true, -- false will only do exact matching
@@ -69,3 +65,10 @@ telescope.setup {
     lsp_references = {theme = "ivy"}
   }
 }
+
+-- extensions
+telescope.load_extension('dap')
+telescope.load_extension('fzf')
+telescope.load_extension("aerial")
+telescope.load_extension("ui-select")
+
