@@ -46,7 +46,7 @@ sethandler <C-]> a:vim i:vim
 
 imap <C-y> <Action>(EditorChooseLookupItemReplace)
 
-nmap gd <Action>(GotoDefinition)
+nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
 
 nmap <C-s>s <Action>(FindInPath)
