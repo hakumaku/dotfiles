@@ -95,6 +95,8 @@ function _zsh_vi_mode_init() {
   bindkey -M menuselect 'k' vi-up-line-or-history
   bindkey -M menuselect 'l' vi-forward-char
   bindkey -M menuselect 'j' vi-down-line-or-history
+
+  bindkey '^y' autosuggest-accept
 }
 zvm_after_init_commands+=(_zsh_vi_mode_init)
 
