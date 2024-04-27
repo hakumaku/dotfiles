@@ -29,7 +29,8 @@ text = [
 	{ run = '$EDITOR "$@"', block = true },
 ]
 image = [
-	{ run = 'imv "$@"', desc = "Open" },
+    # one linear command using imv . -n index
+	{ run = '''~/.config/yazi/imv-rifle.sh "$1"''', desc = "Open" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 video = [
