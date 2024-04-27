@@ -49,6 +49,10 @@ change_icons() {
         icon="mailspring"
         search_app application "mailspring"
         ;;
+      "firefox")
+        icon="firefox"
+        search_app application "firefox"
+        ;;
       "todoist")
         icon="com.todoist.Todoist"
         search_app application "todoist"

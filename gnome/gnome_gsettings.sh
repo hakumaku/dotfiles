@@ -89,6 +89,15 @@ set_gsettings() {
   gsettings set org.gnome.shell.keybindings switch-to-application-7 "['']"
   gsettings set org.gnome.shell.keybindings switch-to-application-8 "['']"
   # gsettings set org.gnome.shell.keybindings switch-to-application-9 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-1 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-2 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-3 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-4 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-5 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-6 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-7 "['']"
+  gsettings set org.gnome.shell.keybindings open-new-window-application-8 "['']"
+  # gsettings set org.gnome.shell.keybindings open-new-window-application-9 "['']"
 
   # Move window to specific workspace
   gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Ctrl>1']"
