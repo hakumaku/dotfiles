@@ -1,4 +1,5 @@
 if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then
+  export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
   if [ -d "${HOME}/.config/environment.d" ]; then
     env_configs=($(ls "$HOME/.config/environment.d"))
     for env_config in ${env_configs[@]}; do
@@ -6,8 +7,6 @@ if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; the
     done
   fi
 fi
-
-export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
 
 # Environment variables
 export HISTFILE=$HOME/.cache/.zsh_histfile

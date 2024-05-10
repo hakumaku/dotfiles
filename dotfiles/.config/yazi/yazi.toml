@@ -9,11 +9,10 @@ show_hidden    = false
 show_symlink   = true
 
 [preview]
-# tab_size   = 2
-max_width  = 1280
-max_height = 720
+max_width  = 1920
+max_height = 1080
 cache_dir  = "~/.cache/yazi"
-
+ 
 image_filter = "nearest"
 image_quality= 50
 
@@ -29,7 +28,6 @@ text = [
 	{ run = '$EDITOR "$@"', block = true },
 ]
 image = [
-    # one linear command using imv . -n index
 	{ run = '''~/.config/yazi/imv-rifle.sh "$1"''', desc = "Open" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]

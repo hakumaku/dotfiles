@@ -11,5 +11,5 @@ gui:
 
 keybinding:
   universal:
-    quit-alt1: ' ' 
+    quit-alt1: '<esc>' 
     return: '<C-c>'
