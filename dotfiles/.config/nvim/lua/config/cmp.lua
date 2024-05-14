@@ -117,6 +117,17 @@ cmp.setup {
   }
 }
 
+-- database
+cmp.setup.filetype(
+  {"sql"},
+  {
+    sources = {
+      { name = "vim-dadbod-completion" },
+      { name = "buffer" },
+    }
+  }
+)
+
 vim.api.nvim_create_autocmd("BufRead", {
   group = vim.api.nvim_create_augroup("CmpSourceCargo", {clear = true}),
   pattern = "Cargo.toml",
