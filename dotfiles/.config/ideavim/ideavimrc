@@ -55,6 +55,9 @@ nmap <C-s>t <Action>(GotoSymbol)
 nmap <C-s>c <Action>(GotoClass)
 nmap <C-l> <ESC>:nohl<CR>
 
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
+
 nmap <C-w>f <Action>(ActivateTerminalToolWindow)
 nmap <C-w>o <Action>(ActivateProjectToolWindow)
 nmap <C-w>t <Action>(ActivateStructureToolWindow)
