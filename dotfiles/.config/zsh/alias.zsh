@@ -22,11 +22,6 @@ alias gv='cd $HOME/Videos'
 alias zshrc='nvim $ZDOTDIR/.zshrc'
 alias bashrc="nvim ~/.bashrc -c 'normal zt'"
 alias dotfiles="cd $HOME/.local/share/dotfiles"
-# Move to the directory when exiting.
-# alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR";'
-# alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias nvimg="nvim -c 'Git | wincmd o' ."
-alias luamake=$XDG_CACHE_HOME/nvim/lspconfig/sumneko_lua/lua-language-server/3rd/luamake/luamake
 alias kitty_ssh="kitty +kitten ssh"
 
 [ "$TERM" = "xterm-kitty" ] && alias terminfo="echo kitty +kitten ssh"
