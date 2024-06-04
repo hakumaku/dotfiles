@@ -1,25 +1,13 @@
-if [ "${TERM}" = "linux" ] || [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ]; then
-  export PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/cargo/bin:$PATH
-  if [ -d "${HOME}/.config/environment.d" ]; then
-    env_configs=($(ls "$HOME/.config/environment.d"))
-    for env_config in ${env_configs[@]}; do
-      source "$HOME/.config/environment.d/${env_config}"
-    done
-  fi
-fi
-
 # Environment variables
 export HISTFILE=$HOME/.cache/.zsh_histfile
 export HISTSIZE=1000
 export SAVEHIST=1000
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
-if command -v bat &>/dev/null; then
-  export MANROFFOPT="-c"
-  export MANPAGER="sh -c 'col -bx | bat -pl man'"
-fi
 export EDITOR=nvim
 export VISUAL="$EDITOR"
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -pl man'"
 
 # Auto completions path
 fpath+=${XDG_DATA_HOME}/zsh/site-functions
@@ -129,23 +117,20 @@ bindkey -s '^o' "^Uyazi^M"
 # source some files
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
-source "$ZDOTDIR/completions.zsh"
 
-# broot (https://github.com/Canop/broot)
-if [[ -f $XDG_CONFIG_HOME/broot/launcher/bash/br ]]; then
-  source $XDG_CONFIG_HOME/broot/launcher/bash/br
-fi
+# TODO: conditionally set vars for 'nvm', 'pyenv'
+# TODO: cache zoxide output
 
 # nvm (https://github.com/nvm-sh/nvm)
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # pyenv (https://github.com/pyenv/pyenv)
-export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv >/dev/null; then
-  eval "$(pyenv init -)"
-fi
+# export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv >/dev/null; then
+#   eval "$(pyenv init -)"
+# fi
 
 # zoxide (https://github.com/ajeetdsouza/zoxide)
 eval "$(zoxide init zsh)"
