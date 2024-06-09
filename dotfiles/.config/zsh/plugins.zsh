@@ -1,19 +1,17 @@
-# zsh-vi-mode
 function load_plugins() {
   local dir="$XDG_DATA_HOME/repositories"
-  local plugins=(
-    "powerlevel10k/powerlevel10k.zsh-theme romkatv/powerlevel10k"
-    "zsh-autosuggestions/zsh-autosuggestions.zsh zsh-users/zsh-autosuggestions"
-    "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh zsh-users/zsh-syntax-highlighting"
-    "fzf-tab/fzf-tab.plugin.zsh Aloxaf/fzf-tab"
-    "zsh-vi-mode/zsh-vi-mode.plugin.zsh jeffreytse/zsh-vi-mode"
+  typeset -A plugins=(
+    "powerlevel10k/powerlevel10k.zsh-theme" "romkatv/powerlevel10k"
+    "zsh-autosuggestions/zsh-autosuggestions.zsh" "zsh-users/zsh-autosuggestions"
+    "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" "zsh-users/zsh-syntax-highlighting"
+    "fzf-tab/fzf-tab.plugin.zsh" "Aloxaf/fzf-tab"
+    "zsh-vi-mode/zsh-vi-mode.plugin.zsh" "jeffreytse/zsh-vi-mode"
   )
-  for plugin in "${plugins[@]}"; do
-    set -- $plugin # Convert the "tuple" into the param args $1 $2...
-    if [[ ! -f "$dir/$1" ]]; then
-      git clone --depth=1 "git@github.com:${2}.git"
+  for key val in "${(@kv)plugins}"; do
+    if [[ ! -f "$dir/${key}" ]]; then
+      git clone --depth=1 "git@github.com:${val}.git"
     fi
-    source "$dir/$1"
+    source "$dir/${key}"
   done
   # powerlevel10k: to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
   if [[ -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]]; then
@@ -61,4 +59,5 @@ function _zsh_vi_mode_init() {
 }
 
 load_plugins
+# zsh-vi-mode
 zvm_after_init_commands+=(_zsh_vi_mode_init)

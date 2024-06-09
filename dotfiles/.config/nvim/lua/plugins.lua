@@ -23,25 +23,63 @@ require("lazy").setup({
       require("config.nvim-surround")
     end
   },
-  'windwp/nvim-ts-autotag',
-
   -- Development Utilities
-  -- manage external editor tooling
-  "williamboman/mason.nvim",
   {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason").setup()
-      require("config.mason-lspconfig")
-    end
-  },
-  "neovim/nvim-lspconfig",
-  -- non-LSP sources to hook into its LSP client
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("config.null-ls")
-    end
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      -- manage external editor tooling
+      "williamboman/mason.nvim",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+          require("mason").setup()
+          require("config.mason-lspconfig")
+        end
+      },
+      -- non-LSP sources to hook into its LSP client
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require("config.null-ls")
+        end
+      },
+      -- nvim api
+      "folke/neodev.nvim",
+      -- clangd extension
+      'p00f/clangd_extensions.nvim',
+      -- rust extension
+      {
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        ft = {'rust'}
+      },
+      {
+        "saecki/crates.nvim",
+        version = 'v0.4.0',
+        event = {"BufRead Cargo.toml"},
+        dependencies = {'nvim-lua/plenary.nvim'},
+        config = function()
+          require('crates').setup()
+        end
+      },
+      -- typescript extension
+      'windwp/nvim-ts-autotag',
+      {
+        "pmizio/typescript-tools.nvim",
+        dependencies = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
+        opts = {
+          settings = {
+            tsserver_plugins = {
+              -- for TypeScript v4.9+
+              "@styled/typescript-styled-plugin"
+              -- or for older TypeScript versions
+              -- "typescript-styled-plugin",
+            }
+          }
+        }
+      },
+    },
   },
   "nvim-lua/plenary.nvim",
   "nvim-lua/popup.nvim",
@@ -55,8 +93,11 @@ require("lazy").setup({
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+      },
+      'nvim-telescope/telescope-ui-select.nvim',
     },
     config = function()
       require("config.telescope")
@@ -134,54 +175,12 @@ require("lazy").setup({
     event = {'InsertEnter'},
     dependencies = {'quangnguyen30192/cmp-nvim-ultisnips'}
   },
-  'nvim-telescope/telescope-ui-select.nvim',
-
-  -- clangd extension
-  'p00f/clangd_extensions.nvim',
-
-  -- rust extension
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = {'rust'}
-  },
-  {
-    "saecki/crates.nvim",
-    version = 'v0.4.0',
-    event = {"BufRead Cargo.toml"},
-    dependencies = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('crates').setup()
-    end
-  },
-
-  -- typescript extension
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"},
-    opts = {
-      settings = {
-        tsserver_plugins = {
-          -- for TypeScript v4.9+
-          "@styled/typescript-styled-plugin"
-          -- or for older TypeScript versions
-          -- "typescript-styled-plugin",
-        }
-      }
-    }
-  },
-
   -- json schemas
   "b0o/schemastore.nvim",
-
   -- database
   'tpope/vim-dadbod',
   "kristijanhusak/vim-dadbod-completion",
   "kristijanhusak/vim-dadbod-ui",
-
-  -- nvim api
-  "folke/neodev.nvim",
-
   -- obsidian
   {
     "epwalsh/obsidian.nvim",

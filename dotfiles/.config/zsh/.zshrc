@@ -60,6 +60,7 @@ bindkey -s '^o' "^Uyazi^M"
 # source some files
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
+source "$ZDOTDIR/plugins.zsh"
 
 # TODO: cache zoxide output
 load_nvm() {
