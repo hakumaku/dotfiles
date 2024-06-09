@@ -30,63 +30,6 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
-# zsh-vi-mode
-local dir="$XDG_DATA_HOME/repositories"
-local plugins=(
-  "powerlevel10k/powerlevel10k.zsh-theme"
-  "zsh-autosuggestions/zsh-autosuggestions.zsh"
-  "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  "fzf-tab/fzf-tab.plugin.zsh"
-  "zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-)
-for plugin in "${plugins[@]}"; do
-  source "$dir/$plugin"
-done
-# powerlevel10k: to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-if [[ -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]]; then
-  source $XDG_CONFIG_HOME/zsh/.p10k.zsh
-fi
-
-function _zsh_vi_mode_init() {
-  # fzf
-  if [[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ]]; then
-    source $XDG_CONFIG_HOME/fzf/fzf.zsh
-    # FZF (https://github.com/junegunn/fzf)
-    # Use ~~ as the trigger sequence instead of the default **
-    export FZF_COMPLETION_TRIGGER='~~'
-    # Options to fzf command
-    export FZF_COMPLETION_OPTS='+c -x'
-    # Setting fd as the default source for fzf
-    export FZF_DEFAULT_COMMAND='fd --type f'
-    # To apply the command to CTRL-T as well
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    # CTRL-/ to toggle small preview window to see the full command
-    # CTRL-Y to copy the command into clipboard using pbcopy
-    export FZF_CTRL_R_OPTS="\
-        --preview 'echo {}' \
-        --preview-window up:3:hidden:wrap \
-        --layout=reverse \
-        --bind 'ctrl-/:toggle-preview' \
-        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' \
-        --color header:italic \
-        --header 'Press CTRL-Y to copy command into clipboard'"
-    # zoxide
-    export _ZO_FZF_OPTS="$FZF_CTRL_R_OPTS"
-  fi
-
-  # Key bindings for zsh-vi-mode
-  bindkey -v
-  bindkey "^j" history-beginning-search-forward
-  bindkey "^k" history-beginning-search-backward
-  bindkey -M menuselect 'h' vi-backward-char
-  bindkey -M menuselect 'k' vi-up-line-or-history
-  bindkey -M menuselect 'l' vi-forward-char
-  bindkey -M menuselect 'j' vi-down-line-or-history
-
-  bindkey '^y' autosuggest-accept
-}
-zvm_after_init_commands+=(_zsh_vi_mode_init)
-
 # Tmux
 if command -v tmux &>/dev/null \
   && [ -n "$PS1" ] \
@@ -118,19 +61,21 @@ bindkey -s '^o' "^Uyazi^M"
 source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
 
-# TODO: conditionally set vars for 'nvm', 'pyenv'
 # TODO: cache zoxide output
+load_nvm() {
+  # nvm (https://github.com/nvm-sh/nvm)
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+}
 
-# nvm (https://github.com/nvm-sh/nvm)
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# pyenv (https://github.com/pyenv/pyenv)
-# export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv >/dev/null; then
-#   eval "$(pyenv init -)"
-# fi
+load_pyenv() {
+  # pyenv (https://github.com/pyenv/pyenv)
+  export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if command -v pyenv >/dev/null; then
+    eval "$(pyenv init -)"
+  fi
+}
 
 # zoxide (https://github.com/ajeetdsouza/zoxide)
 eval "$(zoxide init zsh)"

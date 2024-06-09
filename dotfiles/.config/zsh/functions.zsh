@@ -8,22 +8,6 @@ function _fg_bg {
   fi
 }
 
-function _fzf_cd {
-  fd --type d \
-    --hidden \
-    --exclude .git \
-    --exclude .java \
-    --exclude .gnupg \
-    --exclude .pki \
-    --exclude node_module \
-    --exclude .cache \
-    --exclude .npm \
-    --exclude .mozilla \
-    --exclude .meteor \
-    --exclude .nv | fzf
-}
-alias f='cd $(_fzf_cd)'
-
 function webp {
   mogrify -format jpg *.webp \
     && rm -rf *.webp
