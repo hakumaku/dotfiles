@@ -162,10 +162,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
--- https://github.com/neovim/neovim/blob/master/runtime/plugin/diagnostic.vim
 vim.fn.sign_define('DiagnosticSignError', {
-  -- TODO: bitmap icon
-  text = '',
+  text = '',
   texthl = 'LspDiagnosticsDefaultError',
   linehl = '',
   numhl = ''
@@ -177,7 +175,7 @@ vim.fn.sign_define('DiagnosticSignWarn', {
   numhl = ''
 })
 vim.fn.sign_define('DiagnosticSignHint', {
-  text = '',
+  text = '',
   texthl = 'LspDiagnosticsDefaultHint',
   linehl = '',
   numhl = ''
