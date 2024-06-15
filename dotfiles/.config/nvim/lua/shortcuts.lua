@@ -102,8 +102,8 @@ nnoremap("]d", vim.diagnostic.goto_next, {silent = true})
 nnoremap("[d", vim.diagnostic.goto_prev, {silent = true})
 
 -- LSP config
-nnoremap("gd", vim.lsp.buf.declaration, {silent = true})
-nnoremap("gD", vim.lsp.buf.definition, {silent = true})
+nnoremap("gd", vim.lsp.buf.definition, {silent = true})
+nnoremap("gD", vim.lsp.buf.declaration, {silent = true})
 nnoremap("gi", vim.lsp.buf.implementation, {silent = true})
 nnoremap("K", vim.lsp.buf.hover, {silent = true})
 nnoremap("<C-Space>", vim.lsp.buf.code_action, {silent = true})

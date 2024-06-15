@@ -1,18 +1,4 @@
--- https://github.com/folke/neodev.nvim
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-require("neodev").setup({
-  -- add any options here, or leave empty to use the default settings
-})
-
 local util = require("vim.lsp.util")
-local find_root_dir = function(fname)
-  local dir = util.root_pattern(".git", "setup.py", "setup.cfg",
-                                "pyproject.toml", "requirements.txt")(fname) or
-                  util.path.dirname(fname)
-  return dir
-end
-
-local lspconfig = require('lspconfig')
 
 -- https://www.reddit.com/r/neovim/comments/vfc7hc/lsp_definition_in_tsserver/
 local tsserver_handler = {
@@ -75,8 +61,19 @@ lspconfig.cssmodules_ls.setup {
     -- custom_on_attach(client)
   end
 }
+
 -- Python
-lspconfig.pyright.setup {}
+lspconfig.pylsp.setup {
+  settings = {
+    pylsp = {
+      plugins = {
+        black = { enabled = true },
+        pylsp_mypy = { enabled = true },
+        ruff = { enabled = true },
+      }
+    }
+  }
+}
 lspconfig.ruff_lsp.setup {}
 -- C/C++
 lspconfig.cmake.setup {}

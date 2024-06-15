@@ -29,7 +29,18 @@ require("lazy").setup({
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       -- manage external editor tooling
-      "williamboman/mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          ---@since 1.0.0
+          -- Where Mason should put its bin location in your PATH. Can be one of:
+          -- - "prepend" (default, Mason's bin location is put first in PATH)
+          -- - "append" (Mason's bin location is put at the end of PATH)
+          -- - "skip" (doesn't modify PATH)
+          ---@type '"prepend"' | '"append"' | '"skip"'
+          PATH = "append",
+        }
+      },
       {
         "williamboman/mason-lspconfig.nvim",
         config = function()
@@ -44,8 +55,6 @@ require("lazy").setup({
           require("config.null-ls")
         end
       },
-      -- nvim api
-      "folke/neodev.nvim",
       -- clangd extension
       'p00f/clangd_extensions.nvim',
       -- rust extension

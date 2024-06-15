@@ -15,7 +15,7 @@ require("mason-lspconfig").setup({
     "dockerls",
     "eslint",
     "lua_ls",
-    "pyright",
+    "pylsp",
     "ruff_lsp",
     "rust_analyzer"
   }
