@@ -258,7 +258,12 @@ require("lazy").setup({
   -- Look & Feel
   {'kyazdani42/nvim-web-devicons', lazy = true},
   'folke/lsp-colors.nvim',
-  'folke/zen-mode.nvim',
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      width = 120, -- width of the Zen window
+    }
+  },
   'folke/todo-comments.nvim',
   {
     'onsails/lspkind-nvim',
