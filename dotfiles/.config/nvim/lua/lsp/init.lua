@@ -68,6 +68,7 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         black = { enabled = true },
+        rope_autoimport = { enabled = true },
         pylsp_mypy = { enabled = true },
         ruff = { enabled = true },
       }
