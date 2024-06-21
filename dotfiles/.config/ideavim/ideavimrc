@@ -83,6 +83,8 @@ nmap ]b <Action>(NextTab)
 nmap [b <Action>(PreviousTab)
 nmap ]B <ESC>:tabm+1<CR>
 nmap [B <ESC>:tabm-1<CR>
+nmap ]m <Action>(MethodDown)
+nmap [m <Action>(MethodUp)
 nmap ]c <Action>(VcsShowNextChangeMarker)
 nmap [c <Action>(VcsShowPrevChangeMarker)
 nmap \f <Action>(ReformatCode)
