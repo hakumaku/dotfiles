@@ -9,8 +9,8 @@ show_hidden    = false
 show_symlink   = true
 
 [preview]
-max_width  = 1920
-max_height = 1080
+# max_width  = 1920
+# max_height = 1080
 cache_dir  = "~/.cache/yazi"
  
 image_filter = "nearest"
