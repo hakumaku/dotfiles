@@ -32,7 +32,7 @@ image = [
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 video = [
-	{ run = 'mpv "$@"' },
+	{ run = 'flatpak run io.mpv.Mpv "$@"' },
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 audio = [

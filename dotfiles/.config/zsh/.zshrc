@@ -37,6 +37,7 @@ if command -v tmux &>/dev/null \
   && [[ ! "$TERM" =~ tmux ]] \
   && [ -z "$TMUX" ]; then
   # && [[ ! "$TERM" =~ xterm-kitty ]]; then
+  export TERM_PROGRAM=$TERM
   exec tmux
 fi
 
