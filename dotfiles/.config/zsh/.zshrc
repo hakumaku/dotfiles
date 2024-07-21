@@ -2,6 +2,7 @@
 export HISTFILE=$HOME/.cache/.zsh_histfile
 export HISTSIZE=1000
 export SAVEHIST=1000
+setopt hist_ignore_all_dups
 export LESS="--ignore-case --window=-4 -R"
 export PAGER="less"
 export EDITOR=nvim
