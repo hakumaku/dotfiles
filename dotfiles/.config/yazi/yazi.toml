@@ -10,6 +10,8 @@ show_symlink   = true
 
 [preview]
 cache_dir  = "~/.cache/yazi"
+max_width = 1920
+max_height = 1080
  
 image_filter = "nearest"
 image_quality= 50
@@ -30,7 +32,7 @@ image = [
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 video = [
-	{ run = 'flatpak run io.mpv.Mpv "$@"' },
+	{ run = '''~/.config/yazi/mpv-rifle.sh "$1"''', desc = "Open" },
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 audio = [
