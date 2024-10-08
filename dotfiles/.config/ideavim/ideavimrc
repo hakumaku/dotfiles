@@ -1,7 +1,6 @@
 set surround
 set ideajoin
 set ideamarks
-set ideaput
 set visualbell
 
 set number
@@ -11,7 +10,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set clipboard+=unnamed
+" set clipboard+=unnamed
 set highlightedyank
 " set sneak
 " set easymotion
@@ -60,6 +59,7 @@ vmap gb <Action>(CommentByBlockComment)
 
 " navigations
 nmap <C-s>s <Action>(FindInPath)
+nmap <C-s>e <Action>(GotoUrlAction)
 nmap <C-s>f <Action>(GotoFile)
 nmap <C-s>t <Action>(GotoSymbol)
 nmap <C-s>c <Action>(GotoClass)

@@ -125,7 +125,8 @@ keymap = [
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
     # External Tools
-    { on = [ "e", "u" ], run = "shell --confirm '~/.config/yazi/unzip.sh'", desc = "Unzip file" },
+    { on = [ "e", "u" ], run = "shell --confirm '~/.config/yazi/unzip.sh'", desc = "Unzip all files" },
+    { on = [ "e", "t" ], run = "shell --confirm '~/.config/yazi/untar.sh'", desc = "Untar all files" },
     { on = [ "e", "w" ], run = "shell --confirm '~/.config/yazi/webp.sh'", desc = "Convert .webp files" },
     { on = [ "e", "i" ], run = "shell --confirm '~/.config/yazi/unzip-here.sh'", desc = "Unzip file here" },
 
