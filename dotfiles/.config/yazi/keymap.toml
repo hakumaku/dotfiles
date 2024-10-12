@@ -115,14 +115,14 @@ keymap = [
 	{ on = [ "w" ], run = "tasks_show", desc = "Show the tasks manager" },
 
 	# Goto
-	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
-	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
-	{ on = [ "g", "m" ],       run = "cd /media/haku",   desc = "Go to the mounted directory" },
-	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
-	{ on = [ "g", "w" ],       run = "cd ~/workspace",   desc = "Go to the workspace directory" },
-	{ on = [ "g", "/" ],       run = "cd /",             desc = "Go to the root directory" },
-	{ on = [ "g", "t" ],       run = "cd /tmp",          desc = "Go to the temporary directory" },
-	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
+	{ on = [ "g", "h" ],       run = "cd ~",               desc = "Go to the home directory" },
+	{ on = [ "g", "c" ],       run = "cd ~/.config",       desc = "Go to the config directory" },
+	{ on = [ "g", "m" ],       run = "cd /run/media/haku", desc = "Go to the mounted directory" },
+	{ on = [ "g", "d" ],       run = "cd ~/Downloads",     desc = "Go to the downloads directory" },
+	{ on = [ "g", "w" ],       run = "cd ~/workspace",     desc = "Go to the workspace directory" },
+	{ on = [ "g", "/" ],       run = "cd /",               desc = "Go to the root directory" },
+	{ on = [ "g", "t" ],       run = "cd /tmp",            desc = "Go to the temporary directory" },
+	{ on = [ "g", "<Space>" ], run = "cd --interactive",   desc = "Go to a directory interactively" },
 
     # External Tools
     { on = [ "e", "u" ], run = "shell --confirm '~/.config/yazi/unzip.sh'", desc = "Unzip all files" },

@@ -110,6 +110,8 @@ nmap ]B <ESC>:tabm+1<CR>
 nmap [B <ESC>:tabm-1<CR>
 nmap ]m <Action>(MethodDown)
 nmap [m <Action>(MethodUp)
+nmap <C-n> <Action>(MethodDown)
+nmap <C-p> <Action>(MethodUp)
 nmap ]c <Action>(VcsShowNextChangeMarker)
 nmap [c <Action>(VcsShowPrevChangeMarker)
 
