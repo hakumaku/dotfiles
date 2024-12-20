@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec "${XDG_CACHE_HOME}/nvim/lspconfig/lua-language-server/bin/lua-language-server" "$@"

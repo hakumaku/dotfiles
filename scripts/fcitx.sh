@@ -3,13 +3,7 @@
 set -euo pipefail
 
 config_fcitx() {
-  if command -v fcitx &>/dev/null; then
-    msg info "everything is up to date"
-    return
-  fi
-
   sudo locale-gen en_US.utf8 ko_KR.utf8
-  install_package fcitx
 
   msg info "executing fcitx to generate config"
   if [[ -d "$HOME/.config/fcitx5" ]]; then
