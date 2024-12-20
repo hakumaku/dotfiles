@@ -10,3 +10,6 @@ vim.g.neoformat_basic_format_trim = 1
 vim.g.neoformat_enabled_python = {'black'}
 
 vim.g.shfmt_opt = "-i 2 -ci -bn"
+
+-- rustfmt
+vim.g.neoformat_rust_rustfmt = {}
