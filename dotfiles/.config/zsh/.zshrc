@@ -9,6 +9,7 @@ export EDITOR=nvim
 export VISUAL="$EDITOR"
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -pl man'"
+export PROMPT_EOL_MARK=''
 
 # Auto completions path
 fpath+=${XDG_DATA_HOME}/zsh/site-functions
@@ -38,8 +39,7 @@ if command -v tmux &>/dev/null \
   && [[ ! "$TERM" =~ tmux ]] \
   && [ -z "$TMUX" ]; then
   # && [[ ! "$TERM" =~ xterm-kitty ]]; then
-  export TERM_PROGRAM=$TERM
-  exec tmux
+  echo exec tmux
 fi
 
 zle -N _fg_bg
@@ -87,3 +87,8 @@ eval "$(zoxide init zsh)"
 precmd() {
   print -Pn "\e]133;A\e\\"
 }
+
+. "/home/haku/.local/share/cargo/env"
+alias protontricks='flatpak run com.github.Matoking.protontricks' >> ~/.bashrc
+alias protontricks-launch='flatpak run --command=protontricks-launch com.github.Matoking.protontricks'
+alias mpv='flatpak run io.mpv.Mpv'
