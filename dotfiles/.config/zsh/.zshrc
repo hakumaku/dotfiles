@@ -92,3 +92,5 @@ precmd() {
 alias protontricks='flatpak run com.github.Matoking.protontricks' >> ~/.bashrc
 alias protontricks-launch='flatpak run --command=protontricks-launch com.github.Matoking.protontricks'
 alias mpv='flatpak run io.mpv.Mpv'
+
+. "$HOME/.local/share/../bin/env"
