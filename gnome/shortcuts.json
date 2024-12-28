@@ -7,13 +7,8 @@
     },
     {
       "name": "Run Terminal",
-      "command": "env GLFW_IM_MODULE=ibus kitty --single-instance",
+      "command": "env XCURSOR_SIZE=12 foot --maximize",
       "binding": "<Super>Return"
-    },
-    {
-      "name": "Launch Rofi",
-      "command": "rofi -show drun",
-      "binding": "<Super>R"
     },
     {
       "name": "Spotify - Next",
