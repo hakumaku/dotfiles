@@ -21,7 +21,8 @@ main() {
 
   for i in "${!files[@]}"; do
     if [[ "${files[$i]}" = "${filename}" ]]; then
-      flatpak run io.mpv.Mpv --playlist="$playlist" --playlist-start="$i"
+      # flatpak run io.mpv.Mpv --playlist="$playlist" --playlist-start="$i"
+      mpv --playlist="$playlist" --playlist-start="$i"
     fi
   done
 }
