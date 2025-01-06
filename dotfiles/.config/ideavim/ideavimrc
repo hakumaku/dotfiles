@@ -10,7 +10,8 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-" set clipboard+=unnamed
+set clipboard+=unnamed
+set clipboard+=ideaput
 set highlightedyank
 " set sneak
 " set easymotion
