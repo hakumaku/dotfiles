@@ -43,7 +43,7 @@ local lspconfig = require('lspconfig')
 -- Bash
 lspconfig.bashls.setup {}
 -- Typescript
-lspconfig.tsserver.setup {handlers = tsserver_handler}
+lspconfig.ts_lsp.setup {handlers = tsserver_handler}
 lspconfig.eslint.setup {}
 lspconfig.cssls.setup {}
 lspconfig.cssmodules_ls.setup {
@@ -75,7 +75,7 @@ lspconfig.pylsp.setup {
     }
   }
 }
-lspconfig.ruff_lsp.setup {}
+lspconfig.ruff.setup {}
 -- C/C++
 lspconfig.cmake.setup {}
 lspconfig.clangd.setup {

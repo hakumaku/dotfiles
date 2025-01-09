@@ -16,7 +16,7 @@ require("mason-lspconfig").setup({
     "eslint",
     "lua_ls",
     "pylsp",
-    "ruff_lsp",
+    "ruff",
     "rust_analyzer"
   }
 })
