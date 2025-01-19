@@ -55,8 +55,6 @@ imap <C-j> <CR>
 nmap <C-l> <ESC>:nohl<CR>
 vmap <C-c> <Action>(EditorCopy)
 vmap \v "_dP
-vmap gc <Action>(CommentByLineComment)
-vmap gb <Action>(CommentByBlockComment)
 
 " navigations
 nmap <C-s>s <Action>(FindInPath)
@@ -65,22 +63,30 @@ nmap <C-s>f <Action>(GotoFile)
 nmap <C-s>t <Action>(GotoSymbol)
 nmap <C-s>c <Action>(GotoClass)
 nmap <C-s>o <Action>(FileStructurePopup)
+nmap <C-s>i <Action>(SelectInProjectView)
 nmap <C-s>r <Action>(RecentFiles)
 
+" LSP
 nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
+nmap gu <Action>(FindUsages)
+nmap gK <Action>(ParameterInfo)
+" Signature Help in Insert Mode
+imap <C-k> <C-o><Action>(ParameterInfo)
+" etc
+nmap g; <Action>(JumpToLastChange)
+nmap g, <Action>(JumpToNextChange)
+vmap gc <Action>(CommentByLineComment)
+vmap gb <Action>(CommentByBlockComment)
 
 " refactorings
-" map <leader>rn <Action>(RenameElement)
-" map <leader>rm <Action>(ExtractMethod)
-" map <leader>rv <Action>(IntroduceVariable)
-" map <leader>rf <Action>(IntroduceField)
-" map <leader>rs <Action>(ChangeSignature)
-" map <leader>rr <Action>(Refactorings.QuickListPopupAction)
-nmap \f <Action>(ReformatCode)
-nmap \u <Action>(FindUsages)
-nmap \r <Action>(RenameElement)
-nmap \R <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>rm <Action>(ExtractMethod)
+nmap <leader>rv <Action>(IntroduceVariable)
+nmap <leader>rf <Action>(IntroduceField)
+nmap <leader>rs <Action>(ChangeSignature)
+nmap <leader>f <Action>(ReformatCode)
 
 nmap <C-o> :action Back<CR>
 nmap <C-i> :action Forward<CR>
@@ -96,11 +102,23 @@ nmap <C-w>b <Action>(Switcher)
 nmap <C-w>g <Action>(Git.Branches)
 nmap <C-w>. <Action>(HideAllWindows)
 
+" test
+nmap <leader>e <Action>(Run)
+nmap <leader>E <Action>(RunClass)
+nmap <leader>d <Action>(Debug)
+nmap <leader>D <Action>(DebugClass)
+nmap <leader>q <Action>(Stop)
+nmap <leader>b <Action>(ToggleLineBreakpoint)
+nmap <leader>td <Action>(ChooseDebugConfiguration)
+
 " debug
-nmap \h <Action>(RunToCursor)
-nmap \j <Action>(StepInto)
-nmap \k <Action>(StepOut)
-nmap \l <Action>(StepOver)
+nmap <leader>h <Action>(RunToCursor)
+nmap <leader>j <Action>(StepInto)
+nmap <leader>k <Action>(StepOut)
+nmap <leader>l <Action>(StepOver)
+nmap <leader>de <Action>(EvaluateExpression)
+vmap <leader>de <Action>(EvaluateExpression)
+nmap <leader>du <Action>(ActivateDebugToolWindow)
 
 " unimpaired
 nmap ]d <Action>(GotoNextError)
@@ -115,17 +133,19 @@ nmap <C-n> <Action>(MethodDown)
 nmap <C-p> <Action>(MethodUp)
 nmap ]c <Action>(VcsShowNextChangeMarker)
 nmap [c <Action>(VcsShowPrevChangeMarker)
-
-" test
-nmap \e <Action>(Run)
-nmap \d <Action>(Debug)
-nmap \E <Action>(RunClass)
-nmap \D <Action>(DebugClass)
-nmap \q <Action>(Stop)
-nmap \b <Action>(ToggleLineBreakpoint)
+nmap ]t /TODO<cr>
+nmap [t ?TODO<cr>
 
 " git
-nmap \gg <Action>(Git.Branches)
-nmap \gs <Action>(ActivateCommitToolWindow)
-nmap \gp <Action>(VcsShowCurrentChangeMarker)
-nmap \gr <Action>(Vcs.RollbackChangedLines)
+nmap <leader>gB <Action>(Git.Branches)
+nmap <leader>gs <Action>(ActivateCommitToolWindow)
+nmap <leader>gp <Action>(VcsShowCurrentChangeMarker)
+nmap <leader>gr <Action>(Vcs.RollbackChangedLines)
+nmap <leader>gg <Action>(ActivateCommitToolWindow)
+" Git Blame Line
+nmap <leader>gb <Action>(Annotate)
+" Git Current File History
+nmap <leader>gf <Action>(Vcs.ShowTabbedFileHistory)
+" Git Log
+nmap <leader>gl <Action>(Vcs.Show.Log)
+
