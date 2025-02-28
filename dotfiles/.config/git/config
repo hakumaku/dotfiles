@@ -6,22 +6,12 @@
 [core]
     editor = nvim
     pager = delta
-[init]
-    defaultBranch = main
-[push]
-    autoSetupRemote = true
-[pull]
-    rebase = true
-[rebase]
-    autoStash = true
-    autoSquash = true
-    updateRefs = true
-[commit]
-    verbose = true
 [help]
     autoCorrect = 10
 [interactive]
     diffFilter = delta --color-only
+[column]
+    ui = auto
 [delta]
     features = side-by-side line-numbers decorations
     whitespace-error-style = 22 reverse
@@ -45,11 +35,42 @@
 [alias]
     fzf = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && _fzf_commit'
     view = !zsh -c 'source $XDG_CONFIG_HOME/zsh/.zshrc && _fzf_commit_wo_view'
+[safe]
+    directory = /opt/fluttera
+    directory = /opt/flutter
+
+
+
+[init]
+    defaultBranch = main
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true
+[pull]
+    rebase = true
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+[commit]
+    verbose = true
+[rerere]
+    enabled = true
+    autoupdate = true
 [diff]
     # git-delta
+    tool = nvimdiff
     colorMoved = default
     algorithm = histogram
-	tool = nvimdiff
-[safe]
-	directory = /opt/fluttera
-	directory = /opt/flutter
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true

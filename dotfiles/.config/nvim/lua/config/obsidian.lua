@@ -2,7 +2,7 @@ require("obsidian").setup({
   -- A list of workspace names, paths, and configuration overrides.
   -- If you use the Obsidian app, the 'path' of a workspace should generally be
   -- your vault root (where the `.obsidian` folder is located).
-  workspaces = {{name = "personal", path = "~/workspace/github/obsidian/journey/"}},
+  workspaces = {{name = "personal", path = "~/Documents/journey"}},
 
   -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
   -- levels defined by "vim.log.levels.*".
