@@ -1,2 +1,25 @@
 [editor]
 bufferline = "always"
+
+# search
+[keys.normal."C-s"]
+s = "global_search"
+f = "file_picker_in_current_directory"
+t = "symbol_picker"
+T = "workspace_symbol_picker"
+d = "diagnostics_picker"
+D = "workspace_diagnostics_picker"
+
+# refactoring
+[keys.normal."\\"]
+f = ":format"
+
+# refactoring
+[keys.normal."\\".r]
+r = "rename_symbol"
+# nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
+# nmap <leader>rn <Action>(RenameElement)
+# nmap <leader>rm <Action>(ExtractMethod)
+# nmap <leader>rv <Action>(IntroduceVariable)
+# nmap <leader>rf <Action>(IntroduceField)
+# nmap <leader>rs <Action>(ChangeSignature)
