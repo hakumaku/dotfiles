@@ -22,3 +22,6 @@ auto-format = true
 name = "markdown"
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "markdown" ] }
 auto-format = true
+
+[editor]
+workspace-lsp-roots = ["bar"]

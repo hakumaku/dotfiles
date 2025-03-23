@@ -1,5 +1,22 @@
+theme = "onedark"
+
 [editor]
 bufferline = "always"
+line-number = "relative"
+
+[editor.cursor-shape]
+insert = "bar"
+
+[keys.normal]
+"," = "repeat_last_motion"
+L = "keep_primary_selection"
+
+# unimpaired
+[keys.normal."]"]
+b = "goto_next_buffer"
+
+[keys.normal."["]
+b = "goto_previous_buffer"
 
 # search
 [keys.normal."C-s"]
@@ -23,3 +40,10 @@ r = "rename_symbol"
 # nmap <leader>rv <Action>(IntroduceVariable)
 # nmap <leader>rf <Action>(IntroduceField)
 # nmap <leader>rs <Action>(ChangeSignature)
+
+# comment & uncomment
+[keys.normal."g"]
+c = "toggle_comments"
+
+[keys.select."g"]
+c = "toggle_comments"
