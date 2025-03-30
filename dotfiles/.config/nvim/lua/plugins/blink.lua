@@ -1,51 +1,56 @@
 return {
   {
     'saghen/blink.cmp',
-    -- optional: provides snippets for the snippet source
-    dependencies = {'rafamadriz/friendly-snippets'},
-
-    -- use a release tag to download pre-built binaries
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "L3MON4D3/LuaSnip",
+      version = "v2.*"
+    },
     version = '1.*',
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-      -- 'super-tab' for mappings similar to vscode (tab to accept)
-      -- 'enter' for enter to accept
-      -- 'none' for no mappings
-      --
-      -- All presets have the following mappings:
-      -- C-space: Open menu or open docs if already open
-      -- C-n/C-p or Up/Down: Select next/previous item
-      -- C-e: Hide menu
-      -- C-k: Toggle signature help (if signature.enabled = true)
-      --
-      -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {preset = 'default'},
-
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono'
       },
-
       -- (Default) Only show the documentation popup when manually triggered
-      completion = {documentation = {auto_show = false}},
-
+      completion = {
+        documentation = {auto_show = false},
+        menu = {
+          auto_show = true,
+          draw = {
+            columns = {
+              {"kind_icon", gap = 1},
+              {"label", "label_description", gap = 1}
+            },
+            components = {
+              label = {width = {fill = true, max = 32}},
+              label_description = {
+                width = {max = 28},
+                text = function(ctx)
+                  return ctx.label_description
+                end,
+                highlight = 'BlinkCmpLabelDescription'
+              },
+              source_name = {
+                width = {max = 16},
+                text = function(ctx)
+                  return ctx.source_name
+                end,
+                highlight = 'BlinkCmpSource'
+              }
+            }
+          }
+        },
+        ghost_text = {enabled = true, show_with_menu = true}
+      },
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {default = {'lsp', 'path', 'snippets', 'buffer'}},
-
-      -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-      --
-      -- See the fuzzy documentation for more information
+      sources = {default = {'lsp', 'path', 'snippets', 'buffer', 'cmdline'}},
+      snippets = {preset = 'luasnip'},
       fuzzy = {implementation = "prefer_rust_with_warning"}
       -- pts_extend = { "sources.default" }
     }
@@ -60,6 +65,31 @@ return {
           'github:Crashdummyy/mason-registry'
         }
       })
+    end
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
+    config = function(_, opts)
+      if opts then
+        require("luasnip").config.setup(opts)
+      end
+      vim.tbl_map(function(type)
+        require("luasnip.loaders.from_" .. type).lazy_load()
+      end, {"vscode", "snipmate", "lua"})
+      -- friendly-snippets - enable standardized comments snippets
+      require("luasnip").filetype_extend("typescript", {"tsdoc"})
+      require("luasnip").filetype_extend("javascript", {"jsdoc"})
+      require("luasnip").filetype_extend("lua", {"luadoc"})
+      require("luasnip").filetype_extend("python", {"pydoc"})
+      require("luasnip").filetype_extend("rust", {"rustdoc"})
+      require("luasnip").filetype_extend("c", {"cdoc"})
+      require("luasnip").filetype_extend("cpp", {"cppdoc"})
+      require("luasnip").filetype_extend("kotlin", {"kdoc"})
+      require("luasnip").filetype_extend("sh", {"shelldoc"})
     end
   },
   -- rust extension

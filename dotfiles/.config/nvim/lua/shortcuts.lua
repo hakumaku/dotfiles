@@ -137,28 +137,24 @@ nnoremap("<leader>j", ":lua require('dap').step_into()<CR>", {silent = true})
 nnoremap("<leader>k", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<leader>l", ":lua require('dap').step_over()<CR>", {silent = true})
 
--- DAP Telescope
-nnoremap("<leader>df", ":Telescope dap frames<CR>", {silent = true})
-
 -- neoformat
 nnoremap("<leader>f", ":Neoformat<CR>")
 
--- Telescope
-nnoremap("<C-s>f",
-         ":lua require('config.telescope-pickers').pretty_find_files()<CR>")
-nnoremap("<C-s>b", ":Telescope buffers<CR>")
-nnoremap("<C-s>s", ":Telescope live_grep<CR>")
-nnoremap("<C-s>/", ":Telescope current_buffer_fuzzy_find<CR>")
-nnoremap("<C-s>g", ":Telescope grep_string<CR>")
-nnoremap("<C-s>t",
-         ":lua require('config.telescope-pickers').pretty_lsp_document_symbols()<CR>")
-nnoremap("<C-s>T",
-         ":lua require('config.telescope-pickers').pretty_lsp_dynamic_workspace_symbols()<CR>")
-nnoremap("<C-s>u", ":Telescope lsp_references<CR>")
-nnoremap("<C-s>c", ":Telescope git_branches<CR>")
-
--- NvimTree
-nnoremap("<C-w>o", ":NvimTreeToggle<CR>")
+-- Snacks
+nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
+nnoremap("<C-w>f", ":lua Snacks.terminal()<CR>")
+nnoremap("<C-s>f", ":lua Snacks.picker.files()<CR>")
+nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
+nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
+nnoremap("<C-s>/", ":lua Snacks.picker.lines()<CR>")
+nnoremap("<C-s>t", ":lua Snacks.picker.lsp_symbols()<CR>")
+nnoremap("<C-s>T", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
+nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
+nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
+nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
+nnoremap("<leader>gv", ":lua ToggleTerm:toggle('git view', 'tab')<CR>")
+nnoremap("<leader>x", ":lua ToggleTerm:toggle('lazydocker')<CR>")
+nnoremap("<leader>z", ":lua ToggleTerm:toggle('btm')<CR>")
 
 -- Aerial
 nnoremap("<C-w>t", ":AerialToggle!<CR>")
@@ -178,29 +174,6 @@ nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
 nnoremap("]c", ":Gitsigns next_hunk<CR>")
 nnoremap("[c", ":Gitsigns prev_hunk<CR>")
-
--- nvim-toggleterm.lua
-ToggleTerm = {__term = {}}
-
----@param cmd string
----@param direction string
-function ToggleTerm:toggle(cmd, direction)
-  direction = direction or "float"
-
-  if not self.__term[cmd] then
-    local Terminal = require('toggleterm.terminal').Terminal
-    self.__term[cmd] = Terminal:new({
-      cmd = cmd,
-      hidden = true,
-      direction = direction
-    })
-  end
-  self.__term[cmd]:toggle()
-end
-nnoremap("<leader>gg", ":lua ToggleTerm:toggle('lazygit')<CR>")
-nnoremap("<leader>gv", ":lua ToggleTerm:toggle('git view', 'tab')<CR>")
-nnoremap("<leader>x", ":lua ToggleTerm:toggle('lazydocker')<CR>")
-nnoremap("<leader>z", ":lua ToggleTerm:toggle('btm')<CR>")
 
 nnoremap("<A-1>", ":echo 'alt-1'<CR>")
 nnoremap("<A-2>", ":echo 'alt-2'<CR>")
