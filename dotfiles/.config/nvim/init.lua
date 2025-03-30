@@ -161,6 +161,14 @@ augroup file_vim
 	au FileType vim setlocal foldmarker={{{,}}}
 augroup END
 ]])
+  -- Show highlight when yanking
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+      vim.highlight.on_yank()
+    end,
+    group = vim.api.nvim_create_augroup('YankHighlight', {clear = true}),
+    pattern = '*'
+  })
 
   -- Terraform
   vim.api.nvim_create_autocmd({"BufWritePre"}, {
@@ -168,13 +176,65 @@ augroup END
     callback = vim.lsp.buf.format
   })
 
-  utils = require("utils.functions")
+  -- lazy.nvim
+  require("config.lazy")
+
   -- Disable all shortcuts (ultisnips)
   vim.g.UltiSnipsExpandTrigger = "<C-y>"
   vim.g.UltiSnipsSnippetDirectories = {"ultisnips"}
   vim.g.UltiSnipsJumpForwardTrigger = "<C-j>"
   vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
-  require("plugins")
-  require("lsp")
+
+  utils = require("config.functions")
   require("shortcuts")
+  vim.cmd("colorscheme nightfox")
+  vim.lsp.enable({
+    -- rust
+    "rust-analyzer",
+    -- lua
+    "luals",
+    -- python
+    "pylsp",
+    "ruff",
+    -- terraform
+    "terraformls",
+    -- etc
+    "yamlls",
+    "jsonls",
+    "bashls"
+  })
+  vim.fn.sign_define('DiagnosticSignError', {
+    text = '',
+    texthl = 'LspDiagnosticsDefaultError',
+    linehl = '',
+    numhl = ''
+  })
+  vim.fn.sign_define('DiagnosticSignWarn', {
+    text = '',
+    texthl = 'LspDiagnosticsDefaultWarning',
+    linehl = '',
+    numhl = ''
+  })
+  vim.fn.sign_define('DiagnosticSignHint', {
+    text = '',
+    texthl = 'LspDiagnosticsDefaultHint',
+    linehl = '',
+    numhl = ''
+  })
+  vim.fn.sign_define('DiagnosticSignInfo', {
+    text = '',
+    texthl = 'LspDiagnosticsDefaultInformation',
+    linehl = '',
+    numhl = ''
+  })
+
+  vim.diagnostic.config({
+    -- Use the default configuration
+    virtual_lines = true
+    -- Alternatively, customize specific options
+    -- virtual_lines = {
+    --  -- Only show virtual line diagnostics for the current cursor line
+    --  current_line = true,
+    -- },
+  })
 end
