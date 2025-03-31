@@ -147,6 +147,7 @@ nnoremap("<leader>f", ":Neoformat<CR>")
 -- Snacks
 nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
 nnoremap("<C-w>f", ":lua Snacks.terminal()<CR>")
+nnoremap("<C-w>z", ":ZenMode<CR>")
 nnoremap("<C-s>f", ":lua Snacks.picker.files()<CR>")
 nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
 nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
