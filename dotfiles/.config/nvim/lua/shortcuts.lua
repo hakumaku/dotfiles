@@ -157,8 +157,6 @@ nnoremap("<C-s>T", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
 nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
 nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
 nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
-nnoremap("<leader>x", ":lua ToggleTerm:toggle('lazydocker')<CR>")
-nnoremap("<leader>z", ":lua ToggleTerm:toggle('btm')<CR>")
 
 -- neogit & diffview & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
