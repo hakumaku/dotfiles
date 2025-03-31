@@ -187,11 +187,7 @@ augroup END
 
   utils = require("config.functions")
   require("shortcuts")
-  vim.cmd("colorscheme nightfox")
-  vim.cmd("highlight Normal guibg=none")
-  vim.cmd("highlight NonText guibg=none")
-  vim.cmd("highlight Normal ctermbg=none")
-  vim.cmd("highlight NonText ctermbg=none")
+  require("onedark").load()
   vim.lsp.enable({
     -- rust
     "rust-analyzer",

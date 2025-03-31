@@ -1,7 +1,58 @@
 return {
   -- Look & Feel
-  {'kyazdani42/nvim-web-devicons', lazy = true},
+  -- {'kyazdani42/nvim-web-devicons', lazy = true},
   'folke/todo-comments.nvim',
+  {
+    'navarasu/onedark.nvim',
+    config = {
+      -- Main options --
+      -- 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+      style = 'darker',
+      transparent = true, -- Show/hide background
+      term_colors = true, -- Change terminal color as per the selected theme style
+      ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+      cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
+      -- toggle theme style ---
+      toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+      toggle_style_list = {
+        'dark',
+        'darker',
+        'cool',
+        'deep',
+        'warm',
+        'warmer',
+        'light'
+      }, -- List of styles to toggle between
+
+      -- Change code style ---
+      -- Options are italic, bold, underline, none
+      -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+      code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none'
+      },
+
+      -- Lualine options --
+      lualine = {
+        transparent = false -- lualine center bar transparency
+      },
+
+      -- Custom Highlights --
+      colors = {}, -- Override default colors
+      highlights = {}, -- Override highlight groups
+
+      -- Plugins Config --
+      diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true, -- use undercurl instead of underline for diagnostics
+        background = true -- use background color for virtual text
+      }
+    }
+  },
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
@@ -48,34 +99,5 @@ return {
       specs = {},
       groups = {}
     }
-  },
-  {
-    'mhinz/vim-startify',
-    config = function()
-      vim.g.startify_bookmarks = {
-        {z = "~/.config/zsh/.zshrc"},
-        {g = "~/.config/git/config"},
-        {n = "~/.config/nvim/init.lua"},
-        {t = "~/.config/tmux/tmux.conf"},
-        {a = "~/.config/alacritty/alacritty.toml"},
-        {k = "~/.config/kitty/kitty.conf"},
-        {d = "~/.config/dunst/dunstrc"},
-        {w = "~/.config/waybar/config"},
-        {h = "~/.config/hypr/hyprland.conf"},
-        {y = "~/.config/yazi/yazi.toml"},
-        {f = "~/.config/foot/foot.ini"}
-      }
-      vim.g.startify_lists = {
-        {header = {'  Bookmarks'}, type = 'bookmarks'},
-        {header = {'  Most Recently Used'}, type = 'dir'}
-        -- {header = {'  Commits'}, type = list_commits}
-      }
-
-      vim.g.startify_use_unicode = true
-      vim.g.startify_change_to_vcs_root = true
-      vim.g.startify_change_to_dir = true
-      vim.g.startify_enable_special = true
-      vim.g.startify_padding_left = 8
-    end
   }
 }

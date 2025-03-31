@@ -40,9 +40,9 @@ nnoremap("j", "(v:count > 5 ? \"m'\".v:count : \"\").'j'", {expr = true})
 inoremap("<C-u>", "<C-g>u<C-u>")
 inoremap("<C-w>", "<C-g>u<C-w>")
 
-nnoremap("gh", "^")
+nnoremap("gh", "0")
 nnoremap("gl", "$")
-nnoremap("gs", "0")
+nnoremap("gs", "^")
 
 -- cmdline-editing
 cnoremap("<C-a>", "<Home>")
