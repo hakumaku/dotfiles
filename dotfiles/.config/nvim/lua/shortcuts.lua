@@ -156,14 +156,8 @@ nnoremap("<C-s>T", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
 nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
 nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
 nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
-nnoremap("<leader>gv", ":lua ToggleTerm:toggle('git view', 'tab')<CR>")
 nnoremap("<leader>x", ":lua ToggleTerm:toggle('lazydocker')<CR>")
 nnoremap("<leader>z", ":lua ToggleTerm:toggle('btm')<CR>")
-
--- Aerial
-nnoremap("<C-w>t", ":AerialToggle!<CR>")
-nnoremap("]t", "<cmd>AerialNext<CR>")
-nnoremap("[t", "<cmd>AerialPrev<CR>")
 
 -- neogit & diffview & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")

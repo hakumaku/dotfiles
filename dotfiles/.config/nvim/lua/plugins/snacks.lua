@@ -79,6 +79,12 @@ return {
                 }
               }
             }
+          },
+          lsp_symbols = {
+            layout = {
+              preset = "select",
+              preview = false,
+            }
           }
         },
         layouts = {
@@ -112,9 +118,5 @@ return {
     statuscolumn = {enabled = true},
     words = {enabled = true},
     image = {enabled = true},
-    zen = {
-      enabled = true,
-      width = 120 -- width of the Zen window
-    }
   }
 }
