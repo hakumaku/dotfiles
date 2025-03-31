@@ -76,6 +76,9 @@ imap <C-k> <C-o><Action>(ParameterInfo)
 " etc
 nmap g; <Action>(JumpToLastChange)
 nmap g, <Action>(JumpToNextChange)
+nmap gh ^
+nmap gl $
+nmap gs 0
 vmap gc <Action>(CommentByLineComment)
 vmap gb <Action>(CommentByBlockComment)
 
