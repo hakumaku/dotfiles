@@ -186,20 +186,35 @@ vim.cmd[[colorscheme tokyonight-storm]]
 
 -- LSP
 vim.lsp.enable({
-  -- rust
-  "rust-analyzer",
   -- lua
   "luals",
+  -- rust
+  "rust-analyzer",
   -- python
   "basedpyright",
   "ruff",
   -- terraform
   "terraformls",
+  -- HTML
+  "html",
+  "css",
+  "htmx",
+  "jinja",
+  "tailwindcss",
   -- etc
+  "marksman",
   "yamlls",
   "jsonls",
-  "bashls"
+  "bashls",
+  "docker",
 })
+vim.filetype.add {
+  extension = {
+    jinja = 'jinja',
+    jinja2 = 'jinja',
+    j2 = 'jinja',
+  },
+}
 vim.fn.sign_define('DiagnosticSignError', {
   text = '',
   texthl = 'LspDiagnosticsDefaultError',
