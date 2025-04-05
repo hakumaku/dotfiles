@@ -22,7 +22,9 @@ return {
         diagnosticSeverityOverrides = {
           reportImportCycles = false,
           reportExplicitAny = false,
-          reportUnannotatedClassAttribute = false
+          reportUnannotatedClassAttribute = false,
+          reportUnusedParameter = false,
+          reportMissingTypeStubs = false,
         }
       }
     }
