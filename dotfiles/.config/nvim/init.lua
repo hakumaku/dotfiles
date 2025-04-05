@@ -181,14 +181,17 @@ vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
 
 utils = require("config.functions")
 require("shortcuts")
-require("onedark").load()
+
+vim.cmd[[colorscheme tokyonight-storm]]
+
+-- LSP
 vim.lsp.enable({
   -- rust
   "rust-analyzer",
   -- lua
   "luals",
   -- python
-  "pylsp",
+  "basedpyright",
   "ruff",
   -- terraform
   "terraformls",
