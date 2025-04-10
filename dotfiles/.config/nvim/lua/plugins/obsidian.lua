@@ -9,14 +9,14 @@ return {
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/journey/*.md",
-      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/journey/*.md"
+      "BufReadPre " .. vim.fn.expand "~" .. "/Documents/journal/*.md",
+      "BufNewFile " .. vim.fn.expand "~" .. "/Documents/journal/*.md"
     },
     config = {
       -- A list of workspace names, paths, and configuration overrides.
       -- If you use the Obsidian app, the 'path' of a workspace should generally be
       -- your vault root (where the `.obsidian` folder is located).
-      workspaces = {{name = "personal", path = "~/Documents/journey"}},
+      workspaces = {{name = "personal", path = "~/Documents/journal"}},
 
       -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
       -- levels defined by "vim.log.levels.*".
