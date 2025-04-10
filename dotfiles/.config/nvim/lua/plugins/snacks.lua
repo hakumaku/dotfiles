@@ -80,12 +80,9 @@ return {
               }
             }
           },
-          lsp_symbols = {
-            layout = {
-              preset = "select",
-              preview = false,
-            }
-          }
+          buffers = {layout = {preset = "select", preview = false}},
+          files = {layout = {preset = "select", preview = false}},
+          lsp_symbols = {layout = {preset = "select", preview = false}}
         },
         layouts = {
           sidebar = {
@@ -117,6 +114,6 @@ return {
     scope = {enabled = true},
     statuscolumn = {enabled = true},
     words = {enabled = true},
-    image = {enabled = true},
+    image = {enabled = true}
   }
 }
