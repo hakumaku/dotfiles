@@ -141,9 +141,6 @@ nnoremap("<leader>j", ":lua require('dap').step_into()<CR>", {silent = true})
 nnoremap("<leader>k", ":lua require('dap').step_out()<CR>", {silent = true})
 nnoremap("<leader>l", ":lua require('dap').step_over()<CR>", {silent = true})
 
--- neoformat
-nnoremap("<leader>f", ":Neoformat<CR>")
-
 -- Snacks
 nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
 nnoremap("<C-w>f", ":lua Snacks.terminal()<CR>")
