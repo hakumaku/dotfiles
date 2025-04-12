@@ -55,7 +55,6 @@ return {
       }
     }
   },
-  {"nvim-telescope/telescope-dap.nvim", dependencies = {"nvim-dap"}},
   {
     "mfussenegger/nvim-dap-python",
     dependencies = {"nvim-dap"},

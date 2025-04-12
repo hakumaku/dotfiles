@@ -1,6 +1,7 @@
 return {
   'folke/todo-comments.nvim',
   {"folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}},
+  {"folke/trouble.nvim", cmd = "Trouble"},
   {
     "folke/zen-mode.nvim",
     config = {
