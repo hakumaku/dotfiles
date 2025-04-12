@@ -1,6 +1,4 @@
 return {
-  -- Look & Feel
-  -- {'kyazdani42/nvim-web-devicons', lazy = true},
   'folke/todo-comments.nvim',
   {"folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}},
   {
