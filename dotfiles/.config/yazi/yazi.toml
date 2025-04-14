@@ -12,7 +12,7 @@ show_symlink   = true
 cache_dir  = "~/.cache/yazi"
 max_width = 1920
 max_height = 1080
- 
+
 image_filter = "nearest"
 image_quality= 50
 
