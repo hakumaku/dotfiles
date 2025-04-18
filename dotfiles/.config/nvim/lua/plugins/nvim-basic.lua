@@ -3,5 +3,5 @@ return {
   "tpope/vim-repeat",
   "mbbill/undotree",
   "Raimondi/delimitMate",
-  {"kylechui/nvim-surround", config = {}}
+  {"kylechui/nvim-surround", opts = {}}
 }

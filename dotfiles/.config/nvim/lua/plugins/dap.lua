@@ -9,7 +9,7 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
-    config = {
+    opts = {
       icons = {expanded = "▾", collapsed = "▸"},
       mappings = {
         -- Use a table to apply multiple mappings

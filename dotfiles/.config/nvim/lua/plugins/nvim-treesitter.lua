@@ -4,7 +4,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = {
+    opts = {
       modules = {},
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,

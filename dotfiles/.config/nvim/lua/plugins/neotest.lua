@@ -10,7 +10,7 @@ return {
     },
     lazy = true,
     event = {"BufRead test_*.py"},
-    config = {
+    opts = {
       adapters = {
         -- require("neotest-python")({
         --   dap = {justMyCode = false},

@@ -1,10 +1,10 @@
 return {
   -- Git Integration
-  {'lewis6991/gitsigns.nvim', config = {}},
+  {'lewis6991/gitsigns.nvim', opts = {}},
   {
     "NeogitOrg/neogit",
     dependencies = {"nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
-    config = {
+    opts = {
       -- Hides the hints at the top of the status buffer
       disable_hint = true,
       -- "ascii"   is the graph the git CLI generates
