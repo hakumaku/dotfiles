@@ -11,6 +11,11 @@
       "binding": "<Super>Return"
     },
     {
+      "name": "Run Yazi",
+      "command": "kitty --single-instance --start-as=maximized zsh -c 'yazi'",
+      "binding": "<Super><Ctrl>Return"
+    },
+    {
       "name": "Spotify - Next",
       "command": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
       "binding": "<Super>bracketright"
