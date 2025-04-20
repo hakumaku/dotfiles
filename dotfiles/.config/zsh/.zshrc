@@ -39,7 +39,7 @@ if command -v tmux &>/dev/null \
   && [[ ! "$TERM" =~ tmux ]] \
   && [ -z "$TMUX" ]; then
   # && [[ ! "$TERM" =~ xterm-kitty ]]; then
-  echo exec tmux
+  exec tmux
 fi
 
 zle -N _fg_bg
@@ -64,22 +64,13 @@ source "$ZDOTDIR/alias.zsh"
 source "$ZDOTDIR/functions.zsh"
 source "$ZDOTDIR/plugins.zsh"
 
-# TODO: cache zoxide output
 load_nvm() {
   # nvm (https://github.com/nvm-sh/nvm)
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 }
 
-load_pyenv() {
-  # pyenv (https://github.com/pyenv/pyenv)
-  export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  if command -v pyenv >/dev/null; then
-    eval "$(pyenv init -)"
-  fi
-}
-
+# TODO: cache zoxide output
 # zoxide (https://github.com/ajeetdsouza/zoxide)
 eval "$(zoxide init zsh)"
 
@@ -90,4 +81,3 @@ precmd() {
 
 alias protontricks='flatpak run com.github.Matoking.protontricks' >> ~/.bashrc
 alias protontricks-launch='flatpak run --command=protontricks-launch com.github.Matoking.protontricks'
-# alias mpv='flatpak run io.mpv.Mpv'

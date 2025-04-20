@@ -150,24 +150,45 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Callback when LSP is attached
+-- GLOBAL DEFAULTS
+-- grr gra grn gri i_CTRL-S These GLOBAL keymaps are created unconditionally when Nvim starts:
+-- "grn" is mapped in Normal mode to vim.lsp.buf.rename()
+-- "gra" is mapped in Normal and Visual mode to vim.lsp.buf.code_action()
+-- "grr" is mapped in Normal mode to vim.lsp.buf.references()
+-- "gri" is mapped in Normal mode to vim.lsp.buf.implementation()
+-- "gO" is mapped in Normal mode to vim.lsp.buf.document_symbol()
+-- CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    vim.api.nvim_create_autocmd("CursorHold", {
-      callback = vim.lsp.buf.document_highlight,
-      buffer = ev.buf,
-      desc = "Highlight lsp references on CursorHold"
-    })
-    vim.api.nvim_create_autocmd("CursorHoldI", {
-      callback = vim.lsp.buf.document_highlight,
-      buffer = ev.buf,
-      desc = "Highlight lsp references on CursorHoldI"
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      callback = vim.lsp.buf.clear_references,
-      buffer = ev.buf,
-      desc = "Clear highlighted lsp references on CursorMoved"
-    })
+  callback = function(args)
+    -- :help lsp-cofnig
+    -- args: {
+    --   event: "LspAttach"
+    --   match: <matching string>
+    --   group: <group number>
+    --   file: "/path/to/your/file.txt"
+    --   buf: <buffer number>
+    --   id: <id number>
+    -- }
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    if client:supports_method('textDocument/documentHighlight') then
+      local buf = args.buf
+      vim.api.nvim_create_autocmd("cursorhold", {
+        callback = vim.lsp.buf.document_highlight,
+        buffer = buf,
+        desc = "Highlight lsp references on CursorHold"
+      })
+      vim.api.nvim_create_autocmd("CursorHoldI", {
+        callback = vim.lsp.buf.document_highlight,
+        buffer = buf,
+        desc = "Highlight lsp references on CursorHoldI"
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        callback = vim.lsp.buf.clear_references,
+        buffer = buf,
+        desc = "Clear highlighted lsp references on CursorMoved"
+      })
+    end
   end
 })
 
