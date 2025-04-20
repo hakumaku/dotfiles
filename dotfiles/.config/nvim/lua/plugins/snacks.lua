@@ -1,5 +1,4 @@
 return {
-  -- inline drawing
   {
     "folke/snacks.nvim",
     priority = 1000,
@@ -114,6 +113,6 @@ return {
     scope = {enabled = true},
     statuscolumn = {enabled = true},
     words = {enabled = true},
-    image = {enabled = true}
+    image = {enabled = false}
   }
 }

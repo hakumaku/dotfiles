@@ -18,9 +18,13 @@ vim.opt.conceallevel = 2
 -- Replace - with ' '
 vim.opt.fillchars = {fold = " "}
 
-vim.opt.foldlevel = 5
-vim.opt.foldmethod = "syntax"
-vim.opt.foldnestmax = 5
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+vim.opt.foldnestmax = 4
 
 -- Hide buffers when abandoned
 vim.opt.hidden = true
@@ -130,24 +134,47 @@ iabbrev todo TODO:
 iabbrev fixme FIXME:
 ]])
 
--- autocmd
+-- Load plugins using "lazy.nvim"
+require("config.lazy")
+utils = require("config.functions")
+require("shortcuts")
+
+-- Show highlight when yanking
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("YankHighlight", {clear = true}),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  pattern = "*",
+  desc = "Highlight yank"
+})
+
+-- Callback when LSP is attached
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = vim.lsp.buf.document_highlight,
+      buffer = ev.buf,
+      desc = "Highlight lsp references on CursorHold"
+    })
+    vim.api.nvim_create_autocmd("CursorHoldI", {
+      callback = vim.lsp.buf.document_highlight,
+      buffer = ev.buf,
+      desc = "Highlight lsp references on CursorHoldI"
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      callback = vim.lsp.buf.clear_references,
+      buffer = ev.buf,
+      desc = "Clear highlighted lsp references on CursorMoved"
+    })
+  end
+})
+
 vim.cmd([[
+colorscheme tokyonight-storm
+
 au FocusGained,BufEnter * checktime
-
-augroup project
-	au!
-	au BufRead,BufNewFile *.h,*.c set filetype=cpp
-augroup END
-
-augroup file_py
-	au!
-	au FileType python noremap <buffer> <C-e> :exec '!python3' shellescape(@%, 1) g:argv<CR>
-augroup END
-
-augroup file_bash
-	au!
-	au FileType sh noremap <buffer> <C-e> :exec '!bash' shellescape(@%, 1)<CR>
-augroup END
 
 augroup file_vim
 	au!
@@ -155,34 +182,6 @@ augroup file_vim
 	au FileType vim setlocal foldmarker={{{,}}}
 augroup END
 ]])
--- Show highlight when yanking
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = vim.api.nvim_create_augroup('YankHighlight', {clear = true}),
-  pattern = '*'
-})
-
--- Terraform
-vim.api.nvim_create_autocmd({"BufWritePre"}, {
-  pattern = {"*.tf", "*.tfvars"},
-  callback = vim.lsp.buf.format
-})
-
--- lazy.nvim
-require("config.lazy")
-
--- Disable all shortcuts (ultisnips)
-vim.g.UltiSnipsExpandTrigger = "<C-y>"
-vim.g.UltiSnipsSnippetDirectories = {"ultisnips"}
-vim.g.UltiSnipsJumpForwardTrigger = "<C-j>"
-vim.g.UltiSnipsJumpBackwardTrigger = "<C-k>"
-
-utils = require("config.functions")
-require("shortcuts")
-
-vim.cmd[[colorscheme tokyonight-storm]]
 
 -- LSP
 vim.lsp.enable({
@@ -206,46 +205,35 @@ vim.lsp.enable({
   "yamlls",
   "jsonls",
   "bashls",
-  "docker",
+  "docker"
+}, {
+  -- global lsp config
 })
-vim.filetype.add {
-  extension = {
-    jinja = 'jinja',
-    jinja2 = 'jinja',
-    j2 = 'jinja',
-  },
-}
-vim.fn.sign_define('DiagnosticSignError', {
-  text = '',
-  texthl = 'LspDiagnosticsDefaultError',
-  linehl = '',
-  numhl = ''
-})
-vim.fn.sign_define('DiagnosticSignWarn', {
-  text = '',
-  texthl = 'LspDiagnosticsDefaultWarning',
-  linehl = '',
-  numhl = ''
-})
-vim.fn.sign_define('DiagnosticSignHint', {
-  text = '',
-  texthl = 'LspDiagnosticsDefaultHint',
-  linehl = '',
-  numhl = ''
-})
-vim.fn.sign_define('DiagnosticSignInfo', {
-  text = '',
-  texthl = 'LspDiagnosticsDefaultInformation',
-  linehl = '',
-  numhl = ''
-})
-
+vim.filetype
+    .add({extension = {jinja = 'jinja', jinja2 = 'jinja', j2 = 'jinja'}})
 vim.diagnostic.config({
-  -- Use the default configuration
-  virtual_lines = true,
-  -- Alternatively, customize specific options
-  virtual_lines = {
-   -- Only show virtual line diagnostics for the current cursor line
-   current_line = true,
-  },
+  underline = true,
+  virtual_text = false,
+  virtual_lines = false,
+  float = {border = 'rounded', focusable = false},
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "󰌵"
+    },
+    texthl = {
+      [vim.diagnostic.severity.ERROR] = "LspDiagnosticsDefaultError",
+      [vim.diagnostic.severity.WARN] = "LspDiagnosticsDefaultWarning",
+      [vim.diagnostic.severity.HINT] = "LspDiagnosticsDefaultHint",
+      [vim.diagnostic.severity.INFO] = "LspDiagnosticsDefaultInformation"
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.INFO] = ""
+    }
+  }
 })
