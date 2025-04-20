@@ -167,6 +167,7 @@ nnoremap("<leader>gk", ":diffget //3<CR>")
 nnoremap("<leader>gl", ":lua require('neogit').open({'log'})<CR>")
 
 nnoremap("<C-w>g", ":Neogit<CR>")
+nnoremap("<C-w>b", ":DiffviewOpen<CR>")
 nnoremap("<leader>gh", ":DiffviewFileHistory %<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")

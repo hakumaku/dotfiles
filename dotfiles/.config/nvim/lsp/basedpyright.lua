@@ -25,7 +25,7 @@ return {
           reportUnannotatedClassAttribute = false,
           reportUnusedParameter = false,
           reportMissingTypeStubs = false,
-          reportInvalidCast = false,
+          reportInvalidCast = false
         }
       }
     }
