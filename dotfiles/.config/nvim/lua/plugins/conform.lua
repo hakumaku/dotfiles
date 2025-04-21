@@ -14,12 +14,13 @@ return {
     }
   },
   opts = {
+    formatters = {rustfmt = {prepend_args = {"+nightly"}}},
     formatters_by_ft = {
       lua = {"lua-format"},
       -- Conform will run multiple formatters sequentially
       python = {"black", "ruff"},
       -- You can customize some of the format options for the filetype (:help conform.format)
-      rust = {"rustfmt", lsp_format = "fallback"},
+      rust = {"rustfmt"},
       -- Use the "_" filetype to run formatters on filetypes that don't
       -- have other formatters configured.
       ["_"] = {"trim_whitespace"}
