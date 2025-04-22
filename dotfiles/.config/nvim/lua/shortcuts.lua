@@ -93,6 +93,7 @@ inoremap("<C-q>d", "<C-o>:lua utils.append_semi_colon()<CR>")
 nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
 
 -- Cycle through buffers
+nnoremap("<TAB>", ":b#<CR>")
 nnoremap("]B", ":BufferLineMoveNext<CR>")
 nnoremap("[B", ":BufferLineMovePrev<CR>")
 nnoremap("<BS>", ":bd<CR>", {silent = true})
