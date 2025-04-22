@@ -2,8 +2,8 @@ return {
   -- rust extension
   {
     'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
-    ft = {'rust'}
+    lazy = false,
+    version = '^6' -- Recommended
   },
   {
     "saecki/crates.nvim",

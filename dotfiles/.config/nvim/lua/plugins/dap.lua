@@ -1,10 +1,11 @@
 return {
   -- DAP
-  {"mfussenegger/nvim-dap"},
   {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
-    opts = {}
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "theHamsta/nvim-dap-virtual-text",
+      dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
+    }
   },
   {
     "rcarriga/nvim-dap-ui",

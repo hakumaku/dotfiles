@@ -208,8 +208,8 @@ augroup END
 vim.lsp.enable({
   -- lua
   "luals",
-  -- rust
-  "rust-analyzer",
+  -- do NOT call 'rust-analyzer' lsp server
+  -- since 'mrcjkb/rustaceanvim' automatically does
   -- python
   "basedpyright",
   "ruff",
@@ -257,4 +257,17 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = ""
     }
   }
+})
+
+vim.fn.sign_define('DapBreakpoint', {
+  text = '🔴',
+  texthl = 'DapBreakpoint',
+  linehl = 'DapBreakpoint',
+  numhl = 'DapBreakpoint'
+})
+vim.fn.sign_define('DapStopped', {
+  text = '👉',
+  texthl = 'DapStopped',
+  linehl = 'Visual',
+  numhl = 'DapStopped'
 })
