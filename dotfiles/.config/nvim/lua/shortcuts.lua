@@ -119,20 +119,6 @@ nnoremap("<C-Space>", vim.lsp.buf.code_action, {silent = true})
 nnoremap("<leader>u", vim.lsp.buf.references, {silent = true})
 nnoremap("<leader>r", vim.lsp.buf.rename, {silent = true})
 
--- neotest
-nnoremap("<leader>e", ":lua require('neotest').run.run_last()<CR>",
-         {silent = true})
-nnoremap("<leader>E", ":lua require('neotest').run.run()<CR>", {silent = true})
-nnoremap("<leader>d",
-         ":lua require('neotest').run.run_last({strategy = 'dap'})<CR>",
-         {silent = true})
-nnoremap("<leader>D", ":lua require('neotest').run.run({strategy = 'dap'})<CR>",
-         {silent = true})
-nnoremap("<C-w>m", ":lua require('neotest').output_panel.toggle()<CR>",
-         {silent = true})
-nnoremap("<C-w>n", ":lua require('neotest').summary.toggle()<CR>",
-         {silent = true})
-
 -- DAP
 nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
 nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
@@ -148,7 +134,13 @@ nnoremap("<leader>l", ":lua require('dap').step_over()<CR>", {silent = true})
 -- Snacks
 nnoremap("<C-w>.", ":only<CR>")
 nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
-nnoremap("<C-w>f", ":lua Snacks.terminal()<CR>")
+nnoremap("<C-w>f", ":ToggleTerm<CR>")
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts)
+end
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()')
 nnoremap("<C-w>z", ":ZenMode<CR>")
 
 nnoremap("<C-s>f", ":lua Snacks.picker.files()<CR>")

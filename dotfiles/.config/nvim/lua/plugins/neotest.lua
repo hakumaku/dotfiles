@@ -10,36 +10,45 @@ return {
   event = {"BufRead test_*.py", "BufRead test_*.rs"},
   config = function()
     require("neotest").setup({
+      -- https://github.com/nvim-neotest/neotest/issues/319
+      output_panel = {open = "botright vsplit | vertical resize 80"},
       adapters = {
-        require("rustaceanvim.neotest")
-        -- https://github.com/LazyVim/LazyVim/issues/3543
-        -- require("neotest-python")({
-        --   dap = {justMyCode = false},
-        --   -- Runner to use. Will use pytest if available by default.
-        --   -- Can be a function to return dynamic value.
-        --   runner = "pytest",
-        --   args = {"--capture=no", "--no-header"},
-        --   -- Custom python path for the runner.
-        --   -- Can be a string or a list of strings.
-        --   -- Can also be a function to return dynamic value.
-        --   -- If not provided, the path will be inferred by checking for 
-        --   -- virtual envs in the local directory and for Pipenev/Poetry configs
-        --   python = ".venv/bin/python"
-        -- }),
+        require("rustaceanvim.neotest")({args = {"--color=always"}})
+        require("neotest-python")({
+          dap = {justMyCode = false},
+          runner = "pytest",
+          args = {"--capture=no", "--no-header"},
+        }),
       }
     })
   end,
   opts = {
     -- https://github.com/nvim-neotest/neotest/discussions/455
     keys = {
-      -- Run nearest tests
-      vim.keymap.set("n", "<leader>R", function()
+      vim.keymap.set("n", "<leader>tn", function()
         require("neotest").run.run()
-      end, {desc = "Run nearest tests"}),
-      -- Run tests in file
-      vim.keymap.set("n", "<leader>F", function()
+      end, {desc = "Run nearest test"}),
+      vim.keymap.set("n", "<F5>", function()
+        require("neotest").run.run()
+      end, {desc = "Run nearest test"}),
+      vim.keymap.set("n", "<leader>tf", function()
         require("neotest").run.run(vim.fn.expand("%"))
-      end, {desc = "Run tests in file"})
+      end, {desc = "Run file tests"}),
+      vim.keymap.set("n", "<F6>", function()
+        require("neotest").run.run(vim.fn.expand("%"))
+      end, {desc = "Run file tests"}),
+      vim.keymap.set("n", "<leader>tl", function()
+        require("neotest").run.run_last()
+      end, {desc = "Run last test"}),
+      vim.keymap.set("n", "<leader>ts", function()
+        require("neotest").run.stop()
+      end, {desc = "Stop running tests"}),
+      vim.keymap.set("n", "<leader>to", function()
+        require("neotest").output_panel.toggle()
+      end, {desc = "Open test output"}),
+      vim.keymap.set("n", "<leader>tt", function()
+        require("neotest").summary.toggle()
+      end, {desc = "Toggle test summary"})
     }
   }
 }

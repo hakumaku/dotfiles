@@ -4,6 +4,9 @@
 [includeIf "gitdir:~/workspace/gitlab/"]
     path = ~/.config/git/gitlab/config
 [core]
+    compression = 9
+    whitespace = error
+    preloadindex = true
     editor = nvim
     pager = delta
 [help]
