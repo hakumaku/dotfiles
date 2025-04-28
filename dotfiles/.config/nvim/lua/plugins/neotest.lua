@@ -13,12 +13,12 @@ return {
       -- https://github.com/nvim-neotest/neotest/issues/319
       output_panel = {open = "botright vsplit | vertical resize 80"},
       adapters = {
-        require("rustaceanvim.neotest")({args = {"--color=always"}})
+        require("rustaceanvim.neotest")({args = {"--color=always"}}),
         require("neotest-python")({
           dap = {justMyCode = false},
           runner = "pytest",
-          args = {"--capture=no", "--no-header"},
-        }),
+          args = {"--capture=no", "--no-header"}
+        })
       }
     })
   end,
