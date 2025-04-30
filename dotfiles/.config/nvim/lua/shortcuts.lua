@@ -124,12 +124,6 @@ nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
 nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
          {silent = true})
 nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
-nnoremap("<leader>b", ":lua require('dap').toggle_breakpoint()<CR>",
-         {silent = true})
-nnoremap("<leader>h", ":lua require('dap').continue()<CR>", {silent = true})
-nnoremap("<leader>j", ":lua require('dap').step_into()<CR>", {silent = true})
-nnoremap("<leader>k", ":lua require('dap').step_out()<CR>", {silent = true})
-nnoremap("<leader>l", ":lua require('dap').step_over()<CR>", {silent = true})
 
 -- Snacks
 nnoremap("<C-w>.", ":only<CR>")

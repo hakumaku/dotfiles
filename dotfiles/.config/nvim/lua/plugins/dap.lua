@@ -5,6 +5,43 @@ return {
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
       dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
+    },
+    keys = {
+      {
+        "<F9>",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint"
+      },
+      {
+        "<leader>h",
+        function()
+          require("dap").continue()
+        end,
+        desc = "DAP continue"
+      },
+      {
+        "<leader>j",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "DAP Step Into"
+      },
+      {
+        "<leader>k",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "DAP Step Out"
+      },
+      {
+        "<leader>l",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "DAP Step Over"
+      }
     }
   },
   {
