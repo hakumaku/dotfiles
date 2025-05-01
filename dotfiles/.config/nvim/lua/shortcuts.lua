@@ -58,7 +58,14 @@ nnoremap("<C-k>", ":m-2<Bar>echo 'Move line up'<CR>")
 vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
 
 -- buffers
-nnoremap("<TAB>", ":b#<CR>")
+-- nnoremap("", ":b#<CR>")
+nnoremap("<TAB>", function()
+  local buf = vim.fn.expand("#")
+  if #buf > 0 then
+    vim.cmd.edit(buf)
+    Snacks.notify.info(vim.fn.expand("#:t"), {timeout = 500})
+  end
+end, {silent = true})
 nnoremap("<BS>", ":bd<CR>", {silent = true})
 nnoremap("]B", ":BufferLineMoveNext<CR>")
 nnoremap("[B", ":BufferLineMovePrev<CR>")
