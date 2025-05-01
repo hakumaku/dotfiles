@@ -116,6 +116,7 @@ return {
     scope = {enabled = true},
     statuscolumn = {enabled = true},
     words = {enabled = false},
-    image = {enabled = false}
+    image = {enabled = false},
+    styles = {lazygit = {border = "rounded"}}
   }
 }
