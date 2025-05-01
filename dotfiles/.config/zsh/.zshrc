@@ -37,6 +37,7 @@ if command -v tmux &>/dev/null \
   && [ -n "$PS1" ] \
   && [[ ! "$TERM" =~ screen ]] \
   && [[ ! "$TERM" =~ tmux ]] \
+  && [[ ! "$NVIM" ]] \
   && [ -z "$TMUX" ]; then
   # && [[ ! "$TERM" =~ xterm-kitty ]]; then
   exec tmux

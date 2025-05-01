@@ -1,9 +1,9 @@
 local clear_output_panel = function()
   local buf = vim.fn.bufnr("Neotest Output Panel")
   if buf ~= -1 then
-    wb.set_options({modifiable = true}, {buf = buf})
+    vim.api.nvim_set_option_value("modifiable", true, {buf = buf})
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
-    wb.set_options({modifiable = false}, {buf = buf})
+    vim.api.nvim_set_option_value("modifiable", false, {buf = buf})
   end
 end
 
@@ -76,7 +76,6 @@ return {
     {
       "<leader>tl",
       function()
-        clear_output_panel()
         require("neotest").run.run_last()
       end,
       desc = "Run last test"

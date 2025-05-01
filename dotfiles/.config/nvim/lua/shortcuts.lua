@@ -43,18 +43,11 @@ inoremap("<C-w>", "<C-g>u<C-w>")
 nnoremap("gh", "0")
 nnoremap("gl", "$")
 nnoremap("gs", "^")
+-- Copy & Paste
+vnoremap("<C-c>", '"+y:echo ' .. "'Yanked to clipboard'<CR>")
+inoremap("<C-v>", '<ESC>"+pa')
+vnoremap("<leader>v", '"_dP')
 
--- cmdline-editing
-cnoremap("<C-a>", "<Home>")
-cnoremap("<C-e>", "<End>")
-cnoremap("<C-j>", "<Left>")
-cnoremap("<C-k>", "<Right>")
-cnoremap("<C-l>", "<Delete>")
-cnoremap("<C-d>", "<S-Left>")
-cnoremap("<C-f>", "<S-Right>")
-
--- Insert a newline in normal mode.
--- nnoremap("<CR>", "o<ESC>k")
 -- Insert space in normal mode
 nnoremap("<Space>", "i<space><ESC>")
 -- Move the current line one down.
@@ -64,20 +57,20 @@ vnoremap("<C-j>", ":m '>+1<CR>gv=gv")
 nnoremap("<C-k>", ":m-2<Bar>echo 'Move line up'<CR>")
 vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
 
--- Toggle displaying whitespaces. Mapped to 'ctrl + /'
-nnoremap("<C-_>", ":set nolist!<Bar>echo 'Show whitespaces'<CR>")
+-- buffers
+nnoremap("<TAB>", ":b#<CR>")
+nnoremap("<BS>", ":bd<CR>", {silent = true})
+nnoremap("]B", ":BufferLineMoveNext<CR>")
+nnoremap("[B", ":BufferLineMovePrev<CR>")
 
--- Copy & Paste
-vnoremap("<C-c>", '"+y:echo ' .. "'Yanked to clipboard'<CR>")
-inoremap("<C-v>", '<ESC>"+pa')
-vnoremap("<leader>v", '"_dP')
-
--- Escape terminal mode
-vim.g.termdebug_useFloatingHover = 0
-vim.g.termdebug_use_prompt = 1
-tnoremap("<Esc>", "<C-\\><C-n>")
-nnoremap("<RightMouse>", ":Break<CR>")
-
+-- cmdline-editing
+cnoremap("<C-a>", "<Home>")
+cnoremap("<C-e>", "<End>")
+cnoremap("<C-j>", "<Left>")
+cnoremap("<C-k>", "<Right>")
+cnoremap("<C-l>", "<Delete>")
+cnoremap("<C-d>", "<S-Left>")
+cnoremap("<C-f>", "<S-Right>")
 -- Reverse selected lines.
 vnoremap("<leader>r", "y:lua utils.reverse_lines()<CR>")
 -- Jump to the next tab ')'
@@ -89,97 +82,67 @@ inoremap("<C-l>", "<C-o>:lua utils.jump_right()<CR>")
 inoremap("<C-q>b", "<C-o>:lua utils.toggle_eol_await()<CR>")
 inoremap("<C-q>c", "<C-o>:lua utils.toggle_eol_option()<CR>")
 inoremap("<C-q>d", "<C-o>:lua utils.append_semi_colon()<CR>")
--- External Utilities
-nnoremap("<leader>1", ":.!toilet -w 200 -f term -F border<CR>")
-
--- Cycle through buffers
-nnoremap("<TAB>", ":b#<CR>")
-nnoremap("]B", ":BufferLineMoveNext<CR>")
-nnoremap("[B", ":BufferLineMovePrev<CR>")
-nnoremap("<BS>", ":bd<CR>", {silent = true})
-nnoremap("]d", function()
-  vim.diagnostic.jump({count = 1, float = true})
-end, {silent = true})
-nnoremap("[d", function()
-  vim.diagnostic.jump({count = -1, float = true})
-end, {silent = true})
 
 -- LSP config
+nnoremap("gr", vim.lsp.buf.rename, {silent = true})
+nnoremap("gu", vim.lsp.buf.references, {silent = true})
+nnoremap("ga", vim.lsp.buf.code_action, {silent = true})
 nnoremap("gd", vim.lsp.buf.definition, {silent = true})
 nnoremap("gD", vim.lsp.buf.declaration, {silent = true})
 nnoremap("gi", vim.lsp.buf.implementation, {silent = true})
 nnoremap("gI", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}), {0})
 end, {silent = true})
-
 nnoremap("K", function()
   vim.lsp.buf.hover({border = 'rounded', focusable = false})
 end, {silent = true})
 nnoremap("<C-Space>", vim.lsp.buf.code_action, {silent = true})
-nnoremap("<leader>u", vim.lsp.buf.references, {silent = true})
-nnoremap("<leader>r", vim.lsp.buf.rename, {silent = true})
 
--- DAP
-nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
-nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
-         {silent = true})
-nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
-
--- Snacks
-nnoremap("<C-w>.", ":only<CR>")
-nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
-nnoremap("<C-w>f", ":ToggleTerm<CR>")
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
   vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts)
 end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()')
-nnoremap("<C-w>z", ":ZenMode<CR>")
 
-nnoremap("<C-s>f", ":lua Snacks.picker.files()<CR>")
+nnoremap("<C-s>f", ":lua Snacks.picker.smart()<CR>")
 nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
 nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
+nnoremap("<C-s>m", ":lua Snacks.picker.marks()<CR>")
 nnoremap("<C-s>/", ":lua Snacks.picker.lines()<CR>")
 nnoremap("<C-s>t", ":lua Snacks.picker.lsp_symbols()<CR>")
 nnoremap("<C-s>T", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
 nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
 nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
-nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
 
 -- neogit & diffview & gitsigns
 nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
 nnoremap("<leader>gj", ":diffget //2<CR>")
 nnoremap("<leader>gk", ":diffget //3<CR>")
 nnoremap("<leader>gl", ":lua require('neogit').open({'log'})<CR>")
-
-nnoremap("<C-w>g", ":Neogit<CR>")
-nnoremap("<C-w>b", ":DiffviewOpen<CR>")
+nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
 nnoremap("<leader>gh", ":DiffviewFileHistory %<CR>")
 nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
+
+nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
+
+nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
+nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
+         {silent = true})
+nnoremap("<C-w>.", ":only<CR>")
+nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
+nnoremap("<C-w>f", ":ToggleTerm<CR>")
+nnoremap("<C-w>g", ":Neogit<CR>")
+nnoremap("<C-w>b", ":DiffviewOpen<CR>")
+nnoremap("<C-w>z", ":ZenMode<CR>")
+
 nnoremap("]c", ":Gitsigns next_hunk<CR>")
 nnoremap("[c", ":Gitsigns prev_hunk<CR>")
-
-nnoremap("<A-1>", ":echo 'alt-1'<CR>")
-nnoremap("<A-2>", ":echo 'alt-2'<CR>")
-nnoremap("<A-3>", ":echo 'alt-3'<CR>")
-nnoremap("<A-4>", ":echo 'alt-4'<CR>")
-nnoremap("<A-5>", ":echo 'alt-5'<CR>")
-nnoremap("<A-6>", ":echo 'alt-6'<CR>")
-nnoremap("<A-7>", ":echo 'alt-7'<CR>")
-nnoremap("<A-8>", ":echo 'alt-8'<CR>")
-nnoremap("<A-9>", ":echo 'alt-9'<CR>")
-nnoremap("<A-0>", ":echo 'alt-0'<CR>")
-
-nnoremap("<C-w>1", ":lua utils.select_buffer(1)<CR>", {silent = true})
-nnoremap("<C-w>2", ":lua utils.select_buffer(2)<CR>", {silent = true})
-nnoremap("<C-w>3", ":lua utils.select_buffer(3)<CR>", {silent = true})
-nnoremap("<C-w>4", ":lua utils.select_buffer(4)<CR>", {silent = true})
-nnoremap("<C-w>5", ":lua utils.select_buffer(5)<CR>", {silent = true})
-nnoremap("<C-w>6", ":lua utils.select_buffer(6)<CR>", {silent = true})
-nnoremap("<C-w>7", ":lua utils.select_buffer(7)<CR>", {silent = true})
-nnoremap("<C-w>8", ":lua utils.select_buffer(8)<CR>", {silent = true})
-nnoremap("<C-w>9", ":lua utils.select_buffer(9)<CR>", {silent = true})
-nnoremap("<C-w>0", ":lua utils.select_buffer(10)<CR>", {silent = true})
+nnoremap("]d", function()
+  vim.diagnostic.jump({count = 1, float = true})
+end, {silent = true})
+nnoremap("[d", function()
+  vim.diagnostic.jump({count = -1, float = true})
+end, {silent = true})

@@ -1,4 +1,5 @@
 if vim.g.neovide then
+  -- normal = ["MesloLGS Nerd Font", "Source Han Sans KR", "Noto Color Emoji"]
   vim.g.neovide_normal_opacity = 0.75
 end
 vim.opt.syntax = "on"
@@ -164,6 +165,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(args)
+    local buf = args.buf
+
+    vim.api.nvim_create_autocmd({
+      "BufEnter",
+      "BufWritePost",
+      "CursorHold",
+      "InsertLeave"
+    }, {
+      buffer = buf,
+      callback = function(ev)
+        vim.lsp.codelens.refresh({bufnr = 0})
+      end
+    })
+
     -- :help lsp-cofnig
     -- args: {
     --   event: "LspAttach"
@@ -175,7 +190,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- }
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     if client:supports_method('textDocument/documentHighlight') then
-      local buf = args.buf
       vim.api.nvim_create_autocmd("cursorhold", {
         callback = vim.lsp.buf.document_highlight,
         buffer = buf,
