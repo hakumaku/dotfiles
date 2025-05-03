@@ -69,6 +69,7 @@ end, {silent = true})
 nnoremap("<BS>", ":bd<CR>", {silent = true})
 nnoremap("]B", ":BufferLineMoveNext<CR>")
 nnoremap("[B", ":BufferLineMovePrev<CR>")
+tnoremap("<C-.>", "<C-\\><C-n>:ToggleTerm<CR>", {silent = true})
 
 -- cmdline-editing
 cnoremap("<C-a>", "<Home>")
