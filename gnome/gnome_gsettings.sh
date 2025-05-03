@@ -122,10 +122,10 @@ set_gsettings() {
   # Explicitly set cursor-theme to `Adwaita` for flatpak apps
   gsettings set org.gnome.desktop.interface cursor-theme Adwaita
 
-  gsettings set org.gnome.settings-daemon.plugins.media-keys home ['<Super>E']
-  gsettings set org.gnome.settings-daemon.plugins.media-keys www ['<Super>w']
-  gsettings set org.gnome.settings-daemon.plugins.media-keys search ['<Super>r']
-  gsettings set org.gnome.settings-daemon.plugins.media-keys email ['<Super>g']
+  gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>E']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>w']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys search "['<Super>r']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Super>g']"
 }
 
 set_gsettings
