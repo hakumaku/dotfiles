@@ -9,7 +9,9 @@ function load_plugins() {
   )
   for key val in "${(@kv)plugins}"; do
     if [[ ! -f "$dir/${key}" ]]; then
-      git clone --depth=1 "git@github.com:${val}.git"
+      pushd $dir
+      git clone --depth=1 "https://github.com/${val}.git"
+      popd
     fi
     source "$dir/${key}"
   done
