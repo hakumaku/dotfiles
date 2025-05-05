@@ -1,0 +1,16 @@
+fork = true
+frame = "none"
+idle = true
+maximized = true
+mouse-cursor-icon = "arrow"
+no-multigrid = false
+srgb = false
+tabs = true
+theme = "auto"
+title-hidden = true
+vsync = true
+wsl = false
+
+[font]
+normal = ["MesloLGS Nerd Font"]
+size = 16.0
