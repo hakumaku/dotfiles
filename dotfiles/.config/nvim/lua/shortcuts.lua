@@ -1,31 +1,31 @@
 local function nnoremap(combo, mapping, opts)
-  opts = opts or {noremap = true}
+  opts = opts or { noremap = true }
   opts.noremap = true
-  vim.keymap.set({"n"}, combo, mapping, opts)
+  vim.keymap.set({ "n" }, combo, mapping, opts)
 end
 
 local function inoremap(combo, mapping, opts)
-  opts = opts or {noremap = true}
+  opts = opts or { noremap = true }
   opts.noremap = true
-  vim.keymap.set("i", combo, mapping, {noremap = true})
+  vim.keymap.set("i", combo, mapping, { noremap = true })
 end
 
 local function vnoremap(combo, mapping)
-  vim.keymap.set("v", combo, mapping, {noremap = true})
+  vim.keymap.set("v", combo, mapping, { noremap = true })
 end
 
 local function cnoremap(combo, mapping)
-  vim.keymap.set("c", combo, mapping, {noremap = true})
+  vim.keymap.set("c", combo, mapping, { noremap = true })
 end
 
 local function tnoremap(combo, mapping)
-  vim.keymap.set("t", combo, mapping, {noremap = true})
+  vim.keymap.set("t", combo, mapping, { noremap = true })
 end
 
 local function snoremap(combo, mapping, opts)
-  opts = opts or {noremap = true}
+  opts = opts or { noremap = true }
   opts.noremap = true
-  vim.keymap.set("s", combo, mapping, {noremap = true})
+  vim.keymap.set("s", combo, mapping, { noremap = true })
 end
 
 -- Move cursor by virtual lines.
@@ -34,8 +34,8 @@ end
 nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("J", "mzJ`z")
-nnoremap("k", "(v:count > 5 ? \"m'\".v:count : \"\").'k'", {expr = true})
-nnoremap("j", "(v:count > 5 ? \"m'\".v:count : \"\").'j'", {expr = true})
+nnoremap("k", '(v:count > 5 ? "m\'".v:count : "").\'k\'', { expr = true })
+nnoremap("j", '(v:count > 5 ? "m\'".v:count : "").\'j\'', { expr = true })
 
 inoremap("<C-u>", "<C-g>u<C-u>")
 inoremap("<C-w>", "<C-g>u<C-w>")
@@ -63,14 +63,14 @@ nnoremap("<TAB>", function()
   local buf = vim.fn.expand("#")
   if #buf > 0 then
     vim.cmd.edit(buf)
-    Snacks.notify.info(vim.fn.expand("#:t"), {timeout = 500})
+    Snacks.notify.info(vim.fn.expand("#:t"), { timeout = 500 })
   end
-end, {silent = true})
-nnoremap("<BS>", ":bd<CR>", {silent = true})
+end, { silent = true })
+nnoremap("<BS>", ":bd<CR>", { silent = true })
 nnoremap("]B", ":BufferLineMoveNext<CR>")
 nnoremap("[B", ":BufferLineMovePrev<CR>")
-tnoremap("<C-,>", "<C-\\><C-n>", {silent = true})
-tnoremap("<C-.>", "<C-\\><C-n>:ToggleTerm<CR>", {silent = true})
+tnoremap("<C-,>", "<C-\\><C-n>", { silent = true })
+tnoremap("<C-.>", "<C-\\><C-n>:ToggleTerm<CR>", { silent = true })
 
 -- cmdline-editing
 cnoremap("<C-a>", "<Home>")
@@ -93,26 +93,26 @@ inoremap("<C-q>c", "<C-o>:lua utils.toggle_eol_option()<CR>")
 inoremap("<C-q>d", "<C-o>:lua utils.append_semi_colon()<CR>")
 
 -- LSP config
-nnoremap("gr", vim.lsp.buf.rename, {silent = true})
-nnoremap("gu", vim.lsp.buf.references, {silent = true})
-nnoremap("ga", vim.lsp.buf.code_action, {silent = true})
-nnoremap("gd", vim.lsp.buf.definition, {silent = true})
-nnoremap("gD", vim.lsp.buf.declaration, {silent = true})
-nnoremap("gi", vim.lsp.buf.implementation, {silent = true})
+nnoremap("gr", vim.lsp.buf.rename, { silent = true })
+nnoremap("gu", vim.lsp.buf.references, { silent = true })
+nnoremap("ga", vim.lsp.buf.code_action, { silent = true })
+nnoremap("gd", vim.lsp.buf.definition, { silent = true })
+nnoremap("gD", vim.lsp.buf.declaration, { silent = true })
+nnoremap("gi", vim.lsp.buf.implementation, { silent = true })
 nnoremap("gI", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}), {0})
-end, {silent = true})
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+end, { silent = true })
 nnoremap("K", function()
-  vim.lsp.buf.hover({border = 'rounded', focusable = false})
-end, {silent = true})
-nnoremap("<C-Space>", vim.lsp.buf.code_action, {silent = true})
+  vim.lsp.buf.hover({ border = "rounded", focusable = false })
+end, { silent = true })
+nnoremap("<C-Space>", vim.lsp.buf.code_action, { silent = true })
 
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
+  local opts = { buffer = 0 }
   vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], opts)
 end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()')
+vim.cmd("autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()")
 
 nnoremap("<C-s>f", ":lua Snacks.picker.smart()<CR>")
 nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
@@ -135,11 +135,10 @@ nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
 nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
 
-nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", {silent = true})
+nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", { silent = true })
 
-nnoremap("<C-w>d", ":lua require('dapui').toggle()<CR>", {silent = true})
-nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>",
-         {silent = true})
+nnoremap("<C-w>d", ":lua require('dap-view').toggle()<CR>", { silent = true })
+nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>", { silent = true })
 nnoremap("<C-w>.", ":only<CR>")
 nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
 nnoremap("<C-w>f", ":ToggleTerm<CR>")
@@ -150,8 +149,8 @@ nnoremap("<C-w>z", ":ZenMode<CR>")
 nnoremap("]c", ":Gitsigns next_hunk<CR>")
 nnoremap("[c", ":Gitsigns prev_hunk<CR>")
 nnoremap("]d", function()
-  vim.diagnostic.jump({count = 1, float = true})
-end, {silent = true})
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { silent = true })
 nnoremap("[d", function()
-  vim.diagnostic.jump({count = -1, float = true})
-end, {silent = true})
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { silent = true })
