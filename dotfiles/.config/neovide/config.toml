@@ -12,5 +12,5 @@ vsync = true
 wsl = false
 
 [font]
-normal = ["MesloLGS Nerd Font"]
+normal = ["MesloLGS Nerd Font", "Source Han Sans KR", "Noto Color Emoji"]
 size = 16.0
