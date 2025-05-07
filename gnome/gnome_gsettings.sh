@@ -116,7 +116,9 @@ set_gsettings() {
 
   # Sound control
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up "['<Super>equal']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys volume-up-precise-static "['<Super><Ctrl>equal', '<Shift>XF86AudioRaiseVolume']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down "['<Super>minus']"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down-precise-static "['<Super><Ctrl>minus', '<Shift>XF86AudioLowerVolume']"
   gsettings set org.gnome.settings-daemon.plugins.media-keys volume-mute "['<Super>0']"
 
   # Explicitly set cursor-theme to `Adwaita` for flatpak apps

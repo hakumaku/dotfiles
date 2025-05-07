@@ -4,6 +4,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
       {
+        -- TODO: https://github.com/miroshQa/debugmaster.nvim
         "igorlfs/nvim-dap-view",
         opts = {
           windows = {
