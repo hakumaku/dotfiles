@@ -43,6 +43,7 @@ return {
       python = { "black", "ruff" },
       rust = { "rustfmt" },
       sql = { "sqlfluff" },
+      json = { "jq" },
       -- Use the "_" filetype to run formatters on filetypes that don't
       -- have other formatters configured.
       ["_"] = { "trim_whitespace" },

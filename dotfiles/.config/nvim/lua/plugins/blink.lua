@@ -81,13 +81,13 @@ return {
     build = "make install_jsregexp",
     dependencies = {
       {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-          require("luasnip.loaders.from_vscode").lazy_load({
-            paths = { vim.fn.stdpath("config") .. "/snippets" },
-          })
-        end,
+        -- "rafamadriz/friendly-snippets",
+        -- config = function()
+        --   require("luasnip.loaders.from_vscode").lazy_load()
+        --   require("luasnip.loaders.from_vscode").lazy_load({
+        --     paths = { vim.fn.stdpath("config") .. "/snippets" },
+        --   })
+        -- end,
       },
     },
     config = function(_, opts)
@@ -107,6 +107,11 @@ return {
       require("luasnip").filetype_extend("cpp", { "cppdoc" })
       require("luasnip").filetype_extend("kotlin", { "kdoc" })
       require("luasnip").filetype_extend("sh", { "shelldoc" })
+
+      -- custom snippets
+      require("luasnip.loaders.from_vscode").lazy_load({
+        paths = { vim.fn.stdpath("config") .. "/snippets" },
+      })
     end,
   },
 }
