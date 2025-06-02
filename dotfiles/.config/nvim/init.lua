@@ -2,6 +2,17 @@ if vim.g.neovide then
   -- normal = ["MesloLGS Nerd Font", "Source Han Sans KR", "Noto Color Emoji"]
   vim.g.neovide_normal_opacity = 0.75
   vim.g.neovide_cursor_vfx_mode = "sonicboom"
+  vim.keymap.set(
+    { "n", "v" },
+    "<C-+>",
+    ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>"
+  )
+  vim.keymap.set(
+    { "n", "v" },
+    "<C-->",
+    ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>"
+  )
+  vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
 end
 vim.opt.syntax = "on"
 vim.opt.termguicolors = true
