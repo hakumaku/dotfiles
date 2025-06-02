@@ -1,6 +1,7 @@
 if vim.g.neovide then
   -- normal = ["MesloLGS Nerd Font", "Source Han Sans KR", "Noto Color Emoji"]
   vim.g.neovide_normal_opacity = 0.75
+  vim.g.neovide_cursor_vfx_mode = "sonicboom"
 end
 vim.opt.syntax = "on"
 vim.opt.termguicolors = true
@@ -10,7 +11,7 @@ vim.opt.cursorline = false
 -- When a file has been changed outside of Vim, automatically read it againautoread
 vim.opt.autoread = true
 
-vim.opt.backspace = {"indent", "eol", "start"}
+vim.opt.backspace = { "indent", "eol", "start" }
 vim.opt.cmdheight = 1
 vim.opt.colorcolumn = "101"
 vim.opt.encoding = "utf-8"
@@ -20,7 +21,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.conceallevel = 2
 
 -- Replace - with ' '
-vim.opt.fillchars = {fold = " "}
+vim.opt.fillchars = { fold = " " }
 
 -- Folding
 vim.opt.foldmethod = "expr"
@@ -47,7 +48,7 @@ vim.opt.laststatus = 2
 -- Do not redraw screen in the middle of a macro
 vim.opt.lazyredraw = true
 
-vim.opt.listchars = {tab = "» ", eol = "↲", space = "·"}
+vim.opt.listchars = { tab = "» ", eol = "↲", space = "·" }
 
 -- Enable mouse scrolling
 vim.opt.mouse = "a"
@@ -90,7 +91,7 @@ vim.opt.sessionoptions:remove("options")
 -- Size of the indent
 vim.opt.shiftwidth = 4
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = {"menuone", "noinsert", "noselect"}
+vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 -- Don't give ins-completion-menu messages
 vim.opt.shortmess:append("c")
 -- Show command in last line
@@ -122,7 +123,7 @@ vim.g.termdebug_wide = 1
 vim.opt.laststatus = 3
 
 -- python3 on Arch Linux
-vim.g.python3_host_prog = '/usr/bin/python'
+vim.g.python3_host_prog = "/usr/bin/python"
 
 -- Common typos
 vim.cmd([[
@@ -145,12 +146,12 @@ require("shortcuts")
 
 -- Show highlight when yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("YankHighlight", {clear = true}),
+  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
   pattern = "*",
-  desc = "Highlight yank"
+  desc = "Highlight yank",
 })
 
 -- Callback when LSP is attached
@@ -171,12 +172,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "BufEnter",
       "BufWritePost",
       "CursorHold",
-      "InsertLeave"
+      "InsertLeave",
     }, {
       buffer = buf,
       callback = function(ev)
-        vim.lsp.codelens.refresh({bufnr = 0})
-      end
+        vim.lsp.codelens.refresh({ bufnr = 0 })
+      end,
     })
 
     -- :help lsp-cofnig
@@ -189,24 +190,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --   id: <id number>
     -- }
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    if client:supports_method('textDocument/documentHighlight') then
+    if client:supports_method("textDocument/documentHighlight") then
       vim.api.nvim_create_autocmd("cursorhold", {
         callback = vim.lsp.buf.document_highlight,
         buffer = buf,
-        desc = "Highlight lsp references on CursorHold"
+        desc = "Highlight lsp references on CursorHold",
       })
       vim.api.nvim_create_autocmd("CursorHoldI", {
         callback = vim.lsp.buf.document_highlight,
         buffer = buf,
-        desc = "Highlight lsp references on CursorHoldI"
+        desc = "Highlight lsp references on CursorHoldI",
       })
       vim.api.nvim_create_autocmd("CursorMoved", {
         callback = vim.lsp.buf.clear_references,
         buffer = buf,
-        desc = "Clear highlighted lsp references on CursorMoved"
+        desc = "Clear highlighted lsp references on CursorMoved",
       })
     end
-  end
+  end,
 })
 -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md
 ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
@@ -225,12 +226,12 @@ vim.api.nvim_create_autocmd("LspProgress", {
       if i == #p + 1 or p[i].token == ev.data.params.token then
         p[i] = {
           token = ev.data.params.token,
-          msg = ("[%3d%%] %s%s"):format(value.kind == "end" and 100 or
-                                            value.percentage or 100,
-                                        value.title or "", value.message and
-                                            (" **%s**"):format(value.message) or
-                                            ""),
-          done = value.kind == "end"
+          msg = ("[%3d%%] %s%s"):format(
+            value.kind == "end" and 100 or value.percentage or 100,
+            value.title or "",
+            value.message and (" **%s**"):format(value.message) or ""
+          ),
+          done = value.kind == "end",
         }
         break
       end
@@ -251,18 +252,17 @@ vim.api.nvim_create_autocmd("LspProgress", {
       "⠦",
       "⠧",
       "⠇",
-      "⠏"
+      "⠏",
     }
     vim.notify(table.concat(msg, "\n"), "info", {
       id = "lsp_progress",
       title = client.name,
       opts = function(notif)
-        notif.icon = #progress[client.id] == 0 and " " or
-                         spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) %
-                             #spinner + 1]
-      end
+        notif.icon = #progress[client.id] == 0 and " "
+          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
     })
-  end
+  end,
 })
 
 vim.cmd([[
@@ -299,48 +299,47 @@ vim.lsp.enable({
   "yamlls",
   "jsonls",
   "bashls",
-  "docker"
+  "docker",
 }, {
   -- global lsp config
 })
-vim.filetype
-    .add({extension = {jinja = 'jinja', jinja2 = 'jinja', j2 = 'jinja'}})
+vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
 vim.diagnostic.config({
   underline = true,
   virtual_text = false,
   virtual_lines = false,
-  float = {border = 'rounded', focusable = false},
+  float = { border = "rounded", focusable = false },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",
       [vim.diagnostic.severity.WARN] = "",
       [vim.diagnostic.severity.INFO] = "",
-      [vim.diagnostic.severity.HINT] = "󰌵"
+      [vim.diagnostic.severity.HINT] = "󰌵",
     },
     texthl = {
       [vim.diagnostic.severity.ERROR] = "LspDiagnosticsDefaultError",
       [vim.diagnostic.severity.WARN] = "LspDiagnosticsDefaultWarning",
       [vim.diagnostic.severity.HINT] = "LspDiagnosticsDefaultHint",
-      [vim.diagnostic.severity.INFO] = "LspDiagnosticsDefaultInformation"
+      [vim.diagnostic.severity.INFO] = "LspDiagnosticsDefaultInformation",
     },
     numhl = {
       [vim.diagnostic.severity.ERROR] = "",
       [vim.diagnostic.severity.WARN] = "",
       [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = ""
-    }
-  }
+      [vim.diagnostic.severity.INFO] = "",
+    },
+  },
 })
 
-vim.fn.sign_define('DapBreakpoint', {
-  text = '🔴',
-  texthl = 'DapBreakpoint',
-  linehl = 'DapBreakpoint',
-  numhl = 'DapBreakpoint'
+vim.fn.sign_define("DapBreakpoint", {
+  text = "🔴",
+  texthl = "DapBreakpoint",
+  linehl = "DapBreakpoint",
+  numhl = "DapBreakpoint",
 })
-vim.fn.sign_define('DapStopped', {
-  text = '👉',
-  texthl = 'DapStopped',
-  linehl = 'Visual',
-  numhl = 'DapStopped'
+vim.fn.sign_define("DapStopped", {
+  text = "👉",
+  texthl = "DapStopped",
+  linehl = "Visual",
+  numhl = "DapStopped",
 })
