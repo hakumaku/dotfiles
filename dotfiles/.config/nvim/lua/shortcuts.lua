@@ -106,6 +106,20 @@ nnoremap("K", function()
   vim.lsp.buf.hover({ border = "rounded", focusable = false })
 end, { silent = true })
 nnoremap("<C-Space>", vim.lsp.buf.code_action, { silent = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*.rs",
+  callback = function(ev)
+    nnoremap("gp", function()
+      vim.cmd.RustLsp("parentModule")
+    end)
+    nnoremap("gO", function()
+      vim.cmd.RustLsp("renderDiagnostic")
+    end)
+    nnoremap("go", function()
+      vim.cmd.RustLsp("relatedDiagnostics")
+    end)
+  end,
+})
 
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
