@@ -3,6 +3,6 @@ return {
   "tpope/vim-repeat",
   "mbbill/undotree",
   "Raimondi/delimitMate",
-  "kylechui/nvim-surround",
+  { "kylechui/nvim-surround", opts = {} },
   "kevinhwang91/nvim-bqf",
 }

@@ -7,7 +7,7 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
-    bigfile = {enabled = true},
+    bigfile = { enabled = true },
     dashboard = {
       enabled = true,
       preset = {
@@ -16,71 +16,72 @@ return {
             icon = " ",
             key = "f",
             desc = "Find File",
-            action = ":lua Snacks.dashboard.pick('files')"
+            action = ":lua Snacks.dashboard.pick('files')",
           },
           {
             icon = " ",
             key = "n",
             desc = "New File",
-            action = ":ene | startinsert"
+            action = ":ene | startinsert",
           },
           {
             icon = " ",
             key = "g",
             desc = "Find Text",
-            action = ":lua Snacks.dashboard.pick('live_grep')"
+            action = ":lua Snacks.dashboard.pick('live_grep')",
           },
           {
             icon = " ",
             key = "r",
             desc = "Recent Files",
-            action = ":lua Snacks.dashboard.pick('oldfiles')"
+            action = ":lua Snacks.dashboard.pick('oldfiles')",
           },
           {
             icon = " ",
             key = "c",
             desc = "Config",
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})"
+            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
           },
           {
             icon = " ",
             key = "s",
             desc = "Restore Session",
-            section = "session"
+            section = "session",
           },
           {
             icon = "󰒲 ",
             key = "L",
             desc = "Lazy",
             action = ":Lazy",
-            enabled = package.loaded.lazy ~= nil
+            enabled = package.loaded.lazy ~= nil,
           },
-          {icon = " ", key = "q", desc = "Quit", action = ":qa"}
-        }
-      }
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
+      },
     },
-    explorer = {enabled = true},
-    indent = {enabled = true},
-    input = {enabled = true},
-    lazygit = {enabled = true},
+    explorer = { enabled = true },
+    indent = { enabled = true },
+    input = { enabled = true },
+    lazygit = { enabled = true },
     picker = {
       enabled = true,
       sources = {
         explorer = {
           auto_close = true,
-          layout = {preset = "sidebar", preview = false},
+          layout = { preset = "sidebar", preview = false },
           win = {
             list = {
               keys = {
                 ["o"] = "confirm",
-                ["O"] = "explorer_open" -- open with system application
-              }
-            }
-          }
+                ["O"] = "explorer_open", -- open with system application
+              },
+            },
+          },
         },
-        buffers = {layout = {preset = "select", preview = false}},
-        files = {layout = {preset = "select", preview = false}},
-        lsp_symbols = {layout = {preset = "select", preview = false}}
+        buffers = { layout = { preset = "select", preview = false } },
+        files = { layout = { preset = "select", preview = false } },
+        lsp_symbols = { layout = { preset = "select", preview = false } },
+        marks = { layout = { preset = "ivy", preview = true } },
       },
       layouts = {
         sidebar = {
@@ -98,25 +99,25 @@ return {
               height = 1,
               border = "rounded",
               title = "{title} {live} {flags}",
-              title_pos = "center"
+              title_pos = "center",
             },
-            {win = "list", border = "none"}
-          }
-        }
-      }
+            { win = "list", border = "none" },
+          },
+        },
+      },
     },
     -- terminal = {enabled = true},
     notifier = {
-      enabled = true
+      enabled = true,
       -- your notifier configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
-    quickfile = {enabled = true},
-    scope = {enabled = true},
-    statuscolumn = {enabled = true},
-    words = {enabled = false},
-    image = {enabled = false},
-    styles = {lazygit = {border = "rounded"}}
-  }
+    quickfile = { enabled = true },
+    scope = { enabled = true },
+    statuscolumn = { enabled = true },
+    words = { enabled = false },
+    image = { enabled = false },
+    styles = { lazygit = { border = "rounded" } },
+  },
 }

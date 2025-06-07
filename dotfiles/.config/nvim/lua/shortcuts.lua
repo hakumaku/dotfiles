@@ -93,9 +93,9 @@ inoremap("<C-q>c", "<C-o>:lua utils.toggle_eol_option()<CR>")
 inoremap("<C-q>d", "<C-o>:lua utils.append_semi_colon()<CR>")
 
 -- LSP config
-nnoremap("gr", vim.lsp.buf.rename, { silent = true })
-nnoremap("gu", vim.lsp.buf.references, { silent = true })
-nnoremap("ga", vim.lsp.buf.code_action, { silent = true })
+nnoremap("grn", vim.lsp.buf.rename, { silent = true })
+nnoremap("grr", vim.lsp.buf.references, { silent = true })
+nnoremap("gra", vim.lsp.buf.code_action, { silent = true })
 nnoremap("gd", vim.lsp.buf.definition, { silent = true })
 nnoremap("gD", vim.lsp.buf.declaration, { silent = true })
 nnoremap("gi", vim.lsp.buf.implementation, { silent = true })
@@ -131,9 +131,31 @@ vim.cmd("autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()")
 nnoremap("<C-s>f", ":lua Snacks.picker.smart()<CR>")
 nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
 nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
-nnoremap("<C-s>m", ":lua Snacks.picker.marks()<CR>")
+nnoremap("'", ":lua Snacks.picker.marks()<CR>")
+nnoremap("dm", ":delm! | delm A-Z0-9<CR>")
 nnoremap("<C-s>/", ":lua Snacks.picker.lines()<CR>")
-nnoremap("<C-t>", ":lua Snacks.picker.lsp_symbols()<CR>")
+nnoremap("<C-t>", ":lua Snacks.picker.lsp_symbols({filter})<CR>")
+nnoremap("<C-t>", function()
+  Snacks.picker.lsp_symbols({
+    filter = {
+      rust = {
+        "Class",
+        "Constructor",
+        "Enum",
+        -- "Field",
+        "Function",
+        "Interface",
+        "Method",
+        -- "Module",
+        "Namespace",
+        "Package",
+        "Property",
+        "Struct",
+        "Trait",
+      },
+    },
+  })
+end)
 nnoremap("<C-s>t", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
 nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
 nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
