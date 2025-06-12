@@ -118,6 +118,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     nnoremap("go", function()
       vim.cmd.RustLsp("relatedDiagnostics")
     end)
+    nnoremap("gi", function()
+      Snacks.picker.lsp_implementations({
+        filter = {
+          filter = function(item, self)
+            return string.sub(item["line"], 1, 1) ~= "#"
+          end,
+        },
+      })
+      -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+    end, { silent = true })
   end,
 })
 
@@ -134,7 +144,6 @@ nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
 nnoremap("'", ":lua Snacks.picker.marks()<CR>")
 nnoremap("dm", ":delm! | delm A-Z0-9<CR>")
 nnoremap("<C-s>/", ":lua Snacks.picker.lines()<CR>")
-nnoremap("<C-t>", ":lua Snacks.picker.lsp_symbols({filter})<CR>")
 nnoremap("<C-t>", function()
   Snacks.picker.lsp_symbols({
     filter = {
@@ -143,6 +152,7 @@ nnoremap("<C-t>", function()
         "Constructor",
         "Enum",
         -- "Field",
+        "Object",
         "Function",
         "Interface",
         "Method",
