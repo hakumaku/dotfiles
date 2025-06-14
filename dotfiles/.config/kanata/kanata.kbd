@@ -1,0 +1,26 @@
+;; Caps to escape/control configuration for Kanata
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+)
+
+(deftemplate charmod (char mod)
+  (switch
+    ((key-timing 3 less-than 250)) $char break
+    () (tap-hold-release-timeout 200 500 $char $mod $char) break
+  )
+)
+
+(deflayermap (main)
+  z (t! charmod a lalt)
+  x (t! charmod s lmet)
+  j (t! charmod d lctl)
+  v (t! charmod f lsft)
+  m (t! charmod j lsft)
+  , (t! charmod k rctl)
+  . (t! charmod l rmet)
+  / (t! charmod ; ralt)
+)
