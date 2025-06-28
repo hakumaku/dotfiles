@@ -51,11 +51,11 @@ vnoremap("<leader>v", '"_dP')
 -- Insert space in normal mode
 nnoremap("<Space>", "i<space><ESC>")
 -- Move the current line one down.
-nnoremap("<C-j>", ":m+1<Bar>echo 'Move line down'<CR>")
-vnoremap("<C-j>", ":m '>+1<CR>gv=gv")
+nnoremap("<C-j>", "<cmd>m+1<Bar>echo 'Move line down'<CR>")
+vnoremap("<C-j>", "<cmd>m '>+1<CR>gv=gv")
 -- Move the current line one up.
-nnoremap("<C-k>", ":m-2<Bar>echo 'Move line up'<CR>")
-vnoremap("<C-k>", ":m '<-2<CR>gv=gv")
+nnoremap("<C-k>", "<cmd>m-2<Bar>echo 'Move line up'<CR>")
+vnoremap("<C-k>", "<cmd>m '<-2<CR>gv=gv")
 
 -- buffers
 -- nnoremap("", ":b#<CR>")
@@ -66,9 +66,9 @@ nnoremap("<TAB>", function()
     Snacks.notify.info(vim.fn.expand("#:t"), { timeout = 500 })
   end
 end, { silent = true })
-nnoremap("<BS>", ":bd<CR>", { silent = true })
-nnoremap("]B", ":BufferLineMoveNext<CR>")
-nnoremap("[B", ":BufferLineMovePrev<CR>")
+nnoremap("<BS>", "<cmd>bd<CR>", { silent = true })
+nnoremap("]B", "<cmd>BufferLineMoveNext<CR>")
+nnoremap("[B", "<cmd>BufferLineMovePrev<CR>")
 tnoremap("<C-,>", "<C-\\><C-n>", { silent = true })
 tnoremap("<C-.>", "<C-\\><C-n>:ToggleTerm<CR>", { silent = true })
 
@@ -87,10 +87,10 @@ vnoremap("<leader>r", "y:lua utils.reverse_lines()<CR>")
 -- <C-.> = <C-q>b
 -- <C-/> = <C-q>c
 -- <C-;> = <C-q>d
-inoremap("<C-l>", "<C-o>:lua utils.jump_right()<CR>")
-inoremap("<C-q>b", "<C-o>:lua utils.toggle_eol_await()<CR>")
-inoremap("<C-q>c", "<C-o>:lua utils.toggle_eol_option()<CR>")
-inoremap("<C-q>d", "<C-o>:lua utils.append_semi_colon()<CR>")
+inoremap("<C-l>", "<C-o><cmd>lua utils.jump_right()<CR>")
+inoremap("<C-q>b", "<C-o><cmd>lua utils.toggle_eol_await()<CR>")
+inoremap("<C-q>c", "<C-o><cmd>lua utils.toggle_eol_option()<CR>")
+inoremap("<C-q>d", "<C-o><cmd>lua utils.append_semi_colon()<CR>")
 
 -- LSP config
 nnoremap("grn", vim.lsp.buf.rename, { silent = true })
@@ -138,12 +138,12 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()")
 
-nnoremap("<C-s>f", ":lua Snacks.picker.smart()<CR>")
-nnoremap("<C-s>b", ":lua Snacks.picker.buffers()<CR>")
-nnoremap("<C-s>s", ":lua Snacks.picker.grep()<CR>")
-nnoremap("'", ":lua Snacks.picker.marks()<CR>")
-nnoremap("dm", ":delm! | delm A-Z0-9<CR>")
-nnoremap("<C-s>/", ":lua Snacks.picker.lines()<CR>")
+nnoremap("<C-s>f", "<cmd>lua Snacks.picker.smart()<CR>")
+nnoremap("<C-s>b", "<cmd>lua Snacks.picker.buffers()<CR>")
+nnoremap("<C-s>s", "<cmd>lua Snacks.picker.grep()<CR>")
+nnoremap("<C-s>m", "<cmd>lua Snacks.picker.marks()<CR>")
+nnoremap("dm", "<cmd>delm! | delm A-Z0-9<CR>")
+nnoremap("<C-s>/", "<cmd>lua Snacks.picker.lines()<CR>")
 nnoremap("<C-t>", function()
   Snacks.picker.lsp_symbols({
     filter = {
@@ -166,37 +166,67 @@ nnoremap("<C-t>", function()
     },
   })
 end)
-nnoremap("<C-s>t", ":lua Snacks.picker.lsp_workspace_symbols()<CR>")
-nnoremap("<C-s>u", ":lua Snacks.picker.lsp_references()<CR>")
-nnoremap("<C-s>c", ":lua Snacks.picker.git_branches()<CR>")
+nnoremap("<C-s>t", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>")
+nnoremap("<C-s>u", "<cmd>lua Snacks.picker.lsp_references()<CR>")
+nnoremap("<C-s>c", "<cmd>lua Snacks.picker.git_branches()<CR>")
 
 -- neogit & diffview & gitsigns
-nnoremap("<leader>gd", ":Gvdiffsplit!<CR>")
-nnoremap("<leader>gj", ":diffget //2<CR>")
-nnoremap("<leader>gk", ":diffget //3<CR>")
-nnoremap("<leader>gl", ":lua require('neogit').open({'log'})<CR>")
-nnoremap("<leader>gg", ":lua Snacks.lazygit()<CR>")
-nnoremap("<leader>gh", ":DiffviewFileHistory %<CR>")
-nnoremap("<leader>gb", ":Gitsigns toggle_current_line_blame<CR>")
-nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>")
-nnoremap("<leader>gp", ":Gitsigns preview_hunk<CR>")
+nnoremap("<leader>gd", "<cmd>Gvdiffsplit!<CR>")
+nnoremap("<leader>gj", "<cmd>diffget //2<CR>")
+nnoremap("<leader>gk", "<cmd>diffget //3<CR>")
+nnoremap("<leader>gl", "<cmd>lua require('neogit').open({'log'})<CR>")
+nnoremap("<leader>gg", "<cmd>lua Snacks.lazygit()<CR>")
+nnoremap("<leader>gh", "<cmd>DiffviewFileHistory %<CR>")
+nnoremap("<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
+nnoremap("<leader>gr", "<cmd>Gitsigns reset_hunk<CR>")
+nnoremap("<leader>gp", "<cmd>Gitsigns preview_hunk<CR>")
 
-nnoremap("<leader>q", ":lua utils.dap_quit()<CR>", { silent = true })
+nnoremap("<leader>q", "<cmd>lua utils.dap_quit()<CR>", { silent = true })
 
-nnoremap("<C-w>d", ":lua require('dap-view').toggle()<CR>", { silent = true })
-nnoremap("<C-w>r", ":lua require('dap').repl.toggle({}, 'vsplit')<CR>", { silent = true })
-nnoremap("<C-w>.", ":only<CR>")
-nnoremap("<C-w>o", ":lua Snacks.explorer()<CR>")
-nnoremap("<C-w>f", ":ToggleTerm<CR>")
-nnoremap("<C-w>g", ":Neogit<CR>")
-nnoremap("<C-w>b", ":DiffviewOpen<CR>")
-nnoremap("<C-w>z", ":ZenMode<CR>")
+nnoremap("<C-w>d", "<cmd>lua require('dap-view').toggle()<CR>", { silent = true })
+nnoremap("<C-w>r", "<cmd>lua require('dap').repl.toggle({}, 'vsplit')<CR>", { silent = true })
+nnoremap("<C-w>.", "<cmd>only<CR>")
+nnoremap("<C-w>o", "<cmd>lua Snacks.explorer()<CR>")
+nnoremap("<C-w>f", "<cmd>ToggleTerm<CR>")
+nnoremap("<C-w>g", "<cmd>Neogit<CR>")
+nnoremap("<C-w>b", "<cmd>DiffviewOpen<CR>")
+nnoremap("<C-w>z", "<cmd>ZenMode<CR>")
 
-nnoremap("]c", ":Gitsigns next_hunk<CR>")
-nnoremap("[c", ":Gitsigns prev_hunk<CR>")
+nnoremap("]c", "<cmd>Gitsigns next_hunk<CR>")
+nnoremap("[c", "<cmd>Gitsigns prev_hunk<CR>")
 nnoremap("]d", function()
-  vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({
+    severity = vim.diagnostic.severity.ERROR,
+    count = 1,
+    float = true,
+  })
 end, { silent = true })
 nnoremap("[d", function()
-  vim.diagnostic.jump({ count = -1, float = true })
+  vim.diagnostic.jump({
+    severity = vim.diagnostic.severity.ERROR,
+    count = -1,
+    float = true,
+  })
+end, { silent = true })
+nnoremap("]w", function()
+  vim.diagnostic.jump({
+    severity = {
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.INFO,
+      vim.diagnostic.severity.HINT,
+    },
+    count = 1,
+    float = true,
+  })
+end, { silent = true })
+nnoremap("[w", function()
+  vim.diagnostic.jump({
+    severity = {
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.INFO,
+      vim.diagnostic.severity.HINT,
+    },
+    count = -1,
+    float = true,
+  })
 end, { silent = true })

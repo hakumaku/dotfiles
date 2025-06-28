@@ -55,9 +55,6 @@ bindkey -s '^w0' "cd $XDG_DATA_HOME/repositories^M"
 # <C-.> = <C-q>b
 # <C-/> = <C-q>c
 # <C-;> = <C-q>d
-bindkey -s '^qa' "^Ulazydocker^M"
-bindkey -s '^qb' "^Ulazygit^M"
-bindkey -s '^qc' "^Ubtm^M"
 bindkey -s '^o' "^Uyazi^M"
 
 # source some files

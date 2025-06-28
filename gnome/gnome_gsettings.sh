@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set_gsettings() {
+set_gsettings()
+                {
   # Desktop
   gsettings set org.gnome.desktop.background show-desktop-icons 'false'
   gsettings set org.gnome.desktop.background picture-options 'wallpaper'
@@ -62,6 +63,9 @@ set_gsettings() {
   # Move window to another monitor
   gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Super><Ctrl>H']"
   gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><Ctrl>L']"
+
+  # Always on top
+  gsettings set org.gnome.desktop.wm.keybindings always-on-top "['<Super>a']"
 
   # Close window
   gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q', '<Alt>F4']"

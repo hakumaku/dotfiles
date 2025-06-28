@@ -57,7 +57,7 @@ vim.opt.smartcase = true
 
 vim.opt.laststatus = 2
 -- Do not redraw screen in the middle of a macro
-vim.opt.lazyredraw = true
+vim.opt.lazyredraw = false
 
 vim.opt.listchars = { tab = "» ", eol = "↲", space = "·" }
 

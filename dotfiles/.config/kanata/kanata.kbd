@@ -1,5 +1,3 @@
-;; Caps to escape/control configuration for Kanata
-
 (defcfg
   process-unmapped-keys yes
 )
@@ -15,12 +13,13 @@
 )
 
 (deflayermap (main)
-  z (t! charmod a lalt)
-  x (t! charmod s lmet)
-  j (t! charmod d lctl)
-  v (t! charmod f lsft)
-  m (t! charmod j lsft)
-  , (t! charmod k rctl)
-  . (t! charmod l rmet)
-  / (t! charmod ; ralt)
+  caps esc
+  z (t! charmod z lalt)
+  x (t! charmod x lmet)
+  c (t! charmod c lctl)
+  v (t! charmod v lsft)
+  m (t! charmod m lsft)
+  , (t! charmod , rctl)
+  . (t! charmod . rmet)
+  / (t! charmod / ralt)
 )

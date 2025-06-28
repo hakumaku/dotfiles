@@ -81,7 +81,9 @@ return {
           },
           buffers = { layout = { preset = "select", preview = false } },
           files = { layout = { preset = "select", preview = false } },
+          smart = { layout = { preset = "select", preview = false } },
           lsp_symbols = { layout = { preset = "select", preview = false } },
+          lsp_workspace_symbols = { layout = { preset = "select", preview = false } },
           marks = { layout = { preset = "ivy", preview = true } },
         },
         layouts = {
