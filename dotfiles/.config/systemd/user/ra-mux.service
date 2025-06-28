@@ -2,8 +2,9 @@
 Description=Rust analyzer multiplex server
 
 [Service]
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:%h/.cargo/bin:%h/.local/share/cargo/bin
 Type=simple
-ExecStart=${HOME}/.local/share/cargo/bin/ra-multiplex server
+ExecStart=%h/.local/share/cargo/bin/ra-multiplex server
 
 [Install]
 WantedBy=default.target

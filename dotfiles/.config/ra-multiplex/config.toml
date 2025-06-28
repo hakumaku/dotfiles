@@ -55,4 +55,4 @@ log_filters = "info"
 # If "PATH" is specified here then the PATH from the client environment is
 # going to be used for looking up a relative `--server-path`.
 # Example: pass_environment = ["PATH", "LD_LIBRARY_PATH"]
-pass_environment = []
+pass_environment = ["PATH"]

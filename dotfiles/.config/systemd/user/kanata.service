@@ -7,10 +7,11 @@ Description=Kanata keyboard remapper
 Documentation=https://github.com/jtroo/kanata
 
 [Service]
-Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:$HOME/.cargo/bin:$HOME/.local/share/cargo/bin
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:%h/.cargo/bin:%h/.local/share/cargo/bin
 Environment=DISPLAY=:0
 Type=simple
-ExecStart=/usr/bin/sh -c 'exec ${HOME}/.local/share/cargo/bin/kanata --cfg ${HOME}/.config/kanata/kanata.kbd'
+; ExecStart=/usr/bin/sh -c 'exec ${HOME}/.local/share/cargo/bin/kanata --cfg ${HOME}/.config/kanata/kanata.kbd'
+ExecStart=%h/.local/share/cargo/bin/kanata
 Restart=no
 
 [Install]
