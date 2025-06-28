@@ -1,0 +1,10 @@
+[Unit]
+Description=G14 Sync AMP Speakers with GNOME Volume
+After=default.target
+
+[Service]
+ExecStart=/bin/bash -c '/usr/bin/pactl subscribe | grep --line-buffered "sink" | while read line; do ~/.local/bin/sound.sh; done'
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -36,3 +36,4 @@ package.json
 .luarc.json
 
 **/__pycache__
+dotfiles/.config/systemd/user/default.target.wants
