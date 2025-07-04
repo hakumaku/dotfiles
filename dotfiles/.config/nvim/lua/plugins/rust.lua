@@ -1,8 +1,3 @@
-local function exepath_or_binary(binary)
-  local exe_path = vim.fn.exepath(binary)
-  return #exe_path > 0 and exe_path or binary
-end
-
 return {
   -- rust extension
   {
@@ -13,7 +8,7 @@ return {
       vim.g.rustaceanvim = {
         server = {
           cmd = function(host_or_path, port)
-            return vim.lsp.rpc.connect("/var/run/ra-mux/ra-mux.sock")
+            return vim.lsp.rpc.connect("/run/user/1000/ra-mux/ra-mux.sock")
           end,
           -- ra_multiplex = {
           --   enable = true,
@@ -28,7 +23,7 @@ return {
               lspMux = {
                 version = "1",
                 method = "connect",
-                server = exepath_or_binary("rust-analyzer"),
+                server = vim.fn.exepath("rust-analyzer"),
               },
             },
           },

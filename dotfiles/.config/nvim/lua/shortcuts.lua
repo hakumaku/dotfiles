@@ -192,6 +192,12 @@ nnoremap("<C-w>f", "<cmd>ToggleTerm<CR>")
 nnoremap("<C-w>g", "<cmd>Neogit<CR>")
 nnoremap("<C-w>b", "<cmd>DiffviewOpen<CR>")
 nnoremap("<C-w>z", "<cmd>ZenMode<CR>")
+local Terminal = require("toggleterm.terminal").Terminal
+local lazydocker = Terminal:new({ cmd = "lazydocker", hidden = true })
+function _lazydocker_toggle()
+  lazydocker:toggle()
+end
+nnoremap("<C-w>/", "<cmd>lua _lazydocker_toggle()<CR>")
 
 nnoremap("]c", "<cmd>Gitsigns next_hunk<CR>")
 nnoremap("[c", "<cmd>Gitsigns prev_hunk<CR>")

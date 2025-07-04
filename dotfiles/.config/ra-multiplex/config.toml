@@ -27,14 +27,14 @@ gc_interval = 10 # every 10 seconds
 # avoided, the default was picked at random, this only needs to change if
 # another application happens to collide with ra-multiplex.
 # listen = ["127.0.0.1", 27631] # localhost & some random unprivileged port
-listen = "/var/run/ra-mux/ra-mux.sock" # unix socket
+listen = "/run/user/1000/ra-mux/ra-mux.sock" # unix socket
 
 # ip address and port to which ra-multiplex will connect to
 # or unix socket path on *nix operating systems
 #
 # this should usually just match the value of `listen`
 # connect = ["127.0.0.1", 27631] # same as `listen`
-connect = "/var/run/ra-mux/ra-mux.sock" # same as `listen`
+connect = "/run/user/1000/ra-mux/ra-mux.sock" # same as `listen`
 
 # default log filters
 #
