@@ -110,7 +110,7 @@ return {
 
       -- custom snippets
       require("luasnip.loaders.from_vscode").lazy_load({
-        paths = { vim.fn.stdpath("config") .. "/snippets" },
+        paths = "./snippets",
       })
     end,
   },
