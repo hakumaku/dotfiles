@@ -189,6 +189,7 @@ nnoremap("<C-w>r", "<cmd>lua require('dap').repl.toggle({}, 'vsplit')<CR>", { si
 nnoremap("<C-w>.", "<cmd>only<CR>")
 nnoremap("<C-w>o", "<cmd>lua Snacks.explorer()<CR>")
 nnoremap("<C-w>f", "<cmd>ToggleTerm<CR>")
+nnoremap("<C-w>a", "<cmd>AvanteToggle<CR>")
 nnoremap("<C-w>g", "<cmd>Neogit<CR>")
 nnoremap("<C-w>b", "<cmd>DiffviewOpen<CR>")
 nnoremap("<C-w>z", "<cmd>ZenMode<CR>")
