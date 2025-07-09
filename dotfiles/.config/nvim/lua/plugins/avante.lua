@@ -47,11 +47,11 @@ return {
     windows = {
       position = "right",
       wrap = true,
-      width = 40,
+      width = 50,
       sidebar_header = {
-        enabled = true, -- true, false to enable/disable the header
-        align = "center", -- left, center, right for title
-        rounded = true,
+        enabled = false, -- true, false to enable/disable the header
+        align = "left", -- left, center, right for title
+        rounded = false,
       },
       input = {
         prefix = "> ",
@@ -59,7 +59,7 @@ return {
       },
       edit = {
         border = "rounded",
-        start_insert = true, -- Start insert mode when opening the edit window
+        start_insert = false, -- Start insert mode when opening the edit window
       },
       ask = {
         floating = false, -- Open the 'AvanteAsk' prompt in a floating window

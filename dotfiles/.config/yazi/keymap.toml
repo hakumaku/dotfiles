@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 
 keymap = [
 	{ on = [ "<Esc>" ], run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
@@ -245,15 +245,15 @@ keymap = [
 	{ on = [ "/" ], run = "filter", desc = "Apply a filter for the help items" },
 ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "K" ]
-run = "plugin parent-arrow --args=-1"
+run = "plugin parent-arrow -1"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "J" ]
-run = "plugin parent-arrow --args=1"
+run = "plugin parent-arrow 1"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "l" ]
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
