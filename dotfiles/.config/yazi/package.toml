@@ -3,5 +3,20 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "b886025"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "7a08a09"
+hash = "a1fa2b3e1826c3a34804ea8c548e9f80"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "d896656"
+hash = "62251f94eb67648d42cdfcfb8be0fad2"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "9d26460"
+hash = "6c0568cfa966a5d4ac496c926975a613"
+
 [flavor]
 deps = []
