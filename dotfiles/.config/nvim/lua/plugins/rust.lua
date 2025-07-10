@@ -20,6 +20,13 @@ return {
             --- See: https://rust-analyzer.github.io/book/configuration
             --- @type table
             ["rust-analyzer"] = {
+              workspace = {
+                symbol = {
+                  search = {
+                    excludeImports = true,
+                  },
+                },
+              },
               lspMux = {
                 version = "1",
                 method = "connect",
