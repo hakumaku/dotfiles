@@ -124,7 +124,6 @@ else
 end
 vim.opt.undofile = true
 vim.opt.updatetime = 300
-vim.opt.clipboard:append("unnamedplus")
 vim.opt.viewoptions:remove("options")
 -- On pressing 'wildchar' to invoke completion
 vim.opt.wildmenu = true
