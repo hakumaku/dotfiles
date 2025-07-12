@@ -124,15 +124,14 @@ else
 end
 vim.opt.undofile = true
 vim.opt.updatetime = 300
+vim.opt.clipboard:append("unnamedplus")
 vim.opt.viewoptions:remove("options")
 -- On pressing 'wildchar' to invoke completion
 vim.opt.wildmenu = true
 vim.opt.pumblend = 15
 vim.g.termdebug_wide = 1
-
 -- One status line only.
 vim.opt.laststatus = 3
-
 -- python3 on Arch Linux
 vim.g.python3_host_prog = "/usr/bin/python"
 

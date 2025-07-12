@@ -21,6 +21,14 @@ return {
         -- },
       },
     },
+    web_search_engine = {
+      provider = "google",
+      providers = {
+        api_key_name = "GOOGLE_SEARCH_API_KEY",
+        engine_id_name = "GOOGLE_SEARCH_ENGINE_ID",
+        extra_request_body = {},
+      },
+    },
     behaviour = {
       auto_focus_sidebar = true,
       auto_suggestions = false, -- Experimental stage
@@ -31,7 +39,7 @@ return {
       jump_result_buffer_on_finish = false,
       support_paste_from_clipboard = false,
       minimize_diff = true,
-      enable_token_counting = true,
+      enable_token_counting = false,
       use_cwd_as_project_root = false,
       auto_focus_on_diff_view = false,
       ---@type boolean | string[] -- true: auto-approve all tools, false: normal prompts, string[]: auto-approve specific tools by name
